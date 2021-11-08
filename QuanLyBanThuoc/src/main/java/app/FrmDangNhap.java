@@ -21,12 +21,13 @@ import java.awt.Color;
 import java.awt.Component;
 
 import javax.swing.border.Border;
+import javax.swing.border.LineBorder;
 
 public class FrmDangNhap extends JFrame {
 
 	private JFrame frmHThngQun;
-	private JTextField jtftendangnhap;
-	private JTextField jtfmatkhau;
+	private JTextField txttendangnhap;
+	private JTextField txtmatkhau;
 
 	/**
 	 * Launch the application.
@@ -73,63 +74,63 @@ public class FrmDangNhap extends JFrame {
 		panel.add(panel_1);
 		panel_1.setLayout(null);
 		
-		JLabel jlbhethong = new JLabel("");
-		jlbhethong.setIcon(new ImageIcon("C:\\Users\\Tai\\eclipse-workspace\\HeThongQuanLyThuoc\\img\\tieude2.png"));
-		jlbhethong.setFont(new Font("Source Code Pro ExtraLight", Font.PLAIN, 24));
-		jlbhethong.setBounds(30, 11, 325, 91);
-		panel_1.add(jlbhethong);
+		JLabel lblhethong = new JLabel("");
+		lblhethong.setIcon(new ImageIcon("C:\\Users\\Tai\\eclipse-workspace\\HeThongQuanLyThuoc\\img\\tieude2.png"));
+		lblhethong.setFont(new Font("Source Code Pro ExtraLight", Font.PLAIN, 24));
+		lblhethong.setBounds(30, 11, 325, 91);
+		panel_1.add(lblhethong);
 		
-		JLabel jlbdangnhap = new JLabel("Đăng nhập");
-		jlbdangnhap.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		jlbdangnhap.setBounds(449, 31, 131, 31);
-		panel_1.add(jlbdangnhap);
+		JLabel lbldangnhap = new JLabel("Đăng nhập");
+		lbldangnhap.setFont(new Font("SansSerif", Font.BOLD, 25));
+		lbldangnhap.setBounds(449, 31, 131, 31);
+		panel_1.add(lbldangnhap);
 		
-		JLabel jlbtendangnhap = new JLabel("Tên đăng nhập");
-		jlbtendangnhap.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		jlbtendangnhap.setBounds(405, 103, 93, 24);
-		panel_1.add(jlbtendangnhap);
+		JLabel lbltendangnhap = new JLabel("Tên đăng nhập");
+		lbltendangnhap.setFont(new Font("SansSerif", Font.PLAIN, 15));
+		lbltendangnhap.setBounds(405, 103, 108, 24);
+		panel_1.add(lbltendangnhap);
 		
-		JLabel jlbmatkhau = new JLabel("Mật khẩu");
-		jlbmatkhau.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		jlbmatkhau.setBounds(406, 164, 61, 21);
-		panel_1.add(jlbmatkhau);
+		JLabel lblmatkhau = new JLabel("Mật khẩu");
+		lblmatkhau.setFont(new Font("SansSerif", Font.PLAIN, 15));
+		lblmatkhau.setBounds(406, 164, 61, 21);
+		panel_1.add(lblmatkhau);
 		
-		jtftendangnhap = new JTextField();
-		jtftendangnhap.setBounds(499, 101, 125, 31);
-		jtftendangnhap.setBorder(BorderFactory.createLineBorder(Color.decode("#2C6791")));
+		txttendangnhap = new JTextField();
+		txttendangnhap.setBounds(509, 102, 125, 31);
+		txttendangnhap.setBorder(new LineBorder(new Color(91, 155, 213)));
        
-		panel_1.add(jtftendangnhap);
-		jtftendangnhap.setColumns(10);
+		panel_1.add(txttendangnhap);
+		txttendangnhap.setColumns(10);
 		
-		jtfmatkhau = new JTextField();
-		jtfmatkhau.setBounds(499, 160, 125, 31);
-		panel_1.add(jtfmatkhau);
-		jtfmatkhau.setColumns(10);
-		jtfmatkhau.setBorder(BorderFactory.createLineBorder(Color.decode("#2C6791")));
+		txtmatkhau = new JTextField();
+		txtmatkhau.setBounds(509, 160, 125, 31);
+		panel_1.add(txtmatkhau);
+		txtmatkhau.setColumns(10);
+		txtmatkhau.setBorder(new LineBorder(new Color(91, 155, 213)));
 		
-		JButton jbdangnhap = new JButton("Đăng nhập");
-		jbdangnhap.setForeground(new Color(255, 255, 255));
-		jbdangnhap.setFont(new Font("Tahoma", Font.BOLD, 14));
-		jbdangnhap.setBackground(new Color(0, 153, 255));
-		jbdangnhap.setBounds(474, 228, 117, 31);
+		JButton btndangnhap = new JButton("Đăng nhập");
+		btndangnhap.setForeground(new Color(255, 255, 255));
+		btndangnhap.setFont(new Font("SansSerif", Font.BOLD, 15));
+		btndangnhap.setBackground(new Color(0, 153, 255));
+		btndangnhap.setBounds(474, 228, 117, 31);
 		
-		panel_1.add(jbdangnhap);
+		panel_1.add(btndangnhap);
 		
-		JButton jbthoat = new JButton("Thoát");
-		jbthoat.setForeground(new Color(255, 255, 255));
-		jbthoat.setFont(new Font("Tahoma", Font.BOLD, 14));
-		jbthoat.setBackground(new Color(0, 153, 255));
-		jbthoat.addActionListener(new ActionListener() {
+		JButton btnthoat = new JButton("Thoát");
+		btnthoat.setForeground(new Color(255, 255, 255));
+		btnthoat.setFont(new Font("SansSerif", Font.BOLD, 15));
+		btnthoat.setBackground(new Color(0, 153, 255));
+		btnthoat.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		jbthoat.setBounds(475, 278, 116, 31);
-		panel_1.add(jbthoat);
+		btnthoat.setBounds(475, 278, 116, 31);
+		panel_1.add(btnthoat);
 		
-		JLabel jlbbg = new JLabel("");
-		jlbbg.setIcon(new ImageIcon("C:\\Users\\Tai\\eclipse-workspace\\HeThongQuanLyThuoc\\img\\bg3.jpg"));
-		jlbbg.setBounds(0, 0, 400, 361);
-		panel_1.add(jlbbg);
+		JLabel lblbg = new JLabel("");
+		lblbg.setIcon(new ImageIcon("C:\\Users\\Tai\\eclipse-workspace\\HeThongQuanLyThuoc\\img\\bg3.jpg"));
+		lblbg.setBounds(0, 0, 400, 361);
+		panel_1.add(lblbg);
 		
 	
 	}
