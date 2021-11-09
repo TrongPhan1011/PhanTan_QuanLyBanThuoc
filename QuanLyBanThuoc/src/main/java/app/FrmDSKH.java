@@ -13,13 +13,19 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableModel;
 
 public class FrmDSKH extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
+	private JTextField txtTim;
+	private JTable tbldsThuoc;
 	private JTable table;
+	private JTable tbldsKH;
 	private JTable table_1;
 
 	
@@ -48,72 +54,120 @@ public class FrmDSKH extends JFrame {
 		
 		JLabel lblTieude = new JLabel("Chi tiết thông tin khách hàng");
 		lblTieude.setFont(new Font("SansSerif", Font.BOLD, 25));
-		lblTieude.setBounds(10, 27, 353, 48);
+		lblTieude.setBounds(10, 20, 353, 48);
 		panel_1.add(lblTieude);
 		
 		JLabel lblTim = new JLabel("Tìm kiếm:");
 		lblTim.setFont(new Font("SansSerif", Font.BOLD, 15));
-		lblTim.setBounds(475, 63, 75, 28);
+		lblTim.setBounds(427, 34, 75, 28);
 		panel_1.add(lblTim);
 		
-		textField = new JTextField();
-		textField.setColumns(10);
-		textField.setBorder(BorderFactory.createLineBorder(Color.CYAN));
-		textField.setBounds(573, 63, 264, 33);
-		panel_1.add(textField);
+		txtTim = new JTextField();
+		txtTim.setColumns(10);
+		txtTim.setBorder(BorderFactory.createLineBorder(Color.CYAN));
+		txtTim.setBounds(512, 34, 206, 33);
+		txtTim.setBorder(new LineBorder(new Color(91, 155, 213)));
+		panel_1.add(txtTim);
 		
 		JButton btntim = new JButton("Tìm");
 		btntim.setFont(new Font("Tahoma", Font.BOLD, 15));
 		btntim.setBackground(new Color(41, 242, 255));
-		btntim.setBounds(871, 61, 108, 33);
+		btntim.setBounds(746, 35, 108, 33);
 		panel_1.add(btntim);
 		
-		JLabel lblbang1 = new JLabel("Danh sách khách hàng");
-		lblbang1.setFont(new Font("SansSerif", Font.BOLD, 15));
-		lblbang1.setBounds(385, 101, 170, 39);
-		panel_1.add(lblbang1);
+		JLabel lblThuocdamua = new JLabel("Thuốc đã mua:");
+		lblThuocdamua.setFont(new Font("SansSerif", Font.BOLD, 15));
+		lblThuocdamua.setBounds(168, 335, 112, 20);
+		panel_1.add(lblThuocdamua);
 		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 150, 969, 178);
-		panel_1.add(scrollPane);
+		JLabel lblslthuoc = new JLabel("Số lượng thuốc đã mua:");
+		lblslthuoc.setFont(new Font("SansSerif", Font.BOLD, 15));
+		lblslthuoc.setBounds(520, 331, 198, 28);
+		panel_1.add(lblslthuoc);
 		
-		table = new JTable();
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-				"M\u00E3 kh\u00E1ch h\u00E0ng", "T\u00EAn kh\u00E1ch h\u00E0ng", "Ng\u00E0y sinh", "Gi\u1EDBi t\u00EDnh", "S\u0110T", "\u0110\u1ECBa ch\u1EC9"
-			}
-		));
-		scrollPane.setViewportView(table);
+		JPanel pThuoc = new JPanel();
+		pThuoc.setBounds(10, 365, 983, 252);
+		panel_1.add(pThuoc);
+		pThuoc.setBorder(new TitledBorder(new LineBorder(new Color(91, 155, 213)), "Danh sách thuốc", TitledBorder.CENTER, TitledBorder.TOP, null, Color.BLACK));
+		pThuoc.setBackground(new Color(255,255,255,10));
+		pThuoc.setLayout(null);
 		
-		JLabel lblbang2_1 = new JLabel("Thuốc đã mua");
-		lblbang2_1.setFont(new Font("SansSerif", Font.BOLD, 15));
-		lblbang2_1.setBounds(407, 338, 112, 20);
-		panel_1.add(lblbang2_1);
+		JScrollPane dsThuoc = new JScrollPane();
+		dsThuoc.setBounds(10, 20, 963, 222);
+		pThuoc.add(dsThuoc);
 		
-		JLabel lblbang2_2 = new JLabel("Số lượng thuốc đã mua");
-		lblbang2_2.setFont(new Font("SansSerif", Font.BOLD, 15));
-		lblbang2_2.setBounds(371, 368, 198, 39);
-		panel_1.add(lblbang2_2);
 		
-		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(10, 420, 969, 214);
-		panel_1.add(scrollPane_1);
+		String column[] = { "Tên thuốc","Loại thuốc", "Nước sản xuất","Số lượng","Đơn giá","Tổng tiền"};
+		DefaultTableModel modelthuoc = new DefaultTableModel(column, 0);
+		tbldsThuoc = new JTable(modelthuoc);
+		dsThuoc.setViewportView(tbldsThuoc);
 		
-		table_1 = new JTable();
-		table_1.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-				"T\u00EAn thu\u1ED1c", "Lo\u1EA1i thu\u1ED1c", "Nh\u00E0 s\u1EA3n xu\u1EA5t", "S\u1ED1 l\u01B0\u1EE3ng", "\u0110\u01A1n gi\u00E1", "T\u1ED5ng ti\u1EC1n"
-			}
-		));
-		scrollPane_1.setViewportView(table_1);
+		JTableHeader tbHeader1 = tbldsThuoc.getTableHeader();
+		tbHeader1.setBackground(new Color(91, 155, 213,80));
+		tbHeader1.setForeground(Color.CYAN);
+		tbHeader1.setFont(new Font("SansSerif", Font.BOLD, 20));
+
+//		
+		tbldsThuoc.setSelectionBackground(new Color(91, 155, 213,30));
+		tbldsThuoc.setSelectionForeground(new Color(91, 155, 213));
+		tbldsThuoc.setRowHeight(30);
+
 		
-		JLabel jlbbg = new JLabel("");
-		jlbbg.setIcon(new ImageIcon("data\\img\\bg.png"));
-		jlbbg.setBounds(0, -22, 1003, 683);
-		panel_1.add(jlbbg);
+		JLabel lblThuocdamua1 = new JLabel("0");
+		lblThuocdamua1.setFont(new Font("SansSerif", Font.BOLD, 20));
+		lblThuocdamua1.setForeground(Color.RED);
+		lblThuocdamua1.setBounds(297, 333, 133, 20);
+		panel_1.add(lblThuocdamua1);
+		
+		JLabel lblSLThuoc = new JLabel("0");
+		lblSLThuoc.setForeground(Color.RED);
+		lblSLThuoc.setFont(new Font("SansSerif", Font.BOLD, 20));
+		lblSLThuoc.setBounds(714, 333, 133, 20);
+		panel_1.add(lblSLThuoc);
+		
+		JLabel lblthanhtien = new JLabel("0VNĐ");
+		lblthanhtien.setForeground(Color.RED);
+		lblthanhtien.setFont(new Font("SansSerif", Font.BOLD, 20));
+		lblthanhtien.setBounds(846, 627, 167, 20);
+		panel_1.add(lblthanhtien);
+		
+		JLabel lblSubThanhTien = new JLabel("Thành tiền:");
+		lblSubThanhTien.setFont(new Font("SansSerif", Font.BOLD, 15));
+		lblSubThanhTien.setBounds(736, 627, 101, 20);
+		panel_1.add(lblSubThanhTien);
+		
+		JPanel pKH = new JPanel();
+		pKH.setBounds(10, 79, 983, 246);
+		panel_1.add(pKH);
+		pKH.setBorder(new TitledBorder(new LineBorder(new Color(91, 155, 213)), "Danh sách khách hàng", TitledBorder.CENTER, TitledBorder.TOP, null, Color.BLACK));
+		pKH.setBackground(new Color(255,255,255,10));
+		pKH.setLayout(null);
+		
+		JScrollPane dsKH = new JScrollPane();
+		dsKH.setBounds(10, 20, 963, 201);
+		pKH.add(dsKH);
+		
+		String columnKH[] = { "Mã khách hàng","Tên khách hàng", "Ngày sinh","Giới tính","Số điện thoại","Địa chỉ"};
+		DefaultTableModel modelKhachhang = new DefaultTableModel(columnKH, 0);
+		tbldsKH = new JTable(modelKhachhang);
+		dsKH.setViewportView(tbldsKH);
+		
+		JTableHeader tbHeader = tbldsKH.getTableHeader();
+		tbHeader.setBackground(new Color(91, 155, 213,80));
+		tbHeader.setForeground(Color.CYAN);
+		tbHeader.setFont(new Font("SansSerif", Font.BOLD, 20));
+		
+		
+		tbldsKH.setSelectionBackground(new Color(91, 155, 213,30));
+		tbldsKH.setSelectionForeground(new Color(91, 155, 213));
+		tbldsKH.setRowHeight(30);
+		
+		JButton btnLammoi = new JButton("Làm mới");
+		btnLammoi.setBackground(Color.CYAN);
+		btnLammoi.setFont(new Font("SansSerif", Font.BOLD, 15));
+		btnLammoi.setBounds(875, 34, 108, 34);
+		panel_1.add(btnLammoi);
+		
+		
 	}
 }
