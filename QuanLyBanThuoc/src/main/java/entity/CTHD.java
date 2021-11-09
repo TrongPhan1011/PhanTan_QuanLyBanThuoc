@@ -1,23 +1,58 @@
 package entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.IdClass;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import java.io.Serializable;
 
-@Entity
-@Table(name = "dsCTHD")
-@IdClass(CTHDPK.class)
-public class CTHD {
-	@Id
+import javax.persistence.Embeddable;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+@Embeddable
+public class CTHD implements Serializable {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -464940622459165196L;
+
 	@ManyToOne
+	@JoinColumn(name = "Thuoc_Id")
 	private Thuoc thuoc;
-	@Id
-	@ManyToOne
-	private HoaDon hoaDon;
 	
 	private double soLuong;
 	private double tongTien;
+	public Thuoc getThuoc() {
+		return thuoc;
+	}
+	public void setThuoc(Thuoc thuoc) {
+		this.thuoc = thuoc;
+	}
+	public double getSoLuong() {
+		return soLuong;
+	}
+	public void setSoLuong(double soLuong) {
+		this.soLuong = soLuong;
+	}
+	public double getTongTien() {
+		return tongTien;
+	}
+	public void setTongTien(double tongTien) {
+		this.tongTien = tongTien;
+	}
+	public CTHD(Thuoc thuoc, double soLuong) {
+		super();
+		this.thuoc = thuoc;
+		this.soLuong = soLuong;
+		this.tongTien = thuoc.getDonGia()*soLuong;
+	}
+	
+	public CTHD() {
+		super();
+	}
+	@Override
+	public String toString() {
+		return "CTHD [thuoc=" + thuoc + ", soLuong=" + soLuong + ", tongTien=" + tongTien + "]";
+	}
+	
+	
 
 }
