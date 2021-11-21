@@ -3,9 +3,14 @@ package entity;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
@@ -20,6 +25,7 @@ public class NhanVien implements Serializable {
 	 */
 	private static final long serialVersionUID = -6735862733378529418L;
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private ObjectId id;
 	@Column(name = "so_NhanVien")
 	private String maNhanVien;
@@ -32,14 +38,24 @@ public class NhanVien implements Serializable {
 	private String sdt;
 	@Column(name = "dia_Chi")
 	private String diaChi;
+	private String chucVu;
 	private double luong;
 	@Column(name = "trang_Thai_Lam_Viec")
 	private String trangThaiLamViec;
 	
-	@OneToOne
-	@PrimaryKeyJoinColumn
-	@Column(name = "taiKhoan_Id")
+	@OneToOne(cascade = CascadeType.ALL)
+	@MapsId
+	@JoinColumn(name = "taiKhoan_Id")
 	private TaiKhoan taiKhoan;
+
+	
+	public String getChucVu() {
+		return chucVu;
+	}
+
+	public void setChucVu(String chucVu) {
+		this.chucVu = chucVu;
+	}
 
 	public String getMaNhanVien() {
 		return maNhanVien;
@@ -117,8 +133,25 @@ public class NhanVien implements Serializable {
 		return id;
 	}
 
+	
+
+	public NhanVien(String maNhanVien, String tenNhanVien, String gioiTinh, Date ngaySinh, String sdt, String diaChi,
+			String chucVu, double luong, String trangThaiLamViec, TaiKhoan taiKhoan) {
+		super();
+		this.maNhanVien = maNhanVien;
+		this.tenNhanVien = tenNhanVien;
+		this.gioiTinh = gioiTinh;
+		this.ngaySinh = ngaySinh;
+		this.sdt = sdt;
+		this.diaChi = diaChi;
+		this.chucVu = chucVu;
+		this.luong = luong;
+		this.trangThaiLamViec = trangThaiLamViec;
+		this.taiKhoan = taiKhoan;
+	}
+
 	public NhanVien(ObjectId id, String maNhanVien, String tenNhanVien, String gioiTinh, Date ngaySinh, String sdt,
-			String diaChi, double luong, String trangThaiLamViec, TaiKhoan taiKhoan) {
+			String diaChi, String chucVu, double luong, String trangThaiLamViec, TaiKhoan taiKhoan) {
 		super();
 		this.id = id;
 		this.maNhanVien = maNhanVien;
@@ -127,20 +160,7 @@ public class NhanVien implements Serializable {
 		this.ngaySinh = ngaySinh;
 		this.sdt = sdt;
 		this.diaChi = diaChi;
-		this.luong = luong;
-		this.trangThaiLamViec = trangThaiLamViec;
-		this.taiKhoan = taiKhoan;
-	}
-
-	public NhanVien(String maNhanVien, String tenNhanVien, String gioiTinh, Date ngaySinh, String sdt, String diaChi,
-			double luong, String trangThaiLamViec, TaiKhoan taiKhoan) {
-		super();
-		this.maNhanVien = maNhanVien;
-		this.tenNhanVien = tenNhanVien;
-		this.gioiTinh = gioiTinh;
-		this.ngaySinh = ngaySinh;
-		this.sdt = sdt;
-		this.diaChi = diaChi;
+		this.chucVu = chucVu;
 		this.luong = luong;
 		this.trangThaiLamViec = trangThaiLamViec;
 		this.taiKhoan = taiKhoan;

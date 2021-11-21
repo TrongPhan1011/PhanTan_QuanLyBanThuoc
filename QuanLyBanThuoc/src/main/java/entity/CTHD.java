@@ -2,6 +2,7 @@ package entity;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Embeddable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -14,7 +15,7 @@ public class CTHD implements Serializable {
 	 */
 	private static final long serialVersionUID = -464940622459165196L;
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "Thuoc_Id")
 	private Thuoc thuoc;
 	

@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -17,6 +19,7 @@ public class NuocSX implements Serializable{
 	 */
 	private static final long serialVersionUID = 219121622856710482L;
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private ObjectId id;
 	@Column(name = "ten_NuocSX")
 	private String tenNuocSX;

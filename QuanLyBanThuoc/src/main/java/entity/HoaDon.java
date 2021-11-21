@@ -4,9 +4,12 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -22,15 +25,16 @@ public class HoaDon implements Serializable {
 	 */
 	private static final long serialVersionUID = 4430769447069649083L;
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private ObjectId id;
 	@Column(name= "ngay_Lap")
 	private Date ngayLap;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "ma_Nhan_Vien")
 	private NhanVien nhanVien;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "ma_Khach_Hang")
 	private KhachHang khachHang;
 	

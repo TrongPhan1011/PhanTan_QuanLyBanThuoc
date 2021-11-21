@@ -3,7 +3,10 @@ package entity;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -19,6 +22,7 @@ public class Thuoc implements Serializable{
 	 */
 	private static final long serialVersionUID = 2101165558644982762L;
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private ObjectId id;
 	private String tenThuoc;
 	private double donGia;
@@ -27,15 +31,15 @@ public class Thuoc implements Serializable{
 	private Date hanSD;
 	private String trangThaiThuoc;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "LoaiThuoc_Id")
 	private LoaiThuoc loaiThuoc;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "NuocSX_id")
 	private NuocSX nuocSX;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "NCC_id")
 	private NhaCungCap ncc;
 
