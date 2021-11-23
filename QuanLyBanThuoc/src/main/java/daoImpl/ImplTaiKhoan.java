@@ -3,9 +3,8 @@ package daoImpl;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
-import org.hibernate.Transaction;
-import org.hibernate.ogm.OgmSession;
-import org.hibernate.ogm.OgmSessionFactory;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 
 import dao.TaiKhoanDao;
 import entity.TaiKhoan;
@@ -16,20 +15,19 @@ public class ImplTaiKhoan extends UnicastRemoteObject implements TaiKhoanDao {
 	 * 
 	 */
 	private static final long serialVersionUID = -5680460319162083507L;
-	private OgmSessionFactory sessionFactory;
+	private EntityManager em;
 
 	public ImplTaiKhoan() throws RemoteException {
-		sessionFactory = HibernateUtil.getInstance().getSessionFactory();
+		em = HibernateUtil.getInstance().getEntityManager();
 	}
 
 	@Override
 	public boolean addTaiKhoan(TaiKhoan taiKhoan) throws RemoteException {
-		OgmSession session = sessionFactory.getCurrentSession();
-		Transaction tr = session.getTransaction();
+		EntityTransaction tr = em.getTransaction();
 		try {
 			
 			tr.begin();
-			session.save(taiKhoan);
+			em.persist(taiKhoan);
 
 			tr.commit();
 			return true;

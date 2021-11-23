@@ -2,10 +2,12 @@ package daoImpl;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.List;
 
-import org.hibernate.Transaction;
-import org.hibernate.ogm.OgmSession;
-import org.hibernate.ogm.OgmSessionFactory;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
+
+import org.bson.types.ObjectId;
 
 import dao.ThuocDao;
 import entity.Thuoc;
@@ -17,18 +19,17 @@ public class ImplThuoc  extends UnicastRemoteObject implements ThuocDao {
 	 * 
 	 */
 	private static final long serialVersionUID = -3692853915209401270L;
-	private OgmSessionFactory sessionFactory;
+	private EntityManager em;
 	public ImplThuoc() throws RemoteException {
-		sessionFactory = HibernateUtil.getInstance().getSessionFactory();
+		em = HibernateUtil.getInstance().getEntityManager();
 	}
 	@Override
 	public boolean addThuoc(Thuoc thuoc) throws RemoteException {
-		OgmSession session = sessionFactory.getCurrentSession();
-		Transaction tr = session.getTransaction();
+		EntityTransaction tr = em.getTransaction();
 		try {
 			
 			tr.begin();
-			session.save(thuoc);
+			em.persist(thuoc);
 
 			tr.commit();
 			return true;
@@ -37,6 +38,33 @@ public class ImplThuoc  extends UnicastRemoteObject implements ThuocDao {
 			tr.rollback();
 		}
 		return false;
+	}
+	
+	
+	@Override
+	public List<Thuoc> getThuocTheoMaLoai(ObjectId maLoai) throws RemoteException {
+		EntityTransaction tr = em.getTransaction();
+		try {
+			
+			tr.begin();
+			String query = "db.dsThuoc.aggregate([{\r\n"
+					+ "    '$match': {\r\n"
+					+ "        'LoaiThuoc_Id': ObjectId('"+maLoai+"'),\r\n"
+					+ "        'trangThaiThuoc': 'Còn bán'\r\n"
+					+ "    }\r\n"
+					+ "}])";
+			@SuppressWarnings("unchecked")
+			List<Thuoc> ls = em.createNativeQuery(query,Thuoc.class).getResultList();
+			
+
+			tr.commit();
+			return ls;
+		} catch (Exception e) {
+			e.printStackTrace();
+			tr.rollback();
+		}
+		
+		return null;
 	}
 
 }

@@ -2,9 +2,10 @@ package app;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -17,7 +18,6 @@ import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
-import javax.swing.table.TableModel;
 
 public class FrmDSKH extends JFrame {
 
@@ -33,8 +33,8 @@ public class FrmDSKH extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public FrmDSKH() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	public FrmDSKH(JFrame frm) {
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(0, 0, 1012, 672);
 		setLocationRelativeTo(null);
 		contentPane = new JPanel();
@@ -167,6 +167,14 @@ public class FrmDSKH extends JFrame {
 		btnLammoi.setFont(new Font("SansSerif", Font.BOLD, 15));
 		btnLammoi.setBounds(875, 34, 108, 34);
 		panel_1.add(btnLammoi);
+		
+		addWindowListener(new WindowAdapter() {
+			
+			public void windowClosing(WindowEvent e)
+			{
+				frm.setVisible(true);
+			}
+		});
 		
 		
 	}

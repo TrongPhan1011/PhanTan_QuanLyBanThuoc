@@ -3,9 +3,8 @@ package daoImpl;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
-import org.hibernate.Transaction;
-import org.hibernate.ogm.OgmSession;
-import org.hibernate.ogm.OgmSessionFactory;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 
 import dao.KhachHangDao;
 import entity.KhachHang;
@@ -16,20 +15,19 @@ public class ImplKhachHang extends UnicastRemoteObject implements KhachHangDao {
 	 * 
 	 */
 	private static final long serialVersionUID = -6664970320028235951L;
-	private OgmSessionFactory sessionFactory;
+	private EntityManager em;
 
 	public ImplKhachHang() throws RemoteException {
-		sessionFactory = HibernateUtil.getInstance().getSessionFactory();
+		em = HibernateUtil.getInstance().getEntityManager();
 	}
 
 	@Override
 	public boolean addKhachHang(KhachHang khachHang) throws RemoteException {
 
-		OgmSession session = sessionFactory.getCurrentSession();
-		Transaction tr = session.getTransaction();
+		EntityTransaction tr = em.getTransaction();
 		try {
 			tr.begin();
-			session.save(khachHang);
+			em.persist(khachHang);
 			
 			tr.commit();
 			return true;

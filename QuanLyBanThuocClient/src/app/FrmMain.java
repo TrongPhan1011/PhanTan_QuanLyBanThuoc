@@ -78,7 +78,7 @@ public class FrmMain extends JFrame implements ActionListener  {
 	 * @throws RemoteException 
 	 * @throws MalformedURLException 
 	 */
-	private void initialize() throws MalformedURLException, RemoteException, NotBoundException {
+	public void initialize() throws MalformedURLException, RemoteException, NotBoundException {
 		frame = new JFrame();
 		frame.setResizable(false);
 		frame.setBounds(0, 0, 1285, 700);
@@ -190,19 +190,13 @@ public class FrmMain extends JFrame implements ActionListener  {
 		quanLyThuoc = new FrmQuanLyThuoc();
 		tabbedPane1.addTab("New tab", null, quanLyThuoc, null);
 
-		FrmQLBH frmQLHD = new FrmQLBH(this.frame);
+		FrmQLBH frmQLHD = new FrmQLBH(frame);
 		tabbedPane1.addTab("New tab", null, frmQLHD, null);
 		
 		tabbedPane1.addTab("New tab", null,frmQuanLyNhanVien , null);
 	
 		tabbedPane1.addTab("New tab", null, frmQuanLyThongKe, null); //frmQuanLyNhanVien
-		
-		
-		
-	
-		
-		
-		
+
 		
 		btnquanlynhanvien.addActionListener(this);
 		

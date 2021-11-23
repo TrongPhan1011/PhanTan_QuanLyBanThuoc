@@ -4,13 +4,16 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
-import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -29,6 +32,8 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
+import org.bson.types.ObjectId;
+
 import com.toedter.calendar.JDateChooser;
 
 import dao.CTHDDao;
@@ -40,8 +45,10 @@ import dao.NhanVienDao;
 import dao.NuocSXDao;
 import dao.TaiKhoanDao;
 import dao.ThuocDao;
+import entity.LoaiThuoc;
+import entity.Thuoc;
 
-public class FrmQLBH extends JPanel implements ActionListener,MouseListener {
+public class FrmQLBH extends JPanel implements ActionListener,MouseListener,ItemListener {
 
 	/**
 	 * 
@@ -52,7 +59,7 @@ public class FrmQLBH extends JPanel implements ActionListener,MouseListener {
 	private JTextField txtTimKiem;
 	private JTextField txtTenKH;
 	private JTextField txtSDT;
-	private JTextField txtDiaChi;
+	private JTextField txtTrangThaiKH;
 	private JTextField txtSoLuong;
 	private JTable table;
 	private DefaultTableModel modelThuoc;
@@ -60,6 +67,16 @@ public class FrmQLBH extends JPanel implements ActionListener,MouseListener {
 	private JButton btnDSKH;
 	private JDateChooser chooserNgaySinh;
 	private CTHDDao cthdDao;
+	private JComboBox<String> cboLoaiThuoc;
+	private JComboBox<String> cboTenThuoc;
+	private HoaDonDao hoaDonDao;
+	private KhachHangDao khachHangDao;
+	private LoaiThuocDao loaiThuocDao;
+	private NhaCungCapDao NCCDao;
+	private NhanVienDao nhanVienDao;
+	private NuocSXDao nuocSXDao;
+	private TaiKhoanDao tkDao;
+	private ThuocDao thuocDao;
 
 
 
@@ -72,9 +89,8 @@ public class FrmQLBH extends JPanel implements ActionListener,MouseListener {
 
 
 	public FrmQLBH(JFrame fMain) throws MalformedURLException, RemoteException, NotBoundException {
-		// TODO Auto-generated constructor stub
 		this.fMain = fMain;
-		initialize();
+		initialize(fMain);
 	}
 
 	/**
@@ -83,17 +99,19 @@ public class FrmQLBH extends JPanel implements ActionListener,MouseListener {
 	 * @throws RemoteException 
 	 * @throws MalformedURLException 
 	 */
-	private void initialize() throws MalformedURLException, RemoteException, NotBoundException {
-		 cthdDao =  (CTHDDao) Naming.lookup("rmi://192.168.1.9:9999/cthdDao");
-		HoaDonDao hoaDonDao =  (HoaDonDao) Naming.lookup("rmi://192.168.1.9:9999/hoaDonDao");
-	    KhachHangDao khachHangDao = (KhachHangDao) Naming.lookup("rmi://192.168.1.9:9999/khachHangDao");
-		LoaiThuocDao loaiThuocDao =  (LoaiThuocDao) Naming.lookup("rmi://192.168.1.9:9999/loaiThuocDao");
-		NhaCungCapDao NCCDao =  (NhaCungCapDao) Naming.lookup("rmi://192.168.1.9:9999/nhaCungCapDao");
-		NhanVienDao nhanVienDao =  (NhanVienDao) Naming.lookup("rmi://192.168.1.9:9999/nhanVienDao");
-		NuocSXDao nuocSXDao =  (NuocSXDao) Naming.lookup("rmi://192.168.1.9:9999/nuocSXDao");
-		TaiKhoanDao tkDao =  (TaiKhoanDao) Naming.lookup("rmi://192.168.1.9:9999/taiKhoanDao");
-		ThuocDao thuocDao =  (ThuocDao) Naming.lookup("rmi://192.168.1.9:9999/thuocDao");
+	public void initialize(JFrame fMain) throws MalformedURLException, RemoteException, NotBoundException {
 		
+		cthdDao =  (CTHDDao) Naming.lookup("rmi://192.168.1.9:9999/cthdDao");
+		hoaDonDao =  (HoaDonDao) Naming.lookup("rmi://192.168.1.9:9999/hoaDonDao");
+	    khachHangDao = (KhachHangDao) Naming.lookup("rmi://192.168.1.9:9999/khachHangDao");
+		loaiThuocDao =  (LoaiThuocDao) Naming.lookup("rmi://192.168.1.9:9999/loaiThuocDao");
+		 NCCDao =  (NhaCungCapDao) Naming.lookup("rmi://192.168.1.9:9999/nhaCungCapDao");
+		 nhanVienDao =  (NhanVienDao) Naming.lookup("rmi://192.168.1.9:9999/nhanVienDao");
+		 nuocSXDao =  (NuocSXDao) Naming.lookup("rmi://192.168.1.9:9999/nuocSXDao");
+		 tkDao =  (TaiKhoanDao) Naming.lookup("rmi://192.168.1.9:9999/taiKhoanDao");
+		 thuocDao =  (ThuocDao) Naming.lookup("rmi://192.168.1.9:9999/thuocDao");
+		
+	
 		frame = new JFrame();
 		frame.setBounds(0, 0, 1031, 700);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -144,7 +162,7 @@ public class FrmQLBH extends JPanel implements ActionListener,MouseListener {
 		
 		txtTenKH = new JTextField();
 		txtTenKH.setFont(new Font("SansSerif", Font.PLAIN, 15));
-		txtTenKH.setBounds(139, 23, 158, 31);
+		txtTenKH.setBounds(139, 23, 488, 31);
 		txtTenKH.setBorder(new LineBorder(new Color(91, 155, 213)));
 		pKH.add(txtTenKH);
 		txtTenKH.setColumns(10);
@@ -161,45 +179,39 @@ public class FrmQLBH extends JPanel implements ActionListener,MouseListener {
 		txtSDT.setBorder(new LineBorder(new Color(91, 155, 213)));
 		pKH.add(txtSDT);
 		
-		JLabel lblLoiKhchHng = new JLabel("Loại khách hàng:");
-		lblLoiKhchHng.setFont(new Font("SansSerif", Font.BOLD, 15));
-		lblLoiKhchHng.setBounds(10, 99, 133, 20);
-		pKH.add(lblLoiKhchHng);
+		JLabel lblTrangThaiKH = new JLabel("Trạng thái KH:");
+		lblTrangThaiKH.setFont(new Font("SansSerif", Font.BOLD, 15));
+		lblTrangThaiKH.setBounds(324, 98, 133, 20);
+		pKH.add(lblTrangThaiKH);
 		
-		JComboBox cboLoaiKH = new JComboBox();
-		cboLoaiKH.setBackground(Color.WHITE);
-		cboLoaiKH.setFont(new Font("SansSerif", Font.PLAIN, 15));
-		cboLoaiKH.setBounds(139, 96, 158, 31);
-		cboLoaiKH.setBorder(new LineBorder(new Color(91, 155, 213)));
-		pKH.add(cboLoaiKH);
+		txtTrangThaiKH = new JTextField();
+		txtTrangThaiKH.setEditable(false);
+		txtTrangThaiKH.setFont(new Font("SansSerif", Font.PLAIN, 15));
+		txtTrangThaiKH.setColumns(10);
+		txtTrangThaiKH.setBounds(443, 95, 184, 31);
+		txtTrangThaiKH.setBorder(new LineBorder(new Color(91, 155, 213)));
+		pKH.add(txtTrangThaiKH);
 		
-		JLabel lblDiaChi = new JLabel("Địa chỉ:");
-		lblDiaChi.setFont(new Font("SansSerif", Font.BOLD, 15));
-		lblDiaChi.setBounds(317, 65, 75, 20);
-		pKH.add(lblDiaChi);
-		
-		txtDiaChi = new JTextField();
-		txtDiaChi.setFont(new Font("SansSerif", Font.PLAIN, 15));
-		txtDiaChi.setColumns(10);
-		txtDiaChi.setBounds(396, 60, 224, 31);
-		txtDiaChi.setBorder(new LineBorder(new Color(91, 155, 213)));
-		pKH.add(txtDiaChi);
-		
-		JComboBox cboGioiTinh = new JComboBox();
+		JComboBox<String> cboGioiTinh = new JComboBox<String>();
 		cboGioiTinh.setBackground(Color.WHITE);
 		cboGioiTinh.setFont(new Font("SansSerif", Font.PLAIN, 15));
-		cboGioiTinh.setBounds(396, 96, 224, 31);
+		cboGioiTinh.setBounds(139, 95, 158, 31);
 		cboGioiTinh.setBorder(new LineBorder(new Color(91, 155, 213)));
 		pKH.add(cboGioiTinh);
 		
+		cboGioiTinh.addItem("Nam");
+		cboGioiTinh.addItem("Nữ");
+		
+		
+		
 		JLabel lblGioiTinh = new JLabel("Giới tính:");
 		lblGioiTinh.setFont(new Font("SansSerif", Font.BOLD, 15));
-		lblGioiTinh.setBounds(317, 99, 133, 20);
+		lblGioiTinh.setBounds(10, 103, 100, 20);
 		pKH.add(lblGioiTinh);
 		
 		JLabel lblNgaySinh = new JLabel("Ngày sinh:");
 		lblNgaySinh.setFont(new Font("SansSerif", Font.BOLD, 15));
-		lblNgaySinh.setBounds(317, 28, 93, 20);
+		lblNgaySinh.setBounds(324, 64, 93, 20);
 		pKH.add(lblNgaySinh);
 		
 		JButton btnThemKH = new JButton("Thêm");
@@ -222,7 +234,7 @@ public class FrmQLBH extends JPanel implements ActionListener,MouseListener {
 		
 		chooserNgaySinh = new JDateChooser();
 		chooserNgaySinh.getCalendarButton().setFont(new Font("SansSerif", Font.PLAIN, 15));
-		chooserNgaySinh.setBounds(396, 23, 224, 32);
+		chooserNgaySinh.setBounds(443, 59, 184, 32);
 		pKH.add(chooserNgaySinh);
 		chooserNgaySinh.setBorder(BorderFactory.createLineBorder(new Color(91, 155, 213)));
 		chooserNgaySinh.setDateFormatString("dd/MM/yyyy");
@@ -244,7 +256,7 @@ public class FrmQLBH extends JPanel implements ActionListener,MouseListener {
 		lblLoaiThuoc.setBounds(30, 27, 133, 20);
 		pThuoc.add(lblLoaiThuoc);
 		
-		JComboBox cboLoaiThuoc = new JComboBox();
+		cboLoaiThuoc = new JComboBox<String>();
 		cboLoaiThuoc.setBackground(Color.WHITE);
 		cboLoaiThuoc.setFont(new Font("SansSerif", Font.PLAIN, 15));
 		cboLoaiThuoc.setBounds(118, 24, 202, 31);
@@ -256,7 +268,7 @@ public class FrmQLBH extends JPanel implements ActionListener,MouseListener {
 		lblTenThuoc.setBounds(30, 65, 133, 20);
 		pThuoc.add(lblTenThuoc);
 		
-		JComboBox cboTenThuoc = new JComboBox();
+		 cboTenThuoc = new JComboBox<String>();
 		cboTenThuoc.setBackground(Color.WHITE);
 		cboTenThuoc.setFont(new Font("SansSerif", Font.PLAIN, 15));
 		cboTenThuoc.setBounds(118, 60, 202, 31);
@@ -328,10 +340,10 @@ public class FrmQLBH extends JPanel implements ActionListener,MouseListener {
 		spMatHang.setBackground(Color.white);
 		pMain.add(spMatHang);
 		
-		JButton btnLamMoiGD = new JButton("Làm mới giao diện");
+		JButton btnLamMoiGD = new JButton("Làm mới");
 		btnLamMoiGD.setFont(new Font("SansSerif", Font.BOLD, 15));
 		btnLamMoiGD.setBackground(new Color(41, 242, 255));
-		btnLamMoiGD.setBounds(235, 655, 209, 34);
+		btnLamMoiGD.setBounds(466, 655, 209, 34);
 		pMain.add(btnLamMoiGD);
 		
 		JLabel lblSubThanhTien = new JLabel("Thành tiền:");
@@ -357,10 +369,17 @@ public class FrmQLBH extends JPanel implements ActionListener,MouseListener {
 		btnDSKH.setFont(new Font("SansSerif", Font.BOLD, 15));
 		btnDSKH.setBackground(new Color(41, 242, 255));
 		
+		JButton btnDSHD = new JButton("Danh sách hóa đơn");
+		btnDSHD.setFont(new Font("SansSerif", Font.BOLD, 15));
+		btnDSHD.setBackground(new Color(41, 242, 255));
+		btnDSHD.setBounds(238, 655, 218, 34);
+		pMain.add(btnDSHD);
+		
 		JLabel lblBackground = new JLabel("");
 		lblBackground.setBounds(0, 0, 1031, 700);
 		lblBackground.setIcon(new ImageIcon("data\\img\\bg.png"));
 		pMain.add(lblBackground);
+		
 		
 		//test
 		modelThuoc.addRow(new Object[] {"123","123"});
@@ -368,19 +387,40 @@ public class FrmQLBH extends JPanel implements ActionListener,MouseListener {
 		modelThuoc.addRow(new Object[] {"123","123"});
 		modelThuoc.addRow(new Object[] {"123","123"});
 		
+		List<LoaiThuoc> lsLoaiThuoc = loaiThuocDao.getAllLoaiThuoc();
+		for(LoaiThuoc lt : lsLoaiThuoc) {
+			cboLoaiThuoc.addItem(lt.getTenLoai());
+		}
 		
+		String s = cboLoaiThuoc.getSelectedItem().toString();
+		LoaiThuoc itemLT = null;
+		List<Thuoc> dsThuoc = null;
+		try {
+			itemLT = loaiThuocDao.getLoaiThuocTheoTen(s);
+			dsThuoc = thuocDao.getThuocTheoMaLoai(itemLT.getId());
+		} catch (RemoteException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		cboTenThuoc.removeAllItems();
+		for (Thuoc t : dsThuoc)
+		{
+			
+			cboTenThuoc.addItem(t.getTenThuoc());
+		}
+	
 		
 		//action
 		btnDSKH.addActionListener(this);
 		
+		cboLoaiThuoc.addItemListener(this);
 		
 	}
 	
 	
 	public void loadFrmDSKH() {
-		FrmDSKH frmKH = new FrmDSKH();
+		FrmDSKH frmKH = new FrmDSKH(fMain);
 		frmKH.setVisible(true);
-		
 		
 		fMain.setVisible(false);
 
@@ -426,4 +466,27 @@ public class FrmQLBH extends JPanel implements ActionListener,MouseListener {
 		
 	}
 
+	
+	
+	@Override
+	public void itemStateChanged(ItemEvent e) {
+		if(e.getItem() == cboLoaiThuoc.getSelectedItem()) {
+			String s = cboLoaiThuoc.getSelectedItem().toString();
+			LoaiThuoc lt = null;
+			List<Thuoc> dsThuoc = null;
+			try {
+				lt = loaiThuocDao.getLoaiThuocTheoTen(s);
+				dsThuoc = thuocDao.getThuocTheoMaLoai(lt.getId());
+			} catch (RemoteException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			cboTenThuoc.removeAllItems();
+			for (Thuoc t : dsThuoc)
+			{
+				
+				cboTenThuoc.addItem(t.getTenThuoc());
+			}
+		}
+	}
 }

@@ -3,9 +3,8 @@ package daoImpl;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
-import org.hibernate.Transaction;
-import org.hibernate.ogm.OgmSession;
-import org.hibernate.ogm.OgmSessionFactory;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 
 import dao.CTHDDao;
 import entity.CTHD;
@@ -17,21 +16,22 @@ public class ImplCTHD extends UnicastRemoteObject implements CTHDDao {
 	 */
 	private static final long serialVersionUID = -6341664070505503845L;
 
-	
-	private OgmSessionFactory  sessionFactory;
+
+	private EntityManager em;
 	
 	public ImplCTHD() throws RemoteException{
-		sessionFactory = HibernateUtil.getInstance().getSessionFactory();
+	
+		em = HibernateUtil.getInstance().getEntityManager();
+		
 	}
 	
 
 	@Override
 	public boolean addCTHD(CTHD cthd) throws RemoteException {
-		OgmSession session = sessionFactory.getCurrentSession();
-		Transaction tr = session.getTransaction();
+		EntityTransaction tr = em.getTransaction();
 		try {
 			tr.begin();
-			session.save(cthd);
+				em.persist(cthd);
 			
 			tr.commit();
 			return true;
