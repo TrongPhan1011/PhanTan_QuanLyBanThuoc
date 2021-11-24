@@ -66,5 +66,29 @@ public class ImplThuoc  extends UnicastRemoteObject implements ThuocDao {
 		
 		return null;
 	}
+	@Override
+	public Thuoc getThuocTheoTenVaMaLoai(String tenThuoc, ObjectId maLoai) throws RemoteException {
+		EntityTransaction tr = em.getTransaction();
+		try {
+			
+			tr.begin();
+			String query = "db.dsThuoc.aggregate([{\r\n"
+					+ "    '$match': {\r\n"
+					+ "        'tenThuoc': '"+tenThuoc+"' ,'LoaiThuoc_Id': ObjectId('"+maLoai+"'),\r\n"
+					+ "        'trangThaiThuoc': 'Còn bán'\r\n"
+					+ "    }\r\n"
+					+ "}])";
+			
+			Thuoc t = (Thuoc) em.createNativeQuery(query,Thuoc.class).getSingleResult();
+			
+
+			tr.commit();
+			return t;
+		} catch (Exception e) {
+			e.printStackTrace();
+			tr.rollback();
+		}
+		return null;
+	}
 
 }
