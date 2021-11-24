@@ -13,7 +13,9 @@ import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.text.DecimalFormat;
+import java.text.ParseException;
 import java.time.LocalDate;
+import java.time.Year;
 import java.util.Date;
 import java.util.List;
 
@@ -91,6 +93,7 @@ public class FrmQLBH extends JPanel implements ActionListener,MouseListener,Item
 	private Date now;
 	private DecimalFormat dfTable;
 	private DecimalFormat df;
+	private Regex regex;
 
 
 
@@ -125,6 +128,7 @@ public class FrmQLBH extends JPanel implements ActionListener,MouseListener,Item
 		nuocSXDao =  (NuocSXDao) Naming.lookup("rmi://192.168.1.9:9999/nuocSXDao");
 		tkDao =  (TaiKhoanDao) Naming.lookup("rmi://192.168.1.9:9999/taiKhoanDao");
 		thuocDao =  (ThuocDao) Naming.lookup("rmi://192.168.1.9:9999/thuocDao");
+		regex  = new Regex();
 
 
 		
@@ -431,7 +435,12 @@ public class FrmQLBH extends JPanel implements ActionListener,MouseListener,Item
 		cboLoaiThuoc.addItemListener(this);
 		
 		tblThuoc.addMouseListener(this);
-
+		
+		long time = (System.currentTimeMillis() - new Date(2001-1900, 11-1, 10).getTime());
+		
+		double yearsBetween = time / 3.15576e+10;
+		int age = (int) Math.floor(yearsBetween);
+		
 	}
 
 
@@ -543,15 +552,56 @@ public class FrmQLBH extends JPanel implements ActionListener,MouseListener,Item
 			modelThuoc.removeRow(timRow());
 		}
 		addToTable(t);
+		double thanhTien = tinhThanhTien();
+		lblThanhTien.setText(df.format(thanhTien));
 		
 	}
 	
 	public void removeThuoc() {
 		if(timRow()>=0) {
 			modelThuoc.removeRow(timRow());
+			double thanhTien = tinhThanhTien();
+			lblThanhTien.setText(df.format(thanhTien));
 		}
 		else JOptionPane.showMessageDialog(this, "Vui lòng chọn thuốc cần xóa");
 	}
+	
+	public double tinhThanhTien() {
+		int soRow = tblThuoc.getRowCount();
+		double thanhTien = 0;
+		for(int i = 0; i< soRow; i++) {
+			try {
+				double tongTien = Double.parseDouble(dfTable.parse(modelThuoc.getValueAt(i, 5).toString()).toString()) ;
+				thanhTien += tongTien;
+			} catch (ParseException e) {
+				e.printStackTrace();
+			} 
+		}
+		return thanhTien;
+	}
+	
+	public boolean ktRongKH() {
+		if(regex.kiemTraRong(txtTenKH))
+			return false;
+		if(regex.kiemTraRong(txtSDT))
+			return false;
+		return true;
+	}
+	public boolean ktThongTinKH() {
+		if(ktRongKH()) {
+			if(!regex.RegexTen(txtTenKH))
+				return false;
+			if(!regex.RegexSDT(txtSDT))
+				return false;
+			if(!regex.kiemTraNgaySinh(chooserNgaySinh))
+				return false;
+			
+			
+			return true;
+		}
+		return false;
+	}
+	
 	
 	
 	
