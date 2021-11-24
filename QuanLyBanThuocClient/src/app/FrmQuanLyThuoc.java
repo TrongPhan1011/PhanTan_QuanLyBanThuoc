@@ -73,10 +73,10 @@ public class FrmQuanLyThuoc extends JPanel {
 		p.setLayout(null);
 		
 		JButton btntim = new JButton("Tìm");
-		btntim.setFont(new Font("Tahoma", Font.BOLD, 15));
+		btntim.setFont(new Font("SansSerif", Font.BOLD, 15));
 		btntim.setBackground(new Color(41, 242, 255));
 //		jbtim.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-		btntim.setBounds(836, 41, 93, 33);
+		btntim.setBounds(888, 41, 93, 33);
 		p.add(btntim);
 		
 		JButton btnthem = new JButton("Thêm");
@@ -106,7 +106,7 @@ public class FrmQuanLyThuoc extends JPanel {
 		
 		JLabel lbltimthuoc = new JLabel("Tìm kiếm:");
 		lbltimthuoc.setFont(new Font("SansSerif", Font.BOLD, 15));
-		lbltimthuoc.setBounds(483, 41, 80, 32);
+		lbltimthuoc.setBounds(523, 41, 80, 32);
 		p.add(lbltimthuoc);
 		
 		JLabel lbltieudequanlythuoc = new JLabel("Quản lý thuốc");
@@ -166,11 +166,13 @@ public class FrmQuanLyThuoc extends JPanel {
 		
 		JDateChooser datehansd = new JDateChooser();
 		datehansd.setBounds(803, 133, 178, 32);
+		datehansd.setFont(new Font("SansSerif", Font.PLAIN, 15));
 		datehansd.setBorder(new LineBorder(new Color(91, 155, 213)));
 		p.add(datehansd);
 		
 		JDateChooser datengaysx = new JDateChooser();
 		datengaysx.setBounds(473, 131, 190, 32);
+		datengaysx.setFont(new Font("SansSerif", Font.PLAIN, 15));
 		datengaysx.setBorder(new LineBorder(new Color(91, 155, 213)));
 		p.add(datengaysx);
 		
@@ -255,7 +257,7 @@ public class FrmQuanLyThuoc extends JPanel {
 		
 		txttimkiemthuoc = new JTextField();
 		txttimkiemthuoc.setFont(new Font("SansSerif", Font.PLAIN, 15));
-		txttimkiemthuoc.setBounds(573, 40, 228, 32);
+		txttimkiemthuoc.setBounds(623, 40, 228, 32);
 		txttimkiemthuoc.setBorder(new LineBorder(new Color(91, 155, 213)));
 		p.add(txttimkiemthuoc);
 		txttimkiemthuoc.setColumns(10);

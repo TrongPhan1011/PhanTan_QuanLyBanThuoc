@@ -127,6 +127,18 @@ public class FrmQLBH extends JPanel implements ActionListener,MouseListener,Item
 		thuocDao =  (ThuocDao) Naming.lookup("rmi://192.168.1.9:9999/thuocDao");
 
 
+		
+//		cthdDao =  (CTHDDao) Naming.lookup("rmi://192.168.1.8:9999/cthdDao");
+//		hoaDonDao =  (HoaDonDao) Naming.lookup("rmi://192.168.1.8:9999/hoaDonDao");
+//	    khachHangDao = (KhachHangDao) Naming.lookup("rmi://192.168.1.8:9999/khachHangDao");
+//		loaiThuocDao =  (LoaiThuocDao) Naming.lookup("rmi://192.168.1.8:9999/loaiThuocDao");
+//		 NCCDao =  (NhaCungCapDao) Naming.lookup("rmi://192.168.1.8:9999/nhaCungCapDao");
+//		 nhanVienDao =  (NhanVienDao) Naming.lookup("rmi://192.168.1.8:9999/nhanVienDao");
+//		 nuocSXDao =  (NuocSXDao) Naming.lookup("rmi://192.168.1.8:9999/nuocSXDao");
+//		 tkDao =  (TaiKhoanDao) Naming.lookup("rmi://192.168.1.8:9999/taiKhoanDao");
+//		 thuocDao =  (ThuocDao) Naming.lookup("rmi://192.168.1.8:9999/thuocDao");
+		
+	
 		frame = new JFrame();
 		frame.setBounds(0, 0, 1031, 700);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -412,8 +424,13 @@ public class FrmQLBH extends JPanel implements ActionListener,MouseListener,Item
 		btnLamMoiKH.addActionListener(this);
 		btnThemKH.addActionListener(this);
 		btnThemThuoc.addActionListener(this);
+		btnXoaThuoc.addActionListener(this);
+		rdoGiamSL.addActionListener(this);
+		btnLamMoiGD.addActionListener(this);
 
 		cboLoaiThuoc.addItemListener(this);
+		
+		tblThuoc.addMouseListener(this);
 
 	}
 
@@ -432,9 +449,17 @@ public class FrmQLBH extends JPanel implements ActionListener,MouseListener,Item
 		txtTenKH.setText("");
 		txtSDT.setText("");
 		cboGioiTinh.setSelectedIndex(0);
-
-
 		chooserNgaySinh.setDate(now);
+	}
+	
+	public void resetAll() {
+		resetKH();
+		txtTimKiem.setText("");
+		cboLoaiThuoc.setSelectedIndex(0);
+		rdoGiamSL.setSelected(false);
+		txtSoLuong.setText("");
+		clearTable();
+		lblThanhTien.setText("");
 	}
 
 
@@ -455,6 +480,7 @@ public class FrmQLBH extends JPanel implements ActionListener,MouseListener,Item
 			modelThuoc.removeRow(0);
 		}
 	}
+	
 	public int getSTT() {
 		
 		return tblThuoc.getRowCount()+1;
@@ -465,12 +491,24 @@ public class FrmQLBH extends JPanel implements ActionListener,MouseListener,Item
 				getSTT(),thuoc.getTenThuoc(), thuoc.getLoaiThuoc().getTenLoai(),thuoc.getSoLuongTon(),dfTable.format(thuoc.getDonGia()), dfTable.format(thuoc.getSoLuongTon()*thuoc.getDonGia())
 		});
 	}
+	
 	public int getSoLuongThem() {
 		int soLuong = 0;
 		if(timRow()!=-1) {
 			soLuong = Integer.parseInt(txtSoLuong.getText()) +  Integer.parseInt(modelThuoc.getValueAt(timRow(),3).toString());
 		}
 		else soLuong = Integer.parseInt(txtSoLuong.getText());
+		return soLuong;
+	}
+	
+	public int getSoLuongGiam() {
+		int soLuong = 0;
+		if(rdoGiamSL.isSelected()) {
+			if(timRow()!=-1) {
+				soLuong = - Integer.parseInt(txtSoLuong.getText()) +  Integer.parseInt(modelThuoc.getValueAt(timRow(),3).toString());
+			}
+			
+		}
 		return soLuong;
 	}
 	
@@ -497,14 +535,22 @@ public class FrmQLBH extends JPanel implements ActionListener,MouseListener,Item
 		LoaiThuoc loaiThuoc = loaiThuocDao.getLoaiThuocTheoTen(tenLoaiThuoc);
 		Thuoc t = thuocDao.getThuocTheoTenVaMaLoai(tenThuoc, loaiThuoc.getId());
 		t.setLoaiThuoc(loaiThuoc);
-		t.setSoLuongTon(getSoLuongThem());
+		if(!rdoGiamSL.isSelected())
+			t.setSoLuongTon(getSoLuongThem());
+		else
+			t.setSoLuongTon(getSoLuongGiam());
 		if(timRow()!=-1) {
 			modelThuoc.removeRow(timRow());
 		}
 		addToTable(t);
 		
-		
-		
+	}
+	
+	public void removeThuoc() {
+		if(timRow()>=0) {
+			modelThuoc.removeRow(timRow());
+		}
+		else JOptionPane.showMessageDialog(this, "Vui lòng chọn thuốc cần xóa");
 	}
 	
 	
@@ -527,6 +573,10 @@ public class FrmQLBH extends JPanel implements ActionListener,MouseListener,Item
 				e1.printStackTrace();
 			}
 		}
+		if(rdoGiamSL.isSelected()) {
+			btnThemThuoc.setText("Giảm thuốc");
+		}
+		else btnThemThuoc.setText("Thêm thuốc");
 		if(o.equals(btnThemThuoc)) {
 			try {
 				themThuoc();
@@ -534,12 +584,20 @@ public class FrmQLBH extends JPanel implements ActionListener,MouseListener,Item
 				e1.printStackTrace();
 			}
 		}
+		if(o.equals(btnXoaThuoc)) {
+			removeThuoc();
+		}
+		if(o.equals(btnLamMoiGD)) {
+			resetAll();
+		}
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
-
+		int row = tblThuoc.getSelectedRow();
+		cboLoaiThuoc.setSelectedItem(modelThuoc.getValueAt(row, 2));
+		cboTenThuoc.setSelectedItem(modelThuoc.getValueAt(row, 1));
+		txtSoLuong.setText(modelThuoc.getValueAt(row, 3).toString());
 	}
 
 	@Override
