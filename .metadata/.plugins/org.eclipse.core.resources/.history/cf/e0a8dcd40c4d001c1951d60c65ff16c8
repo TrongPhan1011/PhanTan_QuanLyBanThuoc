@@ -1,0 +1,79 @@
+package daoImpl;
+
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
+
+import dao.NhanVienDao;
+import entity.NhanVien;
+import util.HibernateUtil;
+
+public class ImplNhanVien extends UnicastRemoteObject implements NhanVienDao {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -208819529374076682L;
+	private EntityManager em;
+
+	public ImplNhanVien() throws RemoteException {
+		em = HibernateUtil.getInstance().getEntityManager();
+	}
+
+	@Override
+	public boolean addNhanVien(NhanVien nhanVien) throws RemoteException {
+		EntityTransaction tr = em.getTransaction();
+		
+		try {
+			tr.begin();
+				em.persist(nhanVien);
+			
+			tr.commit();
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			tr.rollback();
+		}
+		
+		return false;
+	}
+
+	@Override
+	public List<NhanVien> getDSNhanVien() throws RemoteException {
+		EntityTransaction tr = em.getTransaction();
+		try {
+			tr.begin();
+			@SuppressWarnings("unchecked")
+			List<NhanVien> nv =  em.createNativeQuery("db.dsNhanVien.find({})",NhanVien.class).getResultList();
+			
+			tr.commit();
+			return nv;
+		} catch (Exception e) {
+			e.printStackTrace();
+			tr.rollback();
+		}
+		return null;
+	}
+
+	@Override
+	public boolean huyTK(String tenNV) throws RemoteException {
+        EntityTransaction tr = em.getTransaction();
+		
+		try {
+			tr.begin();
+				em.remove(tenNV);
+			tr.commit();
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			tr.rollback();
+		}
+		return false;
+	}
+	
+
+}

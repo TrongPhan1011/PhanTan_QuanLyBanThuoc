@@ -1,0 +1,14 @@
+package dao;
+
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+import java.util.List;
+
+import entity.NhanVien;
+
+public interface NhanVienDao extends Remote {
+	public boolean addNhanVien(NhanVien nhanVien) throws RemoteException;
+
+	public List<NhanVien> getDSNhanVien() throws RemoteException;
+	public void soNhanVien() throws RemoteException;
+}

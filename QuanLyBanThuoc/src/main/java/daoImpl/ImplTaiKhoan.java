@@ -38,4 +38,21 @@ public class ImplTaiKhoan extends UnicastRemoteObject implements TaiKhoanDao {
 		return false;
 	}
 
+	@Override
+	public boolean updateTaiKhoan(TaiKhoan taiKhoan) throws RemoteException {
+		EntityTransaction tr = em.getTransaction();
+		try {
+			
+			tr.begin();
+			em.merge(taiKhoan);
+
+			tr.commit();
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			tr.rollback();
+		}
+		return false;
+	}
+
 }

@@ -47,11 +47,11 @@ public class ImplThuoc  extends UnicastRemoteObject implements ThuocDao {
 		try {
 			
 			tr.begin();
-			String query = "db.dsThuoc.aggregate([{\r\n"
-					+ "    '$match': {\r\n"
-					+ "        'LoaiThuoc_Id': ObjectId('"+maLoai+"'),\r\n"
-					+ "        'trangThaiThuoc': 'Còn bán'\r\n"
-					+ "    }\r\n"
+			String query = "db.dsThuoc.aggregate([{"
+					+ "    '$match': {"
+					+ "        'LoaiThuoc_Id': ObjectId('"+maLoai+"'),"
+					+ "        'trangThaiThuoc': 'Còn bán'"
+					+ "    }"
 					+ "}])";
 			@SuppressWarnings("unchecked")
 			List<Thuoc> ls = em.createNativeQuery(query,Thuoc.class).getResultList();
@@ -72,10 +72,10 @@ public class ImplThuoc  extends UnicastRemoteObject implements ThuocDao {
 		try {
 			
 			tr.begin();
-			String query = "db.dsThuoc.aggregate([{\r\n"
-					+ "    '$match': {\r\n"
-					+ "        'tenThuoc': '"+tenThuoc+"' ,'LoaiThuoc_Id': ObjectId('"+maLoai+"'),\r\n"
-					+ "        'trangThaiThuoc': 'Còn bán'\r\n"
+			String query = "db.dsThuoc.aggregate([{"
+					+ "    '$match': {"
+					+ "        'tenThuoc': '"+tenThuoc+"' ,'LoaiThuoc_Id': ObjectId('"+maLoai+"'),"
+					+ "        'trangThaiThuoc': 'Còn bán'"
 					+ "    }\r\n"
 					+ "}])";
 			
