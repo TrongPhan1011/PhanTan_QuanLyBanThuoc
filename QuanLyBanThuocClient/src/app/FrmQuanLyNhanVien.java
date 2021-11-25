@@ -22,8 +22,9 @@ import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
-
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
@@ -96,13 +97,17 @@ public class FrmQuanLyNhanVien extends JPanel implements ActionListener,MouseLis
 	private JTextField txtLuong;
 	private List<NhanVien> dsNV;
 	private int currentIndex = 0;
+	private Regex regex;
+	private Date now;
+//	private DecimalFormat df;
+	private SimpleDateFormat ngay;
 
 
 	/**
 	 * Create the application.
 	 */
 	public FrmQuanLyNhanVien()throws MalformedURLException, RemoteException, NotBoundException {
-		this.fMain = fMain;
+//		this.fMain = fMain;
 		initialize(fMain);
 	}
 
@@ -125,8 +130,9 @@ public class FrmQuanLyNhanVien extends JPanel implements ActionListener,MouseLis
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLayout(null);
 		
-		
-		
+		 regex = new Regex();
+	//	 df = new DecimalFormat("###,### VNĐ");
+         ngay= new SimpleDateFormat("dd/MM/yyyy");		
 		JPanel pMain = new JPanel();
 		pMain.setBackground(Color.WHITE);
 		pMain.setBounds(-62, -132, 1102, 848);
@@ -301,15 +307,18 @@ public class FrmQuanLyNhanVien extends JPanel implements ActionListener,MouseLis
 		
 		
 		
-		 formatDate = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+		LocalDate d = LocalDate.now();
+		now = new Date(d.getYear()-1900,d.getMonthValue()-1,d.getDayOfMonth());
+		datengaysinh.setDate(now);
 		
-		//dao_NV = new NhanVienDao();
+	
 		loadData();
+		
+		
 
 		
 		
-         //nhanVienDao.soNhanVien();
-	//	themNhanVien();
+ 
 	
 
 		
@@ -318,6 +327,8 @@ public class FrmQuanLyNhanVien extends JPanel implements ActionListener,MouseLis
 		btnhuy.addActionListener(this);
 		btnthem.addActionListener(this);
 		btnsua.addActionListener(this);
+		btnhuy.addActionListener(this);
+		btntim.addActionListener(this);
 	    tbl.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 			
 			@Override
@@ -381,6 +392,68 @@ public class FrmQuanLyNhanVien extends JPanel implements ActionListener,MouseLis
 		// TODO Auto-generated method stub
 		
 	}
+     public boolean validata() {
+    	String hoten = txthoten.getText();
+ 		String sdt = txtsdt.getText();
+ 		Date ngaySinh = datengaysinh.getDate();
+ 		String diachi = txtdiachi.getText();
+    	String Luong = txtLuong.getText();
+// 		double luong = Double.parseDouble(Luong);
+ 		if(hoten.isEmpty()) {
+ 			JOptionPane.showMessageDialog(this, "Họ tên không được trống");
+ 			txthoten.requestFocus();
+ 			return false;
+ 		}
+ 		else if(!hoten.matches("[\\p{Lu}[A-Z]][\\p{L}[a-z]]*(\\s+[\\p{Lu}[A-Z]][\\p{L}[a-z]]*)*")) {
+ 			JOptionPane.showMessageDialog(this, "Họ tên bắt đầu bằng chữ in hoa, không chứ số và không có ký tự đắc biệt");
+ 			txthoten.requestFocus();
+ 			return false;
+ 		}
+ 		if(sdt.isEmpty()) {
+ 			JOptionPane.showMessageDialog(this, "Số điện thoại không được trống");
+ 			txthoten.requestFocus();
+ 			return false;
+ 		}
+ 		else if(!sdt.matches("^[0][0-9]{9}$")) {
+ 			JOptionPane.showMessageDialog(this, "Số điện thoại gồm 10 số");
+ 			txtsdt.requestFocus();
+ 			return false;
+ 		}
+ 		
+ 		long time = (System.currentTimeMillis() - datengaysinh.getDate().getTime());
+		double yearsBetween = time / 3.15576e+10;
+		int age = (int) Math.floor(yearsBetween);
+		if(age < 18) {
+			JOptionPane.showMessageDialog(null, "Ngày sinh không hợp lệ!\nTuổi phải lớn hơn hoặc bằng 18");
+			return false;
+		}
+		
+ 		if(diachi.isEmpty()) {
+ 			JOptionPane.showMessageDialog(this, "Địa chỉ không được trống");
+ 			txthoten.requestFocus();
+ 		}
+ 		else if(!diachi.matches("[\\p{Lu}[A-Za-z0-9,.]][\\p{L}[a-z0-9,.]]*(\\s+[\\p{Lu}[A-Za-z0-9,.]][\\p{L}[a-z0-9,.]]*)*")) {
+ 			JOptionPane.showMessageDialog(this, "Địa chỉ bắt đầu bằng chữ cái hoặc số và không có ký tự đắc biệt");
+ 			txtdiachi.requestFocus();
+ 			return false;
+ 		}
+ 		double luong = Double.parseDouble(Luong);
+ 		
+ 		if(Luong.isEmpty()) {
+ 			JOptionPane.showMessageDialog(this, "Lương không được để trống!");
+ 			txtLuong.requestFocus();
+ 		
+ 		}
+ 		else if(luong<0) {
+ 			JOptionPane.showMessageDialog(this, "Lương không được nhập âm");
+ 			txtLuong.requestFocus();
+ 			return false;
+ 		}
+ 		
+     
+	return true;
+    	 
+     }
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -394,16 +467,27 @@ public class FrmQuanLyNhanVien extends JPanel implements ActionListener,MouseLis
 	    	txtsdt.setText("");
 	    	txtLuong.setText("");
 	    	cboGT.setSelectedIndex(0);
-	    	cboCV.setSelectedIndex(0);    	
+	    	cboCV.setSelectedIndex(0); 
+	    	datengaysinh.setDate(now);
+	    	try {
+				loadData();
+			} catch (RemoteException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+	    	taiDuLieuLenBang(dsNV);
 	    }
 	    if(o.equals(btnthem))
 	    {
+	    	if(validata()) {
+	    	
 	    	try {
 				themNhanVien();
 				taiDuLieuLenBang(dsNV);
 			} catch (RemoteException e1) {
 				e1.printStackTrace();
 			}
+	    	}
 	    }
 	    if(o.equals(btnsua))
 	    {
@@ -414,18 +498,25 @@ public class FrmQuanLyNhanVien extends JPanel implements ActionListener,MouseLis
 				e1.printStackTrace();
 			}
 	    }
-	    if(o.equals(btnhuy)) {
+	    if(o.equals(btnhuy)) 
+	    {
 			
-				int row = tbl.getSelectedRow();
-				if (row == -1) {
-					return;
-				}
+	    	try {
+				huyTaiKhoan();
+				taiDuLieuLenBang(dsNV);
+			} catch (RemoteException e1) {
+				//e1.printStackTrace();
+			}	
+		}
+	    if(o.equals(btntim)) {
 
-			 
-				
-			}
-	    
-
+	    	try {
+	    		loadDataTim();
+				taiDuLieuLenBang(dsNV);
+			} catch (RemoteException e1) {
+				e1.printStackTrace();
+			}	
+	    }
 	}
 	
 	private void loadData() throws RemoteException {
@@ -436,12 +527,20 @@ public class FrmQuanLyNhanVien extends JPanel implements ActionListener,MouseLis
 			modelNhanVien.addRow(new Object[] {nhanVien.getMaNhanVien(), nhanVien.getTenNhanVien(),nhanVien.getGioiTinh(),nhanVien.getNgaySinh(),nhanVien.getDiaChi(),nhanVien.getChucVu(),nhanVien.getSdt(),nhanVien.getLuong(),nhanVien.getTrangThaiLamViec()});	
 		}
 	}
+	private void loadDataTim() throws RemoteException{
+		dsNV = new ArrayList<NhanVien>();
+		String text = txttim.getText();
+		dsNV = nhanVienDao.getTim(text);
+		for(NhanVien nhanVien : dsNV) {
+			modelNhanVien.addRow(new Object[] {nhanVien.getMaNhanVien(), nhanVien.getTenNhanVien(),nhanVien.getGioiTinh(),nhanVien.getNgaySinh(),nhanVien.getDiaChi(),nhanVien.getChucVu(),nhanVien.getSdt(),nhanVien.getLuong(),nhanVien.getTrangThaiLamViec()});	
+		}
+	}
 	private void taiDuLieuLenBang(List<NhanVien> dsNV) {
 		modelNhanVien.getDataVector().removeAllElements();
 		modelNhanVien.fireTableDataChanged();
 		new Thread(() -> {
 
-		  formatDate = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+		  
 
 			for (NhanVien nhanVien : dsNV) {
 
@@ -472,6 +571,9 @@ public class FrmQuanLyNhanVien extends JPanel implements ActionListener,MouseLis
 		String Luong = txtLuong.getText();
 		double luong = Double.parseDouble(Luong);
 		String trangthai = "Đang làm việc";
+//		if(kiemTraSDT()==false) {
+//			JOptionPane.showMessageDialog(this, "Số điện thoại này đã tồn tại");
+//		}
 		NhanVien nv = new NhanVien(maNV, hoten, gioiTinh, ngaySinh, sdt, diachi, chucvu, luong,trangthai, new TaiKhoan(maNV, "123"));
         nhanVienDao.addNhanVien(nv) ;
         JOptionPane.showMessageDialog(this, "Thêm nhân viên thành công");
@@ -499,7 +601,7 @@ public class FrmQuanLyNhanVien extends JPanel implements ActionListener,MouseLis
 				String chucvu= cboCV.getSelectedItem().toString();
 				String Luong = txtLuong.getText();
 				double luong = Double.parseDouble(Luong);
-				
+
 				
 				NhanVien nv1 = nhanVienDao.getNhanVienTheoSoNV(maNV1);
 				nv1.setTenNhanVien(hoten);
@@ -510,17 +612,40 @@ public class FrmQuanLyNhanVien extends JPanel implements ActionListener,MouseLis
 			    nv1.setChucVu(chucvu);
 			    nv1.setLuong(luong);
 				
-				
-				
-				
-				
-				
-				
 		        nhanVienDao.updateNhanVien(nv1) ;
 		        JOptionPane.showMessageDialog(this, "Sửa thành công");
 		        loadData();
 			}
 	}
+	public void huyTaiKhoan()throws RemoteException{
+	 
+		    int row = tbl.getSelectedRow();
+			if (row == -1) {
+				JOptionPane.showMessageDialog(this, "Chưa chọn nhân viên");
+                
+			} else {
+				
+				row += currentIndex;
+			
+				String maNV2 = (String) modelNhanVien.getValueAt(row, 0);
+				String trangThai= "Đã nghỉ việc";
+				NhanVien nv2 = nhanVienDao.getNhanVienTheoSoNV(maNV2);
+				
+			    nv2.setTrangThaiLamViec(trangThai);
+				int click= JOptionPane.showConfirmDialog(this, "Bạn muốn hủy tài khoản này","Cảnh báo", JOptionPane.YES_NO_OPTION);
+				if(click== JOptionPane.YES_OPTION) {
+		        nhanVienDao.updateNhanVien(nv2) ;
+		        JOptionPane.showMessageDialog(this, "Hủy thành công");
+		        loadData();
+				}else
+					return;
+			}
+	}
+	public void kiemTraSDT() throws RemoteException{
+		
+	}
+	
+	
 	
 	
 }
