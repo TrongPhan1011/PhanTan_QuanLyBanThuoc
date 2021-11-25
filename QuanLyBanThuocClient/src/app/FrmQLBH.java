@@ -15,7 +15,6 @@ import java.rmi.RemoteException;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.time.LocalDate;
-import java.time.Year;
 import java.util.Date;
 import java.util.List;
 
@@ -450,6 +449,7 @@ public class FrmQLBH extends JPanel implements ActionListener,MouseListener,Item
 		txtTenKH.setText("Phan Huu Trong");
 		txtSDT.setText("0363435019");
 		
+
 	}
 
 
@@ -576,14 +576,14 @@ public class FrmQLBH extends JPanel implements ActionListener,MouseListener,Item
 			}
 			else JOptionPane.showMessageDialog(this, "Số lượng tồn không đủ!\nSố lượng còn: "+ soLuongTon);
 		}
+		
+		
 	}
 	
 	public void removeThuoc() {
 		int row = tblThuoc.getSelectedRow();
 		if(row>=0) {
 			modelThuoc.removeRow(timRow());
-			double thanhTien = tinhThanhTien();
-			lblThanhTien.setText(df.format(thanhTien));
 		}
 		else JOptionPane.showMessageDialog(this, "Vui lòng chọn thuốc cần xóa");
 	}
@@ -635,7 +635,6 @@ public class FrmQLBH extends JPanel implements ActionListener,MouseListener,Item
 		}
 		return false;
 	}
-	
 	
 	
 	
