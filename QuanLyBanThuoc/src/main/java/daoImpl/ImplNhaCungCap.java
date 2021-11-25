@@ -2,6 +2,7 @@ package daoImpl;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -34,6 +35,25 @@ public class ImplNhaCungCap extends UnicastRemoteObject implements NhaCungCapDao
 			tr.rollback();
 		}
 		return false;
+	}
+	@Override
+	public List<NhaCungCap> getAllnhacungcap() throws RemoteException {
+
+		EntityTransaction tr = em.getTransaction();
+		try {
+			
+			tr.begin();
+			
+			@SuppressWarnings("unchecked")
+			List<NhaCungCap>ls = em.createNativeQuery("db.dsNCC.find({})",NhaCungCap.class).getResultList();
+			
+			tr.commit();
+			return ls ;
+		} catch (Exception e) {
+			e.printStackTrace();
+			tr.rollback();
+		}
+		return null;
 	}
 	
 	

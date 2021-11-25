@@ -12,5 +12,8 @@ public interface ThuocDao extends Remote {
 	public boolean addThuoc(Thuoc thuoc) throws RemoteException;
 	public List<Thuoc> getThuocTheoMaLoai(ObjectId maLoai) throws RemoteException;
 	public Thuoc getThuocTheoTenVaMaLoai(String tenThuoc,ObjectId maLoai) throws RemoteException;
+	public List<Thuoc> getAllThuoc ()throws RemoteException;
+	public boolean xoaThuoc(Thuoc thuoc) throws RemoteException;
+	
 	
 }
