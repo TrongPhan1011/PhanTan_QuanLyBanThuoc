@@ -34,6 +34,8 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.swing.JTextField;
 import javax.swing.UIManager;
@@ -62,6 +64,17 @@ import entity.LoaiThuoc;
 import entity.NhaCungCap;
 import entity.NuocSX;
 import entity.Thuoc;
+
+import com.mongodb.Block;
+import com.mongodb.MongoClient;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
+
+import com.mongodb.client.model.Indexes;
+import com.mongodb.client.model.Filters;
+import com.mongodb.client.model.Sorts;
+import com.mongodb.client.model.TextSearchOptions;
+import com.mongodb.client.model.Projections;
 
 public class FrmQuanLyThuoc extends JPanel implements ActionListener, MouseListener {
 
@@ -94,6 +107,7 @@ public class FrmQuanLyThuoc extends JPanel implements ActionListener, MouseListe
 	private ThuocDao thuocDao;
 	private CTHDDao cthdDao;
 	private JComboBox<String> cboloaithuoc;
+	private Regex regex;
 
 	/**
 	 * Launch the application.
@@ -125,8 +139,7 @@ public class FrmQuanLyThuoc extends JPanel implements ActionListener, MouseListe
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(new BorderLayout(0, 0));
 		setLayout(null);
-		
-		
+
 //		cthdDao =  (CTHDDao) Naming.lookup("rmi://192.168.1.9:9999/cthdDao");
 //		hoaDonDao =  (HoaDonDao) Naming.lookup("rmi://192.168.1.9:9999/hoaDonDao");
 //		khachHangDao = (KhachHangDao) Naming.lookup("rmi://192.168.1.9:9999/khachHangDao");
@@ -137,8 +150,7 @@ public class FrmQuanLyThuoc extends JPanel implements ActionListener, MouseListe
 //		tkDao =  (TaiKhoanDao) Naming.lookup("rmi://192.168.1.9:9999/taiKhoanDao");
 //		thuocDao =  (ThuocDao) Naming.lookup("rmi://192.168.1.9:9999/thuocDao");
 //		regex  = new Regex();
-		
-		
+
 		cthdDao = (CTHDDao) Naming.lookup("rmi://192.168.1.8:9999/cthdDao");
 		hoaDonDao = (HoaDonDao) Naming.lookup("rmi://192.168.1.8:9999/hoaDonDao");
 		khachHangDao = (KhachHangDao) Naming.lookup("rmi://192.168.1.8:9999/khachHangDao");
@@ -274,7 +286,6 @@ public class FrmQuanLyThuoc extends JPanel implements ActionListener, MouseListe
 		cboloaithuoc.setBorder(new LineBorder(new Color(91, 155, 213)));
 		p.add(cboloaithuoc);
 
-
 		txtsoluong = new JTextField();
 		txtsoluong.setFont(new Font("SansSerif", Font.PLAIN, 15));
 		txtsoluong.setBounds(803, 90, 178, 32);
@@ -296,7 +307,6 @@ public class FrmQuanLyThuoc extends JPanel implements ActionListener, MouseListe
 		cbotenncc.setBorder(new LineBorder(new Color(91, 155, 213)));
 		p.add(cbotenncc);
 
-
 		txtdiachi = new JTextField();
 		txtdiachi.setFont(new Font("SansSerif", Font.PLAIN, 15));
 		txtdiachi.setBounds(474, 173, 189, 32);
@@ -310,7 +320,6 @@ public class FrmQuanLyThuoc extends JPanel implements ActionListener, MouseListe
 		cbonuocsx.setEditable(true);
 		cbonuocsx.setBorder(new LineBorder(new Color(91, 155, 213)));
 		p.add(cbonuocsx);
-		
 
 		tbl = new JTable(modelthuoc);
 		tbl.setFont(new Font("SansSerif", Font.PLAIN, 13));
@@ -357,10 +366,12 @@ public class FrmQuanLyThuoc extends JPanel implements ActionListener, MouseListe
 		btnthem.addActionListener(this);
 		btnxoa.addActionListener(this);
 		tbl.addMouseListener(this);
-		//
+		// loadthongtin
 		loaddata();
 		loadloaithuoccbo();
 		loadtenncccbo();
+		loadnuocsxcbo();
+		//
 		p.add(jlbbg);
 
 	}
@@ -375,18 +386,26 @@ public class FrmQuanLyThuoc extends JPanel implements ActionListener, MouseListe
 					t.getNcc().getDiaChiNCC(), t.getNuocSX().getTenNuocSX() });
 		}
 	}
+
 	private void loadloaithuoccbo() throws RemoteException {
-		List<LoaiThuoc> loaiThuocs=loaiThuocDao.getAllLoaiThuoc();
-				for(LoaiThuoc lt:loaiThuocs) {
-					cboloaithuoc.addItem(lt.getTenLoai());
-				}
+		List<LoaiThuoc> loaiThuocs = loaiThuocDao.getAllLoaiThuoc();
+		for (LoaiThuoc lt : loaiThuocs) {
+			cboloaithuoc.addItem(lt.getTenLoai());
+		}
 	}
+
 	public void loadtenncccbo() throws RemoteException {
-		List<NhaCungCap> nhaCungCaps=NCCDao.getAllnhacungcap();
-		System.out.println(nhaCungCaps);
-				for(NhaCungCap ls:nhaCungCaps) {
-					cbotenncc.addItem(ls.getTenNCC());
-				}
+		List<NhaCungCap> nhaCungCaps = NCCDao.getAllnhacungcap();
+		for (NhaCungCap ls : nhaCungCaps) {
+			cbotenncc.addItem(ls.getTenNCC());
+		}
+	}
+
+	private void loadnuocsxcbo() throws RemoteException {
+		List<NuocSX> nuocSXs = nuocSXDao.getAllNuocsc();
+		for (NuocSX n : nuocSXs) {
+			cbonuocsx.addItem(n.getTenNuocSX());
+		}
 	}
 
 	private void lammoi() throws RemoteException {
@@ -396,7 +415,7 @@ public class FrmQuanLyThuoc extends JPanel implements ActionListener, MouseListe
 
 	private Thuoc reverThuoc() {
 		String tenthuoc = txttenthuoc.getText();
-		String loaithuoc = txtloaithuoc.getSelectedItem().toString();
+		String loaithuoc = cboloaithuoc.getSelectedItem().toString();
 		Date ngaysx = (Date) datengaysx.getDate();
 		Date hansd = (Date) datehansd.getDate();
 		double dongia = Double.parseDouble(txtdongia.getText());
@@ -420,7 +439,8 @@ public class FrmQuanLyThuoc extends JPanel implements ActionListener, MouseListe
 		cboloaithuoc.setSelectedItem(modelthuoc.getValueAt(row, 1));
 		datengaysx.setDate(new Date(modelthuoc.getValueAt(row, 2).toString()));
 		datehansd.setDate(new Date(modelthuoc.getValueAt(row, 3).toString()));
-		txtdongia.setText(modelthuoc.getValueAt(row, 4).toString());
+
+		txtdongia.setText(modelthuoc.getValueAt(row, 4).toString().replaceAll("[-+.^:,]", ""));
 		txtsoluong.setText(modelthuoc.getValueAt(row, 5).toString());
 		cbotenncc.setSelectedItem(modelthuoc.getValueAt(row, 6).toString());
 		txtdiachi.setText(modelthuoc.getValueAt(row, 7).toString());
@@ -456,11 +476,100 @@ public class FrmQuanLyThuoc extends JPanel implements ActionListener, MouseListe
 		// TODO Auto-generated method stub
 		Object o = e.getSource();
 		if (o.equals(btnthem)) {
-			Thuoc thuoc = reverThuoc();
+			if (txtdiachi.getText().equals("") || txtdongia.getText().equals("") || txtsoluong.getText().equals("")
+					|| txttenthuoc.getText().equals("")) {
+				JOptionPane.showMessageDialog(null, "Vui lòng điền thông tin đầy đủ");
+			} else {
+				if (ktThongTinThuoc()) {
+					Thuoc thuoc = reverThuoc();
+					try {
+						thuocDao.addThuoc(thuoc);
+						lammoi();
+						JOptionPane.showMessageDialog(null, "Thêm thành công");
+					} catch (RemoteException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				}
+			}
+
+		}
+		if (o.equals(btnlammoi)) {
+			txtdiachi.setText("");
+			txtdongia.setText("");
+			txtsoluong.setText("");
+			txttenthuoc.setText("");
+			txttimkiemthuoc.setText("");
 			try {
-				thuocDao.addThuoc(thuoc);
 				lammoi();
-				JOptionPane.showMessageDialog(null, "Thêm thành công");
+			} catch (RemoteException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+		if (o.equals(btnsua)) {
+			int row = tbl.getSelectedRow();
+			if (row < 0) {
+				JOptionPane.showMessageDialog(null, "Vui lòng chọn thông tin cần sửa");
+			} else {
+				int n = JOptionPane.showConfirmDialog(this, "Bạn có muốn sửa dữ liệu này không ?", null,
+						JOptionPane.YES_NO_OPTION);
+				if (n == JOptionPane.YES_OPTION) {
+					try {
+						ObjectId id = loaiThuocDao.getLoaiThuocTheoTen(modelthuoc.getValueAt(row, 1).toString())
+								.getId();
+						Thuoc thuoc = thuocDao.getThuocTheoTenVaMaLoai(modelthuoc.getValueAt(row, 0).toString(), id);
+					
+						
+						LoaiThuoc lt=loaiThuocDao.getLoaiThuocTheoTen(cboloaithuoc.getSelectedItem().toString());
+						thuoc.setLoaiThuoc(lt);
+						
+						NhaCungCap nhaCungCap=NCCDao.getnhacungcaptheoten(cbotenncc.getSelectedItem().toString());
+						thuoc.setNcc(nhaCungCap);
+						
+						nhaCungCap.setDiaChiNCC(txtdiachi.getText());
+						
+						NCCDao.updatediachi(nhaCungCap);
+						
+						NuocSX nuocSX=nuocSXDao.getnuocsanxuat(cbonuocsx.getSelectedItem().toString());
+						thuoc.setNuocSX(nuocSX);
+						
+						thuoc.setDonGia(Double.parseDouble(txtdongia.getText()));
+						thuoc.setHanSD(datehansd.getDate());
+						thuoc.setNgaySX(datengaysx.getDate());
+						thuoc.setTenThuoc(txttenthuoc.getText());
+						thuoc.setSoLuongTon(Integer.parseInt(txtsoluong.getText()));
+						ObjectId id2 = loaiThuocDao.getLoaiThuocTheoTen(cboloaithuoc.getSelectedItem().toString())
+								.getId();
+					
+
+						Thuoc thuoc2 = thuoc;
+						thuocDao.updateThuoc(thuoc2);
+						JOptionPane.showMessageDialog(null, "Sửa thành công");
+						lammoi();
+					} catch (RemoteException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+
+				}
+			}
+		}
+		if (o.equals(btntim)) {
+			String key = txttimkiemthuoc.getText();
+			DecimalFormat df = new DecimalFormat("###,###,###.####");
+			DateFormat dfd = new SimpleDateFormat("yyyy/MM/dd");
+			List<Thuoc> dsthuoc = null;
+			try {
+				dsthuoc = thuocDao.timkiemthuoc(key);
+				modelthuoc.getDataVector().removeAllElements();
+				for (Thuoc t : dsthuoc) {
+					modelthuoc.addRow(
+							new Object[] { t.getTenThuoc(), t.getLoaiThuoc().getTenLoai(), dfd.format(t.getNgaySX()),
+									dfd.format(t.getHanSD()), df.format(t.getDonGia()), t.getSoLuongTon(),
+									t.getNcc().getTenNCC(), t.getNcc().getDiaChiNCC(), t.getNuocSX().getTenNuocSX() });
+
+				}
 			} catch (RemoteException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
@@ -476,23 +585,83 @@ public class FrmQuanLyThuoc extends JPanel implements ActionListener, MouseListe
 						JOptionPane.YES_NO_OPTION);
 				if (n == JOptionPane.YES_OPTION) {
 					try {
-						ObjectId id = loaiThuocDao.getLoaiThuocTheoTen(modelthuoc.getValueAt(row, 1).toString()).getId();
+						ObjectId id = loaiThuocDao.getLoaiThuocTheoTen(modelthuoc.getValueAt(row, 1).toString())
+								.getId();
 						Thuoc thuoc = thuocDao.getThuocTheoTenVaMaLoai(modelthuoc.getValueAt(row, 0).toString(), id);
-						System.out.println(thuoc);
 						thuoc.setTrangThaiThuoc("Ngưng kinh doanh");
-						Thuoc thuoc2=thuoc;
-						System.out.println(thuoc2);
+						Thuoc thuoc2 = thuoc;
 						thuocDao.updateThuoc(thuoc2);
 						JOptionPane.showMessageDialog(null, "Xóa thành công");
+						lammoi();
 					} catch (RemoteException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
-					
+
 				}
 			}
 
 		}
+
+	}
+
+	public boolean ktThongTinThuoc() {
+		String tenthuoc = txttenthuoc.getText();
+		String soluong = txtsoluong.getText();
+		String dongia = txtdongia.getText();
+		String diachi = txtdiachi.getText();
+		if (tenthuoc.length() > 0) {
+			String regex = "^([ A-Za-za-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂẾưăạảấầẩẫậắằẳẵặẹẻẽềềểếỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ]*(\\s?))+$";
+			Pattern pattern = Pattern.compile(regex);
+			Matcher matcher = pattern.matcher(tenthuoc);
+			if (!matcher.find()) {
+				JOptionPane.showMessageDialog(null, "Nhập sai tên (Ví dụ nhập:Nguyễn Văn A)");
+				txttenthuoc.requestFocus();
+				txttenthuoc.selectAll();
+				return false;
+			}
+		}
+		if (soluong.length() > 0) {
+			String regexs = "^[0-9]+$";
+			if (!soluong.matches(regexs)) {
+				JOptionPane.showMessageDialog(null, "Số lượng phải là số nguyên và lớn hơn 0 (ví dụ nhập: 1000)");
+				txtsoluong.requestFocus();
+				txtsoluong.selectAll();
+				return false;
+			}
+		}
+		if (dongia.length() > 0) {
+			String regexs = "^[0-9]+$";
+			if (!dongia.matches(regexs)) {
+				JOptionPane.showMessageDialog(this, "Giá bán phải là số ");
+				txtdongia.requestFocus();
+				txtdongia.selectAll();
+				return false;
+			}
+		}
+		if (dongia.length() > 0) {
+			double giaban2 = Double.parseDouble(dongia);
+			if (giaban2 <= 0) {
+				JOptionPane.showMessageDialog(this, "Giá bán phải lớn hơn 0");
+				txtdongia.requestFocus();
+				txtdongia.selectAll();
+				return false;
+			}
+		}
+		if (diachi.length() > 0) {
+
+			String regex = "^([ A-Za-z0-9,.a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂẾưăạảấầẩẫậắằẳẵặẹẻẽềềểếỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ]*(\\s?))+$";
+			Pattern pattern = Pattern.compile(regex);
+			Matcher matcher = pattern.matcher(diachi);
+			if (!matcher.find()) {
+				JOptionPane.showMessageDialog(null, "Nhập sai địa chỉ (Ví dụ nhập:56a Cầu Xéo, Tân quí, Tân Phú");
+				txtdiachi.requestFocus();
+				txtdiachi.selectAll();
+				return false;
+			}
+		}
+
+		return true;
 
 	}
 }

@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
 import dao.NhaCungCapDao;
+import entity.LoaiThuoc;
 import entity.NhaCungCap;
 import util.HibernateUtil;
 
@@ -54,6 +55,39 @@ public class ImplNhaCungCap extends UnicastRemoteObject implements NhaCungCapDao
 			tr.rollback();
 		}
 		return null;
+	}
+	@Override
+	public NhaCungCap getnhacungcaptheoten(String nhaCungCap) throws RemoteException {
+		EntityTransaction tr = em.getTransaction();
+		try {
+			tr.begin();
+			
+			NhaCungCap ncc =  (NhaCungCap) em.createNativeQuery("db.dsNCC.find({'ten_NCC': '"+nhaCungCap+"'})",NhaCungCap.class).getSingleResult();
+			
+		
+			tr.commit();
+			return ncc;
+		} catch (Exception e) {
+			e.printStackTrace();
+			tr.rollback();
+		}
+		return null;
+	}
+	@Override
+	public boolean updatediachi(NhaCungCap cap) throws RemoteException {
+		EntityTransaction tr = em.getTransaction();
+		try {
+			
+			tr.begin();
+			em.merge(cap);
+
+			tr.commit();
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			tr.rollback();
+		}
+		return false;
 	}
 	
 	
