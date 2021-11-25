@@ -106,7 +106,7 @@ public class ImplThuoc  extends UnicastRemoteObject implements ThuocDao {
 		return null;
 	}
 	@Override
-	public boolean xoaThuoc(Thuoc thuoc) throws RemoteException {
+	public boolean updateThuoc(Thuoc thuoc) throws RemoteException {
 		EntityTransaction tr = em.getTransaction();
 		try {
 			

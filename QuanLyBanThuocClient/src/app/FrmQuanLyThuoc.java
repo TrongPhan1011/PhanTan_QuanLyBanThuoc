@@ -125,6 +125,20 @@ public class FrmQuanLyThuoc extends JPanel implements ActionListener, MouseListe
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(new BorderLayout(0, 0));
 		setLayout(null);
+		
+		
+//		cthdDao =  (CTHDDao) Naming.lookup("rmi://192.168.1.9:9999/cthdDao");
+//		hoaDonDao =  (HoaDonDao) Naming.lookup("rmi://192.168.1.9:9999/hoaDonDao");
+//		khachHangDao = (KhachHangDao) Naming.lookup("rmi://192.168.1.9:9999/khachHangDao");
+//		loaiThuocDao =  (LoaiThuocDao) Naming.lookup("rmi://192.168.1.9:9999/loaiThuocDao");
+//		NCCDao =  (NhaCungCapDao) Naming.lookup("rmi://192.168.1.9:9999/nhaCungCapDao");
+//		nhanVienDao =  (NhanVienDao) Naming.lookup("rmi://192.168.1.9:9999/nhanVienDao");
+//		nuocSXDao =  (NuocSXDao) Naming.lookup("rmi://192.168.1.9:9999/nuocSXDao");
+//		tkDao =  (TaiKhoanDao) Naming.lookup("rmi://192.168.1.9:9999/taiKhoanDao");
+//		thuocDao =  (ThuocDao) Naming.lookup("rmi://192.168.1.9:9999/thuocDao");
+//		regex  = new Regex();
+		
+		
 		cthdDao = (CTHDDao) Naming.lookup("rmi://192.168.1.8:9999/cthdDao");
 		hoaDonDao = (HoaDonDao) Naming.lookup("rmi://192.168.1.8:9999/hoaDonDao");
 		khachHangDao = (KhachHangDao) Naming.lookup("rmi://192.168.1.8:9999/khachHangDao");
@@ -468,7 +482,7 @@ public class FrmQuanLyThuoc extends JPanel implements ActionListener, MouseListe
 						thuoc.setTrangThaiThuoc("Ngưng kinh doanh");
 						Thuoc thuoc2=thuoc;
 						System.out.println(thuoc2);
-						thuocDao.xoaThuoc(thuoc2);
+						thuocDao.updateThuoc(thuoc2);
 						JOptionPane.showMessageDialog(null, "Xóa thành công");
 					} catch (RemoteException e1) {
 						// TODO Auto-generated catch block
