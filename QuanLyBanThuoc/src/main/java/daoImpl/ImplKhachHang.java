@@ -37,4 +37,23 @@ public class ImplKhachHang extends UnicastRemoteObject implements KhachHangDao {
 		}
 		return false;
 	}
+
+	@Override
+	public KhachHang getKHTheoSDT(String sdt) throws RemoteException {
+		
+		EntityTransaction tr = em.getTransaction();
+		try {
+			tr.begin();
+			KhachHang kh  = (KhachHang) em.createNativeQuery("db.dsKhachHang.find({'sdt' : '"+sdt+"'})",KhachHang.class).getSingleResult();
+			
+			tr.commit();
+			if(kh != null)
+				return kh;
+		} catch (Exception e) {
+			e.printStackTrace();
+			tr.rollback();
+		}
+		
+		return null;
+	}
 }

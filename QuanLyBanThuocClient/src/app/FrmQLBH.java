@@ -13,6 +13,7 @@ import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.text.DecimalFormat;
+import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
@@ -91,6 +92,7 @@ public class FrmQLBH extends JPanel implements ActionListener,MouseListener,Item
 	private Date now;
 	private DecimalFormat dfTable;
 	private DecimalFormat df;
+	private Regex regex;
 
 
 
@@ -116,6 +118,17 @@ public class FrmQLBH extends JPanel implements ActionListener,MouseListener,Item
 	@SuppressWarnings("deprecation")
 	public void initialize(JFrame fMain) throws MalformedURLException, RemoteException, NotBoundException {
 
+		cthdDao =  (CTHDDao) Naming.lookup("rmi://192.168.1.9:9999/cthdDao");
+		hoaDonDao =  (HoaDonDao) Naming.lookup("rmi://192.168.1.9:9999/hoaDonDao");
+		khachHangDao = (KhachHangDao) Naming.lookup("rmi://192.168.1.9:9999/khachHangDao");
+		loaiThuocDao =  (LoaiThuocDao) Naming.lookup("rmi://192.168.1.9:9999/loaiThuocDao");
+		NCCDao =  (NhaCungCapDao) Naming.lookup("rmi://192.168.1.9:9999/nhaCungCapDao");
+		nhanVienDao =  (NhanVienDao) Naming.lookup("rmi://192.168.1.9:9999/nhanVienDao");
+		nuocSXDao =  (NuocSXDao) Naming.lookup("rmi://192.168.1.9:9999/nuocSXDao");
+		tkDao =  (TaiKhoanDao) Naming.lookup("rmi://192.168.1.9:9999/taiKhoanDao");
+		thuocDao =  (ThuocDao) Naming.lookup("rmi://192.168.1.9:9999/thuocDao");
+		regex  = new Regex();
+		
 //		cthdDao =  (CTHDDao) Naming.lookup("rmi://192.168.1.9:9999/cthdDao");
 //		hoaDonDao =  (HoaDonDao) Naming.lookup("rmi://192.168.1.9:9999/hoaDonDao");
 //		khachHangDao = (KhachHangDao) Naming.lookup("rmi://192.168.1.9:9999/khachHangDao");
@@ -128,15 +141,15 @@ public class FrmQLBH extends JPanel implements ActionListener,MouseListener,Item
 
 
 		
-		cthdDao =  (CTHDDao) Naming.lookup("rmi://192.168.1.8:9999/cthdDao");
-		hoaDonDao =  (HoaDonDao) Naming.lookup("rmi://192.168.1.8:9999/hoaDonDao");
-	    khachHangDao = (KhachHangDao) Naming.lookup("rmi://192.168.1.8:9999/khachHangDao");
-		loaiThuocDao =  (LoaiThuocDao) Naming.lookup("rmi://192.168.1.8:9999/loaiThuocDao");
-		 NCCDao =  (NhaCungCapDao) Naming.lookup("rmi://192.168.1.8:9999/nhaCungCapDao");
-		 nhanVienDao =  (NhanVienDao) Naming.lookup("rmi://192.168.1.8:9999/nhanVienDao");
-		 nuocSXDao =  (NuocSXDao) Naming.lookup("rmi://192.168.1.8:9999/nuocSXDao");
-		 tkDao =  (TaiKhoanDao) Naming.lookup("rmi://192.168.1.8:9999/taiKhoanDao");
-		 thuocDao =  (ThuocDao) Naming.lookup("rmi://192.168.1.8:9999/thuocDao");
+//		cthdDao =  (CTHDDao) Naming.lookup("rmi://192.168.1.8:9999/cthdDao");
+//		hoaDonDao =  (HoaDonDao) Naming.lookup("rmi://192.168.1.8:9999/hoaDonDao");
+//	    khachHangDao = (KhachHangDao) Naming.lookup("rmi://192.168.1.8:9999/khachHangDao");
+//		loaiThuocDao =  (LoaiThuocDao) Naming.lookup("rmi://192.168.1.8:9999/loaiThuocDao");
+//		 NCCDao =  (NhaCungCapDao) Naming.lookup("rmi://192.168.1.8:9999/nhaCungCapDao");
+//		 nhanVienDao =  (NhanVienDao) Naming.lookup("rmi://192.168.1.8:9999/nhanVienDao");
+//		 nuocSXDao =  (NuocSXDao) Naming.lookup("rmi://192.168.1.8:9999/nuocSXDao");
+//		 tkDao =  (TaiKhoanDao) Naming.lookup("rmi://192.168.1.8:9999/taiKhoanDao");
+//		 thuocDao =  (ThuocDao) Naming.lookup("rmi://192.168.1.8:9999/thuocDao");
 		
 	
 		frame = new JFrame();
@@ -207,6 +220,7 @@ public class FrmQLBH extends JPanel implements ActionListener,MouseListener,Item
 		pKH.add(txtSDT);
 
 		cboGioiTinh = new JComboBox<String>();
+		cboGioiTinh.setEditable(true);
 		cboGioiTinh.setBackground(Color.WHITE);
 		cboGioiTinh.setFont(new Font("SansSerif", Font.PLAIN, 15));
 		cboGioiTinh.setBounds(434, 70, 193, 31);
@@ -431,6 +445,10 @@ public class FrmQLBH extends JPanel implements ActionListener,MouseListener,Item
 		cboLoaiThuoc.addItemListener(this);
 		
 		tblThuoc.addMouseListener(this);
+		
+		txtTenKH.setText("Phan Huu Trong");
+		txtSDT.setText("0363435019");
+		
 
 	}
 
@@ -521,36 +539,101 @@ public class FrmQLBH extends JPanel implements ActionListener,MouseListener,Item
 		String gioiTinh  = cboGioiTinh.getSelectedItem().toString();
 		
 		KhachHang kh = new KhachHang(tenKH, gioiTinh, ngaySinh, sdt);
-		if(khachHangDao.addKhachHang(kh)) {
-			JOptionPane.showMessageDialog(this, "Thêm khách hàng thành công");
+		KhachHang khTim = khachHangDao.getKHTheoSDT(sdt);
+		if(ktRongKH()) {
+			if(ktThongTinKH()) {
+				if(khTim == null) {
+					if(khachHangDao.addKhachHang(kh)) {
+						JOptionPane.showMessageDialog(this, "Thêm khách hàng thành công");
+					}
+				}else JOptionPane.showMessageDialog(this, "Số điện thoại đã được đăng ký");
+			}
 		}
 	}
 	
 	public void themThuoc() throws RemoteException {
 		
-		String tenLoaiThuoc = cboLoaiThuoc.getSelectedItem().toString();
-		String tenThuoc = cboTenThuoc.getSelectedItem().toString();
-		
-		
-		LoaiThuoc loaiThuoc = loaiThuocDao.getLoaiThuocTheoTen(tenLoaiThuoc);
-		Thuoc t = thuocDao.getThuocTheoTenVaMaLoai(tenThuoc, loaiThuoc.getId());
-		t.setLoaiThuoc(loaiThuoc);
-		if(!rdoGiamSL.isSelected())
-			t.setSoLuongTon(getSoLuongThem());
-		else
-			t.setSoLuongTon(getSoLuongGiam());
-		if(timRow()!=-1) {
-			modelThuoc.removeRow(timRow());
+		if(ktThongTinThuoc()) {
+			String tenLoaiThuoc = cboLoaiThuoc.getSelectedItem().toString();
+			String tenThuoc = cboTenThuoc.getSelectedItem().toString();
+			
+			LoaiThuoc loaiThuoc = loaiThuocDao.getLoaiThuocTheoTen(tenLoaiThuoc);
+			Thuoc t = thuocDao.getThuocTheoTenVaMaLoai(tenThuoc, loaiThuoc.getId());
+			int soLuongTon = t.getSoLuongTon();
+			int soLuongMua = 0;
+			t.setLoaiThuoc(loaiThuoc);
+			if(!rdoGiamSL.isSelected())
+				soLuongMua = getSoLuongThem();
+			else
+				soLuongMua =  getSoLuongGiam();
+			if(soLuongTon >= soLuongMua) {
+				if(timRow()!=-1) {
+					modelThuoc.removeRow(timRow());
+				}
+				addToTable(t);
+				double thanhTien = tinhThanhTien();
+				lblThanhTien.setText(df.format(thanhTien));
+			}
+			else JOptionPane.showMessageDialog(this, "Số lượng tồn không đủ!\nSố lượng còn: "+ soLuongTon);
 		}
-		addToTable(t);
+		
 		
 	}
 	
 	public void removeThuoc() {
-		if(timRow()>=0) {
+		int row = tblThuoc.getSelectedRow();
+		if(row>=0) {
 			modelThuoc.removeRow(timRow());
 		}
 		else JOptionPane.showMessageDialog(this, "Vui lòng chọn thuốc cần xóa");
+	}
+	
+	public double tinhThanhTien() {
+		int soRow = tblThuoc.getRowCount();
+		double thanhTien = 0;
+		for(int i = 0; i< soRow; i++) {
+			try {
+				double tongTien = Double.parseDouble(dfTable.parse(modelThuoc.getValueAt(i, 5).toString()).toString()) ;
+				thanhTien += tongTien;
+			} catch (ParseException e) {
+				e.printStackTrace();
+			} 
+		}
+		return thanhTien;
+	}
+	
+	public boolean ktRongKH() {
+		if(!regex.kiemTraRong(txtTenKH))
+			return false;
+		if(!regex.kiemTraRong(txtSDT))
+			return false;
+		return true;
+	}
+	public boolean ktThongTinKH() {
+		if(ktRongKH()) {
+			if(!regex.RegexTen(txtTenKH))
+				return false;
+			if(!regex.RegexSDT(txtSDT))
+				return false;
+			if(!regex.kiemTraNgaySinh(chooserNgaySinh))
+				return false;
+			
+			
+			return true;
+		}
+		return false;
+	}
+	public boolean ktThongTinThuoc() {
+		
+		if(regex.regexSoLuong(txtSoLuong))
+		{
+			int soLuong = Integer.parseInt(txtSoLuong.getText());
+			if(soLuong > 0) {
+				return true;
+			}
+			else JOptionPane.showMessageDialog(this, "Số lượng phải lớn hơn 0");
+		}
+		return false;
 	}
 	
 	
