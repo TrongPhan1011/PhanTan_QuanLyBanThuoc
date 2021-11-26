@@ -29,8 +29,9 @@ public class ImplThuoc  extends UnicastRemoteObject implements ThuocDao {
 		try {
 			
 			tr.begin();
-//			em.persist(thuoc);
 			em.merge(thuoc);
+			em.merge(thuoc);
+
 			tr.commit();
 			return true;
 		} catch (Exception e) {
@@ -96,7 +97,7 @@ public class ImplThuoc  extends UnicastRemoteObject implements ThuocDao {
 		EntityTransaction tr=em.getTransaction();
 		try {
 			tr.begin();
-			String query="db.dsThuoc.find({})";
+			String query="db.dsThuoc.find({'trangThaiThuoc':'Còn bán'})";
 			List<Thuoc>ls=em.createNativeQuery(query,Thuoc.class).getResultList();
 			tr.commit();
 			return ls;
@@ -122,20 +123,24 @@ public class ImplThuoc  extends UnicastRemoteObject implements ThuocDao {
 		return false;
 	}
 	@Override
-	public boolean testUpdateThuoc(Thuoc thuoc) throws RemoteException {
+	public List<Thuoc> timkiemthuoc(String key) throws RemoteException {
 		EntityTransaction tr = em.getTransaction();
 		try {
 			
 			tr.begin();
 			
+			String query="db.dsThuoc.find({ $text: { $search: '"+key+"' } } )";
+			
+			List<Thuoc> ls=em.createNativeQuery(query,Thuoc.class).getResultList();
 
 			tr.commit();
-			return true;
+			return ls;
 		} catch (Exception e) {
 			e.printStackTrace();
 			tr.rollback();
 		}
-		return false;
+		
+		return null;
 	}
 
 }

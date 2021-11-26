@@ -130,6 +130,7 @@ public class AddObject {
 		loaiThuocDao.addLoaiThuoc(lt15);
 		loaiThuocDao.addLoaiThuoc(lt16);
 //		//nuoc san xuat
+
 		NuocSX nsx1=new NuocSX("Pháp");
 		NuocSX nsx2=new NuocSX("Việt Nam");
 		NuocSX nsx3=new NuocSX("Hungary");

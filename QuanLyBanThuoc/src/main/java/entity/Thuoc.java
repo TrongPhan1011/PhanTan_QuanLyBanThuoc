@@ -15,9 +15,10 @@ import javax.persistence.Table;
 
 import org.bson.types.ObjectId;
 
-@Entity()
-@Table(name = "dsThuoc", indexes = {
-		@Index (columnList = "tenThuoc", name = "tenThuoc_Indexes")
+
+@Entity
+@Table(name = "dsThuoc",indexes = {
+		@Index(columnList = "tenThuoc",name="tenThuoc_Indexes")
 })
 public class Thuoc implements Serializable{
 	/**

@@ -10,5 +10,6 @@ public interface LoaiThuocDao extends Remote {
 	public boolean addLoaiThuoc(LoaiThuoc loaiThuoc) throws RemoteException;
 	public List<LoaiThuoc>	 getAllLoaiThuoc() throws RemoteException;
 	public LoaiThuoc getLoaiThuocTheoTen(String tenLoai) throws RemoteException;
+
 	
 }
