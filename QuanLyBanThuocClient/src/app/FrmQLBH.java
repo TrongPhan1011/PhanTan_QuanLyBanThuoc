@@ -14,7 +14,11 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.text.DecimalFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -36,6 +40,8 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
+import org.bson.types.ObjectId;
+
 import com.toedter.calendar.JDateChooser;
 
 import dao.CTHDDao;
@@ -47,9 +53,14 @@ import dao.NhanVienDao;
 import dao.NuocSXDao;
 import dao.TaiKhoanDao;
 import dao.ThuocDao;
+import entity.CTHD;
+import entity.HoaDon;
 import entity.KhachHang;
 import entity.LoaiThuoc;
+import entity.NhaCungCap;
+import entity.NhanVien;
 import entity.Thuoc;
+
 
 public class FrmQLBH extends JPanel implements ActionListener,MouseListener,ItemListener {
 
@@ -63,7 +74,6 @@ public class FrmQLBH extends JPanel implements ActionListener,MouseListener,Item
 	private JTextField txtTenKH;
 	private JTextField txtSDT;
 	private JTextField txtSoLuong;
-	private JTable table;
 	private DefaultTableModel modelThuoc;
 	private JTable tblThuoc;
 	private JButton btnDSKH;
@@ -93,6 +103,11 @@ public class FrmQLBH extends JPanel implements ActionListener,MouseListener,Item
 	private DecimalFormat dfTable;
 	private DecimalFormat df;
 	private Regex regex;
+	private DefaultTableModel modelKH;
+	private JTable tblKH;
+	private JButton btnSua;
+	private SimpleDateFormat sf;
+	private String maNV;
 
 
 
@@ -104,8 +119,9 @@ public class FrmQLBH extends JPanel implements ActionListener,MouseListener,Item
 	 */
 
 
-	public FrmQLBH(JFrame fMain) throws MalformedURLException, RemoteException, NotBoundException {
+	public FrmQLBH(JFrame fMain,String maNV) throws MalformedURLException, RemoteException, NotBoundException {
 		this.fMain = fMain;
+		this.maNV = maNV;
 		initialize(fMain);
 	}
 
@@ -118,31 +134,31 @@ public class FrmQLBH extends JPanel implements ActionListener,MouseListener,Item
 	@SuppressWarnings("deprecation")
 	public void initialize(JFrame fMain) throws MalformedURLException, RemoteException, NotBoundException {
 
-//		cthdDao =  (CTHDDao) Naming.lookup("rmi://192.168.1.9:9999/cthdDao");
-//		hoaDonDao =  (HoaDonDao) Naming.lookup("rmi://192.168.1.9:9999/hoaDonDao");
-//		khachHangDao = (KhachHangDao) Naming.lookup("rmi://192.168.1.9:9999/khachHangDao");
-//		loaiThuocDao =  (LoaiThuocDao) Naming.lookup("rmi://192.168.1.9:9999/loaiThuocDao");
-//		NCCDao =  (NhaCungCapDao) Naming.lookup("rmi://192.168.1.9:9999/nhaCungCapDao");
-//		nhanVienDao =  (NhanVienDao) Naming.lookup("rmi://192.168.1.9:9999/nhanVienDao");
-//		nuocSXDao =  (NuocSXDao) Naming.lookup("rmi://192.168.1.9:9999/nuocSXDao");
-//		tkDao =  (TaiKhoanDao) Naming.lookup("rmi://192.168.1.9:9999/taiKhoanDao");
-//		thuocDao =  (ThuocDao) Naming.lookup("rmi://192.168.1.9:9999/thuocDao");
-//		regex  = new Regex();
+		cthdDao =  (CTHDDao) Naming.lookup("rmi://192.168.1.9:9999/cthdDao");
+		hoaDonDao =  (HoaDonDao) Naming.lookup("rmi://192.168.1.9:9999/hoaDonDao");
+		khachHangDao = (KhachHangDao) Naming.lookup("rmi://192.168.1.9:9999/khachHangDao");
+		loaiThuocDao =  (LoaiThuocDao) Naming.lookup("rmi://192.168.1.9:9999/loaiThuocDao");
+		NCCDao =  (NhaCungCapDao) Naming.lookup("rmi://192.168.1.9:9999/nhaCungCapDao");
+		nhanVienDao =  (NhanVienDao) Naming.lookup("rmi://192.168.1.9:9999/nhanVienDao");
+		nuocSXDao =  (NuocSXDao) Naming.lookup("rmi://192.168.1.9:9999/nuocSXDao");
+		tkDao =  (TaiKhoanDao) Naming.lookup("rmi://192.168.1.9:9999/taiKhoanDao");
+		thuocDao =  (ThuocDao) Naming.lookup("rmi://192.168.1.9:9999/thuocDao");
+		regex  = new Regex();
 		
 	
 
 
 		
-		cthdDao =  (CTHDDao) Naming.lookup("rmi://192.168.1.8:9999/cthdDao");
-		hoaDonDao =  (HoaDonDao) Naming.lookup("rmi://192.168.1.8:9999/hoaDonDao");
-	    khachHangDao = (KhachHangDao) Naming.lookup("rmi://192.168.1.8:9999/khachHangDao");
-		loaiThuocDao =  (LoaiThuocDao) Naming.lookup("rmi://192.168.1.8:9999/loaiThuocDao");
-		 NCCDao =  (NhaCungCapDao) Naming.lookup("rmi://192.168.1.8:9999/nhaCungCapDao");
-		 nhanVienDao =  (NhanVienDao) Naming.lookup("rmi://192.168.1.8:9999/nhanVienDao");
-		 nuocSXDao =  (NuocSXDao) Naming.lookup("rmi://192.168.1.8:9999/nuocSXDao");
-		 tkDao =  (TaiKhoanDao) Naming.lookup("rmi://192.168.1.8:9999/taiKhoanDao");
-		 thuocDao =  (ThuocDao) Naming.lookup("rmi://192.168.1.8:9999/thuocDao");
-		 regex  = new Regex();
+//		cthdDao =  (CTHDDao) Naming.lookup("rmi://192.168.1.8:9999/cthdDao");
+//		hoaDonDao =  (HoaDonDao) Naming.lookup("rmi://192.168.1.8:9999/hoaDonDao");
+//	    khachHangDao = (KhachHangDao) Naming.lookup("rmi://192.168.1.8:9999/khachHangDao");
+//		loaiThuocDao =  (LoaiThuocDao) Naming.lookup("rmi://192.168.1.8:9999/loaiThuocDao");
+//		 NCCDao =  (NhaCungCapDao) Naming.lookup("rmi://192.168.1.8:9999/nhaCungCapDao");
+//		 nhanVienDao =  (NhanVienDao) Naming.lookup("rmi://192.168.1.8:9999/nhanVienDao");
+//		 nuocSXDao =  (NuocSXDao) Naming.lookup("rmi://192.168.1.8:9999/nuocSXDao");
+//		 tkDao =  (TaiKhoanDao) Naming.lookup("rmi://192.168.1.8:9999/taiKhoanDao");
+//		 thuocDao =  (ThuocDao) Naming.lookup("rmi://192.168.1.8:9999/thuocDao");
+//		 regex  = new Regex();
 	
 		frame = new JFrame();
 		frame.setBounds(0, 0, 1031, 700);
@@ -201,13 +217,13 @@ public class FrmQLBH extends JPanel implements ActionListener,MouseListener,Item
 
 		JLabel lblSDT = new JLabel("Số điện thoại:");
 		lblSDT.setFont(new Font("SansSerif", Font.BOLD, 15));
-		lblSDT.setBounds(10, 75, 133, 20);
+		lblSDT.setBounds(10, 64, 133, 20);
 		pKH.add(lblSDT);
 
 		txtSDT = new JTextField();
 		txtSDT.setFont(new Font("SansSerif", Font.PLAIN, 15));
 		txtSDT.setColumns(10);
-		txtSDT.setBounds(139, 70, 158, 31);
+		txtSDT.setBounds(139, 59, 158, 31);
 		txtSDT.setBorder(new LineBorder(new Color(91, 155, 213)));
 		pKH.add(txtSDT);
 
@@ -215,7 +231,7 @@ public class FrmQLBH extends JPanel implements ActionListener,MouseListener,Item
 		cboGioiTinh.setEditable(true);
 		cboGioiTinh.setBackground(Color.WHITE);
 		cboGioiTinh.setFont(new Font("SansSerif", Font.PLAIN, 15));
-		cboGioiTinh.setBounds(434, 70, 193, 31);
+		cboGioiTinh.setBounds(434, 59, 193, 31);
 		cboGioiTinh.setBorder(new LineBorder(new Color(91, 155, 213)));
 		pKH.add(cboGioiTinh);
 
@@ -226,7 +242,7 @@ public class FrmQLBH extends JPanel implements ActionListener,MouseListener,Item
 
 		JLabel lblGioiTinh = new JLabel("Giới tính:");
 		lblGioiTinh.setFont(new Font("SansSerif", Font.BOLD, 15));
-		lblGioiTinh.setBounds(324, 78, 100, 20);
+		lblGioiTinh.setBounds(324, 67, 100, 20);
 		pKH.add(lblGioiTinh);
 
 		JLabel lblNgaySinh = new JLabel("Ngày sinh:");
@@ -236,14 +252,14 @@ public class FrmQLBH extends JPanel implements ActionListener,MouseListener,Item
 
 		btnThemKH = new JButton("Thêm");
 		btnThemKH.setFont(new Font("SansSerif", Font.BOLD, 15));
-		btnThemKH.setBounds(10, 165, 287, 34);
+		btnThemKH.setBounds(10, 165, 200, 34);
 		btnThemKH.setBackground(new Color(41, 242, 255));
 		pKH.add(btnThemKH);
 
 		btnLamMoiKH = new JButton("Làm mới");
 		btnLamMoiKH.setFont(new Font("SansSerif", Font.BOLD, 15));
 		btnLamMoiKH.setBackground(new Color(41, 242, 255));
-		btnLamMoiKH.setBounds(324, 165, 303, 34);
+		btnLamMoiKH.setBounds(434, 165, 193, 34);
 		pKH.add(btnLamMoiKH);
 
 		chooserNgaySinh = new JDateChooser();
@@ -382,6 +398,46 @@ public class FrmQLBH extends JPanel implements ActionListener,MouseListener,Item
 		pMain.add(btnDSKH);
 		btnDSKH.setFont(new Font("SansSerif", Font.BOLD, 15));
 		btnDSKH.setBackground(new Color(41, 242, 255));
+		
+		String col1 [] = {"Tên KH","SĐT", "Ngày sinh", "Giới tính"};
+		modelKH = new DefaultTableModel(col1,0);
+
+
+
+		tblKH = new JTable(modelKH);
+		tblKH.setBackground(Color.WHITE);
+		tblKH.setFont(new Font("SansSerif", Font.PLAIN, 13));
+
+
+		JTableHeader tblHeader = tblKH.getTableHeader();
+		tblHeader.setBackground(new Color(91, 155, 213,80));
+		tblHeader.setForeground(Color.CYAN);
+		tblHeader.setFont(new Font("SansSerif", Font.BOLD, 20));
+
+
+		tblKH.setSelectionBackground(new Color(91, 155, 213,30));
+		tblKH.setSelectionForeground(new Color(91, 155, 213));
+		tblKH.setRowHeight(30);
+
+		DefaultTableCellRenderer right = new DefaultTableCellRenderer();
+		right.setHorizontalAlignment(JLabel.RIGHT);
+
+		tblKH.getColumnModel().getColumn(1).setCellRenderer(right);
+		tblKH.getColumnModel().getColumn(2).setCellRenderer(right);
+		
+
+		JScrollPane spKH = new JScrollPane(tblKH);
+		spKH.setViewportBorder(null);
+		spKH.setBounds(10, 95, 617, 64);
+		spKH.setBorder(new LineBorder(new Color(91, 155, 213), 1, true));
+		spKH.setBackground(Color.white);
+		pKH.add(spKH);
+		
+		btnSua = new JButton("Sửa");
+		btnSua.setFont(new Font("SansSerif", Font.BOLD, 15));
+		btnSua.setBackground(new Color(41, 242, 255));
+		btnSua.setBounds(220, 165, 204, 34);
+		pKH.add(btnSua);
 
 		JLabel lblBackground = new JLabel("");
 		lblBackground.setBounds(0, 0, 1031, 700);
@@ -423,6 +479,7 @@ public class FrmQLBH extends JPanel implements ActionListener,MouseListener,Item
 		
 		dfTable = new DecimalFormat("###,###");
 		df = new DecimalFormat("###,### VNĐ");
+		sf = new SimpleDateFormat("dd/MM/yyy");
 
 
 		//action
@@ -433,13 +490,19 @@ public class FrmQLBH extends JPanel implements ActionListener,MouseListener,Item
 		btnXoaThuoc.addActionListener(this);
 		rdoGiamSL.addActionListener(this);
 		btnLamMoiGD.addActionListener(this);
-
+		btnTim.addActionListener(this);
+		btnSua.addActionListener(this);
+		btnThanhToan.addActionListener(this);
+		
 		cboLoaiThuoc.addItemListener(this);
 		
 		tblThuoc.addMouseListener(this);
+		tblKH.addMouseListener(this);
 		
 		txtTenKH.setText("Phan Huu Trong");
 		txtSDT.setText("0363435019");
+		
+		
 		
 
 	}
@@ -460,6 +523,7 @@ public class FrmQLBH extends JPanel implements ActionListener,MouseListener,Item
 		txtSDT.setText("");
 		cboGioiTinh.setSelectedIndex(0);
 		chooserNgaySinh.setDate(now);
+		clearTableKH();
 	}
 	
 	public void resetAll() {
@@ -488,6 +552,11 @@ public class FrmQLBH extends JPanel implements ActionListener,MouseListener,Item
 	public void clearTable() {
 		while (tblThuoc.getRowCount() > 0) {
 			modelThuoc.removeRow(0);
+		}
+	}
+	public void clearTableKH() {
+		while (tblKH.getRowCount() > 0) {
+			modelKH.removeRow(0);
 		}
 	}
 	
@@ -525,10 +594,10 @@ public class FrmQLBH extends JPanel implements ActionListener,MouseListener,Item
 	
 	
 	public void themKH() throws RemoteException {
-		String tenKH = txtTenKH.getText();
-		String  sdt = txtSDT.getText();
+		String tenKH = txtTenKH.getText().trim();
+		String  sdt = txtSDT.getText().trim();
 		Date ngaySinh = chooserNgaySinh.getDate();
-		String gioiTinh  = cboGioiTinh.getSelectedItem().toString();
+		String gioiTinh  = cboGioiTinh.getSelectedItem().toString().trim();
 		
 		KhachHang kh = new KhachHang(tenKH, gioiTinh, ngaySinh, sdt);
 		KhachHang khTim = khachHangDao.getKHTheoSDT(sdt);
@@ -537,6 +606,7 @@ public class FrmQLBH extends JPanel implements ActionListener,MouseListener,Item
 				if(khTim == null) {
 					if(khachHangDao.addKhachHang(kh)) {
 						JOptionPane.showMessageDialog(this, "Thêm khách hàng thành công");
+						loadtableKH(kh);
 					}
 				}else JOptionPane.showMessageDialog(this, "Số điện thoại đã được đăng ký");
 			}
@@ -546,36 +616,74 @@ public class FrmQLBH extends JPanel implements ActionListener,MouseListener,Item
 	public void themThuoc() throws RemoteException {
 		
 		if(ktThongTinThuoc()) {
-			String tenLoaiThuoc = cboLoaiThuoc.getSelectedItem().toString();
-			String tenThuoc = cboTenThuoc.getSelectedItem().toString();
+			String tenLoaiThuoc = cboLoaiThuoc.getSelectedItem().toString().trim();
+			String tenThuoc = cboTenThuoc.getSelectedItem().toString().trim();
 			
 			LoaiThuoc loaiThuoc = loaiThuocDao.getLoaiThuocTheoTen(tenLoaiThuoc);
 			Thuoc t = thuocDao.getThuocTheoTenVaMaLoai(tenThuoc, loaiThuoc.getId());
+			Thuoc updateThuoc = t;
+			int soLuongUpdate = updateThuoc.getSoLuongTon();
+			
 			int soLuongTon = t.getSoLuongTon();
 			int soLuongMua = 0;
 			t.setLoaiThuoc(loaiThuoc);
-			if(!rdoGiamSL.isSelected())
+			if(!rdoGiamSL.isSelected()) {
 				soLuongMua = getSoLuongThem();
-			else
-				soLuongMua =  getSoLuongGiam();
-			if(soLuongTon >= soLuongMua) {
-				if(timRow()!=-1) {
-					modelThuoc.removeRow(timRow());
+				soLuongUpdate -=  Integer.parseInt(txtSoLuong.getText());
+				
+				if(soLuongTon >= soLuongMua) {
+					if(timRow()!=-1) {
+						modelThuoc.removeRow(timRow());
+					}
+					
+					t.setSoLuongTon(soLuongMua);
+					addToTable(t);
+					double thanhTien = tinhThanhTien();
+					lblThanhTien.setText(df.format(thanhTien));
+					updateThuoc.setSoLuongTon(soLuongUpdate);
+					thuocDao.updateThuoc(updateThuoc);
 				}
-				addToTable(t);
-				double thanhTien = tinhThanhTien();
-				lblThanhTien.setText(df.format(thanhTien));
+				else JOptionPane.showMessageDialog(this, "Số lượng tồn không đủ!\nSố lượng còn: "+ soLuongTon);
 			}
-			else JOptionPane.showMessageDialog(this, "Số lượng tồn không đủ!\nSố lượng còn: "+ soLuongTon);
+			else {
+				soLuongMua =  getSoLuongGiam();
+				if(soLuongMua >=0) {
+					soLuongUpdate +=  Integer.parseInt(txtSoLuong.getText());
+
+					if(timRow()!=-1) {
+						modelThuoc.removeRow(timRow());
+					}
+					
+					t.setSoLuongTon(soLuongMua);
+					addToTable(t);
+					double thanhTien = tinhThanhTien();
+					lblThanhTien.setText(df.format(thanhTien));
+					updateThuoc.setSoLuongTon(soLuongUpdate);
+					thuocDao.updateThuoc(updateThuoc);
+				}
+				else JOptionPane.showMessageDialog(this, "Số lượng giảm đã vượt quá số lượng đã mua");
+			}
+			
+			
 		}
 		
 		
 	}
 	
-	public void removeThuoc() {
+	public void removeThuoc() throws RemoteException {
 		int row = tblThuoc.getSelectedRow();
 		if(row>=0) {
+			String tenLoaiThuoc = cboLoaiThuoc.getSelectedItem().toString();
+			String tenThuoc = cboTenThuoc.getSelectedItem().toString();
+			
+			LoaiThuoc loaiThuoc = loaiThuocDao.getLoaiThuocTheoTen(tenLoaiThuoc);
+			Thuoc t = thuocDao.getThuocTheoTenVaMaLoai(tenThuoc, loaiThuoc.getId());
+			
+			int soLuongDaMua = Integer.parseInt(txtSoLuong.getText());
+			t.setSoLuongTon(soLuongDaMua + t.getSoLuongTon());
+			thuocDao.updateThuoc(t);
 			modelThuoc.removeRow(timRow());
+			
 		}
 		else JOptionPane.showMessageDialog(this, "Vui lòng chọn thuốc cần xóa");
 	}
@@ -626,9 +734,101 @@ public class FrmQLBH extends JPanel implements ActionListener,MouseListener,Item
 			else JOptionPane.showMessageDialog(this, "Số lượng phải lớn hơn 0");
 		}
 		return false;
+		
+		
+		
+		
+		
+		
 	}
 	
+	public void timKH() throws RemoteException {
+		String sdt = txtTimKiem.getText().trim();
+		KhachHang kh = khachHangDao.getKHTheoSDT(sdt);
+		if(kh == null) {
+			JOptionPane.showMessageDialog(this, "Không có kết quả tìm kiếm phù hợp!\n - Vui lòng nhập SĐT của khách hàng đã được đăng ký bao gồm 10 chữ số.");
+		}
+		else {
+			loadtableKH(kh);
+			
+		}
+	}
 	
+	public void loadtableKH(KhachHang kh) {
+		clearTableKH();
+		modelKH.addRow(new Object[] {
+				kh.getTenKhachHang(),kh.getSdt(),sf.format(kh.getNgaySinh()),kh.getGioiTinh()
+		});
+	}
+	
+	public void suaKH() throws RemoteException {
+		int row = tblKH.getSelectedRow();
+		if(row!= -1) {
+			KhachHang kh = khachHangDao.getKHTheoSDT(modelKH.getValueAt(row, 1).toString());
+		
+			if(ktRongKH()) {
+				if(ktThongTinKH()) {
+					KhachHang khTim = khachHangDao.getKHTheoSDT(txtSDT.getText());
+					if(khTim.getSdt().equalsIgnoreCase(kh.getSdt())||khTim == null) {
+						kh.setTenKhachHang(txtTenKH.getText());
+						kh.setGioiTinh(cboGioiTinh.getSelectedItem().toString());
+						kh.setNgaySinh(chooserNgaySinh.getDate());
+						kh.setSdt(txtSDT.getText());
+						if(khachHangDao.updateKhachHang(kh)) {
+							JOptionPane.showMessageDialog(this, "Sửa khách hàng thành công");
+							loadtableKH(kh);
+						}
+					}else JOptionPane.showMessageDialog(this, "Số điện thoại đã được đăng ký");
+				}
+			}
+			
+			
+		}else JOptionPane.showMessageDialog(this, "Vui lòng chọn khách hàng trước khi sửa");
+	}
+	public List<CTHD> getdsCTHD() throws RemoteException{
+		int row = tblThuoc.getRowCount();
+		List<CTHD> lsCT = new ArrayList<CTHD>();
+		
+		for(int i = 0;i<row;i++) {
+			LoaiThuoc lt = loaiThuocDao.getLoaiThuocTheoTen(modelThuoc.getValueAt(i, 2).toString());
+			String tenThuoc = modelThuoc.getValueAt(i, 1).toString();
+			Thuoc t = thuocDao.getThuocTheoTenVaMaLoai(tenThuoc, lt.getId());
+			int soLuong = Integer.parseInt(modelThuoc.getValueAt(i, 3).toString());
+			CTHD ct = new CTHD(t, soLuong);
+			lsCT.add(ct);
+			
+		}
+		
+		return lsCT;
+	}
+	
+	public void thanhToan() throws RemoteException {
+		int rowKH = tblKH.getSelectedRow();
+int optThanhToan = JOptionPane.showConfirmDialog(this, "Bạn có chắn chắn muốn thanh toán không?", "Thông báo", JOptionPane.YES_NO_OPTION );
+		
+		if(optThanhToan == JOptionPane.YES_OPTION) {
+			if(rowKH != -1) {
+				int rowThuoc = tblThuoc.getRowCount();
+				if(rowThuoc != 0 ) {
+	//				HoaDon hd = new HoaDon(ngaylap, nhanvienlap, khachhang, listCTHD)
+					Date ngayLap = now;
+					NhanVien nv = nhanVienDao.getNhanVienTheoSoNV(maNV);
+					KhachHang kh = khachHangDao.getKHTheoSDT(modelKH.getValueAt(rowKH, 1).toString());
+					List<CTHD> lsCTHD = getdsCTHD();
+					HoaDon hd = new HoaDon(ngayLap, nv, kh, lsCTHD);
+					if(hoaDonDao.addHoaDon(hd))
+					{
+						JOptionPane.showMessageDialog(this, "Thanh toán thành công.");
+					}
+					
+				}
+				else JOptionPane.showMessageDialog(this, "Vui lòng nhập thuốc cần mua");
+				
+			}
+			else JOptionPane.showMessageDialog(this, "Vui lòng chọn khách hàng trước khi thanh toán");
+		}
+		
+	}
 	
 
 
@@ -660,19 +860,61 @@ public class FrmQLBH extends JPanel implements ActionListener,MouseListener,Item
 			}
 		}
 		if(o.equals(btnXoaThuoc)) {
-			removeThuoc();
+			try {
+				removeThuoc();
+			} catch (RemoteException e1) {
+				e1.printStackTrace();
+			}
 		}
 		if(o.equals(btnLamMoiGD)) {
 			resetAll();
+		}
+		if(o.equals(btnTim)) {
+			try {
+				timKH();
+			} catch (RemoteException e1) {
+				e1.printStackTrace();
+			}
+		}
+		if(o.equals(btnSua)) {
+			try {
+				suaKH();
+			} catch (RemoteException e1) {
+				e1.printStackTrace();
+			}
+		}
+		if(o.equals(btnThanhToan)) {
+			try {
+				thanhToan();
+			} catch (RemoteException e1) {
+				e1.printStackTrace();
+			}
 		}
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
+		Object o = e.getSource();
+		if(o.equals(tblThuoc)) {
 		int row = tblThuoc.getSelectedRow();
 		cboLoaiThuoc.setSelectedItem(modelThuoc.getValueAt(row, 2));
 		cboTenThuoc.setSelectedItem(modelThuoc.getValueAt(row, 1));
 		txtSoLuong.setText(modelThuoc.getValueAt(row, 3).toString());
+		}
+		if(o.equals(tblKH)) {
+			int row = tblKH.getSelectedRow();
+			txtTenKH.setText(modelKH.getValueAt(row,0).toString());
+			txtSDT.setText(modelKH.getValueAt(row, 1).toString());
+			Date ngaysinh = null;
+			try {
+				ngaysinh = sf.parse(modelKH.getValueAt(row, 2).toString());
+			} catch (ParseException e1) {
+				e1.printStackTrace();
+			}
+			chooserNgaySinh.setDate(ngaysinh);
+			cboGioiTinh.setSelectedItem(modelKH.getValueAt(row, 3));
+			
+		}
 	}
 
 	@Override

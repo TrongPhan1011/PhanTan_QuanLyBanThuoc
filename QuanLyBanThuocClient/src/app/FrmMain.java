@@ -41,6 +41,7 @@ public class FrmMain extends JFrame implements ActionListener  {
 	private JButton btnquanlynhanvien;
 	private JTabbedPane tabbedPane1;
 	private FrmQuanLyThuoc quanLyThuoc;
+	private JLabel jlbgetmanv;
 	
 
 	/**
@@ -165,7 +166,7 @@ public class FrmMain extends JFrame implements ActionListener  {
 		jlbmnv.setBounds(10, 556, 121, 33);
 		panel_1.add(jlbmnv);
 		
-		JLabel jlbgetmanv = new JLabel("NV123");
+		jlbgetmanv = new JLabel("NV123");
 		jlbgetmanv.setForeground(new Color(255, 255, 255));
 		jlbgetmanv.setFont(new Font("Tahoma", Font.PLAIN, 19));
 		jlbgetmanv.setBounds(141, 565, 113, 14);
@@ -190,7 +191,7 @@ public class FrmMain extends JFrame implements ActionListener  {
 		quanLyThuoc = new FrmQuanLyThuoc();
 		tabbedPane1.addTab("New tab", null, quanLyThuoc, null);
 
-		FrmQLBH frmQLHD = new FrmQLBH(frame);
+		FrmQLBH frmQLHD = new FrmQLBH(frame,jlbgetmanv.getText());
 		tabbedPane1.addTab("New tab", null, frmQLHD, null);
 		
 		tabbedPane1.addTab("New tab", null,frmQuanLyNhanVien , null);

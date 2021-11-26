@@ -29,8 +29,8 @@ public class ImplThuoc  extends UnicastRemoteObject implements ThuocDao {
 		try {
 			
 			tr.begin();
-			em.persist(thuoc);
-
+//			em.persist(thuoc);
+			em.merge(thuoc);
 			tr.commit();
 			return true;
 		} catch (Exception e) {
@@ -112,6 +112,22 @@ public class ImplThuoc  extends UnicastRemoteObject implements ThuocDao {
 			
 			tr.begin();
 			em.merge(thuoc);
+
+			tr.commit();
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			tr.rollback();
+		}
+		return false;
+	}
+	@Override
+	public boolean testUpdateThuoc(Thuoc thuoc) throws RemoteException {
+		EntityTransaction tr = em.getTransaction();
+		try {
+			
+			tr.begin();
+			
 
 			tr.commit();
 			return true;
