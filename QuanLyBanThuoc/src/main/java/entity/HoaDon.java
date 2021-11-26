@@ -8,6 +8,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -38,7 +39,7 @@ public class HoaDon implements Serializable {
 	@JoinColumn(name = "ma_Khach_Hang")
 	private KhachHang khachHang;
 	
-	@ElementCollection
+	@ElementCollection(fetch=FetchType.EAGER)
 	private List<CTHD> dsCTHD;
 
 	public Date getNgayLap() {
@@ -101,7 +102,7 @@ public class HoaDon implements Serializable {
 
 	@Override
 	public String toString() {
-		return "HoaDon [id=" + id + ", ngayLap=" + ngayLap + ", nhanVien=" + nhanVien + ", khachHang=" + khachHang
+		return "HoaDon [id=" + id + ", ngayLap=" + ngayLap
 				+ ", dsCTHD=" + dsCTHD + "]";
 	}
 	
