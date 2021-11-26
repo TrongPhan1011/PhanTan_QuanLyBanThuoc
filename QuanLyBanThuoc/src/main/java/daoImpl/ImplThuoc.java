@@ -127,6 +127,7 @@ public class ImplThuoc  extends UnicastRemoteObject implements ThuocDao {
 		try {
 			
 			tr.begin();
+			
 			String query="db.dsThuoc.find({ $text: { $search: '"+key+"' } } )";
 			
 			List<Thuoc> ls=em.createNativeQuery(query,Thuoc.class).getResultList();
@@ -137,6 +138,7 @@ public class ImplThuoc  extends UnicastRemoteObject implements ThuocDao {
 			e.printStackTrace();
 			tr.rollback();
 		}
+		
 		return null;
 	}
 

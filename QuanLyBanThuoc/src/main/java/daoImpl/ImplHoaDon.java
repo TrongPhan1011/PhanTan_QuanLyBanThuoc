@@ -2,6 +2,10 @@ package daoImpl;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.text.Format;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -26,7 +30,7 @@ public class ImplHoaDon extends UnicastRemoteObject implements HoaDonDao {
 		EntityTransaction tr = em.getTransaction();
 		try {
 			tr.begin();
-			em.persist(hoaDon);
+			em.merge(hoaDon);
 			
 			tr.commit();
 			return true;
@@ -36,6 +40,47 @@ public class ImplHoaDon extends UnicastRemoteObject implements HoaDonDao {
 		}
 		
 		return false;
+	}
+	
+	@Override
+	public List<HoaDon> getHoaDonTheoNgay(Date ngayDen, Date ngayKT) throws RemoteException {
+		EntityTransaction tr = em.getTransaction();
+		try {
+			tr.begin();
+			Format sf = new SimpleDateFormat("yyyy-MM-dd");
+			String query = "db.dsHoaDon.aggregate([{'$match' : {'$and' : [{'ngay_Lap' : {'$lte' : ISODate('"+sf.format(ngayKT)+"')}},{'ngay_Lap' : {'$gte' : ISODate('"+sf.format(ngayDen)+"')}}]}}])";
+			@SuppressWarnings("unchecked")
+			List<HoaDon> ldHD = em.createNativeQuery(query,HoaDon.class).getResultList();
+			
+			
+			
+			tr.commit();
+			return ldHD;
+		} catch (Exception e) {
+			e.printStackTrace();
+			tr.rollback();
+		}
+		return null;
+	}
+	@Override
+	public List<HoaDon> getHoaDonTheo1Ngay(Date ngay) throws RemoteException {
+		EntityTransaction tr = em.getTransaction();
+		try {
+			tr.begin();
+			Format sf = new SimpleDateFormat("yyyy-MM-dd");
+			String query = "db.dsHoaDon.aggregate([{'$match' : {'ngay_Lap' : {'$eq' : ISODate('"+sf.format(ngay)+"')}}}])";
+			@SuppressWarnings("unchecked")
+			List<HoaDon> ldHD = em.createNativeQuery(query,HoaDon.class).getResultList();
+			
+			
+			
+			tr.commit();
+			return ldHD;
+		} catch (Exception e) {
+			e.printStackTrace();
+			tr.rollback();
+		}
+		return null;
 	}
 	
 	
