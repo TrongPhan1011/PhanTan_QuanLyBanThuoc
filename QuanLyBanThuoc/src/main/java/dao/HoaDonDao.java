@@ -10,4 +10,5 @@ import entity.HoaDon;
 public interface HoaDonDao extends Remote {
 	public boolean addHoaDon(HoaDon hoaDon) throws RemoteException;
 	public List<HoaDon> getHoaDonTheoNgay(Date ngayDen, Date ngayKT) throws RemoteException;
+	public List<HoaDon> getHoaDonTheo1Ngay(Date ngay) throws RemoteException;
 }

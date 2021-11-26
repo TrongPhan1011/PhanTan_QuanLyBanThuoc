@@ -30,7 +30,6 @@ public class ImplThuoc  extends UnicastRemoteObject implements ThuocDao {
 			
 			tr.begin();
 			em.merge(thuoc);
-			em.merge(thuoc);
 
 			tr.commit();
 			return true;

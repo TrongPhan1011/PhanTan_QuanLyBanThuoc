@@ -62,6 +62,26 @@ public class ImplHoaDon extends UnicastRemoteObject implements HoaDonDao {
 		}
 		return null;
 	}
+	@Override
+	public List<HoaDon> getHoaDonTheo1Ngay(Date ngay) throws RemoteException {
+		EntityTransaction tr = em.getTransaction();
+		try {
+			tr.begin();
+			Format sf = new SimpleDateFormat("yyyy-MM-dd");
+			String query = "db.dsHoaDon.aggregate([{'$match' : {'ngay_Lap' : {'$eq' : ISODate('"+sf.format(ngay)+"')}}}])";
+			@SuppressWarnings("unchecked")
+			List<HoaDon> ldHD = em.createNativeQuery(query,HoaDon.class).getResultList();
+			
+			
+			
+			tr.commit();
+			return ldHD;
+		} catch (Exception e) {
+			e.printStackTrace();
+			tr.rollback();
+		}
+		return null;
+	}
 	
 	
 
