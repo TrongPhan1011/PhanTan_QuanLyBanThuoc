@@ -41,6 +41,8 @@ public class FrmMain extends JFrame implements ActionListener  {
 	private JButton btnquanlynhanvien;
 	private JTabbedPane tabbedPane1;
 	private FrmQuanLyThuoc quanLyThuoc;
+	private static String manv;
+	private static String chucvu;
 	
 
 	/**
@@ -52,7 +54,7 @@ public class FrmMain extends JFrame implements ActionListener  {
 			public void run() {
 				try {
 					UIManager.setLookAndFeel("com.jtattoo.plaf.smart.SmartLookAndFeel");
-					FrmMain window = new FrmMain();
+					FrmMain window = new FrmMain(manv,chucvu);
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -67,10 +69,11 @@ public class FrmMain extends JFrame implements ActionListener  {
 	 * @throws RemoteException 
 	 * @throws MalformedURLException 
 	 */
-	public FrmMain() throws MalformedURLException, RemoteException, NotBoundException {
-		initialize();
-		getTime();
-	}
+//	public FrmMain() throws MalformedURLException, RemoteException, NotBoundException {
+//		initialize();
+//		getTime();
+//	}
+	
 
 	/**
 	 * Initialize the contents of the frame.
@@ -78,15 +81,15 @@ public class FrmMain extends JFrame implements ActionListener  {
 	 * @throws RemoteException 
 	 * @throws MalformedURLException 
 	 */
-	public void initialize() throws MalformedURLException, RemoteException, NotBoundException {
-		frame = new JFrame();
-		frame.setResizable(false);
-		frame.setBounds(0, 0, 1285, 700);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setLocationRelativeTo(null);
+	public FrmMain(String manv,String chucvu) throws MalformedURLException, RemoteException, NotBoundException {
+	
+		setResizable(false);
+		setBounds(0, 0, 1285, 700);
+//		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setLocationRelativeTo(null);
 		
 		JPanel panel = new JPanel();
-		frame.getContentPane().add(panel, BorderLayout.CENTER);
+		getContentPane().add(panel, BorderLayout.CENTER);
 		panel.setLayout(null);
 		
 		JPanel panel_1 = new JPanel();
@@ -149,7 +152,20 @@ public class FrmMain extends JFrame implements ActionListener  {
 		JButton jbtdangxuat = new JButton("Đăng xuất");
 		jbtdangxuat.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				frame.setVisible(false);
+				setVisible(false);
+				try {
+					FrmDangNhap frmDangNhap=new FrmDangNhap();
+					frmDangNhap.setVisible(true);
+				} catch (MalformedURLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (RemoteException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (NotBoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				
 			}
 		});
@@ -165,7 +181,7 @@ public class FrmMain extends JFrame implements ActionListener  {
 		jlbmnv.setBounds(10, 556, 121, 33);
 		panel_1.add(jlbmnv);
 		
-		JLabel jlbgetmanv = new JLabel("NV123");
+		JLabel jlbgetmanv = new JLabel(manv);
 		jlbgetmanv.setForeground(new Color(255, 255, 255));
 		jlbgetmanv.setFont(new Font("Tahoma", Font.PLAIN, 19));
 		jlbgetmanv.setBounds(141, 565, 113, 14);
@@ -186,7 +202,7 @@ public class FrmMain extends JFrame implements ActionListener  {
 		 tabbedPane1 = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane1.setBounds(253, -49, 1026, 724);
 		panel.add(tabbedPane1);
-
+		
 		quanLyThuoc = new FrmQuanLyThuoc();
 		tabbedPane1.addTab("New tab", null, quanLyThuoc, null);
 
@@ -196,13 +212,22 @@ public class FrmMain extends JFrame implements ActionListener  {
 		tabbedPane1.addTab("New tab", null,frmQuanLyNhanVien , null);
 	
 		tabbedPane1.addTab("New tab", null, frmQuanLyThongKe, null); //frmQuanLyNhanVien
-
+		
+		tabbedPane1.addTab("New tab", null, frmQuanLyThongKe, null);
+		
+		if(chucvu.equalsIgnoreCase("Nhân viên bán hàng")) {
+			remove(btnquanlynhanvien);
+			btnquanlythongke.setBounds(0, 93, 254, 60);
+		}
+		getTime();
 		
 		btnquanlynhanvien.addActionListener(this);
-		
+	
 		
 		
 	}
+	
+
 	public void getTime() {
 		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
 		LocalDate now=LocalDate.now();
@@ -216,8 +241,9 @@ public class FrmMain extends JFrame implements ActionListener  {
 		if(o.equals(btnquanlynhanvien)) {
 			tabbedPane1.setSelectedIndex(2);
 		
-//			System.out.println("123");
+
 		}
+	
 	}
 }
 

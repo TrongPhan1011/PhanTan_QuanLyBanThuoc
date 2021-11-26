@@ -55,4 +55,22 @@ public class ImplTaiKhoan extends UnicastRemoteObject implements TaiKhoanDao {
 		return false;
 	}
 
+	@Override
+	public TaiKhoan timtaikhoangtheoten(String ten) throws RemoteException {
+		EntityTransaction tr = em.getTransaction();
+		try {
+			
+			tr.begin();
+			String query="db.dsTaiKhoan.find({'tai_Khoan':'"+ten+"'})";
+			TaiKhoan taiKhoan=(TaiKhoan) em.createNativeQuery(query,TaiKhoan.class).getSingleResult();
+
+			tr.commit();
+			return taiKhoan;
+		} catch (Exception e) {
+			e.printStackTrace();
+			tr.rollback();
+		}
+		return null;
+	}
+
 }

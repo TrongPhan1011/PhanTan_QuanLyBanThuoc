@@ -4,8 +4,11 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import java.awt.Font;
@@ -16,18 +19,52 @@ import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.net.MalformedURLException;
+import java.rmi.Naming;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.text.ParseException;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 import java.awt.Component;
 
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
+import javax.swing.text.MaskFormatter;
 
-public class FrmDangNhap extends JFrame {
+import dao.CTHDDao;
+import dao.HoaDonDao;
+import dao.KhachHangDao;
+import dao.LoaiThuocDao;
+import dao.NhaCungCapDao;
+import dao.NhanVienDao;
+import dao.NuocSXDao;
+import dao.TaiKhoanDao;
+import dao.ThuocDao;
+import daoImpl.ImplTaiKhoan;
+import entity.NhanVien;
+import entity.TaiKhoan;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
+public class FrmDangNhap extends JFrame implements ActionListener {
 
 	private JFrame frmHThngQun;
 	private JTextField txttendangnhap;
-	private JTextField txtmatkhau;
+	private JPasswordField txtmatkhau;
+	private JButton btndangnhap;
+	private JButton btnthoat;
+	private HoaDonDao hoaDonDao;
+	private KhachHangDao khachHangDao;
+	private LoaiThuocDao loaiThuocDao;
+	private NhaCungCapDao NCCDao;
+	private NhanVienDao nhanVienDao;
+	private NuocSXDao nuocSXDao;
+	private TaiKhoanDao tkDao;
+	private ThuocDao thuocDao;
+	private CTHDDao cthdDao;
+	private TaiKhoan taiKhoan=null;
+	private NhanVien nhanVien=null;
 
 	/**
 	 * Launch the application.
@@ -39,7 +76,7 @@ public class FrmDangNhap extends JFrame {
 				try {
 					UIManager.setLookAndFeel("com.jtattoo.plaf.smart.SmartLookAndFeel");
 					FrmDangNhap window = new FrmDangNhap();
-					window.frmHThngQun.setVisible(true);
+					window.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -49,23 +86,40 @@ public class FrmDangNhap extends JFrame {
 
 	/**
 	 * Create the application.
+	 * @throws NotBoundException 
+	 * @throws RemoteException 
+	 * @throws MalformedURLException 
 	 */
-	public FrmDangNhap() {
-		initialize();
-	}
+//	public FrmDangNhap() throws MalformedURLException, RemoteException, NotBoundException {
+//		initialize();
+//	}
 
 	/**
 	 * Initialize the contents of the frame.
+	 * @throws NotBoundException 
+	 * @throws RemoteException 
+	 * @throws MalformedURLException 
 	 */
-	private void initialize() {
-		frmHThngQun = new JFrame();
-		frmHThngQun.setResizable(false);
-		frmHThngQun.setTitle("Hệ thống quản lý nhà thuốc");
-		frmHThngQun.setBounds(100, 100, 650, 391);
-		frmHThngQun.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	public FrmDangNhap() throws MalformedURLException, RemoteException, NotBoundException {
+		
+		setResizable(false);
+		setTitle("Hệ thống quản lý nhà thuốc");
+		setBounds(100, 100, 650, 391);
+//		frmHThngQun.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setLocationRelativeTo(null);
+		
+		cthdDao = (CTHDDao) Naming.lookup("rmi://192.168.1.6:9999/cthdDao");
+		hoaDonDao = (HoaDonDao) Naming.lookup("rmi://192.168.1.6:9999/hoaDonDao");
+		khachHangDao = (KhachHangDao) Naming.lookup("rmi://192.168.1.6:9999/khachHangDao");
+		loaiThuocDao = (LoaiThuocDao) Naming.lookup("rmi://192.168.1.6:9999/loaiThuocDao");
+		NCCDao = (NhaCungCapDao) Naming.lookup("rmi://192.168.1.6:9999/nhaCungCapDao");
+		nhanVienDao = (NhanVienDao) Naming.lookup("rmi://192.168.1.6:9999/nhanVienDao");
+		nuocSXDao = (NuocSXDao) Naming.lookup("rmi://192.168.1.6:9999/nuocSXDao");
+		tkDao = (TaiKhoanDao) Naming.lookup("rmi://192.168.1.6:9999/taiKhoanDao");
+		thuocDao = (ThuocDao) Naming.lookup("rmi://192.168.1.6:9999/thuocDao");
 		
 		JPanel panel = new JPanel();
-		frmHThngQun.getContentPane().add(panel, BorderLayout.CENTER);
+		getContentPane().add(panel, BorderLayout.CENTER);
 		panel.setLayout(null);
 		
 		JPanel panel_1 = new JPanel();
@@ -79,6 +133,36 @@ public class FrmDangNhap extends JFrame {
 		lblhethong.setFont(new Font("Source Code Pro ExtraLight", Font.PLAIN, 24));
 		lblhethong.setBounds(30, 11, 325, 91);
 		panel_1.add(lblhethong);
+		
+		JLabel txtquenmk = new JLabel("Quên mật khẩu ?");
+		txtquenmk.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				try {
+					FrmQuenMatKhau frmQuenMatKhau=new FrmQuenMatKhau();
+					frmQuenMatKhau.setVisible(true);
+					frmQuenMatKhau.setResizable(false);
+					frmQuenMatKhau.setTitle("Hệ thống quản lý nhà thuốc");
+					frmQuenMatKhau.setBounds(100, 100, 650, 391);
+//					frmHThngQun.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+					frmQuenMatKhau.setLocationRelativeTo(null);
+					setVisible(false);
+				} catch (MalformedURLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (RemoteException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (NotBoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+			}
+		});
+		txtquenmk.setFont(new Font("SansSerif", Font.PLAIN, 13));
+		txtquenmk.setBounds(536, 202, 108, 15);
+		panel_1.add(txtquenmk);
 		
 		JLabel lbldangnhap = new JLabel("Đăng nhập");
 		lbldangnhap.setFont(new Font("SansSerif", Font.BOLD, 25));
@@ -98,32 +182,31 @@ public class FrmDangNhap extends JFrame {
 		txttendangnhap = new JTextField();
 		txttendangnhap.setBounds(509, 102, 125, 31);
 		txttendangnhap.setBorder(new LineBorder(new Color(91, 155, 213)));
+		
        
 		panel_1.add(txttendangnhap);
 		txttendangnhap.setColumns(10);
 		
-		txtmatkhau = new JTextField();
+		txtmatkhau = new JPasswordField();
 		txtmatkhau.setBounds(509, 160, 125, 31);
 		panel_1.add(txtmatkhau);
 		txtmatkhau.setColumns(10);
 		txtmatkhau.setBorder(new LineBorder(new Color(91, 155, 213)));
 		
-		JButton btndangnhap = new JButton("Đăng nhập");
+		 btndangnhap = new JButton("Đăng nhập");
 		btndangnhap.setForeground(new Color(255, 255, 255));
 		btndangnhap.setFont(new Font("SansSerif", Font.BOLD, 15));
 		btndangnhap.setBackground(new Color(0, 153, 255));
 		btndangnhap.setBounds(474, 228, 117, 31);
+		btndangnhap.addActionListener(this);
 		
 		panel_1.add(btndangnhap);
 		
-		JButton btnthoat = new JButton("Thoát");
+		 btnthoat = new JButton("Thoát");
 		btnthoat.setForeground(new Color(255, 255, 255));
 		btnthoat.setFont(new Font("SansSerif", Font.BOLD, 15));
 		btnthoat.setBackground(new Color(0, 153, 255));
-		btnthoat.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
+		btnthoat.addActionListener(this);
 		btnthoat.setBounds(475, 278, 116, 31);
 		panel_1.add(btnthoat);
 		
@@ -157,5 +240,67 @@ public class FrmDangNhap extends JFrame {
 	    public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
 	        g.drawRoundRect(x, y, width-1, height-1, radius, radius);
 	    }
+	}
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		
+		Object o=e.getSource();
+		if(o.equals(btnthoat)) {
+			System.exit(0);
+		}
+		if(o.equals(btndangnhap)) {
+			String tendangnhap=txttendangnhap.getText().trim();
+			String mk=txtmatkhau.getText().trim();
+			
+			try {
+				taiKhoan = tkDao.timtaikhoangtheoten(tendangnhap);
+				 nhanVien=nhanVienDao.getNhanVienTheoSoNV(tendangnhap);
+			} catch (RemoteException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			if(taiKhoan==null) {
+				JOptionPane.showMessageDialog(null, "Đăng nhập không thành công");
+			}
+			else {
+				if(mk.equals(taiKhoan.getMatKhau())&&nhanVien.getTrangThaiLamViec().equalsIgnoreCase("Đang làm việc")) {
+					
+						try {
+							FrmMain frmMain=new FrmMain(tendangnhap,nhanVien.getChucVu());
+							frmMain.setVisible(true);
+							frmMain.setResizable(false);
+							frmMain.setBounds(0, 0, 1285, 700);
+							frmMain.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+							frmMain.setLocationRelativeTo(null);
+						
+							
+							
+							setVisible(false);
+						} catch (MalformedURLException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						} catch (RemoteException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						} catch (NotBoundException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+					
+					
+				}
+				else if(mk.equals(taiKhoan.getMatKhau())&&nhanVien.getTrangThaiLamViec().equalsIgnoreCase("Đã nghỉ việc")) {
+					JOptionPane.showMessageDialog(null, "Tài khoản này không còn hoạt động");
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "Đăng nhập không thành công");
+				}
+			}
+			
+				
+			
+			
+		}
+		
 	}
 }
