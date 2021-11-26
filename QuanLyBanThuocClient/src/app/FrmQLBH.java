@@ -828,7 +828,7 @@ public class FrmQLBH extends JPanel implements ActionListener,MouseListener,Item
 	
 	public void thanhToan() throws RemoteException {
 		int rowKH = tblKH.getSelectedRow();
-int optThanhToan = JOptionPane.showConfirmDialog(this, "Bạn có chắn chắn muốn thanh toán không?", "Thông báo", JOptionPane.YES_NO_OPTION );
+		int optThanhToan = JOptionPane.showConfirmDialog(this, "Bạn có chắn chắn muốn thanh toán không?", "Thông báo", JOptionPane.YES_NO_OPTION );
 		
 		if(optThanhToan == JOptionPane.YES_OPTION) {
 			if(rowKH != -1) {
@@ -836,7 +836,8 @@ int optThanhToan = JOptionPane.showConfirmDialog(this, "Bạn có chắn chắn 
 				if(rowThuoc != 0 ) {
 	//				HoaDon hd = new HoaDon(ngaylap, nhanvienlap, khachhang, listCTHD)
 					Date ngayLap = now;
-					NhanVien nv = nhanVienDao.getNhanVienTheoSoNV(maNV);
+//					NhanVien nv = nhanVienDao.getNhanVienTheoSoNV(maNV);
+					NhanVien nv = nhanVienDao.getNhanVienTheoSoNV("NV1");
 					KhachHang kh = khachHangDao.getKHTheoSDT(modelKH.getValueAt(rowKH, 1).toString());
 					List<CTHD> lsCTHD = getdsCTHD();
 					HoaDon hd = new HoaDon(ngayLap, nv, kh, lsCTHD);
