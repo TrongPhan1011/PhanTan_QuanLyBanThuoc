@@ -46,11 +46,15 @@ public class ImplKhachHang extends UnicastRemoteObject implements KhachHangDao {
 		EntityTransaction tr = em.getTransaction();
 		try {
 			tr.begin();
+
 			KhachHang kh  = (KhachHang) em.createNativeQuery("db.dsKhachHang.find({'sdt' : '"+sdt+"'})",KhachHang.class).getSingleResult();
 		
+
+//				KhachHang kh  = (KhachHang) em.createNativeQuery("db.dsKhachHang.findOne({'sdt' : '"+sdt+"'})",KhachHang.class).getSingleResult();
+
 			tr.commit();
-			if(kh != null)
-				return kh;
+			
+			return kh;
 		} catch (Exception e) {
 			e.printStackTrace();
 			tr.rollback();
@@ -60,6 +64,7 @@ public class ImplKhachHang extends UnicastRemoteObject implements KhachHangDao {
 	}
 
 	@Override
+
 	public List<KhachHang> getAllKhachHang() throws RemoteException {
 		EntityTransaction tr = em.getTransaction();
 		try {
@@ -74,6 +79,25 @@ public class ImplKhachHang extends UnicastRemoteObject implements KhachHangDao {
 			e.printStackTrace();
 			tr.rollback();
 		}
+		
 		return null;
+	}
+
+	public boolean updateKhachHang(KhachHang khachHang) throws RemoteException {
+		EntityTransaction tr = em.getTransaction();
+		try {
+			tr.begin();
+			em.merge(khachHang);
+			
+			tr.commit();
+			return true;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			tr.rollback();
+		}
+
+		return false;
+
 	}
 }

@@ -24,6 +24,7 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -123,7 +124,7 @@ public class FrmQuanLyNhanVien extends JPanel implements ActionListener,MouseLis
 	private void initialize(JFrame fMain) throws MalformedURLException, RemoteException, NotBoundException {
 		
 		//Thanh+Tai
-	//	cthdDao =  (CTHDDao) Naming.lookup("rmi://192.168.1.8:9999/cthdDao");
+		cthdDao =  (CTHDDao) Naming.lookup("rmi://192.168.1.8:9999/cthdDao");
 		 hoaDonDao =  (HoaDonDao) Naming.lookup("rmi://192.168.1.8:9999/hoaDonDao");
 	     khachHangDao = (KhachHangDao) Naming.lookup("rmi://192.168.1.8:9999/khachHangDao");
 		 loaiThuocDao =  (LoaiThuocDao) Naming.lookup("rmi://192.168.1.8:9999/loaiThuocDao");
@@ -150,7 +151,7 @@ public class FrmQuanLyNhanVien extends JPanel implements ActionListener,MouseLis
 		
 		 regex = new Regex();
 	//	 df = new DecimalFormat("###,### VNĐ");
-         ngay= new SimpleDateFormat("dd/MM/yyyy");		
+         ngay = new SimpleDateFormat("dd/MM/yyyy");		
 		JPanel pMain = new JPanel();
 		pMain.setBackground(Color.WHITE);
 		pMain.setBounds(-62, -132, 1102, 848);
@@ -166,7 +167,7 @@ public class FrmQuanLyNhanVien extends JPanel implements ActionListener,MouseLis
 		lblTim.setFont(new Font("SansSerif", Font.BOLD, 15));
 		lblTim.setBounds(608, 176, 75, 28);
 		pMain.add(lblTim);
-		
+		DecimalFormat df = new DecimalFormat("###,###,###.####");
 		txttim = new JTextField();
 		txttim.setColumns(10);
 		txttim.setFont(new Font("SansSerif", Font.PLAIN, 15));
@@ -358,21 +359,31 @@ public class FrmQuanLyNhanVien extends JPanel implements ActionListener,MouseLis
 			
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
+				int row = tbl.getSelectedRow();
 				try {
-					if(tbl.getSelectedRow() ==-1)
+					if(row ==-1)
 						return;
-					int row = tbl.getSelectedRow();
+					//int row = tbl.getSelectedRow();
 //					String temp= modelNhanVien.getValueAt(row, 3).toString();
 //					Date date = (Date) new SimpleDateFormat("dd/MM/yyyy").parse(temp);
 //					Date date  = (Date) modelNhanVien.getValueAt(row, 3);
-					txthoten.setText((String) modelNhanVien.getValueAt(row, 1));
-					txtsdt.setText((String) modelNhanVien.getValueAt(row, 6));
-					datengaysinh.setDate(new Date(modelNhanVien.getValueAt(row, 3).toString()));
-					txtdiachi.setText((String) modelNhanVien.getValueAt(row, 4));
+					txthoten.setText(modelNhanVien.getValueAt(row, 1).toString());
+					txtsdt.setText(modelNhanVien.getValueAt(row, 6).toString());
+					Date ngaysinh = null;
+					try {
+						ngaysinh = ngay.parse(modelNhanVien.getValueAt(row, 3).toString());
+					} catch (ParseException e1) {
+						e1.printStackTrace();
+					}
+					datengaysinh.setDate(ngaysinh);
+					
+				//	datengaysinh.setDate(new Date(modelNhanVien.getValueAt(row, 3).toString()));
+					txtdiachi.setText(modelNhanVien.getValueAt(row, 4).toString());
 					cboGT.setSelectedItem(modelNhanVien.getValueAt(row, 2));
 					cboCV.setSelectedItem(modelNhanVien.getValueAt(row, 5));
+					txtLuong.setText(modelNhanVien.getValueAt(row, 7).toString().replaceAll("[-+.^:,]", ""));
 					
-					txtLuong.setText((String) modelNhanVien.getValueAt(row, 7).toString());
+				
 					
 				}catch (Exception e2) {
 					e2.printStackTrace();
@@ -473,6 +484,7 @@ public class FrmQuanLyNhanVien extends JPanel implements ActionListener,MouseLis
  			txtdiachi.requestFocus();
  			return false;
  		}
+ 		
  		double luong = Double.parseDouble(Luong);
  		
  		if(Luong.isEmpty()) {
@@ -559,17 +571,19 @@ public class FrmQuanLyNhanVien extends JPanel implements ActionListener,MouseLis
 	    dsNV = new ArrayList<NhanVien>();
 		dsNV = nhanVienDao.getDSNhanVien();
 		DecimalFormat df = new DecimalFormat("###,###,###.####");
-		DateFormat dfd = new SimpleDateFormat("dd/MM/yyyy");
+		
 		for(NhanVien nhanVien : dsNV) {
-			modelNhanVien.addRow(new Object[] {nhanVien.getMaNhanVien(), nhanVien.getTenNhanVien(),nhanVien.getGioiTinh(),dfd.format(nhanVien.getNgaySinh()),nhanVien.getDiaChi(),nhanVien.getChucVu(),nhanVien.getSdt(),df.format(nhanVien.getLuong()),nhanVien.getTrangThaiLamViec()});	
+			modelNhanVien.addRow(new Object[] {nhanVien.getMaNhanVien(), nhanVien.getTenNhanVien(),nhanVien.getGioiTinh(),ngay.format(nhanVien.getNgaySinh()),nhanVien.getDiaChi(),nhanVien.getChucVu(),nhanVien.getSdt(),df.format(nhanVien.getLuong()),nhanVien.getTrangThaiLamViec()});	
 		}
 	}
 	private void loadDataTim() throws RemoteException{
 		dsNV = new ArrayList<NhanVien>();
 		String text = txttim.getText();
 		dsNV = nhanVienDao.getTim(text);
+		DecimalFormat df = new DecimalFormat("###,###,###.####");
+		DateFormat dfd = new SimpleDateFormat("dd/MM/yyyy");
 		for(NhanVien nhanVien : dsNV) {
-			modelNhanVien.addRow(new Object[] {nhanVien.getMaNhanVien(), nhanVien.getTenNhanVien(),nhanVien.getGioiTinh(),nhanVien.getNgaySinh(),nhanVien.getDiaChi(),nhanVien.getChucVu(),nhanVien.getSdt(),nhanVien.getLuong(),nhanVien.getTrangThaiLamViec()});	
+			modelNhanVien.addRow(new Object[] {nhanVien.getMaNhanVien(), nhanVien.getTenNhanVien(),nhanVien.getGioiTinh(),dfd.format(nhanVien.getNgaySinh()),nhanVien.getDiaChi(),nhanVien.getChucVu(),nhanVien.getSdt(),df.format(nhanVien.getLuong()),nhanVien.getTrangThaiLamViec()});	
 		}
 	}
 	private void taiDuLieuLenBang(List<NhanVien> dsNV) {

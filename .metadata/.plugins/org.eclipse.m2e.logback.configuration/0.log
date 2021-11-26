@@ -1238,3 +1238,141 @@
 2021-11-26 10:15:59,442 [Worker-30: Launching FrmMain] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\USER\Desktop\QuanLyBanThuoc\QuanLyBanThuocClient\src\main\resources
 2021-11-26 10:15:59,444 [Worker-30: Launching FrmMain] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1258 actually) to copy filtered resources, i.e. build is platform dependent!
 2021-11-26 10:15:59,445 [Worker-30: Launching FrmMain] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\USER\Desktop\QuanLyBanThuoc\QuanLyBanThuocClient\src\test\resources
+2021-11-26 10:55:09,009 [Worker-55: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1258 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-26 10:55:09,012 [Worker-55: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2021-11-26 10:55:09,015 [Worker-55: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1258 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-26 10:55:09,018 [Worker-55: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\USER\Desktop\QuanLyBanThuoc\QuanLyBanThuoc\src\test\resources
+2021-11-26 10:55:09,361 [Worker-50: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1258 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-26 10:55:09,363 [Worker-50: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\USER\Desktop\QuanLyBanThuoc\QuanLyBanThuocClient\src\main\resources
+2021-11-26 10:55:09,365 [Worker-50: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1258 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-26 10:55:09,367 [Worker-50: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\USER\Desktop\QuanLyBanThuoc\QuanLyBanThuocClient\src\test\resources
+2021-11-26 10:55:09,414 [Worker-50: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1258 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-26 10:55:09,416 [Worker-50: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\USER\Desktop\QuanLyBanThuoc\QuanLyBanThuocServer\src\main\resources
+2021-11-26 10:55:09,417 [Worker-50: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1258 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-26 10:55:09,419 [Worker-50: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\USER\Desktop\QuanLyBanThuoc\QuanLyBanThuocServer\src\test\resources
+2021-11-26 10:55:45,605 [Worker-55: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1258 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-26 10:55:45,607 [Worker-55: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\USER\Desktop\QuanLyBanThuoc\QuanLyBanThuocClient\src\main\resources
+2021-11-26 10:55:45,608 [Worker-55: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1258 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-26 10:55:45,610 [Worker-55: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\USER\Desktop\QuanLyBanThuoc\QuanLyBanThuocClient\src\test\resources
+2021-11-26 10:55:59,758 [Worker-55: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1258 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-26 10:55:59,760 [Worker-55: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\USER\Desktop\QuanLyBanThuoc\QuanLyBanThuocClient\src\main\resources
+2021-11-26 10:55:59,762 [Worker-55: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1258 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-26 10:55:59,764 [Worker-55: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\USER\Desktop\QuanLyBanThuoc\QuanLyBanThuocClient\src\test\resources
+2021-11-26 10:56:14,571 [Worker-50: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1258 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-26 10:56:14,573 [Worker-50: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2021-11-26 10:56:14,575 [Worker-50: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1258 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-26 10:56:14,576 [Worker-50: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\USER\Desktop\QuanLyBanThuoc\QuanLyBanThuoc\src\test\resources
+2021-11-26 10:56:35,346 [Worker-49: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1258 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-26 10:56:35,347 [Worker-49: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\USER\Desktop\QuanLyBanThuoc\QuanLyBanThuocClient\src\main\resources
+2021-11-26 10:56:35,348 [Worker-49: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1258 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-26 10:56:35,350 [Worker-49: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\USER\Desktop\QuanLyBanThuoc\QuanLyBanThuocClient\src\test\resources
+2021-11-26 10:56:48,480 [Worker-51: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1258 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-26 10:56:48,482 [Worker-51: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2021-11-26 10:56:48,484 [Worker-51: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1258 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-26 10:56:48,485 [Worker-51: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\USER\Desktop\QuanLyBanThuoc\QuanLyBanThuoc\src\test\resources
+2021-11-26 10:57:22,626 [Worker-46: Launching App] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1258 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-26 10:57:22,628 [Worker-46: Launching App] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\USER\Desktop\QuanLyBanThuoc\QuanLyBanThuocServer\src\main\resources
+2021-11-26 10:57:22,630 [Worker-46: Launching App] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1258 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-26 10:57:22,631 [Worker-46: Launching App] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\USER\Desktop\QuanLyBanThuoc\QuanLyBanThuocServer\src\test\resources
+2021-11-26 10:57:59,528 [Worker-52: Launching App] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1258 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-26 10:57:59,533 [Worker-52: Launching App] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2021-11-26 10:57:59,535 [Worker-52: Launching App] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1258 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-26 10:57:59,536 [Worker-52: Launching App] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\USER\Desktop\QuanLyBanThuoc\QuanLyBanThuoc\src\test\resources
+2021-11-26 10:59:13,451 [Worker-58: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1258 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-26 10:59:13,455 [Worker-58: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2021-11-26 10:59:13,457 [Worker-58: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1258 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-26 10:59:13,459 [Worker-58: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\USER\Desktop\QuanLyBanThuoc\QuanLyBanThuoc\src\test\resources
+2021-11-26 11:00:00,936 [Worker-57: Launching FrmMain] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1258 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-26 11:00:00,938 [Worker-57: Launching FrmMain] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\USER\Desktop\QuanLyBanThuoc\QuanLyBanThuocClient\src\main\resources
+2021-11-26 11:00:00,940 [Worker-57: Launching FrmMain] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1258 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-26 11:00:00,942 [Worker-57: Launching FrmMain] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\USER\Desktop\QuanLyBanThuoc\QuanLyBanThuocClient\src\test\resources
+2021-11-26 11:01:12,975 [Worker-49: Launching FrmMain] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1258 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-26 11:01:12,976 [Worker-49: Launching FrmMain] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\USER\Desktop\QuanLyBanThuoc\QuanLyBanThuocClient\src\main\resources
+2021-11-26 11:01:12,977 [Worker-49: Launching FrmMain] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1258 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-26 11:01:12,978 [Worker-49: Launching FrmMain] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\USER\Desktop\QuanLyBanThuoc\QuanLyBanThuocClient\src\test\resources
+2021-11-26 11:05:40,448 [Worker-52: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1258 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-26 11:05:40,449 [Worker-52: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\USER\Desktop\QuanLyBanThuoc\QuanLyBanThuocClient\src\main\resources
+2021-11-26 11:05:40,450 [Worker-52: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1258 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-26 11:05:40,451 [Worker-52: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\USER\Desktop\QuanLyBanThuoc\QuanLyBanThuocClient\src\test\resources
+2021-11-26 11:05:56,160 [Worker-52: Launching AddObject] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1258 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-26 11:05:56,161 [Worker-52: Launching AddObject] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\USER\Desktop\QuanLyBanThuoc\QuanLyBanThuocClient\src\main\resources
+2021-11-26 11:05:56,162 [Worker-52: Launching AddObject] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1258 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-26 11:05:56,163 [Worker-52: Launching AddObject] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\USER\Desktop\QuanLyBanThuoc\QuanLyBanThuocClient\src\test\resources
+2021-11-26 11:06:51,525 [Worker-52: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1258 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-26 11:06:51,528 [Worker-52: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\USER\Desktop\QuanLyBanThuoc\QuanLyBanThuocClient\src\main\resources
+2021-11-26 11:06:51,531 [Worker-52: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1258 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-26 11:06:51,533 [Worker-52: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\USER\Desktop\QuanLyBanThuoc\QuanLyBanThuocClient\src\test\resources
+2021-11-26 11:19:38,472 [Worker-64: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1258 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-26 11:19:38,473 [Worker-64: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\USER\Desktop\QuanLyBanThuoc\QuanLyBanThuocClient\src\main\resources
+2021-11-26 11:19:38,475 [Worker-64: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1258 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-26 11:19:38,477 [Worker-64: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\USER\Desktop\QuanLyBanThuoc\QuanLyBanThuocClient\src\test\resources
+2021-11-26 11:27:50,846 [Worker-69: Launching FrmMain] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1258 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-26 11:27:50,848 [Worker-69: Launching FrmMain] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\USER\Desktop\QuanLyBanThuoc\QuanLyBanThuocClient\src\main\resources
+2021-11-26 11:27:50,849 [Worker-69: Launching FrmMain] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1258 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-26 11:27:50,853 [Worker-69: Launching FrmMain] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\USER\Desktop\QuanLyBanThuoc\QuanLyBanThuocClient\src\test\resources
+2021-11-26 11:36:38,562 [Worker-77: Launching FrmMain] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1258 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-26 11:36:38,569 [Worker-77: Launching FrmMain] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\USER\Desktop\QuanLyBanThuoc\QuanLyBanThuocClient\src\main\resources
+2021-11-26 11:36:38,571 [Worker-77: Launching FrmMain] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1258 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-26 11:36:38,572 [Worker-77: Launching FrmMain] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\USER\Desktop\QuanLyBanThuoc\QuanLyBanThuocClient\src\test\resources
+2021-11-26 11:51:41,192 [Worker-83: Launching FrmMain] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1258 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-26 11:51:41,194 [Worker-83: Launching FrmMain] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\USER\Desktop\QuanLyBanThuoc\QuanLyBanThuocClient\src\main\resources
+2021-11-26 11:51:41,195 [Worker-83: Launching FrmMain] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1258 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-26 11:51:41,197 [Worker-83: Launching FrmMain] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\USER\Desktop\QuanLyBanThuoc\QuanLyBanThuocClient\src\test\resources
+2021-11-26 11:51:58,905 [Worker-84: Launching FrmMain] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1258 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-26 11:51:58,907 [Worker-84: Launching FrmMain] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\USER\Desktop\QuanLyBanThuoc\QuanLyBanThuocClient\src\main\resources
+2021-11-26 11:51:58,909 [Worker-84: Launching FrmMain] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1258 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-26 11:51:58,910 [Worker-84: Launching FrmMain] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\USER\Desktop\QuanLyBanThuoc\QuanLyBanThuocClient\src\test\resources
+2021-11-26 11:52:20,933 [Worker-87: Launching FrmMain] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1258 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-26 11:52:20,934 [Worker-87: Launching FrmMain] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\USER\Desktop\QuanLyBanThuoc\QuanLyBanThuocClient\src\main\resources
+2021-11-26 11:52:20,937 [Worker-87: Launching FrmMain] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1258 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-26 11:52:20,937 [Worker-87: Launching FrmMain] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\USER\Desktop\QuanLyBanThuoc\QuanLyBanThuocClient\src\test\resources
+2021-11-26 11:55:03,075 [Worker-84: Launching FrmMain] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1258 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-26 11:55:03,077 [Worker-84: Launching FrmMain] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\USER\Desktop\QuanLyBanThuoc\QuanLyBanThuocClient\src\main\resources
+2021-11-26 11:55:03,079 [Worker-84: Launching FrmMain] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1258 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-26 11:55:03,080 [Worker-84: Launching FrmMain] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\USER\Desktop\QuanLyBanThuoc\QuanLyBanThuocClient\src\test\resources
+2021-11-26 11:57:33,917 [Worker-84: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1258 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-26 11:57:33,921 [Worker-84: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\USER\Desktop\QuanLyBanThuoc\QuanLyBanThuocClient\src\main\resources
+2021-11-26 11:57:33,924 [Worker-84: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1258 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-26 11:57:33,928 [Worker-84: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\USER\Desktop\QuanLyBanThuoc\QuanLyBanThuocClient\src\test\resources
+2021-11-26 12:03:53,789 [Worker-93: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1258 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-26 12:03:53,791 [Worker-93: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\USER\Desktop\QuanLyBanThuoc\QuanLyBanThuocClient\src\main\resources
+2021-11-26 12:03:53,793 [Worker-93: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1258 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-26 12:03:53,797 [Worker-93: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\USER\Desktop\QuanLyBanThuoc\QuanLyBanThuocClient\src\test\resources
+2021-11-26 12:09:28,076 [Worker-98: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1258 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-26 12:09:28,078 [Worker-98: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\USER\Desktop\QuanLyBanThuoc\QuanLyBanThuocClient\src\main\resources
+2021-11-26 12:09:28,080 [Worker-98: Building] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1258 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-26 12:09:28,081 [Worker-98: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\USER\Desktop\QuanLyBanThuoc\QuanLyBanThuocClient\src\test\resources
+2021-11-26 12:13:57,001 [Worker-100: Launching FrmMain] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1258 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-26 12:13:57,002 [Worker-100: Launching FrmMain] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\USER\Desktop\QuanLyBanThuoc\QuanLyBanThuocClient\src\main\resources
+2021-11-26 12:13:57,005 [Worker-100: Launching FrmMain] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1258 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-26 12:13:57,008 [Worker-100: Launching FrmMain] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\USER\Desktop\QuanLyBanThuoc\QuanLyBanThuocClient\src\test\resources
+2021-11-26 12:14:21,328 [Worker-102: Launching FrmMain] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1258 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-26 12:14:21,329 [Worker-102: Launching FrmMain] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\USER\Desktop\QuanLyBanThuoc\QuanLyBanThuocClient\src\main\resources
+2021-11-26 12:14:21,331 [Worker-102: Launching FrmMain] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1258 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-26 12:14:21,333 [Worker-102: Launching FrmMain] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\USER\Desktop\QuanLyBanThuoc\QuanLyBanThuocClient\src\test\resources
+2021-11-26 12:14:53,616 [Worker-95: Launching FrmMain] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1258 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-26 12:14:53,619 [Worker-95: Launching FrmMain] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\USER\Desktop\QuanLyBanThuoc\QuanLyBanThuocClient\src\main\resources
+2021-11-26 12:14:53,620 [Worker-95: Launching FrmMain] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1258 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-26 12:14:53,622 [Worker-95: Launching FrmMain] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\USER\Desktop\QuanLyBanThuoc\QuanLyBanThuocClient\src\test\resources
+2021-11-26 12:16:44,824 [Worker-95: Launching FrmMain] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1258 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-26 12:16:44,826 [Worker-95: Launching FrmMain] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\USER\Desktop\QuanLyBanThuoc\QuanLyBanThuocClient\src\main\resources
+2021-11-26 12:16:44,828 [Worker-95: Launching FrmMain] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1258 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-26 12:16:44,829 [Worker-95: Launching FrmMain] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\USER\Desktop\QuanLyBanThuoc\QuanLyBanThuocClient\src\test\resources
+2021-11-26 12:20:36,768 [Worker-96: Launching FrmMain] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1258 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-26 12:20:36,770 [Worker-96: Launching FrmMain] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\USER\Desktop\QuanLyBanThuoc\QuanLyBanThuocClient\src\main\resources
+2021-11-26 12:20:36,772 [Worker-96: Launching FrmMain] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1258 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-26 12:20:36,774 [Worker-96: Launching FrmMain] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\USER\Desktop\QuanLyBanThuoc\QuanLyBanThuocClient\src\test\resources
+2021-11-26 12:21:05,409 [Worker-102: Launching FrmMain] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1258 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-26 12:21:05,411 [Worker-102: Launching FrmMain] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\USER\Desktop\QuanLyBanThuoc\QuanLyBanThuocClient\src\main\resources
+2021-11-26 12:21:05,412 [Worker-102: Launching FrmMain] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1258 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-26 12:21:05,414 [Worker-102: Launching FrmMain] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\USER\Desktop\QuanLyBanThuoc\QuanLyBanThuocClient\src\test\resources
+2021-11-26 12:21:26,721 [Worker-95: Launching FrmMain] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1258 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-26 12:21:26,723 [Worker-95: Launching FrmMain] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\USER\Desktop\QuanLyBanThuoc\QuanLyBanThuocClient\src\main\resources
+2021-11-26 12:21:26,725 [Worker-95: Launching FrmMain] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1258 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-26 12:21:26,727 [Worker-95: Launching FrmMain] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\USER\Desktop\QuanLyBanThuoc\QuanLyBanThuocClient\src\test\resources
+2021-11-26 12:23:47,047 [Worker-94: Launching FrmMain] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1258 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-26 12:23:47,049 [Worker-94: Launching FrmMain] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\USER\Desktop\QuanLyBanThuoc\QuanLyBanThuocClient\src\main\resources
+2021-11-26 12:23:47,051 [Worker-94: Launching FrmMain] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1258 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-26 12:23:47,052 [Worker-94: Launching FrmMain] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\USER\Desktop\QuanLyBanThuoc\QuanLyBanThuocClient\src\test\resources
+2021-11-26 12:29:55,173 [Worker-96: Launching FrmMain] WARN  o.e.m.c.i.embedder.EclipseLogger - Using platform encoding (Cp1258 actually) to copy filtered resources, i.e. build is platform dependent!
+2021-11-26 12:29:55,174 [Worker-96: Launching FrmMain] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\USER\Desktop\QuanLyBanThuoc\QuanLyBanThuocClient\src\main\resources

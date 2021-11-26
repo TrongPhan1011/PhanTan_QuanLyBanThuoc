@@ -26,7 +26,7 @@ public class ImplHoaDon extends UnicastRemoteObject implements HoaDonDao {
 		EntityTransaction tr = em.getTransaction();
 		try {
 			tr.begin();
-			em.persist(hoaDon);
+			em.merge(hoaDon);
 			
 			tr.commit();
 			return true;

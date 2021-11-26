@@ -31,7 +31,7 @@ public class ImplCTHD extends UnicastRemoteObject implements CTHDDao {
 		EntityTransaction tr = em.getTransaction();
 		try {
 			tr.begin();
-				em.persist(cthd);
+				em.merge(cthd);
 			
 			tr.commit();
 			return true;
