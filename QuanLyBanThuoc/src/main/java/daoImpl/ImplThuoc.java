@@ -90,5 +90,36 @@ public class ImplThuoc  extends UnicastRemoteObject implements ThuocDao {
 		}
 		return null;
 	}
+	@Override
+	public List<Thuoc> getAllThuoc() throws RemoteException {
+		// TODO Auto-generated method stub
+		EntityTransaction tr=em.getTransaction();
+		try {
+			tr.begin();
+			String query="db.dsThuoc.find({})";
+			List<Thuoc>ls=em.createNativeQuery(query,Thuoc.class).getResultList();
+			tr.commit();
+			return ls;
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return null;
+	}
+	@Override
+	public boolean updateThuoc(Thuoc thuoc) throws RemoteException {
+		EntityTransaction tr = em.getTransaction();
+		try {
+			
+			tr.begin();
+			em.merge(thuoc);
+
+			tr.commit();
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			tr.rollback();
+		}
+		return false;
+	}
 
 }

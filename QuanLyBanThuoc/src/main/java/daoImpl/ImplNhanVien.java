@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
 import dao.NhanVienDao;
+import entity.KhachHang;
 import entity.LoaiThuoc;
 import entity.NhanVien;
 import entity.Thuoc;
@@ -129,15 +130,18 @@ public class ImplNhanVien extends UnicastRemoteObject implements NhanVienDao {
 		return null;
 	}
 
+	
+
 	@Override
-	public List<NhanVien> getSDT() throws RemoteException {
+	public NhanVien getNVTheoSDT(String sdt) throws RemoteException {
 		EntityTransaction tr = em.getTransaction();
 		try {
-			
 			tr.begin();
-			List<NhanVien> sdt =  em.createNativeQuery("db.dsNhanVien.distinct('sdt')",NhanVien.class).getResultList();
+			NhanVien nv  = (NhanVien) em.createNativeQuery("db.dsNhanVien.find({'sdt' : '"+sdt+"'})",NhanVien.class).getSingleResult();		
+			
 			tr.commit();
-			return sdt;
+			if(nv != null)
+				return nv;
 		} catch (Exception e) {
 			e.printStackTrace();
 			tr.rollback();
@@ -145,7 +149,5 @@ public class ImplNhanVien extends UnicastRemoteObject implements NhanVienDao {
 		return null;
 	}
 
-
-	
 
 }

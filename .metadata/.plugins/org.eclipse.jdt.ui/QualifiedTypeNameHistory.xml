@@ -21,6 +21,6 @@
     <fullyQualifiedTypeName name="javax.swing.JOptionPane"/>
     <fullyQualifiedTypeName name="java.util.List"/>
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
-    <fullyQualifiedTypeName name="entity.NhanVien"/>
     <fullyQualifiedTypeName name="java.rmi.RemoteException"/>
+    <fullyQualifiedTypeName name="entity.NhanVien"/>
 </qualifiedTypeNameHistroy>

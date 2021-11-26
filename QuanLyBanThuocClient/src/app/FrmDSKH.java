@@ -2,8 +2,20 @@ package app;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.net.MalformedURLException;
+import java.rmi.Naming;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -19,7 +31,19 @@ import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
-public class FrmDSKH extends JFrame {
+import dao.CTHDDao;
+import dao.HoaDonDao;
+import dao.KhachHangDao;
+import dao.LoaiThuocDao;
+import dao.NhaCungCapDao;
+import dao.NhanVienDao;
+import dao.NuocSXDao;
+import dao.TaiKhoanDao;
+import dao.ThuocDao;
+import entity.KhachHang;
+import entity.NhanVien;
+
+public class FrmDSKH extends JFrame implements  ActionListener,MouseListener,ItemListener{
 
 	private JPanel contentPane;
 	private JTextField txtTim;
@@ -27,13 +51,28 @@ public class FrmDSKH extends JFrame {
 	private JTable table;
 	private JTable tbldsKH;
 	private JTable table_1;
+	private CTHDDao cthdDao;
+	private HoaDonDao hoaDonDao;
+	private KhachHangDao khachHangDao;
+	private LoaiThuocDao loaiThuocDao;
+	private NhaCungCapDao NCCDao;
+	private NhanVienDao nhanVienDao;
+	private TaiKhoanDao tkDao;
+	private NuocSXDao nuocSXDao;
+	private ThuocDao thuocDao;
+	private DefaultTableModel modelthuoc;
+	private DefaultTableModel modelKhachhang;
+	
 
 	
 
 	/**
 	 * Create the frame.
+	 * @throws NotBoundException 
+	 * @throws RemoteException 
+	 * @throws MalformedURLException 
 	 */
-	public FrmDSKH(JFrame frm) {
+	public FrmDSKH(JFrame frm) throws MalformedURLException, RemoteException, NotBoundException {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(0, 0, 1012, 672);
 		setLocationRelativeTo(null);
@@ -41,6 +80,17 @@ public class FrmDSKH extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		
+		cthdDao = (CTHDDao) Naming.lookup("rmi://192.168.1.8:9999/cthdDao");
+		hoaDonDao = (HoaDonDao) Naming.lookup("rmi://192.168.1.8:9999/hoaDonDao");
+		khachHangDao = (KhachHangDao) Naming.lookup("rmi://192.168.1.8:9999/khachHangDao");
+		loaiThuocDao = (LoaiThuocDao) Naming.lookup("rmi://192.168.1.8:9999/loaiThuocDao");
+		NCCDao = (NhaCungCapDao) Naming.lookup("rmi://192.168.1.8:9999/nhaCungCapDao");
+		nhanVienDao = (NhanVienDao) Naming.lookup("rmi://192.168.1.8:9999/nhanVienDao");
+		nuocSXDao = (NuocSXDao) Naming.lookup("rmi://192.168.1.8:9999/nuocSXDao");
+		tkDao = (TaiKhoanDao) Naming.lookup("rmi://192.168.1.8:9999/taiKhoanDao");
+		thuocDao = (ThuocDao) Naming.lookup("rmi://192.168.1.8:9999/thuocDao");
+		
 		
 		JPanel panel = new JPanel();
 		panel.setBounds(0, 0, 998, 651);
@@ -98,7 +148,7 @@ public class FrmDSKH extends JFrame {
 		
 		
 		String column[] = { "Tên thuốc","Loại thuốc", "Nước sản xuất","Số lượng","Đơn giá","Tổng tiền"};
-		DefaultTableModel modelthuoc = new DefaultTableModel(column, 0);
+	    modelthuoc = new DefaultTableModel(column, 0);
 		tbldsThuoc = new JTable(modelthuoc);
 		dsThuoc.setViewportView(tbldsThuoc);
 		
@@ -147,8 +197,8 @@ public class FrmDSKH extends JFrame {
 		dsKH.setBounds(10, 20, 963, 201);
 		pKH.add(dsKH);
 		
-		String columnKH[] = { "Mã khách hàng","Tên khách hàng", "Ngày sinh","Giới tính","Số điện thoại","Địa chỉ"};
-		DefaultTableModel modelKhachhang = new DefaultTableModel(columnKH, 0);
+		String columnKH[] = { "STT","Tên khách hàng", "Ngày sinh","Giới tính","Số điện thoại"};
+	     modelKhachhang = new DefaultTableModel(columnKH, 0);
 		tbldsKH = new JTable(modelKhachhang);
 		dsKH.setViewportView(tbldsKH);
 		
@@ -175,7 +225,72 @@ public class FrmDSKH extends JFrame {
 				frm.setVisible(true);
 			}
 		});
+		loadData();
 		
 		
+	}
+
+
+
+	@Override
+	public void itemStateChanged(ItemEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	private void loadData() throws RemoteException{
+		 List<KhachHang> dsKH = khachHangDao.getAllKhachHang();
+		 int i=0;
+		 for(KhachHang kh : dsKH) {
+			 i++;
+			 modelKhachhang.addRow(new Object[] { i, kh.getTenKhachHang(),kh.getNgaySinh(),kh.getGioiTinh(),kh.getSdt()});
+		 }
 	}
 }
