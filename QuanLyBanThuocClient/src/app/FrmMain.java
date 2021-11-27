@@ -206,7 +206,7 @@ public class FrmMain extends JFrame implements ActionListener  {
 		quanLyThuoc = new FrmQuanLyThuoc();
 		tabbedPane1.addTab("New tab", null, quanLyThuoc, null);
 
-		FrmQLBH frmQLHD = new FrmQLBH(frame,manv);
+		FrmQLBH frmQLHD = new FrmQLBH(this,manv);
 		tabbedPane1.addTab("New tab", null, frmQLHD, null);
 		
 		tabbedPane1.addTab("New tab", null,frmQuanLyNhanVien , null);

@@ -2,6 +2,7 @@ package app;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -18,6 +19,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.swing.BorderFactory;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -48,9 +50,15 @@ import dao.TaiKhoanDao;
 import dao.ThuocDao;
 import entity.CTHD;
 import entity.HoaDon;
+import jiconfont.icons.font_awesome.FontAwesome;
+import jiconfont.swing.IconFontSwing;
 
 public class FrmQuanLyThongKe extends JPanel implements ActionListener,MouseListener {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8036228643460468738L;
 	private JFrame frame;
 	private CTHDDao cthdDao;
 	private HoaDonDao hoaDonDao;
@@ -211,6 +219,10 @@ public class FrmQuanLyThongKe extends JPanel implements ActionListener,MouseList
 		lblSubDoanhThu.setForeground(new Color(91, 155, 213));
 		pDoanhThu.add(lblSubDoanhThu);
 		
+		JLabel lblICDoanhThu = new JLabel("");
+		lblICDoanhThu.setBounds(10, 11, 68, 75);
+		pDoanhThu.add(lblICDoanhThu);
+		
 		JPanel pThuoc = new JPanel();
 		pThuoc.setLayout(null);
 		pThuoc.setBorder(new LineBorder(new Color(91, 155, 213), 2));
@@ -256,6 +268,23 @@ public class FrmQuanLyThongKe extends JPanel implements ActionListener,MouseList
 		
 		chooserNgayBatDau.setDate(now);
 		chooserNgayDen.setDate(now);
+		
+		IconFontSwing.register(FontAwesome.getIconFont());
+		Icon icThem = IconFontSwing.buildIcon(FontAwesome.PLUS, 20, new Color(0, 176, 80));
+		Icon icNgay = IconFontSwing.buildIcon(FontAwesome.CALENDAR, 20, new Color(91, 155, 213));
+		Icon icTim = IconFontSwing.buildIcon(FontAwesome.SEARCH, 20, Color.black);
+		Icon icLamMoi = IconFontSwing.buildIcon(FontAwesome.REFRESH, 20, Color.blue);
+		Icon icDS = IconFontSwing.buildIcon(FontAwesome.LIST_OL, 20, Color.orange);
+		Icon icXoa = IconFontSwing.buildIcon(FontAwesome.TIMES, 20, Color.red);
+		Icon icMoney = IconFontSwing.buildIcon(FontAwesome.MONEY, 60, new Color(0, 176, 80));
+		Icon icBarchar = IconFontSwing.buildIcon(FontAwesome.BAR_CHART, 25, new Color(0, 176, 80));
+		
+		chooserNgayBatDau.setIcon((ImageIcon) icNgay);
+		chooserNgayDen.setIcon((ImageIcon) icNgay);
+		btnLamMoi.setIcon(icLamMoi);
+		btnThongKe.setIcon(icBarchar);
+		lblICDoanhThu.setIcon(icMoney);
+		
 		
 		
 		df = new DecimalFormat("###,### VNĐ");
