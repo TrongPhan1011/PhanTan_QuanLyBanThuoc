@@ -204,7 +204,7 @@ public class FrmQuenMatKhau extends JFrame implements ActionListener {
 		btndoimatkhau.setIcon(icdoimk);
 
 		JLabel lblbg = new JLabel("");
-		lblbg.setIcon(new ImageIcon("C:\\Users\\Tai\\eclipse-workspace\\HeThongQuanLyThuoc\\img\\bg3.jpg"));
+		lblbg.setIcon(new ImageIcon("data\\img\\bg3.jpg"));
 		lblbg.setBounds(0, 0, 400, 361);
 		panel_1.add(lblbg);
 
