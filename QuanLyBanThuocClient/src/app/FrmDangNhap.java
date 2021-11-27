@@ -10,6 +10,7 @@ import java.awt.BorderLayout;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.BorderFactory;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -44,6 +45,9 @@ import dao.ThuocDao;
 import daoImpl.ImplTaiKhoan;
 import entity.NhanVien;
 import entity.TaiKhoan;
+import jiconfont.icons.font_awesome.FontAwesome;
+import jiconfont.swing.IconFontSwing;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -108,6 +112,7 @@ public class FrmDangNhap extends JFrame implements ActionListener {
 //		frmHThngQun.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
 		
+		IconFontSwing.register(FontAwesome.getIconFont());
 //		cthdDao =  (CTHDDao) Naming.lookup("rmi://192.168.1.9:9999/cthdDao");
 //		hoaDonDao =  (HoaDonDao) Naming.lookup("rmi://192.168.1.9:9999/hoaDonDao");
 //		khachHangDao = (KhachHangDao) Naming.lookup("rmi://192.168.1.9:9999/khachHangDao");
@@ -221,10 +226,28 @@ public class FrmDangNhap extends JFrame implements ActionListener {
 		btnthoat.setBounds(475, 278, 116, 31);
 		panel_1.add(btnthoat);
 		
+
+		Icon icThem = IconFontSwing.buildIcon(FontAwesome.PLUS, 20, new Color(0, 176, 80));
+		Icon icNgay = IconFontSwing.buildIcon(FontAwesome.CALENDAR, 20, new Color(91, 155, 213));
+		Icon icTim = IconFontSwing.buildIcon(FontAwesome.SEARCH, 20, Color.black);
+		Icon icLamMoi = IconFontSwing.buildIcon(FontAwesome.REFRESH, 20, Color.blue);
+		Icon icDS = IconFontSwing.buildIcon(FontAwesome.LIST_OL, 20, Color.orange);
+		Icon icXoa = IconFontSwing.buildIcon(FontAwesome.TIMES, 20, Color.red);
+		Icon icSua = IconFontSwing.buildIcon(FontAwesome.WRENCH, 20, Color.darkGray);
+		Icon icThanhToan = IconFontSwing.buildIcon(FontAwesome.CART_PLUS, 25, new Color(0, 176, 80));
+		Icon icDangnhap = IconFontSwing.buildIcon(FontAwesome.SIGN_IN, 20, Color.darkGray);
+		Icon icThoat = IconFontSwing.buildIcon(FontAwesome.SIGN_OUT, 20, Color.darkGray);
+		
+		btndangnhap.setIcon(icDangnhap);
+		btnthoat.setIcon(icThoat);
+		
+		
+		
 		JLabel lblbg = new JLabel("");
 		lblbg.setIcon(new ImageIcon("C:\\Users\\Tai\\eclipse-workspace\\HeThongQuanLyThuoc\\img\\bg3.jpg"));
 		lblbg.setBounds(0, 0, 400, 361);
 		panel_1.add(lblbg);
+		
 		
 	
 	}

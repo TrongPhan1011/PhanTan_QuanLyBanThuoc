@@ -14,6 +14,7 @@ import java.awt.Component;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.BorderFactory;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -68,6 +69,8 @@ import entity.LoaiThuoc;
 import entity.NhaCungCap;
 import entity.NuocSX;
 import entity.Thuoc;
+import jiconfont.icons.font_awesome.FontAwesome;
+import jiconfont.swing.IconFontSwing;
 
 import com.mongodb.Block;
 import com.mongodb.MongoClient;
@@ -381,6 +384,20 @@ public class FrmQuanLyThuoc extends JPanel implements ActionListener, MouseListe
 		loadtenncccbo();
 		loadnuocsxcbo();
 		//
+		IconFontSwing.register(FontAwesome.getIconFont());
+		Icon icThem = IconFontSwing.buildIcon(FontAwesome.PLUS, 20, new Color(0, 176, 80));
+		Icon icNgay = IconFontSwing.buildIcon(FontAwesome.CALENDAR, 20, new Color(91, 155, 213));
+		Icon icTim = IconFontSwing.buildIcon(FontAwesome.SEARCH, 20, Color.black);
+		Icon icLamMoi = IconFontSwing.buildIcon(FontAwesome.REFRESH, 20, Color.blue);
+		Icon icDS = IconFontSwing.buildIcon(FontAwesome.LIST_OL, 20, Color.orange);
+		Icon icXoa = IconFontSwing.buildIcon(FontAwesome.TIMES, 20, Color.red);
+		Icon icSua = IconFontSwing.buildIcon(FontAwesome.WRENCH, 20, Color.darkGray);
+		Icon icThanhToan = IconFontSwing.buildIcon(FontAwesome.CART_PLUS, 25, new Color(0, 176, 80));
+		btnthem.setIcon(icThem);
+		btnsua.setIcon(icSua);
+		btnxoa.setIcon(icXoa);
+		btntim.setIcon(icTim);
+		btnlammoi.setIcon(icLamMoi);
 		p.add(jlbbg);
 
 	}

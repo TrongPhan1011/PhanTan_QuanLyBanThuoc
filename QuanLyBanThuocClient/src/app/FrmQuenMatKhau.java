@@ -10,6 +10,7 @@ import java.awt.BorderLayout;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.BorderFactory;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -44,6 +45,9 @@ import dao.ThuocDao;
 import daoImpl.ImplTaiKhoan;
 import entity.NhanVien;
 import entity.TaiKhoan;
+import jiconfont.icons.font_awesome.FontAwesome;
+import jiconfont.swing.IconFontSwing;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -184,6 +188,20 @@ public class FrmQuenMatKhau extends JFrame implements ActionListener {
 		btnquaylai.addActionListener(this);
 		btnquaylai.setBounds(456, 317, 134, 30);
 		panel_1.add(btnquaylai);
+		
+		IconFontSwing.register(FontAwesome.getIconFont());
+		Icon icThem = IconFontSwing.buildIcon(FontAwesome.PLUS, 20, new Color(0, 176, 80));
+		Icon icNgay = IconFontSwing.buildIcon(FontAwesome.CALENDAR, 20, new Color(91, 155, 213));
+		Icon icTim = IconFontSwing.buildIcon(FontAwesome.SEARCH, 20, Color.black);
+		Icon icLamMoi = IconFontSwing.buildIcon(FontAwesome.REFRESH, 20, Color.blue);
+		Icon icDS = IconFontSwing.buildIcon(FontAwesome.LIST_OL, 20, Color.orange);
+		Icon icXoa = IconFontSwing.buildIcon(FontAwesome.TIMES, 20, Color.red);
+		Icon icSua = IconFontSwing.buildIcon(FontAwesome.WRENCH, 20, Color.darkGray);
+		Icon icThanhToan = IconFontSwing.buildIcon(FontAwesome.CART_PLUS, 25, new Color(0, 176, 80));
+		Icon icThoat = IconFontSwing.buildIcon(FontAwesome.SIGN_OUT, 20, Color.darkGray);
+		Icon icdoimk = IconFontSwing.buildIcon(FontAwesome.EXCHANGE, 20, Color.darkGray);
+		btnquaylai.setIcon(icThoat);
+		btndoimatkhau.setIcon(icdoimk);
 
 		JLabel lblbg = new JLabel("");
 		lblbg.setIcon(new ImageIcon("C:\\Users\\Tai\\eclipse-workspace\\HeThongQuanLyThuoc\\img\\bg3.jpg"));
