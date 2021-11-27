@@ -23,6 +23,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.swing.BorderFactory;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -60,6 +61,8 @@ import entity.LoaiThuoc;
 import entity.NhaCungCap;
 import entity.NhanVien;
 import entity.Thuoc;
+import jiconfont.icons.font_awesome.FontAwesome;
+import jiconfont.swing.IconFontSwing;
 
 
 public class FrmQLBH extends JPanel implements ActionListener,MouseListener,ItemListener {
@@ -169,6 +172,9 @@ public class FrmQLBH extends JPanel implements ActionListener,MouseListener,Item
 		thuocDao = (ThuocDao) Naming.lookup("rmi://192.168.1.6:9999/thuocDao");
 		 regex  = new Regex();
 	
+		
+		IconFontSwing.register(FontAwesome.getIconFont());
+		
 		frame = new JFrame();
 		frame.setBounds(0, 0, 1031, 700);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -204,6 +210,8 @@ public class FrmQLBH extends JPanel implements ActionListener,MouseListener,Item
 		btnTim.setFont(new Font("SansSerif", Font.BOLD, 15));
 		btnTim.setBounds(918, 35, 89, 35);
 		pMain.add(btnTim);
+		
+		
 
 		JPanel pKH = new JPanel();
 		pKH.setBorder(new TitledBorder(new LineBorder(new Color(91, 155, 213)), "Th\u00F4ng tin kh\u00E1ch h\u00E0ng", TitledBorder.CENTER, TitledBorder.TOP, null, Color.BLACK));
@@ -264,12 +272,15 @@ public class FrmQLBH extends JPanel implements ActionListener,MouseListener,Item
 		btnThemKH.setBounds(10, 165, 200, 34);
 		btnThemKH.setBackground(new Color(41, 242, 255));
 		pKH.add(btnThemKH);
+		
 
 		btnLamMoiKH = new JButton("Làm mới");
 		btnLamMoiKH.setFont(new Font("SansSerif", Font.BOLD, 15));
 		btnLamMoiKH.setBackground(new Color(41, 242, 255));
 		btnLamMoiKH.setBounds(434, 165, 193, 34);
 		pKH.add(btnLamMoiKH);
+		
+	
 
 		chooserNgaySinh = new JDateChooser();
 		chooserNgaySinh.getCalendarButton().setFont(new Font("SansSerif", Font.PLAIN, 15));
@@ -277,10 +288,9 @@ public class FrmQLBH extends JPanel implements ActionListener,MouseListener,Item
 		pKH.add(chooserNgaySinh);
 		chooserNgaySinh.setBorder(BorderFactory.createLineBorder(new Color(91, 155, 213)));
 		chooserNgaySinh.setDateFormatString("dd/MM/yyyy");
-
-
 		chooserNgaySinh.setFont(new Font("SansSerif",Font.PLAIN, 15));
 
+		
 
 		//setBorder(new LineBorder(new Color(91, 155, 213)));
 		JPanel pThuoc = new JPanel();
@@ -490,6 +500,27 @@ public class FrmQLBH extends JPanel implements ActionListener,MouseListener,Item
 		dfTable = new DecimalFormat("###,###");
 		df = new DecimalFormat("###,### VNĐ");
 		sf = new SimpleDateFormat("dd/MM/yyy");
+		
+		
+		Icon icThem = IconFontSwing.buildIcon(FontAwesome.PLUS, 20, new Color(0, 176, 80));
+		Icon icNgay = IconFontSwing.buildIcon(FontAwesome.CALENDAR, 20, new Color(91, 155, 213));
+		Icon icTim = IconFontSwing.buildIcon(FontAwesome.SEARCH, 20, Color.black);
+		Icon icLamMoi = IconFontSwing.buildIcon(FontAwesome.REFRESH, 20, Color.blue);
+		Icon icDS = IconFontSwing.buildIcon(FontAwesome.LIST_OL, 20, Color.orange);
+		Icon icXoa = IconFontSwing.buildIcon(FontAwesome.TIMES, 20, Color.red);
+		Icon icSua = IconFontSwing.buildIcon(FontAwesome.WRENCH, 20, Color.darkGray);
+		Icon icThanhToan = IconFontSwing.buildIcon(FontAwesome.CART_PLUS, 25, new Color(0, 176, 80));
+		
+		btnTim.setIcon(icTim);
+		chooserNgaySinh.setIcon((ImageIcon) icNgay);
+		btnThemKH.setIcon( icThem);
+		btnThemThuoc.setIcon(icThem);
+		btnLamMoiKH.setIcon( icLamMoi);
+		btnLamMoiGD.setIcon(icLamMoi);
+		btnDSKH.setIcon(icDS);
+		btnXoaThuoc.setIcon(icXoa);
+		btnSua.setIcon(icSua);
+		btnThanhToan.setIcon(icThanhToan);
 
 
 		//action
