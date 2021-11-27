@@ -77,6 +77,11 @@ public class HoaDon implements Serializable {
 	public ObjectId getId() {
 		return id;
 	}
+	
+
+	public void setId(ObjectId id) {
+		this.id = id;
+	}
 
 	public HoaDon(ObjectId id, Date ngayLap, NhanVien nhanVien, KhachHang khachHang, List<CTHD> dsCTHD) {
 		super();

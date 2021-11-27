@@ -533,7 +533,9 @@ public class FrmQLBH extends JPanel implements ActionListener,MouseListener,Item
 
 
 	public void loadFrmDSKH() throws MalformedURLException, RemoteException, NotBoundException {
-		FrmDSKH frmKH = new FrmDSKH(fMain);
+		//FrmDSKH frmKH = new FrmDSKH(fMain);
+		
+		DSHD frmKH = new DSHD(fMain);
 		frmKH.setVisible(true);
 
 		fMain.setVisible(false);

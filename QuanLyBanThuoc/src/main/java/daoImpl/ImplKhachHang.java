@@ -10,6 +10,7 @@ import javax.persistence.EntityTransaction;
 import dao.KhachHangDao;
 import entity.KhachHang;
 import entity.LoaiThuoc;
+import entity.NhanVien;
 import util.HibernateUtil;
 
 public class ImplKhachHang extends UnicastRemoteObject implements KhachHangDao {
@@ -100,4 +101,6 @@ public class ImplKhachHang extends UnicastRemoteObject implements KhachHangDao {
 		return false;
 
 	}
+
+
 }

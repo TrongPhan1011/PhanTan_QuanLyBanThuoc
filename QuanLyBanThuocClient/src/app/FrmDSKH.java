@@ -10,10 +10,13 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,6 +34,8 @@ import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
+import org.bson.types.ObjectId;
+
 import dao.CTHDDao;
 import dao.HoaDonDao;
 import dao.KhachHangDao;
@@ -40,13 +45,16 @@ import dao.NhanVienDao;
 import dao.NuocSXDao;
 import dao.TaiKhoanDao;
 import dao.ThuocDao;
+import entity.CTHD;
+import entity.HoaDon;
 import entity.KhachHang;
 import entity.NhanVien;
+import entity.Thuoc;
+import javax.swing.ImageIcon;
 
 public class FrmDSKH extends JFrame implements  ActionListener,MouseListener,ItemListener{
 
 	private JPanel contentPane;
-	private JTextField txtTim;
 	private JTable tbldsThuoc;
 	private JTable table;
 	private JTable tbldsKH;
@@ -60,9 +68,12 @@ public class FrmDSKH extends JFrame implements  ActionListener,MouseListener,Ite
 	private TaiKhoanDao tkDao;
 	private NuocSXDao nuocSXDao;
 	private ThuocDao thuocDao;
-	private DefaultTableModel modelthuoc;
-	private DefaultTableModel modelKhachhang;
-	
+	private DefaultTableModel modelthuoc1;
+	private DefaultTableModel modelKhachhang1;
+	private KhachHang khSelect;
+	private SimpleDateFormat sf;
+	private JLabel lblthanhtien;
+	private JButton btnLammoi;
 
 	
 
@@ -72,7 +83,9 @@ public class FrmDSKH extends JFrame implements  ActionListener,MouseListener,Ite
 	 * @throws RemoteException 
 	 * @throws MalformedURLException 
 	 */
-	public FrmDSKH(JFrame frm) throws MalformedURLException, RemoteException, NotBoundException {
+	public FrmDSKH(JFrame frm,KhachHang khSelect) throws MalformedURLException, RemoteException, NotBoundException {
+		
+		this.khSelect = khSelect;
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(0, 0, 1012, 672);
 		setLocationRelativeTo(null);
@@ -107,49 +120,21 @@ public class FrmDSKH extends JFrame implements  ActionListener,MouseListener,Ite
 		lblTieude.setBounds(10, 20, 353, 48);
 		panel_1.add(lblTieude);
 		
-		JLabel lblTim = new JLabel("Tìm kiếm:");
-		lblTim.setFont(new Font("SansSerif", Font.BOLD, 15));
-		lblTim.setBounds(427, 34, 75, 28);
-		panel_1.add(lblTim);
-		
-		txtTim = new JTextField();
-		txtTim.setColumns(10);
-		txtTim.setBorder(BorderFactory.createLineBorder(Color.CYAN));
-		txtTim.setBounds(512, 34, 206, 33);
-		txtTim.setBorder(new LineBorder(new Color(91, 155, 213)));
-		panel_1.add(txtTim);
-		
-		JButton btntim = new JButton("Tìm");
-		btntim.setFont(new Font("Tahoma", Font.BOLD, 15));
-		btntim.setBackground(new Color(41, 242, 255));
-		btntim.setBounds(746, 35, 108, 33);
-		panel_1.add(btntim);
-		
-		JLabel lblThuocdamua = new JLabel("Thuốc đã mua:");
-		lblThuocdamua.setFont(new Font("SansSerif", Font.BOLD, 15));
-		lblThuocdamua.setBounds(168, 335, 112, 20);
-		panel_1.add(lblThuocdamua);
-		
-		JLabel lblslthuoc = new JLabel("Số lượng thuốc đã mua:");
-		lblslthuoc.setFont(new Font("SansSerif", Font.BOLD, 15));
-		lblslthuoc.setBounds(520, 331, 198, 28);
-		panel_1.add(lblslthuoc);
-		
 		JPanel pThuoc = new JPanel();
-		pThuoc.setBounds(10, 365, 983, 252);
+		pThuoc.setBounds(10, 335, 983, 282);
 		panel_1.add(pThuoc);
 		pThuoc.setBorder(new TitledBorder(new LineBorder(new Color(91, 155, 213)), "Danh sách thuốc", TitledBorder.CENTER, TitledBorder.TOP, null, Color.BLACK));
 		pThuoc.setBackground(new Color(255,255,255,10));
 		pThuoc.setLayout(null);
 		
 		JScrollPane dsThuoc = new JScrollPane();
-		dsThuoc.setBounds(10, 20, 963, 222);
+		dsThuoc.setBounds(10, 20, 963, 252);
 		pThuoc.add(dsThuoc);
 		
 		
-		String column[] = { "Tên thuốc","Loại thuốc", "Nước sản xuất","Số lượng","Đơn giá","Tổng tiền"};
-	    modelthuoc = new DefaultTableModel(column, 0);
-		tbldsThuoc = new JTable(modelthuoc);
+		String column[] = { "Tên thuốc","Loại thuốc","Số lượng","Đơn giá","Tổng tiền"};
+	    modelthuoc1 = new DefaultTableModel(column, 0);
+		tbldsThuoc = new JTable(modelthuoc1);
 		dsThuoc.setViewportView(tbldsThuoc);
 		
 		JTableHeader tbHeader1 = tbldsThuoc.getTableHeader();
@@ -161,21 +146,8 @@ public class FrmDSKH extends JFrame implements  ActionListener,MouseListener,Ite
 		tbldsThuoc.setSelectionBackground(new Color(91, 155, 213,30));
 		tbldsThuoc.setSelectionForeground(new Color(91, 155, 213));
 		tbldsThuoc.setRowHeight(30);
-
 		
-		JLabel lblThuocdamua1 = new JLabel("0");
-		lblThuocdamua1.setFont(new Font("SansSerif", Font.BOLD, 20));
-		lblThuocdamua1.setForeground(Color.RED);
-		lblThuocdamua1.setBounds(297, 333, 133, 20);
-		panel_1.add(lblThuocdamua1);
-		
-		JLabel lblSLThuoc = new JLabel("0");
-		lblSLThuoc.setForeground(Color.RED);
-		lblSLThuoc.setFont(new Font("SansSerif", Font.BOLD, 20));
-		lblSLThuoc.setBounds(714, 333, 133, 20);
-		panel_1.add(lblSLThuoc);
-		
-		JLabel lblthanhtien = new JLabel("0VNĐ");
+		lblthanhtien = new JLabel("0VNĐ");
 		lblthanhtien.setForeground(Color.RED);
 		lblthanhtien.setFont(new Font("SansSerif", Font.BOLD, 20));
 		lblthanhtien.setBounds(846, 627, 167, 20);
@@ -197,9 +169,9 @@ public class FrmDSKH extends JFrame implements  ActionListener,MouseListener,Ite
 		dsKH.setBounds(10, 20, 963, 201);
 		pKH.add(dsKH);
 		
-		String columnKH[] = { "STT","Tên khách hàng", "Ngày sinh","Giới tính","Số điện thoại"};
-	     modelKhachhang = new DefaultTableModel(columnKH, 0);
-		tbldsKH = new JTable(modelKhachhang);
+		String columnKH[] = { "Mã hóa đơn","Tên khách hàng","Số điện thoại","Ngày mua"};
+	     modelKhachhang1 = new DefaultTableModel(columnKH, 0);
+		tbldsKH = new JTable(modelKhachhang1);
 		dsKH.setViewportView(tbldsKH);
 		
 		JTableHeader tbHeader = tbldsKH.getTableHeader();
@@ -212,11 +184,20 @@ public class FrmDSKH extends JFrame implements  ActionListener,MouseListener,Ite
 		tbldsKH.setSelectionForeground(new Color(91, 155, 213));
 		tbldsKH.setRowHeight(30);
 		
-		JButton btnLammoi = new JButton("Làm mới");
+		btnLammoi = new JButton("Làm mới");
 		btnLammoi.setBackground(Color.CYAN);
 		btnLammoi.setFont(new Font("SansSerif", Font.BOLD, 15));
 		btnLammoi.setBounds(875, 34, 108, 34);
 		panel_1.add(btnLammoi);
+		
+		JLabel lblNewLabel = new JLabel("New label");
+		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\USER\\Desktop\\QuanLyBanThuoc\\QuanLyBanThuoc\\data\\img\\bg.png"));
+		lblNewLabel.setBounds(0, 10, 1039, 661);
+		panel_1.add(lblNewLabel);
+		
+		tbldsKH.addMouseListener(this);
+		
+		sf = new SimpleDateFormat("dd/MM/yyyy");
 		
 		addWindowListener(new WindowAdapter() {
 			
@@ -226,9 +207,16 @@ public class FrmDSKH extends JFrame implements  ActionListener,MouseListener,Ite
 			}
 		});
 		loadData();
+//		lblthanhtien +=modelKhachhang1.
+		
+		btnLammoi.addActionListener(this);
+		
+		
 		
 		
 	}
+	
+
 
 
 
@@ -238,19 +226,41 @@ public class FrmDSKH extends JFrame implements  ActionListener,MouseListener,Ite
 		
 	}
 
+	
 
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
+		Object o = e.getSource();
+		 String sdt = null;
+		if(o.equals(tbldsKH)) {
+			int row = tbldsKH.getSelectedRow();
+			try {
+				modelthuoc1.setRowCount(0);
+				loadDataThuoc();
+			    
+			} catch (RemoteException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+			// click row --> lấy mã -->  tìm theo mã --> load vô table thuoc --> tính thanh tiền
+			
+
+		}
+		
 		
 	}
+	
 
 
 
 	@Override
 	public void mousePressed(MouseEvent e) {
 		// TODO Auto-generated method stub
+		
+		
+	
 		
 	}
 
@@ -282,15 +292,44 @@ public class FrmDSKH extends JFrame implements  ActionListener,MouseListener,Ite
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+	Object o = e.getSource();
+	if(o.equals(btnLammoi)) {
+		modelthuoc1.setRowCount(0);
+		lblthanhtien.setText("0");
+	}
 		
 	}
 	private void loadData() throws RemoteException{
-		 List<KhachHang> dsKH = khachHangDao.getAllKhachHang();
+		
+		 List<HoaDon> dsHD = hoaDonDao.getHoaDonTheoMaKH(khSelect.getId());
 		 int i=0;
-		 for(KhachHang kh : dsKH) {
+		 for(HoaDon hd : dsHD) {
 			 i++;
-			 modelKhachhang.addRow(new Object[] { i, kh.getTenKhachHang(),kh.getNgaySinh(),kh.getGioiTinh(),kh.getSdt()});
+			 
+			 modelKhachhang1.addRow(new Object[] { hd.getId(), hd.getKhachHang().getTenKhachHang(),hd.getKhachHang().getSdt(),sf.format( hd.getNgayLap())});
 		 }
+	}
+	private void loadDataThuoc() throws RemoteException{
+		int row = tbldsKH.getSelectedRow();
+		String maHD = modelKhachhang1.getValueAt(row, 0).toString();
+		List<HoaDon> dsHD1 = hoaDonDao.getHoaDonTheoMaHD(maHD);
+		for(HoaDon hd : dsHD1) {
+			List<CTHD> dsCTHD = hd.getDsCTHD();
+			 for(CTHD cthd : dsCTHD) {
+				modelthuoc1.addRow(new Object[] {cthd.getThuoc().getTenThuoc(),cthd.getThuoc().getLoaiThuoc().getTenLoai(),cthd.getSoLuong(),cthd.getThuoc().getDonGia(),cthd.getTongTien()});	
+			}
+		}
+		addTongTien();
+		
+	}
+	public void addTongTien() {
+		int row = tbldsThuoc.getRowCount();
+		double tongTien = 0;
+		for(int i =0 ; i<row; i++) {
+			tongTien += Double.parseDouble(modelthuoc1.getValueAt(i, 4).toString());
+		}
+		DecimalFormat df = new DecimalFormat("###,### VNĐ");
+		lblthanhtien.setText(df.format(tongTien));
+		
 	}
 }

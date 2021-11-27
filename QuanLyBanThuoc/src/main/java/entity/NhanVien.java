@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
@@ -18,7 +19,9 @@ import javax.persistence.Table;
 import org.bson.types.ObjectId;
 
 @Entity
-@Table(name = "dsNhanVien")
+@Table(name = "dsNhanVien",indexes = {
+		@Index(columnList = "sdt",name="sdt_Indexes")
+})
 public class NhanVien implements Serializable {
 	/**
 	 * 
@@ -174,7 +177,7 @@ public class NhanVien implements Serializable {
 	public String toString() {
 		return "NhanVien [id=" + id + ", maNhanVien=" + maNhanVien + ", tenNhanVien=" + tenNhanVien + ", gioiTinh="
 				+ gioiTinh + ", ngaySinh=" + ngaySinh + ", sdt=" + sdt + ", diaChi=" + diaChi + ", luong=" + luong
-				+ ", trangThaiLamViec=" + trangThaiLamViec + ", taiKhoan=" + taiKhoan + "]";
+				+ ", trangThaiLamViec=" + trangThaiLamViec + "]";
 	}
 	
 	

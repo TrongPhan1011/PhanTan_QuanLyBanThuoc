@@ -558,12 +558,17 @@ public class FrmQuanLyNhanVien extends JPanel implements ActionListener,MouseLis
 		}
 	    if(o.equals(btntim)) {
 
+	    	String tim = txttim.getText().trim();
+	    	if(tim.isEmpty()) {
+	    		JOptionPane.showMessageDialog(this, "Vui lòng nhập thông tin tìm kiếm");
+	    	}else {
 	    	try {
 	    		loadDataTim();
 				taiDuLieuLenBang(dsNV);
 			} catch (RemoteException e1) {
 				e1.printStackTrace();
 			}	
+	    }
 	    }
 	}
 	
@@ -596,12 +601,13 @@ public class FrmQuanLyNhanVien extends JPanel implements ActionListener,MouseLis
 			for (NhanVien nhanVien : dsNV) {
 
 				SwingUtilities.invokeLater(() -> {
-					
+					DecimalFormat df = new DecimalFormat("###,###,###.####");
+					DateFormat dfd = new SimpleDateFormat("dd/MM/yyyy");
 
 					modelNhanVien.addRow(new Object[] { nhanVien.getMaNhanVien(), nhanVien.getTenNhanVien(),
 							nhanVien.getGioiTinh(),
-							nhanVien.getNgaySinh(), nhanVien.getDiaChi(),
-							nhanVien.getChucVu(), nhanVien.getSdt(), nhanVien.getLuong(),
+							dfd.format(nhanVien.getNgaySinh()), nhanVien.getDiaChi(),
+							nhanVien.getChucVu(), nhanVien.getSdt(), df.format(nhanVien.getLuong()),
 							nhanVien.getTrangThaiLamViec()});
 				});
 
@@ -632,9 +638,9 @@ public class FrmQuanLyNhanVien extends JPanel implements ActionListener,MouseLis
         	         JOptionPane.showMessageDialog(this, "Thêm nhân viên thành công");
         	         loadData();
 		           }
-		} else JOptionPane.showMessageDialog(this, "Số điện thoại đã được đăng ký");
-       
-		
+		} else 
+			JOptionPane.showMessageDialog(this, "Số điện thoại đã được đăng ký");
+       	
 }
 
 	
