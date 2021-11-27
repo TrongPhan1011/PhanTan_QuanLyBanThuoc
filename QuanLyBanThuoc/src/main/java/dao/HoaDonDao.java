@@ -14,4 +14,5 @@ public interface HoaDonDao extends Remote {
 	public List<HoaDon> getHoaDonTheoNgay(Date ngayDen, Date ngayKT) throws RemoteException;
 	public List<HoaDon> getHoaDonTheoMaKH(ObjectId maKH) throws RemoteException;
 	public List<HoaDon> getHoaDonTheoMaHD(String maHD) throws RemoteException;
+	public List<HoaDon> getHoaDonTheo1Ngay(Date ngay) throws RemoteException;
 }

@@ -34,6 +34,8 @@ import java.util.List;
 
 import javax.swing.JTextField;
 import javax.swing.BorderFactory;
+import javax.swing.Icon;
+
 import com.toedter.calendar.JDateChooser;
 import javax.swing.JTextPane;
 import javax.swing.SwingUtilities;
@@ -59,6 +61,8 @@ import dao.TaiKhoanDao;
 import dao.ThuocDao;
 import entity.LoaiThuoc;
 import entity.Thuoc;
+import jiconfont.icons.font_awesome.FontAwesome;
+import jiconfont.swing.IconFontSwing;
 import entity.NhanVien;
 import entity.TaiKhoan;
 
@@ -144,10 +148,22 @@ public class FrmQuanLyNhanVien extends JPanel implements ActionListener,MouseLis
 //		tkDao =  (TaiKhoanDao) Naming.lookup("rmi://192.168.1.9:9999/taiKhoanDao");
 //		thuocDao =  (ThuocDao) Naming.lookup("rmi://192.168.1.9:9999/thuocDao");
 		 
+//		 cthdDao = (CTHDDao) Naming.lookup("rmi://192.168.1.6:9999/cthdDao");
+//			hoaDonDao = (HoaDonDao) Naming.lookup("rmi://192.168.1.6:9999/hoaDonDao");
+//			khachHangDao = (KhachHangDao) Naming.lookup("rmi://192.168.1.6:9999/khachHangDao");
+//			loaiThuocDao = (LoaiThuocDao) Naming.lookup("rmi://192.168.1.6:9999/loaiThuocDao");
+//			NCCDao = (NhaCungCapDao) Naming.lookup("rmi://192.168.1.6:9999/nhaCungCapDao");
+//			nhanVienDao = (NhanVienDao) Naming.lookup("rmi://192.168.1.6:9999/nhanVienDao");
+//			nuocSXDao = (NuocSXDao) Naming.lookup("rmi://192.168.1.6:9999/nuocSXDao");
+//			tkDao = (TaiKhoanDao) Naming.lookup("rmi://192.168.1.6:9999/taiKhoanDao");
+//			thuocDao = (ThuocDao) Naming.lookup("rmi://192.168.1.6:9999/thuocDao");
+		 
 		frame = new JFrame();
 		frame.setBounds(0, 0, 1043, 736);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLayout(null);
+		
+		IconFontSwing.register(FontAwesome.getIconFont());
 		
 		 regex = new Regex();
 	//	 df = new DecimalFormat("###,### VNĐ");
@@ -157,6 +173,15 @@ public class FrmQuanLyNhanVien extends JPanel implements ActionListener,MouseLis
 		pMain.setBounds(-62, -132, 1102, 848);
 		add(pMain);
 		pMain.setLayout(null);
+		
+		Icon icThem = IconFontSwing.buildIcon(FontAwesome.PLUS, 20, new Color(0, 176, 80));
+		Icon icNgay = IconFontSwing.buildIcon(FontAwesome.CALENDAR, 20, new Color(91, 155, 213));
+		Icon icTim = IconFontSwing.buildIcon(FontAwesome.SEARCH, 20, Color.black);
+		Icon icLamMoi = IconFontSwing.buildIcon(FontAwesome.REFRESH, 20, Color.blue);
+		Icon icDS = IconFontSwing.buildIcon(FontAwesome.LIST_OL, 20, Color.orange);
+		Icon icXoa = IconFontSwing.buildIcon(FontAwesome.TIMES, 20, Color.red);
+		Icon icSua = IconFontSwing.buildIcon(FontAwesome.WRENCH, 20, Color.darkGray);
+		Icon icThanhToan = IconFontSwing.buildIcon(FontAwesome.CART_PLUS, 25, new Color(0, 176, 80));
 		
 		JLabel lblQLNV = new JLabel("Quản lý nhân viên ");
 		lblQLNV.setFont(new Font("SansSerif", Font.BOLD, 25));
@@ -336,6 +361,13 @@ public class FrmQuanLyNhanVien extends JPanel implements ActionListener,MouseLis
 		LocalDate d = LocalDate.now();
 		now = new Date(d.getYear()-1900,d.getMonthValue()-1,d.getDayOfMonth());
 		datengaysinh.setDate(now);
+		
+		btntim.setIcon(icTim);
+		btnthem.setIcon(icThem);
+		btnsua.setIcon(icSua);
+		btnLammoi.setIcon(icLamMoi);
+		btnhuy.setIcon(icXoa);
+		//datengaysinh.setIcon()
 		
 	
 		loadData();

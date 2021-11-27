@@ -1,33 +1,41 @@
 package app;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.EventQueue;
-
-import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.LineBorder;
-import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
-import java.text.Format;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.CategoryDataset;
+import org.jfree.data.category.DefaultCategoryDataset;
+
 import com.toedter.calendar.JDateChooser;
-import com.toedter.calendar.demo.DateChooserPanel;
 
 import dao.CTHDDao;
 import dao.HoaDonDao;
@@ -38,13 +46,10 @@ import dao.NhanVienDao;
 import dao.NuocSXDao;
 import dao.TaiKhoanDao;
 import dao.ThuocDao;
+import entity.CTHD;
 import entity.HoaDon;
 
-import javax.swing.border.EtchedBorder;
-import javax.swing.JRadioButton;
-import javax.swing.SwingConstants;
-
-public class FrmQuanLyThongKe extends JPanel{
+public class FrmQuanLyThongKe extends JPanel implements ActionListener,MouseListener {
 
 	private JFrame frame;
 	private CTHDDao cthdDao;
@@ -58,6 +63,16 @@ public class FrmQuanLyThongKe extends JPanel{
 	private ThuocDao thuocDao;
 	private Regex regex;
 	private Date now;
+	private JButton btnThuoc;
+	private JButton btnDoanhThu;
+	private JButton btnLamMoi;
+	private JDateChooser chooserNgayDen;
+	private JButton btnThongKe;
+	private JDateChooser chooserNgayBatDau;
+	private DecimalFormat df;
+	private SimpleDateFormat sf;
+	private JPanel pBieuDo;
+	private JLabel lblNgayTK;
 
 
 	/**
@@ -119,15 +134,15 @@ public class FrmQuanLyThongKe extends JPanel{
 		lblQLTK.setBounds(10, 11, 221, 33);
 		pMain.add(lblQLTK);
 		
-		JLabel lblNgay = new JLabel("Thời gian:");
+		JLabel lblNgay = new JLabel("Thời gian thống kê:");
 		lblNgay.setFont(new Font("SansSerif", Font.BOLD, 17));
-		lblNgay.setBounds(565, 11, 89, 33);
+		lblNgay.setBounds(450, 11, 204, 33);
 		pMain.add(lblNgay);
 		
-		JLabel lblNgayTK = new JLabel("10/10/2021");
+		lblNgayTK = new JLabel("");
 		lblNgayTK.setForeground(Color.RED);
 		lblNgayTK.setFont(lblNgayTK.getFont().deriveFont(lblNgayTK.getFont().getStyle() | Font.BOLD | Font.ITALIC, 17f));
-		lblNgayTK.setBounds(664, 11, 111, 33);
+		lblNgayTK.setBounds(628, 11, 294, 33);
 		pMain.add(lblNgayTK);
 		JPanel pThongTinTK = new JPanel();
 		
@@ -136,7 +151,7 @@ public class FrmQuanLyThongKe extends JPanel{
 		pThongTinTK.setBounds(10, 46, 480, 106);
 		pMain.add(pThongTinTK);
 		
-		JDateChooser chooserNgayBatDau = new JDateChooser();
+		chooserNgayBatDau = new JDateChooser();
 		chooserNgayBatDau.getCalendarButton().setFont(new Font("SansSerif", Font.PLAIN, 15));
 		chooserNgayBatDau.setBounds(65, 18, 154, 32);
 		pThongTinTK.add(chooserNgayBatDau);
@@ -151,7 +166,7 @@ public class FrmQuanLyThongKe extends JPanel{
 		lblSubNgay.setBounds(10, 18, 67, 32);
 		pThongTinTK.add(lblSubNgay);
 		
-		JButton btnThongKe = new JButton("Thống kê");
+		 btnThongKe = new JButton("Thống kê");
 		btnThongKe.setFont(new Font("SansSerif", Font.BOLD, 15));
 		btnThongKe.setBackground(new Color(41, 242, 255));
 		btnThongKe.setBounds(261, 18, 209, 34);
@@ -162,7 +177,7 @@ public class FrmQuanLyThongKe extends JPanel{
 		lbln.setBounds(10, 63, 67, 32);
 		pThongTinTK.add(lbln);
 		
-		JDateChooser chooserNgayDen = new JDateChooser();
+		 chooserNgayDen = new JDateChooser();
 		chooserNgayDen.getCalendarButton().setFont(new Font("SansSerif", Font.PLAIN, 15));
 		chooserNgayDen.setBounds(66, 63, 154, 32);
 		pThongTinTK.add(chooserNgayDen);
@@ -170,7 +185,7 @@ public class FrmQuanLyThongKe extends JPanel{
 		chooserNgayDen.setDateFormatString("dd/MM/yyyy");
 		chooserNgayDen.setFont(new Font("SansSerif",Font.PLAIN, 15));
 		
-		JButton btnLamMoi = new JButton("Làm mới");
+		btnLamMoi = new JButton("Làm mới");
 		btnLamMoi.setFont(new Font("SansSerif", Font.BOLD, 15));
 		btnLamMoi.setBackground(new Color(41, 242, 255));
 		btnLamMoi.setBounds(261, 61, 209, 34);
@@ -183,7 +198,7 @@ public class FrmQuanLyThongKe extends JPanel{
 		pDoanhThu.setBorder(new LineBorder(new Color(91, 155, 213), 2));
 		pDoanhThu.setLayout(null);
 		
-		JButton btnDoanhThu = new JButton("100,000 VNĐ");
+		btnDoanhThu = new JButton("100,000 VNĐ");
 		btnDoanhThu.setBackground(Color.WHITE);
 		btnDoanhThu.setFont(new Font("SansSerif", Font.BOLD, 16));
 		btnDoanhThu.setBounds(88, 11, 151, 53);
@@ -203,7 +218,7 @@ public class FrmQuanLyThongKe extends JPanel{
 		pThuoc.setBounds(759, 53, 249, 97);
 		pMain.add(pThuoc);
 		
-		JButton btnThuoc = new JButton("100");
+		btnThuoc = new JButton("100");
 		btnThuoc.setFont(new Font("SansSerif", Font.BOLD, 16));
 		btnThuoc.setBackground(Color.WHITE);
 		btnThuoc.setBounds(88, 11, 151, 53);
@@ -216,7 +231,7 @@ public class FrmQuanLyThongKe extends JPanel{
 		lblSubThuoc.setForeground(new Color(91, 155, 213));
 		pThuoc.add(lblSubThuoc);
 		
-		JPanel pBieuDo = new JPanel();
+		pBieuDo = new JPanel();
 		pBieuDo.setLayout(null);
 		pBieuDo.setBorder(new TitledBorder(new LineBorder(new Color(91, 155, 213), 2), "Bi\u1EC3u \u0111\u1ED3 th\u1ED1ng k\u00EA", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		pBieuDo.setBackground(Color.WHITE);
@@ -242,12 +257,231 @@ public class FrmQuanLyThongKe extends JPanel{
 		chooserNgayBatDau.setDate(now);
 		chooserNgayDen.setDate(now);
 		
-		List<HoaDon> ls = hoaDonDao.getHoaDonTheoNgay(now, now);
-		System.out.println(ls);
-//		Date d1 = chooserNgayBatDau.getDate();
-//		Format sf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//		System.out.println(sf.format(now));
+		
+		df = new DecimalFormat("###,### VNĐ");
+		sf = new SimpleDateFormat("dd/MM/yyy");
+
+		
+		btnThongKe.addActionListener(this);
+		btnLamMoi.addActionListener(this);
+		btnDoanhThu.addActionListener(this);
+		btnThuoc.addActionListener(this);
 		
 		
 	}
+	
+	public void loadThongKe() throws RemoteException {
+		Date ngayden = chooserNgayBatDau.getDate();
+		Date ngayKT = chooserNgayDen.getDate();
+		if(ngayden.compareTo(ngayKT) <= 0) {
+			loadbtn(getDSHD());
+			
+			lblNgayTK.setText(sf.format(ngayden)+" - "+sf.format(ngayKT));
+			
+		}
+		else JOptionPane.showMessageDialog(this, "Ngày bắt đầu phải nhỏ hơn ngày kết thúc!");
+		
+	}
+	
+	public void addChart() throws RemoteException {
+		if(!lblNgayTK.getText().equalsIgnoreCase("")) {
+			pBieuDo.removeAll();
+			pBieuDo.revalidate();
+			pBieuDo.repaint();
+			ChartPanel chartPanel = new ChartPanel(createChart());
+			chartPanel.setLocation(10, 22);
+			chartPanel.setSize(978, 433);
+	        chartPanel.setPreferredSize(new java.awt.Dimension(560, 367));
+	        pBieuDo.add(chartPanel);
+	 	}else JOptionPane.showMessageDialog(this, "Vui lòng thống kê trước khi xem biểu đồ");
+	}
+	
+	public  JFreeChart createChart() throws RemoteException {
+        JFreeChart barChart = ChartFactory.createBarChart(
+                "Biểu đồ thống kê doanh thu",
+                "Ngày", "Tổng tiền",
+                createDataset(), PlotOrientation.VERTICAL, false, false, false);
+        return barChart;
+    }
+	
+	 public CategoryDataset createDataset() throws RemoteException {
+	        final DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+	        
+	        Date ngayden = chooserNgayBatDau.getDate();
+			Date ngayKT = chooserNgayDen.getDate();
+			long noDay = (ngayKT.getTime() - ngayden.getTime()) / (24 * 3600 * 1000);
+			for(int i = 0;i<=noDay;i++) {
+				List<HoaDon> ls = hoaDonDao.getHoaDonTheo1Ngay(ngayden);
+				double tongtien =0;
+				for(HoaDon hd : ls) {
+					if(hd != null) {
+						List<CTHD> lsCT = hd.getDsCTHD();
+						for(CTHD ct : lsCT) {
+							tongtien += ct.getTongTien();
+						}
+					}
+				}
+				
+				dataset.addValue(tongtien, "Số tiền (VNĐ)", sf.format(ngayden));
+				
+				Calendar c = Calendar.getInstance();
+				c.setTime(ngayden);
+				c.add(Calendar.DATE, 1);  
+				ngayden = c.getTime();
+			}	
+
+	        return dataset;
+	}
+	 
+	 public void addChartThuoc() throws RemoteException {
+			 if(!lblNgayTK.getText().equalsIgnoreCase("")) {
+				pBieuDo.removeAll();
+				pBieuDo.revalidate();
+				pBieuDo.repaint();
+				ChartPanel chartPanel = new ChartPanel(createChartThuoc());
+				chartPanel.setLocation(10, 22);
+				chartPanel.setSize(978, 433);
+		        chartPanel.setPreferredSize(new java.awt.Dimension(560, 367));
+		        pBieuDo.add(chartPanel);
+	        }else JOptionPane.showMessageDialog(this, "Vui lòng thống kê trước khi xem biểu đồ");
+		}
+	 
+	 public  JFreeChart createChartThuoc() throws RemoteException {
+	        JFreeChart barChart = ChartFactory.createBarChart(
+	                "Biểu đồ thống kê số lượng thuốc đã bán",
+	                "Ngày", "Số lượng thuốc",
+	                datasetThuoc(), PlotOrientation.VERTICAL, false, false, false);
+	        return barChart;
+	    }
+	 
+	 public CategoryDataset datasetThuoc() throws RemoteException {
+	        final DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+	        
+	        Date ngayden = chooserNgayBatDau.getDate();
+			Date ngayKT = chooserNgayDen.getDate();
+			long noDay = (ngayKT.getTime() - ngayden.getTime()) / (24 * 3600 * 1000);
+			for(int i = 0;i<=noDay;i++) {
+				List<HoaDon> ls = hoaDonDao.getHoaDonTheo1Ngay(ngayden);
+				double tong =0;
+				for(HoaDon hd : ls) {
+					if(hd != null) {
+						List<CTHD> lsCT = hd.getDsCTHD();
+						for(CTHD ct : lsCT) {
+							
+							tong += ct.getSoLuong();
+						}
+					}
+				}
+				
+				dataset.addValue(tong, "Số lượng thuốc", sf.format(ngayden));
+				
+				Calendar c = Calendar.getInstance();
+				c.setTime(ngayden);
+				c.add(Calendar.DATE, 1);  
+				ngayden = c.getTime();
+			}	
+
+	        return dataset;
+	}
+	
+	public void loadbtn(List<HoaDon> ls) {
+		
+		double tongTien = 0;
+		int soThuoc = 0;
+		for(HoaDon hd : ls) {
+			List<CTHD> lsCT = hd.getDsCTHD();
+			for(CTHD ct : lsCT) {
+				tongTien += ct.getTongTien();
+				soThuoc += ct.getSoLuong();
+			}
+		}
+		btnDoanhThu.setText(df.format(tongTien));
+		btnThuoc.setText(soThuoc+"");
+	}
+	
+	
+	public List<HoaDon> getDSHD() throws RemoteException{
+		Date ngayden = chooserNgayBatDau.getDate();
+		Date ngayKT = chooserNgayDen.getDate();
+		
+		List<HoaDon> ls = hoaDonDao.getHoaDonTheoNgay(ngayden, ngayKT);
+		return ls;
+	}
+	public void resetAll() {
+		chooserNgayBatDau.setDate(now);
+		chooserNgayDen.setDate(now);
+		pBieuDo.removeAll();
+		pBieuDo.revalidate();
+		pBieuDo.repaint();
+		btnDoanhThu.setText("0 VNĐ");
+		btnThuoc.setText("0");
+		lblNgayTK.setText("");
+	}
+	
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		Object o = e.getSource();
+		if(o.equals(btnThongKe))
+		{
+			try {
+				loadThongKe();
+			} catch (RemoteException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+		if(o.equals(btnDoanhThu)) {
+			try {
+				addChart();
+			} catch (RemoteException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+		if(o.equals(btnLamMoi)) {
+			resetAll();
+		}
+		if(o.equals(btnThuoc)) {
+			try {
+				addChartThuoc();
+			} catch (RemoteException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
+	
 }

@@ -31,7 +31,10 @@ import java.rmi.RemoteException;
 
 import java.text.DateFormat;
 import java.text.DecimalFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -44,6 +47,7 @@ import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
+import javax.swing.text.DateFormatter;
 
 import org.bson.types.ObjectId;
 
@@ -108,6 +112,9 @@ public class FrmQuanLyThuoc extends JPanel implements ActionListener, MouseListe
 	private CTHDDao cthdDao;
 	private JComboBox<String> cboloaithuoc;
 	private Regex regex;
+	private LoaiThuoc loaiThuoc3=null;
+	private NuocSX nuocSX3=null;
+	private NhaCungCap nhaCungCap2=null;
 
 	/**
 	 * Launch the application.
@@ -174,15 +181,15 @@ public class FrmQuanLyThuoc extends JPanel implements ActionListener, MouseListe
 //		thuocDao =  (ThuocDao) Naming.lookup("rmi://192.168.1.9:9999/thuocDao");
 //		regex  = new Regex();
 
-//		cthdDao = (CTHDDao) Naming.lookup("rmi://192.168.1.8:9999/cthdDao");
-//		hoaDonDao = (HoaDonDao) Naming.lookup("rmi://192.168.1.8:9999/hoaDonDao");
-//		khachHangDao = (KhachHangDao) Naming.lookup("rmi://192.168.1.8:9999/khachHangDao");
-//		loaiThuocDao = (LoaiThuocDao) Naming.lookup("rmi://192.168.1.8:9999/loaiThuocDao");
-//		NCCDao = (NhaCungCapDao) Naming.lookup("rmi://192.168.1.8:9999/nhaCungCapDao");
-//		nhanVienDao = (NhanVienDao) Naming.lookup("rmi://192.168.1.8:9999/nhanVienDao");
-//		nuocSXDao = (NuocSXDao) Naming.lookup("rmi://192.168.1.8:9999/nuocSXDao");
-//		tkDao = (TaiKhoanDao) Naming.lookup("rmi://192.168.1.8:9999/taiKhoanDao");
-//		thuocDao = (ThuocDao) Naming.lookup("rmi://192.168.1.8:9999/thuocDao");
+//		cthdDao = (CTHDDao) Naming.lookup("rmi://192.168.1.6:9999/cthdDao");
+//		hoaDonDao = (HoaDonDao) Naming.lookup("rmi://192.168.1.6:9999/hoaDonDao");
+//		khachHangDao = (KhachHangDao) Naming.lookup("rmi://192.168.1.6:9999/khachHangDao");
+//		loaiThuocDao = (LoaiThuocDao) Naming.lookup("rmi://192.168.1.6:9999/loaiThuocDao");
+//		NCCDao = (NhaCungCapDao) Naming.lookup("rmi://192.168.1.6:9999/nhaCungCapDao");
+//		nhanVienDao = (NhanVienDao) Naming.lookup("rmi://192.168.1.6:9999/nhanVienDao");
+//		nuocSXDao = (NuocSXDao) Naming.lookup("rmi://192.168.1.6:9999/nuocSXDao");
+//		tkDao = (TaiKhoanDao) Naming.lookup("rmi://192.168.1.6:9999/taiKhoanDao");
+//		thuocDao = (ThuocDao) Naming.lookup("rmi://192.168.1.6:9999/thuocDao");
 
 		p = new JPanel();
 		p.setBackground(Color.WHITE);
@@ -287,12 +294,14 @@ public class FrmQuanLyThuoc extends JPanel implements ActionListener, MouseListe
 		datehansd.setBounds(803, 133, 178, 32);
 		datehansd.setFont(new Font("SansSerif", Font.PLAIN, 15));
 		datehansd.setBorder(new LineBorder(new Color(91, 155, 213)));
+		datehansd.setDateFormatString("yyyy/MM/dd");
 		p.add(datehansd);
 
 		datengaysx = new JDateChooser();
 		datengaysx.setBounds(473, 131, 190, 32);
 		datengaysx.setFont(new Font("SansSerif", Font.PLAIN, 15));
 		datengaysx.setBorder(new LineBorder(new Color(91, 155, 213)));
+		datengaysx.setDateFormatString("yyyy/MM/dd");
 		p.add(datengaysx);
 
 		txttenthuoc = new JTextField();
@@ -436,7 +445,7 @@ public class FrmQuanLyThuoc extends JPanel implements ActionListener, MouseListe
 		loaddata();
 	}
 
-	private Thuoc reverThuoc() {
+	private Thuoc reverThuoc() throws RemoteException {
 		String tenthuoc = txttenthuoc.getText();
 		String loaithuoc = cboloaithuoc.getSelectedItem().toString();
 		Date ngaysx = (Date) datengaysx.getDate();
@@ -447,10 +456,28 @@ public class FrmQuanLyThuoc extends JPanel implements ActionListener, MouseListe
 		String tenncc = cbotenncc.getSelectedItem().toString();
 		String diachi = txtdiachi.getText();
 		String nuocsx = cbonuocsx.getSelectedItem().toString();
-		LoaiThuoc loaiThuoc2 = new LoaiThuoc(loaithuoc);
-		NuocSX nuocSX2 = new NuocSX(nuocsx);
-		NhaCungCap nhaCungCap = new NhaCungCap(tenncc, diachi);
-		Thuoc thuoc = new Thuoc(tenthuoc, dongia, soluong, ngaysx, hansd, trangthai, loaiThuoc2, nuocSX2, nhaCungCap);
+		LoaiThuoc loaithuoc2=loaiThuocDao.getLoaiThuocTheoTen(loaithuoc);
+		if(loaithuoc.equals(loaithuoc2.getTenLoai())) {
+			 loaiThuoc3 =new LoaiThuoc(loaithuoc2.getId(), loaithuoc2.getTenLoai());
+		}else {
+			 loaiThuoc3=new LoaiThuoc(loaithuoc);
+		}
+		NuocSX nuocSX2=nuocSXDao.getnuocsanxuat(nuocsx);
+		if(nuocSX2.getTenNuocSX().equals(nuocsx)) {
+			 nuocSX3=new NuocSX(nuocSX2.getId(), nuocSX2.getTenNuocSX());
+		}else {
+			 nuocSX3=new NuocSX(nuocsx);
+		}
+		NhaCungCap nhaCungCap=NCCDao.getnhacungcaptheoten(tenncc);
+		if(tenncc.equals(nhaCungCap.getTenNCC())) {
+			 nhaCungCap2=new NhaCungCap(nhaCungCap.getId(), nhaCungCap.getTenNCC(), nhaCungCap.getDiaChiNCC());
+		}
+		else {
+			 nhaCungCap2=new NhaCungCap(tenncc, diachi);
+		}
+	
+		
+		Thuoc thuoc = new Thuoc(tenthuoc, dongia, soluong, ngaysx, hansd, trangthai, loaiThuoc3, nuocSX3, nhaCungCap2);
 		return thuoc;
 	}
 
@@ -503,21 +530,36 @@ public class FrmQuanLyThuoc extends JPanel implements ActionListener, MouseListe
 					|| txttenthuoc.getText().equals("")) {
 				JOptionPane.showMessageDialog(null, "Vui lòng điền thông tin đầy đủ");
 			} else {
-				if (ktThongTinThuoc()) {
-					Thuoc thuoc = reverThuoc();
-					try {
-						thuocDao.addThuoc(thuoc);
-						lammoi();
-						JOptionPane.showMessageDialog(null, "Thêm thành công");
-					} catch (RemoteException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
+				try {
+					if (ktThongTinThuoc()) {
+						Thuoc thuoc = null;
+						try {
+							thuoc = reverThuoc();
+						} catch (RemoteException e2) {
+							// TODO Auto-generated catch block
+							e2.printStackTrace();
+						}
+						try {
+							thuocDao.addThuoc(thuoc);
+							lammoi();
+							JOptionPane.showMessageDialog(null, "Thêm thành công");
+						} catch (RemoteException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 					}
+				} catch (HeadlessException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (ParseException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
 				}
 			}
 
 		}
 		if (o.equals(btnlammoi)) {
+
 			txtdiachi.setText("");
 			txtdongia.setText("");
 			txtsoluong.setText("");
@@ -528,6 +570,7 @@ public class FrmQuanLyThuoc extends JPanel implements ActionListener, MouseListe
 			} catch (RemoteException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
+
 			}
 		}
 		if (o.equals(btnsua)) {
@@ -542,21 +585,20 @@ public class FrmQuanLyThuoc extends JPanel implements ActionListener, MouseListe
 						ObjectId id = loaiThuocDao.getLoaiThuocTheoTen(modelthuoc.getValueAt(row, 1).toString())
 								.getId();
 						Thuoc thuoc = thuocDao.getThuocTheoTenVaMaLoai(modelthuoc.getValueAt(row, 0).toString(), id);
-					
-						
-						LoaiThuoc lt=loaiThuocDao.getLoaiThuocTheoTen(cboloaithuoc.getSelectedItem().toString());
+
+						LoaiThuoc lt = loaiThuocDao.getLoaiThuocTheoTen(cboloaithuoc.getSelectedItem().toString());
 						thuoc.setLoaiThuoc(lt);
-						
-						NhaCungCap nhaCungCap=NCCDao.getnhacungcaptheoten(cbotenncc.getSelectedItem().toString());
+
+						NhaCungCap nhaCungCap = NCCDao.getnhacungcaptheoten(cbotenncc.getSelectedItem().toString());
 						thuoc.setNcc(nhaCungCap);
-						
+
 						nhaCungCap.setDiaChiNCC(txtdiachi.getText());
-						
+
 						NCCDao.updatediachi(nhaCungCap);
-						
-						NuocSX nuocSX=nuocSXDao.getnuocsanxuat(cbonuocsx.getSelectedItem().toString());
+
+						NuocSX nuocSX = nuocSXDao.getnuocsanxuat(cbonuocsx.getSelectedItem().toString());
 						thuoc.setNuocSX(nuocSX);
-						
+
 						thuoc.setDonGia(Double.parseDouble(txtdongia.getText()));
 						thuoc.setHanSD(datehansd.getDate());
 						thuoc.setNgaySX(datengaysx.getDate());
@@ -564,7 +606,6 @@ public class FrmQuanLyThuoc extends JPanel implements ActionListener, MouseListe
 						thuoc.setSoLuongTon(Integer.parseInt(txtsoluong.getText()));
 						ObjectId id2 = loaiThuocDao.getLoaiThuocTheoTen(cboloaithuoc.getSelectedItem().toString())
 								.getId();
-					
 
 						Thuoc thuoc2 = thuoc;
 						thuocDao.updateThuoc(thuoc2);
@@ -628,11 +669,15 @@ public class FrmQuanLyThuoc extends JPanel implements ActionListener, MouseListe
 
 	}
 
-	public boolean ktThongTinThuoc() {
+	public boolean ktThongTinThuoc() throws ParseException {
 		String tenthuoc = txttenthuoc.getText();
 		String soluong = txtsoluong.getText();
 		String dongia = txtdongia.getText();
 		String diachi = txtdiachi.getText();
+		DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
+		Date ngaysx = new SimpleDateFormat("yyyy/MM/dd").parse(df.format(datengaysx.getDate()));
+		Date hdsd = new SimpleDateFormat("yyyy/MM/dd").parse(df.format(datehansd.getDate()));
+
 		if (tenthuoc.length() > 0) {
 			String regex = "^([ A-Za-za-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂẾưăạảấầẩẫậắằẳẵặẹẻẽềềểếỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ]*(\\s?))+$";
 			Pattern pattern = Pattern.compile(regex);
@@ -670,6 +715,14 @@ public class FrmQuanLyThuoc extends JPanel implements ActionListener, MouseListe
 				txtdongia.selectAll();
 				return false;
 			}
+		}
+		if (ngaysx.equals(hdsd)) {
+			JOptionPane.showMessageDialog(null, "Ngày sản xuất và hạn sử dụng không được trùng nhau");
+			return false;
+		} else if (ngaysx.after(hdsd)) {
+			JOptionPane.showMessageDialog(null, "Ngày sản xuất không thể sau hạn sử dụng");
+			return false;
+
 		}
 		if (diachi.length() > 0) {
 

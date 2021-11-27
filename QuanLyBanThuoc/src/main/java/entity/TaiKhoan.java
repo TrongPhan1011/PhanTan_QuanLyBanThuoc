@@ -85,7 +85,7 @@ public class TaiKhoan implements Serializable {
 
 	@Override
 	public String toString() {
-		return "TaiKhoan [id=" + id + ", maTK=" + maTK + ", matKhau=" + matKhau + ", nhanVien=" + nhanVien + "]";
+		return "TaiKhoan [id=" + id + ", maTK=" + maTK + ", matKhau=" + matKhau  + "]";
 	}
 	
 	

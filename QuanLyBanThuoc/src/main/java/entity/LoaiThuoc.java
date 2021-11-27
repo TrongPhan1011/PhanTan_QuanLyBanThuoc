@@ -60,6 +60,7 @@ public class LoaiThuoc implements Serializable {
 		// TODO Auto-generated constructor stub
 		this.id=id2;
 	}
+
 	@Override
 	public String toString() {
 		return "LoaiThuoc [id=" + id + ", tenLoai=" + tenLoai + "]";
