@@ -220,7 +220,7 @@ public class FrmQuanLyThongKe extends JPanel implements ActionListener,MouseList
 		pDoanhThu.add(lblSubDoanhThu);
 		
 		JLabel lblICDoanhThu = new JLabel("");
-		lblICDoanhThu.setBounds(10, 11, 68, 75);
+		lblICDoanhThu.setBounds(10, 11, 76, 53);
 		pDoanhThu.add(lblICDoanhThu);
 		
 		JPanel pThuoc = new JPanel();
@@ -276,7 +276,7 @@ public class FrmQuanLyThongKe extends JPanel implements ActionListener,MouseList
 		Icon icLamMoi = IconFontSwing.buildIcon(FontAwesome.REFRESH, 20, Color.blue);
 		Icon icDS = IconFontSwing.buildIcon(FontAwesome.LIST_OL, 20, Color.orange);
 		Icon icXoa = IconFontSwing.buildIcon(FontAwesome.TIMES, 20, Color.red);
-		Icon icMoney = IconFontSwing.buildIcon(FontAwesome.MONEY, 60, new Color(0, 176, 80));
+		Icon icMoney = IconFontSwing.buildIcon(FontAwesome.MONEY, 70, new Color(0, 176, 80));
 		Icon icBarchar = IconFontSwing.buildIcon(FontAwesome.BAR_CHART, 25, new Color(0, 176, 80));
 		
 		chooserNgayBatDau.setIcon((ImageIcon) icNgay);
