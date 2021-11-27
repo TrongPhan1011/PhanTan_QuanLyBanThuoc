@@ -62,6 +62,7 @@ public class App {
 			
 			
 			//id của tài
+<<<<<<< HEAD
 			Naming.bind("rmi://192.168.1.8:9999/cthdDao", cthdDao);
 			Naming.bind("rmi://192.168.1.8:9999/hoaDonDao", hoaDonDao);
 			Naming.bind("rmi://192.168.1.8:9999/khachHangDao", khachHangDao);
@@ -81,9 +82,7 @@ public class App {
 //			Naming.bind("rmi://192.168.1.6:9999/nuocSXDao", nuocSXDao);
 //			Naming.bind("rmi://192.168.1.6:9999/taiKhoanDao", taiKhoanDao);
 //			Naming.bind("rmi://192.168.1.6:9999/thuocDao", thuocDao);
-			
-			
-			//
+=======
 			Naming.bind("rmi://192.168.1.6:9999/cthdDao", cthdDao);
 			Naming.bind("rmi://192.168.1.6:9999/hoaDonDao", hoaDonDao);
 			Naming.bind("rmi://192.168.1.6:9999/khachHangDao", khachHangDao);
@@ -93,6 +92,7 @@ public class App {
 			Naming.bind("rmi://192.168.1.6:9999/nuocSXDao", nuocSXDao);
 			Naming.bind("rmi://192.168.1.6:9999/taiKhoanDao", taiKhoanDao);
 			Naming.bind("rmi://192.168.1.6:9999/thuocDao", thuocDao);
+>>>>>>> 588389f6a97c948573cfec46f71c6d05694d77b1
 			
 
 			

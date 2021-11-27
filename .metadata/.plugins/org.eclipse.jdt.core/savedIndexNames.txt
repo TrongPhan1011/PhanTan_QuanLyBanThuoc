@@ -12,7 +12,6 @@ INDEX VERSION 1.131+C:\Users\USER\Desktop\QuanLyBanThuoc\.metadata\.plugins\org.
 3075012702.index
 1062958732.index
 3007478790.index
-1271993225.index
 1341774350.index
 3412308276.index
 976835564.index

@@ -137,7 +137,7 @@ public class FrmQLBH extends JPanel implements ActionListener,MouseListener,Item
 	@SuppressWarnings("deprecation")
 	public void initialize(JFrame fMain) throws MalformedURLException, RemoteException, NotBoundException {
 
-
+<<<<<<< HEAD
 
 //		cthdDao =  (CTHDDao) Naming.lookup("rmi://192.168.1.9:9999/cthdDao");
 //		hoaDonDao =  (HoaDonDao) Naming.lookup("rmi://192.168.1.9:9999/hoaDonDao");
@@ -149,7 +149,8 @@ public class FrmQLBH extends JPanel implements ActionListener,MouseListener,Item
 //		tkDao =  (TaiKhoanDao) Naming.lookup("rmi://192.168.1.9:9999/taiKhoanDao");
 //		thuocDao =  (ThuocDao) Naming.lookup("rmi://192.168.1.9:9999/thuocDao");
 		regex  = new Regex();
-
+=======
+>>>>>>> 588389f6a97c948573cfec46f71c6d05694d77b1
 //		cthdDao =  (CTHDDao) Naming.lookup("rmi://192.168.1.9:9999/cthdDao");
 //		hoaDonDao =  (HoaDonDao) Naming.lookup("rmi://192.168.1.9:9999/hoaDonDao");
 //		khachHangDao = (KhachHangDao) Naming.lookup("rmi://192.168.1.9:9999/khachHangDao");
@@ -160,7 +161,7 @@ public class FrmQLBH extends JPanel implements ActionListener,MouseListener,Item
 //		tkDao =  (TaiKhoanDao) Naming.lookup("rmi://192.168.1.9:9999/taiKhoanDao");
 //		thuocDao =  (ThuocDao) Naming.lookup("rmi://192.168.1.9:9999/thuocDao");
 //		regex  = new Regex();
-
+<<<<<<< HEAD
 
 //		cthdDao =  (CTHDDao) Naming.lookup("rmi://192.168.1.9:9999/cthdDao");
 //		hoaDonDao =  (HoaDonDao) Naming.lookup("rmi://192.168.1.9:9999/hoaDonDao");
@@ -174,7 +175,14 @@ public class FrmQLBH extends JPanel implements ActionListener,MouseListener,Item
 //		regex  = new Regex();
 
 		
+=======
+//		
+>>>>>>> 588389f6a97c948573cfec46f71c6d05694d77b1
+	
 
+
+		
+<<<<<<< HEAD
 		cthdDao =  (CTHDDao) Naming.lookup("rmi://192.168.1.8:9999/cthdDao");
 		hoaDonDao =  (HoaDonDao) Naming.lookup("rmi://192.168.1.8:9999/hoaDonDao");
 	    khachHangDao = (KhachHangDao) Naming.lookup("rmi://192.168.1.8:9999/khachHangDao");
@@ -184,7 +192,7 @@ public class FrmQLBH extends JPanel implements ActionListener,MouseListener,Item
 		 nuocSXDao =  (NuocSXDao) Naming.lookup("rmi://192.168.1.8:9999/nuocSXDao");
 		 tkDao =  (TaiKhoanDao) Naming.lookup("rmi://192.168.1.8:9999/taiKhoanDao");
 		 thuocDao =  (ThuocDao) Naming.lookup("rmi://192.168.1.8:9999/thuocDao");
-
+=======
 //		cthdDao =  (CTHDDao) Naming.lookup("rmi://192.168.1.8:9999/cthdDao");
 //		hoaDonDao =  (HoaDonDao) Naming.lookup("rmi://192.168.1.8:9999/hoaDonDao");
 //	    khachHangDao = (KhachHangDao) Naming.lookup("rmi://192.168.1.8:9999/khachHangDao");
@@ -203,7 +211,7 @@ public class FrmQLBH extends JPanel implements ActionListener,MouseListener,Item
 		nuocSXDao = (NuocSXDao) Naming.lookup("rmi://192.168.1.6:9999/nuocSXDao");
 		tkDao = (TaiKhoanDao) Naming.lookup("rmi://192.168.1.6:9999/taiKhoanDao");
 		thuocDao = (ThuocDao) Naming.lookup("rmi://192.168.1.6:9999/thuocDao");
-
+>>>>>>> 588389f6a97c948573cfec46f71c6d05694d77b1
 		 regex  = new Regex();
 	
 		

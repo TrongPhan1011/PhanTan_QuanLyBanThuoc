@@ -112,10 +112,10 @@ public class FrmDangNhap extends JFrame implements ActionListener {
 //		frmHThngQun.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
 		
-
-
+<<<<<<< HEAD
+=======
 		IconFontSwing.register(FontAwesome.getIconFont());
-
+>>>>>>> 588389f6a97c948573cfec46f71c6d05694d77b1
 //		cthdDao =  (CTHDDao) Naming.lookup("rmi://192.168.1.9:9999/cthdDao");
 //		hoaDonDao =  (HoaDonDao) Naming.lookup("rmi://192.168.1.9:9999/hoaDonDao");
 //		khachHangDao = (KhachHangDao) Naming.lookup("rmi://192.168.1.9:9999/khachHangDao");
