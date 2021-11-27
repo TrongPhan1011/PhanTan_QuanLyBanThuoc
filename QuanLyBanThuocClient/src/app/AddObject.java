@@ -44,6 +44,19 @@ public class AddObject {
 //		NuocSXDao nuocSXDao =  (NuocSXDao) Naming.lookup("rmi://192.168.1.9:9999/nuocSXDao");
 //		TaiKhoanDao tkDao =  (TaiKhoanDao) Naming.lookup("rmi://192.168.1.9:9999/taiKhoanDao");
 //		ThuocDao thuocDao =  (ThuocDao) Naming.lookup("rmi://192.168.1.9:9999/thuocDao");
+<<<<<<< HEAD
+		
+//		//Id của Thanh
+		CTHDDao cthdDao =  (CTHDDao) Naming.lookup("rmi://192.168.1.8:9999/cthdDao");
+		HoaDonDao hoaDonDao =  (HoaDonDao) Naming.lookup("rmi://192.168.1.8:9999/hoaDonDao");
+	    KhachHangDao khachHangDao = (KhachHangDao) Naming.lookup("rmi://192.168.1.8:9999/khachHangDao");
+		LoaiThuocDao loaiThuocDao =  (LoaiThuocDao) Naming.lookup("rmi://192.168.1.8:9999/loaiThuocDao");
+		NhaCungCapDao NCCDao =  (NhaCungCapDao) Naming.lookup("rmi://192.168.1.8:9999/nhaCungCapDao");
+		NhanVienDao nhanVienDao =  (NhanVienDao) Naming.lookup("rmi://192.168.1.8:9999/nhanVienDao");
+		NuocSXDao nuocSXDao =  (NuocSXDao) Naming.lookup("rmi://192.168.1.8:9999/nuocSXDao");
+		TaiKhoanDao tkDao =  (TaiKhoanDao) Naming.lookup("rmi://192.168.1.8:9999/taiKhoanDao");
+		ThuocDao thuocDao =  (ThuocDao) Naming.lookup("rmi://192.168.1.8:9999/thuocDao");
+=======
 //		
 //		//Id của Thanh
 //		CTHDDao cthdDao =  (CTHDDao) Naming.lookup("rmi://192.168.1.8:9999/cthdDao");
@@ -65,6 +78,7 @@ public class AddObject {
 		NuocSXDao nuocSXDao = (NuocSXDao) Naming.lookup("rmi://192.168.1.6:9999/nuocSXDao");
 		TaiKhoanDao tkDao = (TaiKhoanDao) Naming.lookup("rmi://192.168.1.6:9999/taiKhoanDao");
 		ThuocDao thuocDao = (ThuocDao) Naming.lookup("rmi://192.168.1.6:9999/thuocDao");
+>>>>>>> c02bc1f8b54e5f4f3853e399d33ceb45b37dd3b2
 //	
 //
 //	
@@ -103,12 +117,12 @@ public class AddObject {
 //		//tài : thuốc --> nsx, ncc, loại --> tài
 //		//		hóa đơn --> CTHD --> tài
 //		
-////		LoaiThuoc lt1 = new LoaiThuoc("Thuốc kháng dị ứng");
-////		NuocSX nsx1 = new NuocSX("Pháp");
-////		NhaCungCap ncc1 = new NhaCungCap("Sanofi Aventis", "Xa lộ Hà Nội, Long Bình, Quận 9, Thành phố Hồ Chí Minh, Vietnam");
-////		
-////		Thuoc t1 = new Thuoc("Telfast HD 180mg ", 75000.00, 500, new Date(2020-1900,9-1,9), new Date(2022-1900,5-1,15), "Còn bán", lt1, nsx1 , ncc1 );
-////		thuocDao.addThuoc(t1);
+//		LoaiThuoc lt1 = new LoaiThuoc("Thuốc kháng dị ứng");
+//		NuocSX nsx1 = new NuocSX("Pháp");
+//		NhaCungCap ncc1 = new NhaCungCap("Sanofi Aventis", "Xa lộ Hà Nội, Long Bình, Quận 9, Thành phố Hồ Chí Minh, Vietnam");
+//		
+//		Thuoc t1 = new Thuoc("Telfast HD 180mg ", 75000.00, 500, new Date(2020-1900,9-1,9), new Date(2022-1900,5-1,15), "Còn bán", lt1, nsx1 , ncc1 );
+//		thuocDao.addThuoc(t1);
 //		//loaithuoc
 		LoaiThuoc lt1=new LoaiThuoc("Thuốc kháng dị ứng");
 		LoaiThuoc lt2=new LoaiThuoc("Thuốc kháng viêm");
@@ -189,8 +203,35 @@ public class AddObject {
 		thuocDao.addThuoc(t3);
 		
 		
+<<<<<<< HEAD
+		//LoaiThuoc lt = loaiThuocDao.getLoaiThuocTheoTen(lt2.getTenLoai());
+		
+//		Thuoc t4 = new Thuoc("Telfast HD 180mg", 75000.00, 500, new Date(2020-9-9), new Date(2022-05-15), "Còn bán", lt, nsx1 , ncc1 );
+//		Thuoc t5 = new Thuoc("Telfast HD 140mg", 75000.00, 500, new Date(2020-9-9), new Date(2022-05-15), "Còn bán", lt, nsx1 , ncc1 );
+//		
+//		
+//		System.out.println("before: \n"+t1.toString());
+//		
+//		t1.setLoaiThuoc(lt);
+//		
+//		thuocDao.updateThuoc(t1);
+//		System.out.println("Update: \n"+t1.toString());
 		
 		
+//		thuocDao.addThuoc(t4);
+//		thuocDao.addThuoc(t5);
+		
+		
+		
+//		t1.setLoaiThuoc(lt12);
+//		thuocDao.updateThuoc(t1);
+		//Thuoc t2 = new Thuoc("Teladf", 75000.00, 500, new Date(2020-9-9), new Date(2022-05-15), "Còn bán", lt1, nsx1 , ncc1 );
+		
+//		HoaDon hd = new HoaDon(ngaylap, nhanvienlap, khachhang, listCTHD)
+=======
+		
+		
+>>>>>>> c02bc1f8b54e5f4f3853e399d33ceb45b37dd3b2
 		
 
 		

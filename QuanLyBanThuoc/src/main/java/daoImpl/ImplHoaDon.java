@@ -10,6 +10,8 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
+import org.bson.types.ObjectId;
+
 import dao.HoaDonDao;
 import entity.HoaDon;
 import util.HibernateUtil;
@@ -62,6 +64,7 @@ public class ImplHoaDon extends UnicastRemoteObject implements HoaDonDao {
 		}
 		return null;
 	}
+	
 	@Override
 	public List<HoaDon> getHoaDonTheo1Ngay(Date ngay) throws RemoteException {
 		EntityTransaction tr = em.getTransaction();
@@ -73,6 +76,49 @@ public class ImplHoaDon extends UnicastRemoteObject implements HoaDonDao {
 			List<HoaDon> ldHD = em.createNativeQuery(query,HoaDon.class).getResultList();
 			
 			
+			
+			tr.commit();
+			return ldHD;
+		} catch (Exception e) {
+			e.printStackTrace();
+			tr.rollback();
+		}
+		
+		return null;
+	}
+	
+	@Override
+
+	public List<HoaDon> getHoaDonTheoMaKH(ObjectId maKH) throws RemoteException {
+		//  ObjectId('"+maLoai+"'
+		
+		EntityTransaction tr = em.getTransaction();
+		try {
+			tr.begin();
+			String query = "db.dsHoaDon.find({ma_Khach_Hang :  ObjectId('"+maKH.toString()+"')})";
+			@SuppressWarnings("unchecked")
+			List<HoaDon> ldHD = em.createNativeQuery(query,HoaDon.class).getResultList();
+			
+			tr.commit();
+			return ldHD;
+		} catch (Exception e) {
+			e.printStackTrace();
+			tr.rollback();
+		}
+		return null;
+	}
+			
+		
+
+
+	@Override
+	public List<HoaDon> getHoaDonTheoMaHD(String maHD) throws RemoteException {
+		EntityTransaction tr = em.getTransaction();
+		try {
+			tr.begin();
+			String query = "db.dsHoaDon.find({_id :  ObjectId('"+maHD.toString()+"')})";
+			@SuppressWarnings("unchecked")
+			List<HoaDon> ldHD = em.createNativeQuery(query,HoaDon.class).getResultList();
 			
 			tr.commit();
 			return ldHD;

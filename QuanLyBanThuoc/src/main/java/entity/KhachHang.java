@@ -8,12 +8,16 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Index;
 import javax.persistence.Table;
 
 import org.bson.types.ObjectId;
 
 @Entity
-@Table(name ="dsKhachHang")
+@Table(name = "dsKhachHang",indexes = {
+		@Index(columnList = "sdt",name="sdt_Indexes"),
+		@Index(columnList = "ten_Khach_Hang",name="tenKH_Indexes")
+})
 public class KhachHang implements Serializable {
 	/**
 	 * 
