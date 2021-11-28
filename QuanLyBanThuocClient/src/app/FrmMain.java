@@ -16,6 +16,7 @@ import java.awt.Component;
 
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.Panel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -27,6 +28,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 
 import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -63,6 +65,8 @@ public class FrmMain extends JFrame implements ActionListener  {
 		setBounds(0, 0, 1285, 700);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
+		setTitle("Nhà thuốc T3");
+		
 		
 		JPanel panel = new JPanel();
 		getContentPane().add(panel, BorderLayout.CENTER);
@@ -203,16 +207,19 @@ public class FrmMain extends JFrame implements ActionListener  {
 		Icon icSL = IconFontSwing.buildIcon(FontAwesome.MEDKIT, 50, new Color(91, 155, 213));
 		Icon icQLBH = IconFontSwing.buildIcon(FontAwesome.CART_PLUS, 50, new Color(0, 176, 80));
 		Icon icNV = IconFontSwing.buildIcon(FontAwesome.USER_MD, 50, Color.orange);
-		Icon icLamMoi = IconFontSwing.buildIcon(FontAwesome.REFRESH, 20, Color.blue);
+		
 		Icon icDX = IconFontSwing.buildIcon(FontAwesome.SIGN_OUT, 30, Color.red);
 		
 		Icon icBarchar = IconFontSwing.buildIcon(FontAwesome.BAR_CHART, 40, Color.red);
-		
+		Icon icLogo = IconFontSwing.buildIcon(FontAwesome.HOSPITAL_O, 17, Color.orange);
+		ImageIcon imgImage = (ImageIcon) icLogo;
+		setIconImage(imgImage.getImage());
 		btnQLThuoc.setIcon(icSL);
 		btnHoaDon.setIcon(icQLBH);
 		btnquanlynhanvien.setIcon(icNV);
 		btnquanlythongke.setIcon(icBarchar);
 		btnDangXuat.setIcon(icDX);
+		
 		
 	}
 	

@@ -14,6 +14,7 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.Insets;
 
 import javax.swing.JTextField;
@@ -231,7 +232,9 @@ public class FrmDangNhap extends JFrame implements ActionListener {
 	
 		Icon icDangnhap = IconFontSwing.buildIcon(FontAwesome.SIGN_IN, 30, Color.yellow);
 		Icon icThoat = IconFontSwing.buildIcon(FontAwesome.POWER_OFF, 30, Color.red);
-		
+		Icon icLogo = IconFontSwing.buildIcon(FontAwesome.HOSPITAL_O, 17, Color.orange);
+		ImageIcon imgImage = (ImageIcon) icLogo;
+		setIconImage(imgImage.getImage());
 		btndangnhap.setIcon(icDangnhap);
 		btnthoat.setIcon(icThoat);
 		

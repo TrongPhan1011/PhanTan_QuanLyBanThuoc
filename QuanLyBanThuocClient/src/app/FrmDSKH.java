@@ -91,10 +91,12 @@ public class FrmDSKH extends JFrame implements  ActionListener,MouseListener,Ite
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(0, 0, 1012, 672);
 		setLocationRelativeTo(null);
+		setTitle("Nhà thuốc T3");
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		
 		
 		String ip ="";
 		try {
