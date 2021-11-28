@@ -633,6 +633,7 @@ public class FrmQuanLyThuoc extends JPanel implements ActionListener, MouseListe
 			List<Thuoc> dsthuoc = null;
 			try {
 				dsthuoc = thuocDao.timkiemthuoc(key);
+				if(dsthuoc.size()>0) {
 				modelthuoc.getDataVector().removeAllElements();
 				for (Thuoc t : dsthuoc) {
 					modelthuoc.addRow(
@@ -641,6 +642,13 @@ public class FrmQuanLyThuoc extends JPanel implements ActionListener, MouseListe
 									t.getNcc().getTenNCC(), t.getNcc().getDiaChiNCC(), t.getNuocSX().getTenNuocSX() });
 
 				}
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "Không tìm thấy thuốc");
+					txttimkiemthuoc.requestFocus();
+					
+				}
+	
 			} catch (RemoteException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
