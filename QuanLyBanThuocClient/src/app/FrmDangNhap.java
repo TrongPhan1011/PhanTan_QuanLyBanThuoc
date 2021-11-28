@@ -20,7 +20,9 @@ import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.net.InetAddress;
 import java.net.MalformedURLException;
+import java.net.UnknownHostException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
@@ -107,47 +109,31 @@ public class FrmDangNhap extends JFrame implements ActionListener {
 	public FrmDangNhap() throws MalformedURLException, RemoteException, NotBoundException {
 		
 		setResizable(false);
-		setTitle("Hệ thống quản lý nhà thuốc");
+		setTitle("Hệ thống quản lý nhà thuốc T3");
 		setBounds(100, 100, 650, 391);
-//		frmHThngQun.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
 		
 
 
 		IconFontSwing.register(FontAwesome.getIconFont());
 
-//		cthdDao =  (CTHDDao) Naming.lookup("rmi://192.168.1.9:9999/cthdDao");
-//		hoaDonDao =  (HoaDonDao) Naming.lookup("rmi://192.168.1.9:9999/hoaDonDao");
-//		khachHangDao = (KhachHangDao) Naming.lookup("rmi://192.168.1.9:9999/khachHangDao");
-//		loaiThuocDao =  (LoaiThuocDao) Naming.lookup("rmi://192.168.1.9:9999/loaiThuocDao");
-//		NCCDao =  (NhaCungCapDao) Naming.lookup("rmi://192.168.1.9:9999/nhaCungCapDao");
-//		nhanVienDao =  (NhanVienDao) Naming.lookup("rmi://192.168.1.9:9999/nhanVienDao");
-//		nuocSXDao =  (NuocSXDao) Naming.lookup("rmi://192.168.1.9:9999/nuocSXDao");
-//		tkDao =  (TaiKhoanDao) Naming.lookup("rmi://192.168.1.9:9999/taiKhoanDao");
-//		thuocDao =  (ThuocDao) Naming.lookup("rmi://192.168.1.9:9999/thuocDao");
+		String ip ="";
+		try {
+			ip = InetAddress.getLocalHost().getHostAddress();
+		} catch (UnknownHostException e1) {
+			e1.printStackTrace();
+		}
 		
-		
-		cthdDao = (CTHDDao) Naming.lookup("rmi://192.168.1.6:9999/cthdDao");
-		hoaDonDao = (HoaDonDao) Naming.lookup("rmi://192.168.1.6:9999/hoaDonDao");
-		khachHangDao = (KhachHangDao) Naming.lookup("rmi://192.168.1.6:9999/khachHangDao");
-		loaiThuocDao = (LoaiThuocDao) Naming.lookup("rmi://192.168.1.6:9999/loaiThuocDao");
-		NCCDao = (NhaCungCapDao) Naming.lookup("rmi://192.168.1.6:9999/nhaCungCapDao");
-		nhanVienDao = (NhanVienDao) Naming.lookup("rmi://192.168.1.6:9999/nhanVienDao");
-		nuocSXDao = (NuocSXDao) Naming.lookup("rmi://192.168.1.6:9999/nuocSXDao");
-		tkDao = (TaiKhoanDao) Naming.lookup("rmi://192.168.1.6:9999/taiKhoanDao");
-		thuocDao = (ThuocDao) Naming.lookup("rmi://192.168.1.6:9999/thuocDao");
-		
-		
-		//
-		cthdDao = (CTHDDao) Naming.lookup("rmi://192.168.1.8:9999/cthdDao");
-		hoaDonDao = (HoaDonDao) Naming.lookup("rmi://192.168.1.8:9999/hoaDonDao");
-		khachHangDao = (KhachHangDao) Naming.lookup("rmi://192.168.1.8:9999/khachHangDao");
-		loaiThuocDao = (LoaiThuocDao) Naming.lookup("rmi://192.168.1.8:9999/loaiThuocDao");
-		NCCDao = (NhaCungCapDao) Naming.lookup("rmi://192.168.1.8:9999/nhaCungCapDao");
-		nhanVienDao = (NhanVienDao) Naming.lookup("rmi://192.168.1.8:9999/nhanVienDao");
-		nuocSXDao = (NuocSXDao) Naming.lookup("rmi://192.168.1.8:9999/nuocSXDao");
-		tkDao = (TaiKhoanDao) Naming.lookup("rmi://192.168.1.8:9999/taiKhoanDao");
-		thuocDao = (ThuocDao) Naming.lookup("rmi://192.168.1.8:9999/thuocDao");
+		cthdDao =  (CTHDDao) Naming.lookup("rmi://"+ip+":9999/cthdDao");
+		hoaDonDao =  (HoaDonDao) Naming.lookup("rmi://"+ip+":9999/hoaDonDao");
+		khachHangDao = (KhachHangDao) Naming.lookup("rmi://"+ip+":9999/khachHangDao");
+		loaiThuocDao =  (LoaiThuocDao) Naming.lookup("rmi://"+ip+":9999/loaiThuocDao");
+		NCCDao =  (NhaCungCapDao) Naming.lookup("rmi://"+ip+":9999/nhaCungCapDao");
+		nhanVienDao =  (NhanVienDao) Naming.lookup("rmi://"+ip+":9999/nhanVienDao");
+		nuocSXDao =  (NuocSXDao) Naming.lookup("rmi://"+ip+":9999/nuocSXDao");
+		tkDao =  (TaiKhoanDao) Naming.lookup("rmi://"+ip+":9999/taiKhoanDao");
+		thuocDao =  (ThuocDao) Naming.lookup("rmi://"+ip+":9999/thuocDao");
 		
 		JPanel panel = new JPanel();
 		getContentPane().add(panel, BorderLayout.CENTER);
@@ -159,13 +145,13 @@ public class FrmDangNhap extends JFrame implements ActionListener {
 		panel.add(panel_1);
 		panel_1.setLayout(null);
 		
-		JLabel lblhethong = new JLabel("");
+		JLabel lblhethong = new JLabel("Hệ thống quản lý thuốc T3");
 		lblhethong.setIcon(new ImageIcon("C:\\Users\\Tai\\eclipse-workspace\\HeThongQuanLyThuoc\\img\\tieude2.png"));
-		lblhethong.setFont(new Font("Source Code Pro ExtraLight", Font.PLAIN, 24));
-		lblhethong.setBounds(30, 11, 325, 91);
+		lblhethong.setFont(new Font("Dialog", Font.BOLD, 25));
+		lblhethong.setBounds(30, 11, 325, 116);
 		panel_1.add(lblhethong);
 		
-		JLabel txtquenmk = new JLabel("Quên mật khẩu ?");
+		JLabel txtquenmk = new JLabel("Quên mật khẩu?");
 		txtquenmk.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -191,7 +177,7 @@ public class FrmDangNhap extends JFrame implements ActionListener {
 				
 			}
 		});
-		txtquenmk.setFont(new Font("SansSerif", Font.PLAIN, 13));
+		txtquenmk.setFont(new Font("SansSerif", Font.ITALIC, 12));
 		txtquenmk.setBounds(536, 202, 108, 15);
 		panel_1.add(txtquenmk);
 		
@@ -202,16 +188,16 @@ public class FrmDangNhap extends JFrame implements ActionListener {
 		
 		JLabel lbltendangnhap = new JLabel("Tên đăng nhập");
 		lbltendangnhap.setFont(new Font("SansSerif", Font.PLAIN, 15));
-		lbltendangnhap.setBounds(405, 103, 108, 24);
+		lbltendangnhap.setBounds(394, 103, 108, 24);
 		panel_1.add(lbltendangnhap);
 		
 		JLabel lblmatkhau = new JLabel("Mật khẩu");
 		lblmatkhau.setFont(new Font("SansSerif", Font.PLAIN, 15));
-		lblmatkhau.setBounds(406, 164, 61, 21);
+		lblmatkhau.setBounds(394, 163, 61, 21);
 		panel_1.add(lblmatkhau);
 		
 		txttendangnhap = new JTextField();
-		txttendangnhap.setBounds(509, 102, 125, 31);
+		txttendangnhap.setBounds(498, 102, 136, 31);
 		txttendangnhap.setBorder(new LineBorder(new Color(91, 155, 213)));
 		
        
@@ -219,7 +205,7 @@ public class FrmDangNhap extends JFrame implements ActionListener {
 		txttendangnhap.setColumns(10);
 		
 		txtmatkhau = new JPasswordField();
-		txtmatkhau.setBounds(509, 160, 125, 31);
+		txtmatkhau.setBounds(497, 160, 137, 31);
 		panel_1.add(txtmatkhau);
 		txtmatkhau.setColumns(10);
 		txtmatkhau.setBorder(new LineBorder(new Color(91, 155, 213)));
@@ -228,7 +214,7 @@ public class FrmDangNhap extends JFrame implements ActionListener {
 		btndangnhap.setForeground(new Color(255, 255, 255));
 		btndangnhap.setFont(new Font("SansSerif", Font.BOLD, 15));
 		btndangnhap.setBackground(new Color(0, 153, 255));
-		btndangnhap.setBounds(474, 228, 117, 31);
+		btndangnhap.setBounds(394, 228, 240, 39);
 		btndangnhap.addActionListener(this);
 		
 		panel_1.add(btndangnhap);
@@ -238,20 +224,13 @@ public class FrmDangNhap extends JFrame implements ActionListener {
 		btnthoat.setFont(new Font("SansSerif", Font.BOLD, 15));
 		btnthoat.setBackground(new Color(0, 153, 255));
 		btnthoat.addActionListener(this);
-		btnthoat.setBounds(475, 278, 116, 31);
+		btnthoat.setBounds(394, 278, 240, 39);
 		panel_1.add(btnthoat);
 		
 
-		Icon icThem = IconFontSwing.buildIcon(FontAwesome.PLUS, 20, new Color(0, 176, 80));
-		Icon icNgay = IconFontSwing.buildIcon(FontAwesome.CALENDAR, 20, new Color(91, 155, 213));
-		Icon icTim = IconFontSwing.buildIcon(FontAwesome.SEARCH, 20, Color.black);
-		Icon icLamMoi = IconFontSwing.buildIcon(FontAwesome.REFRESH, 20, Color.blue);
-		Icon icDS = IconFontSwing.buildIcon(FontAwesome.LIST_OL, 20, Color.orange);
-		Icon icXoa = IconFontSwing.buildIcon(FontAwesome.TIMES, 20, Color.red);
-		Icon icSua = IconFontSwing.buildIcon(FontAwesome.WRENCH, 20, Color.darkGray);
-		Icon icThanhToan = IconFontSwing.buildIcon(FontAwesome.CART_PLUS, 25, new Color(0, 176, 80));
-		Icon icDangnhap = IconFontSwing.buildIcon(FontAwesome.SIGN_IN, 20, Color.darkGray);
-		Icon icThoat = IconFontSwing.buildIcon(FontAwesome.SIGN_OUT, 20, Color.darkGray);
+	
+		Icon icDangnhap = IconFontSwing.buildIcon(FontAwesome.SIGN_IN, 30, Color.yellow);
+		Icon icThoat = IconFontSwing.buildIcon(FontAwesome.POWER_OFF, 30, Color.red);
 		
 		btndangnhap.setIcon(icDangnhap);
 		btnthoat.setIcon(icThoat);
@@ -260,7 +239,7 @@ public class FrmDangNhap extends JFrame implements ActionListener {
 		
 		JLabel lblbg = new JLabel("");
 		lblbg.setIcon(new ImageIcon("data\\img\\bg3.jpg"));
-		lblbg.setBounds(0, 0, 400, 361);
+		lblbg.setBounds(0, 0, 384, 361);
 		panel_1.add(lblbg);
 		
 		

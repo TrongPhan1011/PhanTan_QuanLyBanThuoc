@@ -25,7 +25,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.geom.RoundRectangle2D;
+import java.net.InetAddress;
 import java.net.MalformedURLException;
+import java.net.UnknownHostException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
@@ -148,52 +150,28 @@ public class FrmQuanLyThuoc extends JPanel implements ActionListener, MouseListe
 		frame.setBounds(0, 0, 1031, 700);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(new BorderLayout(0, 0));
+	
 		setLayout(null);
 		
+		regex  = new Regex();
 		
-//		cthdDao =  (CTHDDao) Naming.lookup("rmi://192.168.1.9:9999/cthdDao");
-//		hoaDonDao =  (HoaDonDao) Naming.lookup("rmi://192.168.1.9:9999/hoaDonDao");
-//		khachHangDao = (KhachHangDao) Naming.lookup("rmi://192.168.1.9:9999/khachHangDao");
-//		loaiThuocDao =  (LoaiThuocDao) Naming.lookup("rmi://192.168.1.9:9999/loaiThuocDao");
-//		NCCDao =  (NhaCungCapDao) Naming.lookup("rmi://192.168.1.9:9999/nhaCungCapDao");
-//		nhanVienDao =  (NhanVienDao) Naming.lookup("rmi://192.168.1.9:9999/nhanVienDao");
-//		nuocSXDao =  (NuocSXDao) Naming.lookup("rmi://192.168.1.9:9999/nuocSXDao");
-//		tkDao =  (TaiKhoanDao) Naming.lookup("rmi://192.168.1.9:9999/taiKhoanDao");
-//		thuocDao =  (ThuocDao) Naming.lookup("rmi://192.168.1.9:9999/thuocDao");
-		//regex  = new Regex();
+		String ip ="";
+		try {
+			ip = InetAddress.getLocalHost().getHostAddress();
+		} catch (UnknownHostException e1) {
+			e1.printStackTrace();
+		}
 		
+		cthdDao =  (CTHDDao) Naming.lookup("rmi://"+ip+":9999/cthdDao");
+		hoaDonDao =  (HoaDonDao) Naming.lookup("rmi://"+ip+":9999/hoaDonDao");
+		khachHangDao = (KhachHangDao) Naming.lookup("rmi://"+ip+":9999/khachHangDao");
+		loaiThuocDao =  (LoaiThuocDao) Naming.lookup("rmi://"+ip+":9999/loaiThuocDao");
+		NCCDao =  (NhaCungCapDao) Naming.lookup("rmi://"+ip+":9999/nhaCungCapDao");
+		nhanVienDao =  (NhanVienDao) Naming.lookup("rmi://"+ip+":9999/nhanVienDao");
+		nuocSXDao =  (NuocSXDao) Naming.lookup("rmi://"+ip+":9999/nuocSXDao");
+		tkDao =  (TaiKhoanDao) Naming.lookup("rmi://"+ip+":9999/taiKhoanDao");
+		thuocDao =  (ThuocDao) Naming.lookup("rmi://"+ip+":9999/thuocDao");
 		
-		cthdDao = (CTHDDao) Naming.lookup("rmi://192.168.1.8:9999/cthdDao");
-		hoaDonDao = (HoaDonDao) Naming.lookup("rmi://192.168.1.8:9999/hoaDonDao");
-		khachHangDao = (KhachHangDao) Naming.lookup("rmi://192.168.1.8:9999/khachHangDao");
-		loaiThuocDao = (LoaiThuocDao) Naming.lookup("rmi://192.168.1.8:9999/loaiThuocDao");
-		NCCDao = (NhaCungCapDao) Naming.lookup("rmi://192.168.1.8:9999/nhaCungCapDao");
-		nhanVienDao = (NhanVienDao) Naming.lookup("rmi://192.168.1.8:9999/nhanVienDao");
-		nuocSXDao = (NuocSXDao) Naming.lookup("rmi://192.168.1.8:9999/nuocSXDao");
-		tkDao = (TaiKhoanDao) Naming.lookup("rmi://192.168.1.8:9999/taiKhoanDao");
-		thuocDao = (ThuocDao) Naming.lookup("rmi://192.168.1.8:9999/thuocDao");
-
-//		cthdDao =  (CTHDDao) Naming.lookup("rmi://192.168.1.9:9999/cthdDao");
-//		hoaDonDao =  (HoaDonDao) Naming.lookup("rmi://192.168.1.9:9999/hoaDonDao");
-//		khachHangDao = (KhachHangDao) Naming.lookup("rmi://192.168.1.9:9999/khachHangDao");
-//		loaiThuocDao =  (LoaiThuocDao) Naming.lookup("rmi://192.168.1.9:9999/loaiThuocDao");
-//		NCCDao =  (NhaCungCapDao) Naming.lookup("rmi://192.168.1.9:9999/nhaCungCapDao");
-//		nhanVienDao =  (NhanVienDao) Naming.lookup("rmi://192.168.1.9:9999/nhanVienDao");
-//		nuocSXDao =  (NuocSXDao) Naming.lookup("rmi://192.168.1.9:9999/nuocSXDao");
-//		tkDao =  (TaiKhoanDao) Naming.lookup("rmi://192.168.1.9:9999/taiKhoanDao");
-//		thuocDao =  (ThuocDao) Naming.lookup("rmi://192.168.1.9:9999/thuocDao");
-//		regex  = new Regex();
-
-		cthdDao = (CTHDDao) Naming.lookup("rmi://192.168.1.6:9999/cthdDao");
-		hoaDonDao = (HoaDonDao) Naming.lookup("rmi://192.168.1.6:9999/hoaDonDao");
-		khachHangDao = (KhachHangDao) Naming.lookup("rmi://192.168.1.6:9999/khachHangDao");
-		loaiThuocDao = (LoaiThuocDao) Naming.lookup("rmi://192.168.1.6:9999/loaiThuocDao");
-		NCCDao = (NhaCungCapDao) Naming.lookup("rmi://192.168.1.6:9999/nhaCungCapDao");
-		nhanVienDao = (NhanVienDao) Naming.lookup("rmi://192.168.1.6:9999/nhanVienDao");
-		nuocSXDao = (NuocSXDao) Naming.lookup("rmi://192.168.1.6:9999/nuocSXDao");
-		tkDao = (TaiKhoanDao) Naming.lookup("rmi://192.168.1.6:9999/taiKhoanDao");
-		thuocDao = (ThuocDao) Naming.lookup("rmi://192.168.1.6:9999/thuocDao");
-
 		p = new JPanel();
 		p.setBackground(Color.WHITE);
 		p.setBounds(0, 0, 1370, 700);
@@ -204,37 +182,37 @@ public class FrmQuanLyThuoc extends JPanel implements ActionListener, MouseListe
 		btntim.setFont(new Font("SansSerif", Font.BOLD, 15));
 		btntim.setBackground(new Color(41, 242, 255));
 //		jbtim.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-		btntim.setBounds(888, 41, 93, 33);
+		btntim.setBounds(893, 42, 107, 33);
 		p.add(btntim);
 
 		btnthem = new JButton("Thêm");
 		btnthem.setBackground(Color.CYAN);
 		btnthem.setFont(new Font("SansSerif", Font.BOLD, 15));
 		btnthem.setForeground(Color.BLACK);
-		btnthem.setBounds(195, 229, 107, 33);
+		btnthem.setBounds(143, 229, 172, 33);
 		p.add(btnthem);
 
 		btnxoa = new JButton("Xóa");
 		btnxoa.setFont(new Font("SansSerif", Font.BOLD, 15));
 		btnxoa.setBackground(Color.CYAN);
-		btnxoa.setBounds(382, 229, 93, 33);
+		btnxoa.setBounds(325, 229, 172, 33);
 		p.add(btnxoa);
 
 		btnsua = new JButton("Sửa");
 		btnsua.setBackground(Color.CYAN);
 		btnsua.setFont(new Font("SansSerif", Font.BOLD, 15));
-		btnsua.setBounds(547, 229, 89, 33);
+		btnsua.setBounds(507, 229, 172, 33);
 		p.add(btnsua);
 
 		btnlammoi = new JButton("Làm mới");
 		btnlammoi.setBackground(Color.CYAN);
 		btnlammoi.setFont(new Font("SansSerif", Font.BOLD, 15));
-		btnlammoi.setBounds(714, 229, 107, 33);
+		btnlammoi.setBounds(690, 229, 172, 33);
 		p.add(btnlammoi);
 
 		JLabel lbltimthuoc = new JLabel("Tìm kiếm:");
 		lbltimthuoc.setFont(new Font("SansSerif", Font.BOLD, 15));
-		lbltimthuoc.setBounds(523, 41, 80, 32);
+		lbltimthuoc.setBounds(552, 41, 80, 32);
 		p.add(lbltimthuoc);
 
 		JLabel lbltieudequanlythuoc = new JLabel("Quản lý thuốc");
@@ -260,7 +238,7 @@ public class FrmQuanLyThuoc extends JPanel implements ActionListener, MouseListe
 
 		JLabel lblsoluong = new JLabel("Số lượng:");
 		lblsoluong.setFont(new Font("SansSerif", Font.BOLD, 15));
-		lblsoluong.setBounds(701, 91, 120, 26);
+		lblsoluong.setBounds(720, 87, 120, 26);
 		p.add(lblsoluong);
 
 		JLabel lbldongia = new JLabel("Đơn giá:");
@@ -285,16 +263,16 @@ public class FrmQuanLyThuoc extends JPanel implements ActionListener, MouseListe
 
 		JLabel lblhansd = new JLabel("Hạn SD:");
 		lblhansd.setFont(new Font("SansSerif", Font.BOLD, 15));
-		lblhansd.setBounds(701, 128, 81, 32);
+		lblhansd.setBounds(720, 124, 81, 32);
 		p.add(lblhansd);
 
 		JLabel lblnuocsx = new JLabel("Nước SX:");
 		lblnuocsx.setFont(new Font("SansSerif", Font.BOLD, 15));
-		lblnuocsx.setBounds(701, 171, 80, 32);
+		lblnuocsx.setBounds(720, 167, 80, 32);
 		p.add(lblnuocsx);
 
 		datehansd = new JDateChooser();
-		datehansd.setBounds(803, 133, 178, 32);
+		datehansd.setBounds(822, 129, 178, 32);
 		datehansd.setFont(new Font("SansSerif", Font.PLAIN, 15));
 		datehansd.setBorder(new LineBorder(new Color(91, 155, 213)));
 		datehansd.setDateFormatString("yyyy/MM/dd");
@@ -323,7 +301,7 @@ public class FrmQuanLyThuoc extends JPanel implements ActionListener, MouseListe
 
 		txtsoluong = new JTextField();
 		txtsoluong.setFont(new Font("SansSerif", Font.PLAIN, 15));
-		txtsoluong.setBounds(803, 90, 178, 32);
+		txtsoluong.setBounds(822, 86, 178, 32);
 		txtsoluong.setBorder(new LineBorder(new Color(91, 155, 213)));
 		p.add(txtsoluong);
 		txtsoluong.setColumns(10);
@@ -351,7 +329,7 @@ public class FrmQuanLyThuoc extends JPanel implements ActionListener, MouseListe
 
 		cbonuocsx = new JComboBox<String>();
 		cbonuocsx.setFont(new Font("SansSerif", Font.PLAIN, 15));
-		cbonuocsx.setBounds(803, 174, 178, 32);
+		cbonuocsx.setBounds(822, 170, 178, 32);
 		cbonuocsx.setEditable(true);
 		cbonuocsx.setBorder(new LineBorder(new Color(91, 155, 213)));
 		p.add(cbonuocsx);
@@ -362,11 +340,11 @@ public class FrmQuanLyThuoc extends JPanel implements ActionListener, MouseListe
 		scrollPane.setViewportView(tbl);
 
 		JTableHeader tbHeader = tbl.getTableHeader();
-		tbHeader.setBackground(new Color(91, 155, 213, 80));
+		tbHeader.setBackground(new Color(131, 179, 226));
 		tbHeader.setForeground(Color.CYAN);
 		tbHeader.setFont(new Font("SansSerif", Font.BOLD, 20));
 
-		tbl.setSelectionBackground(new Color(91, 155, 213, 30));
+		tbl.setSelectionBackground(new Color(236, 243, 250));
 		tbl.setSelectionForeground(new Color(91, 155, 213));
 		tbl.setRowHeight(30);
 
@@ -376,17 +354,29 @@ public class FrmQuanLyThuoc extends JPanel implements ActionListener, MouseListe
 		tbl.getColumnModel().getColumn(2).setCellRenderer(rightRenderer);
 		tbl.getColumnModel().getColumn(3).setCellRenderer(rightRenderer);
 		tbl.getColumnModel().getColumn(4).setCellRenderer(rightRenderer);
-
+		tbl.getColumnModel().getColumn(5).setCellRenderer(rightRenderer);
+		
+		tbl.setAutoResizeMode(tbl.AUTO_RESIZE_OFF);
+		tbl.getColumnModel().getColumn(0).setPreferredWidth(150);
+		tbl.getColumnModel().getColumn(1).setPreferredWidth(120);
+		tbl.getColumnModel().getColumn(2).setPreferredWidth(100);
+		tbl.getColumnModel().getColumn(3).setPreferredWidth(100);
+		tbl.getColumnModel().getColumn(4).setPreferredWidth(90);
+		tbl.getColumnModel().getColumn(5).setPreferredWidth(90);
+		tbl.getColumnModel().getColumn(6).setPreferredWidth(100);
+		tbl.getColumnModel().getColumn(7).setPreferredWidth(500);
+		tbl.getColumnModel().getColumn(6).setPreferredWidth(100);
+		
 		JScrollPane spMatHang = new JScrollPane(tbl);
 		spMatHang.setViewportBorder(null);
-		spMatHang.setBounds(13, 292, 997, 388);
+		spMatHang.setBounds(13, 273, 987, 407);
 		spMatHang.setBorder(new LineBorder(new Color(91, 155, 213), 1, true));
 		spMatHang.setBackground(Color.white);
 		p.add(spMatHang);
 
 		txttimkiemthuoc = new JTextField();
 		txttimkiemthuoc.setFont(new Font("SansSerif", Font.PLAIN, 15));
-		txttimkiemthuoc.setBounds(623, 40, 228, 32);
+		txttimkiemthuoc.setBounds(642, 41, 228, 32);
 		txttimkiemthuoc.setBorder(new LineBorder(new Color(91, 155, 213)));
 		p.add(txttimkiemthuoc);
 		txttimkiemthuoc.setColumns(10);

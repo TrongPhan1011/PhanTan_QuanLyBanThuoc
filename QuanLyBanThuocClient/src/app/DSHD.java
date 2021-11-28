@@ -11,7 +11,9 @@ import java.awt.event.MouseListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.UnsupportedEncodingException;
+import java.net.InetAddress;
 import java.net.MalformedURLException;
+import java.net.UnknownHostException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
@@ -92,15 +94,22 @@ public class DSHD extends JFrame implements  ActionListener,MouseListener,ItemLi
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		cthdDao = (CTHDDao) Naming.lookup("rmi://192.168.1.8:9999/cthdDao");
-		hoaDonDao = (HoaDonDao) Naming.lookup("rmi://192.168.1.8:9999/hoaDonDao");
-		khachHangDao = (KhachHangDao) Naming.lookup("rmi://192.168.1.8:9999/khachHangDao");
-		loaiThuocDao = (LoaiThuocDao) Naming.lookup("rmi://192.168.1.8:9999/loaiThuocDao");
-		NCCDao = (NhaCungCapDao) Naming.lookup("rmi://192.168.1.8:9999/nhaCungCapDao");
-		nhanVienDao = (NhanVienDao) Naming.lookup("rmi://192.168.1.8:9999/nhanVienDao");
-		nuocSXDao = (NuocSXDao) Naming.lookup("rmi://192.168.1.8:9999/nuocSXDao");
-		tkDao = (TaiKhoanDao) Naming.lookup("rmi://192.168.1.8:9999/taiKhoanDao");
-		thuocDao = (ThuocDao) Naming.lookup("rmi://192.168.1.8:9999/thuocDao");
+		String ip ="";
+		try {
+			ip = InetAddress.getLocalHost().getHostAddress();
+		} catch (UnknownHostException e1) {
+			e1.printStackTrace();
+		}
+		
+		cthdDao =  (CTHDDao) Naming.lookup("rmi://"+ip+":9999/cthdDao");
+		hoaDonDao =  (HoaDonDao) Naming.lookup("rmi://"+ip+":9999/hoaDonDao");
+		khachHangDao = (KhachHangDao) Naming.lookup("rmi://"+ip+":9999/khachHangDao");
+		loaiThuocDao =  (LoaiThuocDao) Naming.lookup("rmi://"+ip+":9999/loaiThuocDao");
+		NCCDao =  (NhaCungCapDao) Naming.lookup("rmi://"+ip+":9999/nhaCungCapDao");
+		nhanVienDao =  (NhanVienDao) Naming.lookup("rmi://"+ip+":9999/nhanVienDao");
+		nuocSXDao =  (NuocSXDao) Naming.lookup("rmi://"+ip+":9999/nuocSXDao");
+		tkDao =  (TaiKhoanDao) Naming.lookup("rmi://"+ip+":9999/taiKhoanDao");
+		thuocDao =  (ThuocDao) Naming.lookup("rmi://"+ip+":9999/thuocDao");
 		
 		
 		JPanel panel = new JPanel();
@@ -183,8 +192,8 @@ public class DSHD extends JFrame implements  ActionListener,MouseListener,ItemLi
 		btnLammoi.setBounds(875, 34, 108, 34);
 		panel_1.add(btnLammoi);
 		
-		JLabel label = new JLabel("New label");
-		label.setIcon(new ImageIcon("C:\\Users\\USER\\Desktop\\QuanLyBanThuoc\\QuanLyBanThuoc\\data\\img\\bg.png"));
+		JLabel label = new JLabel("");
+		label.setIcon(new ImageIcon("data\\img\\bg.png"));
 		label.setBounds(0, 20, 1028, 651);
 		panel_1.add(label);
 		

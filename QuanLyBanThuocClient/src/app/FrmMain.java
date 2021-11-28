@@ -4,6 +4,10 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.UIManager;
+
+import jiconfont.icons.font_awesome.FontAwesome;
+import jiconfont.swing.IconFontSwing;
+
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -22,7 +26,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 
-
+import javax.swing.Icon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -45,34 +49,6 @@ public class FrmMain extends JFrame implements ActionListener  {
 	private static String chucvu;
 	
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					UIManager.setLookAndFeel("com.jtattoo.plaf.smart.SmartLookAndFeel");
-					FrmMain window = new FrmMain(manv,chucvu);
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the application.
-	 * @throws NotBoundException 
-	 * @throws RemoteException 
-	 * @throws MalformedURLException 
-	 */
-//	public FrmMain() throws MalformedURLException, RemoteException, NotBoundException {
-//		initialize();
-//		getTime();
-//	}
 	
 
 	/**
@@ -85,7 +61,7 @@ public class FrmMain extends JFrame implements ActionListener  {
 	
 		setResizable(false);
 		setBounds(0, 0, 1285, 700);
-//		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
 		
 		JPanel panel = new JPanel();
@@ -105,36 +81,36 @@ public class FrmMain extends JFrame implements ActionListener  {
 		jlbmenu.setForeground(new Color(255, 255, 204));
 		panel_1.add(jlbmenu);
 		
-		JButton jbquanlythuoc = new JButton("Quản lý thuốc");
-		jbquanlythuoc.addActionListener(new ActionListener() {
+		JButton btnQLThuoc = new JButton("Quản lý thuốc");
+		btnQLThuoc.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				tabbedPane1.setSelectedIndex(0);
 			}
 		});
-		jbquanlythuoc.setFont(new Font("Tahoma", Font.BOLD, 21));
-		jbquanlythuoc.setBackground(new Color(51, 204, 204));
-		jbquanlythuoc.setForeground(new Color(255, 255, 255));
-		jbquanlythuoc.setBounds(0, 93, 254, 60);
-		panel_1.add(jbquanlythuoc);
+		btnQLThuoc.setFont(new Font("Tahoma", Font.BOLD, 21));
+		btnQLThuoc.setBackground(new Color(51, 204, 204));
+		btnQLThuoc.setForeground(new Color(255, 255, 255));
+		btnQLThuoc.setBounds(0, 92, 254, 80);
+		panel_1.add(btnQLThuoc);
 		
-		JButton jbquanlyhoadon = new JButton("Quản lý hóa đơn");
-		jbquanlyhoadon.addActionListener(new ActionListener() {
+		JButton btnHoaDon = new JButton("Quản lý bán hàng");
+		btnHoaDon.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				tabbedPane1.setSelectedIndex(1);
 			}
 		});
 		
-		jbquanlyhoadon.setForeground(new Color(255, 255, 255));
-		jbquanlyhoadon.setFont(new Font("Tahoma", Font.BOLD, 21));
-		jbquanlyhoadon.setBackground(new Color(51, 204, 204));
-		jbquanlyhoadon.setBounds(0, 165, 254, 60);
-		panel_1.add(jbquanlyhoadon);
+		btnHoaDon.setForeground(new Color(255, 255, 255));
+		btnHoaDon.setFont(new Font("Tahoma", Font.BOLD, 19));
+		btnHoaDon.setBackground(new Color(51, 204, 204));
+		btnHoaDon.setBounds(0, 173, 254, 80);
+		panel_1.add(btnHoaDon);
 		
 		btnquanlynhanvien = new JButton("Quản lý nhân viên");
-		btnquanlynhanvien.setFont(new Font("Tahoma", Font.BOLD, 21));
+		btnquanlynhanvien.setFont(new Font("Tahoma", Font.BOLD, 19));
 		btnquanlynhanvien.setForeground(new Color(255, 255, 255));
 		btnquanlynhanvien.setBackground(new Color(51, 204, 204));
-		btnquanlynhanvien.setBounds(0, 237, 254, 60);
+		btnquanlynhanvien.setBounds(0, 254, 254, 80);
 		panel_1.add(btnquanlynhanvien);
 		
 		JButton btnquanlythongke = new JButton("Quản lý thống kê");
@@ -144,13 +120,13 @@ public class FrmMain extends JFrame implements ActionListener  {
 			}
 		});
 		btnquanlythongke.setBackground(new Color(51, 204, 204));
-		btnquanlythongke.setFont(new Font("Tahoma", Font.BOLD, 21));
+		btnquanlythongke.setFont(new Font("Tahoma", Font.BOLD, 19));
 		btnquanlythongke.setForeground(new Color(255, 255, 255));
-		btnquanlythongke.setBounds(0, 310, 254, 60);
+		btnquanlythongke.setBounds(0, 335, 254, 80);
 		panel_1.add(btnquanlythongke);
 		
-		JButton jbtdangxuat = new JButton("Đăng xuất");
-		jbtdangxuat.addActionListener(new ActionListener() {
+		JButton btnDangXuat = new JButton("Đăng xuất");
+		btnDangXuat.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
 				try {
@@ -169,11 +145,11 @@ public class FrmMain extends JFrame implements ActionListener  {
 				
 			}
 		});
-		jbtdangxuat.setForeground(new Color(255, 255, 255));
-		jbtdangxuat.setBackground(new Color(51, 204, 204));
-		jbtdangxuat.setFont(new Font("Tahoma", Font.PLAIN, 21));
-		jbtdangxuat.setBounds(0, 600, 254, 60);
-		panel_1.add(jbtdangxuat);
+		btnDangXuat.setForeground(new Color(255, 255, 255));
+		btnDangXuat.setBackground(new Color(51, 204, 204));
+		btnDangXuat.setFont(new Font("Tahoma", Font.PLAIN, 21));
+		btnDangXuat.setBounds(0, 600, 254, 66);
+		panel_1.add(btnDangXuat);
 		
 		JLabel jlbmnv = new JLabel("Mã nhân viên:");
 		jlbmnv.setFont(new Font("Tahoma", Font.PLAIN, 19));
@@ -223,7 +199,20 @@ public class FrmMain extends JFrame implements ActionListener  {
 		
 		btnquanlynhanvien.addActionListener(this);
 	
+		IconFontSwing.register(FontAwesome.getIconFont());
+		Icon icSL = IconFontSwing.buildIcon(FontAwesome.MEDKIT, 50, new Color(91, 155, 213));
+		Icon icQLBH = IconFontSwing.buildIcon(FontAwesome.CART_PLUS, 50, new Color(0, 176, 80));
+		Icon icNV = IconFontSwing.buildIcon(FontAwesome.USER_MD, 50, Color.orange);
+		Icon icLamMoi = IconFontSwing.buildIcon(FontAwesome.REFRESH, 20, Color.blue);
+		Icon icDX = IconFontSwing.buildIcon(FontAwesome.SIGN_OUT, 30, Color.red);
 		
+		Icon icBarchar = IconFontSwing.buildIcon(FontAwesome.BAR_CHART, 40, Color.red);
+		
+		btnQLThuoc.setIcon(icSL);
+		btnHoaDon.setIcon(icQLBH);
+		btnquanlynhanvien.setIcon(icNV);
+		btnquanlythongke.setIcon(icBarchar);
+		btnDangXuat.setIcon(icDX);
 		
 	}
 	

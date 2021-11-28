@@ -1,5 +1,7 @@
 package serverApp;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -49,53 +51,22 @@ public class App {
 			TaiKhoanDao taiKhoanDao = new ImplTaiKhoan();
 			ThuocDao thuocDao = new ImplThuoc();
 			
-			//Id cua Trong
-//			Naming.bind("rmi://192.168.1.9:9999/cthdDao", cthdDao);
-//			Naming.bind("rmi://192.168.1.9:9999/hoaDonDao", hoaDonDao);
-//			Naming.bind("rmi://192.168.1.9:9999/khachHangDao", khachHangDao);
-//			Naming.bind("rmi://192.168.1.9:9999/loaiThuocDao", loaiThuocDao);
-//			Naming.bind("rmi://192.168.1.9:9999/nhaCungCapDao", nhaCungCapDao);
-//			Naming.bind("rmi://192.168.1.9:9999/nhanVienDao", nhanVienDao);
-//			Naming.bind("rmi://192.168.1.9:9999/nuocSXDao", nuocSXDao);
-//			Naming.bind("rmi://192.168.1.9:9999/taiKhoanDao", taiKhoanDao);
-//			Naming.bind("rmi://192.168.1.9:9999/thuocDao", thuocDao);
+			String ip ="";
+			try {
+				ip = InetAddress.getLocalHost().getHostAddress();
+			} catch (UnknownHostException e1) {
+				e1.printStackTrace();
+			}
 			
-			
-			//id của tài
-			Naming.bind("rmi://192.168.1.8:9999/cthdDao", cthdDao);
-			Naming.bind("rmi://192.168.1.8:9999/hoaDonDao", hoaDonDao);
-			Naming.bind("rmi://192.168.1.8:9999/khachHangDao", khachHangDao);
-			Naming.bind("rmi://192.168.1.8:9999/loaiThuocDao", loaiThuocDao);
-			Naming.bind("rmi://192.168.1.8:9999/nhaCungCapDao", nhaCungCapDao);
-			Naming.bind("rmi://192.168.1.8:9999/nhanVienDao", nhanVienDao);
-			Naming.bind("rmi://192.168.1.8:9999/nuocSXDao", nuocSXDao);
-			Naming.bind("rmi://192.168.1.8:9999/taiKhoanDao", taiKhoanDao);
-			Naming.bind("rmi://192.168.1.8:9999/thuocDao", thuocDao);
-			
-//			Naming.bind("rmi://192.168.1.6:9999/cthdDao", cthdDao);
-//			Naming.bind("rmi://192.168.1.6:9999/hoaDonDao", hoaDonDao);
-//			Naming.bind("rmi://192.168.1.6:9999/khachHangDao", khachHangDao);
-//			Naming.bind("rmi://192.168.1.6:9999/loaiThuocDao", loaiThuocDao);
-//			Naming.bind("rmi://192.168.1.6:9999/nhaCungCapDao", nhaCungCapDao);
-//			Naming.bind("rmi://192.168.1.6:9999/nhanVienDao", nhanVienDao);
-//			Naming.bind("rmi://192.168.1.6:9999/nuocSXDao", nuocSXDao);
-//			Naming.bind("rmi://192.168.1.6:9999/taiKhoanDao", taiKhoanDao);
-//			Naming.bind("rmi://192.168.1.6:9999/thuocDao", thuocDao);
-			
-			
-			//
-			Naming.bind("rmi://192.168.1.6:9999/cthdDao", cthdDao);
-			Naming.bind("rmi://192.168.1.6:9999/hoaDonDao", hoaDonDao);
-			Naming.bind("rmi://192.168.1.6:9999/khachHangDao", khachHangDao);
-			Naming.bind("rmi://192.168.1.6:9999/loaiThuocDao", loaiThuocDao);
-			Naming.bind("rmi://192.168.1.6:9999/nhaCungCapDao", nhaCungCapDao);
-			Naming.bind("rmi://192.168.1.6:9999/nhanVienDao", nhanVienDao);
-			Naming.bind("rmi://192.168.1.6:9999/nuocSXDao", nuocSXDao);
-			Naming.bind("rmi://192.168.1.6:9999/taiKhoanDao", taiKhoanDao);
-			Naming.bind("rmi://192.168.1.6:9999/thuocDao", thuocDao);
-			
-
-			
+			Naming.bind("rmi://"+ip+":9999/cthdDao", cthdDao);
+			Naming.bind("rmi://"+ip+":9999/hoaDonDao", hoaDonDao);
+			Naming.bind("rmi://"+ip+":9999/khachHangDao", khachHangDao);
+			Naming.bind("rmi://"+ip+":9999/loaiThuocDao", loaiThuocDao);
+			Naming.bind("rmi://"+ip+":9999/nhaCungCapDao", nhaCungCapDao);
+			Naming.bind("rmi://"+ip+":9999/nhanVienDao", nhanVienDao);
+			Naming.bind("rmi://"+ip+":9999/nuocSXDao", nuocSXDao);
+			Naming.bind("rmi://"+ip+":9999/taiKhoanDao", taiKhoanDao);
+			Naming.bind("rmi://"+ip+":9999/thuocDao", thuocDao);
 			
 			
 			
