@@ -164,7 +164,7 @@ public class FrmDSKH extends JFrame implements  ActionListener,MouseListener,Ite
 		tbldsThuoc.getColumnModel().getColumn(2).setCellRenderer(rightRenderer);
 		tbldsThuoc.getColumnModel().getColumn(3).setCellRenderer(rightRenderer);
 		tbldsThuoc.getColumnModel().getColumn(4).setCellRenderer(rightRenderer);
-		
+		tbldsKH.getColumnModel().getColumn(3).setCellRenderer(rightRenderer);
 //		tbldsThuoc.getColumnModel().getColumn(3).setCellRenderer(center);
 		
 		JTableHeader tbHeader1 = tbldsThuoc.getTableHeader();
@@ -203,8 +203,6 @@ public class FrmDSKH extends JFrame implements  ActionListener,MouseListener,Ite
 	     modelKhachhang1 = new DefaultTableModel(columnKH, 0);
 		tbldsKH = new JTable(modelKhachhang1);
 		dsKH.setViewportView(tbldsKH);
-		
-		tbldsKH.getColumnModel().getColumn(3).setCellRenderer(rightRenderer);
 		
 		JTableHeader tbHeader = tbldsKH.getTableHeader();
 		tbHeader.setBackground(new Color(91, 155, 213,80));
