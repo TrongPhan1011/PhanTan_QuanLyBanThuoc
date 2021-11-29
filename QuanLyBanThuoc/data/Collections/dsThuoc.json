@@ -30,7 +30,7 @@
   "hanSD": {
     "$date": "2021-02-01T17:00:00Z"
   },
-  "soLuongTon": 25,
+  "soLuongTon": 20,
   "NCC_id": {
     "$oid": "61a4b926fcca1d44c852902d"
   },
@@ -53,7 +53,7 @@
   "hanSD": {
     "$date": "1970-01-01T00:00:02.008Z"
   },
-  "soLuongTon": 125,
+  "soLuongTon": 124,
   "NCC_id": {
     "$oid": "61a4b926fcca1d44c8529031"
   },

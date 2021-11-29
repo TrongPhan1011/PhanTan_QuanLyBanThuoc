@@ -43,4 +43,34 @@
   "so_NhanVien": "NV3",
   "chucVu": "Nhân viên bán hàng",
   "dia_Chi": "170 Thống Nhất, p10, Q.Gò Vấp"
+},{
+  "_id": {
+    "$oid": "61a4df544a40bf1ef85d9f34"
+  },
+  "ten_Nhan_Vien": "Lê Tuấn Tài",
+  "sdt": "0949218444",
+  "trang_Thai_Lam_Viec": "Đang làm việc",
+  "gioi_Tinh": "Nam",
+  "luong": 5000000,
+  "ngay_Sinh": {
+    "$date": "2001-11-07T17:00:00Z"
+  },
+  "so_NhanVien": "NV4",
+  "chucVu": "Quản lý",
+  "dia_Chi": "Bình Dương"
+},{
+  "_id": {
+    "$oid": "61a4df864a40bf1ef85d9f35"
+  },
+  "ten_Nhan_Vien": "Nguyễn Hữu Trọng",
+  "sdt": "0949218447",
+  "trang_Thai_Lam_Viec": "Đang làm việc",
+  "gioi_Tinh": "Nam",
+  "luong": 5000000,
+  "ngay_Sinh": {
+    "$date": "2001-11-07T17:00:00Z"
+  },
+  "so_NhanVien": "NV5",
+  "chucVu": "Quản lý",
+  "dia_Chi": "Bình Dương"
 }]
