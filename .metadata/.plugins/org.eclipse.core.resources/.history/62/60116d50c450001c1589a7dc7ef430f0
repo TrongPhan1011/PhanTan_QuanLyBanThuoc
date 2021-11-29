@@ -148,7 +148,6 @@ public class DSHD extends JFrame implements  ActionListener,MouseListener,ItemLi
 		
 		txtTim = new JTextField();
 		txtTim.setColumns(10);
-		txtTim.setFont(new Font("SansSerif", Font.PLAIN, 15));
 		txtTim.setBorder(BorderFactory.createLineBorder(Color.CYAN));
 		txtTim.setBounds(512, 34, 206, 33);
 		txtTim.setBorder(new LineBorder(new Color(91, 155, 213)));
@@ -218,7 +217,7 @@ public class DSHD extends JFrame implements  ActionListener,MouseListener,ItemLi
 		
 		panel_1.add(label);
 		
-		btntim.setIcon(icTim);
+		btntim.setIcon(icThem);
 		btnLammoi.setIcon(icLamMoi);
 		
 		
