@@ -8,7 +8,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
 import dao.NhaCungCapDao;
-import entity.LoaiThuoc;
 import entity.NhaCungCap;
 import util.HibernateUtil;
 

@@ -19,7 +19,6 @@ import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -46,15 +45,7 @@ import javax.swing.table.JTableHeader;
 
 import com.toedter.calendar.JDateChooser;
 
-import dao.CTHDDao;
-import dao.HoaDonDao;
-import dao.KhachHangDao;
-import dao.LoaiThuocDao;
-import dao.NhaCungCapDao;
 import dao.NhanVienDao;
-import dao.NuocSXDao;
-import dao.TaiKhoanDao;
-import dao.ThuocDao;
 import entity.NhanVien;
 import entity.TaiKhoan;
 import jiconfont.icons.font_awesome.FontAwesome;
@@ -83,28 +74,16 @@ public class FrmQuanLyNhanVien extends JPanel implements ActionListener,MouseLis
 	private JFrame fMain;
 	
 	private DefaultTableModel modelNhanVien;
-	//private CustomTable tableNV;
 	private JDateChooser datengaysinh;
-	private HoaDonDao hoaDonDao;
-	private KhachHangDao khachHangDao;
-	private LoaiThuocDao loaiThuocDao;
-	private NhaCungCapDao NCCDao;
 	private NhanVienDao nhanVienDao;
-	private NuocSXDao nuocSXDao;
-	private TaiKhoanDao tkDao;
-	private ThuocDao thuocDao;
-	private DateTimeFormatter formatDate;
 	private JLabel lblLuong;
 	private JTextField txtLuong;
 	private List<NhanVien> dsNV;
 	private int currentIndex = 0;
 
-	private Regex regex;
 	private Date now;
-//	private DecimalFormat df;
 	private SimpleDateFormat ngay;
 
-	private CTHDDao cthdDao;
 
 
 
@@ -112,46 +91,14 @@ public class FrmQuanLyNhanVien extends JPanel implements ActionListener,MouseLis
 	 * Create the application.
 	 */
 	public FrmQuanLyNhanVien()throws MalformedURLException, RemoteException, NotBoundException {
-//		this.fMain = fMain;
 		initialize(fMain);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
+	@SuppressWarnings("deprecation")
 	private void initialize(JFrame fMain) throws MalformedURLException, RemoteException, NotBoundException {
-		
-		//Thanh+Tai
-
-//		cthdDao =  (CTHDDao) Naming.lookup("rmi://192.168.1.8:9999/cthdDao");
-//		 hoaDonDao =  (HoaDonDao) Naming.lookup("rmi://192.168.1.8:9999/hoaDonDao");
-//	     khachHangDao = (KhachHangDao) Naming.lookup("rmi://192.168.1.8:9999/khachHangDao");
-//		 loaiThuocDao =  (LoaiThuocDao) Naming.lookup("rmi://192.168.1.8:9999/loaiThuocDao");
-//		 NCCDao =  (NhaCungCapDao) Naming.lookup("rmi://192.168.1.8:9999/nhaCungCapDao");
-//		 nhanVienDao =  (NhanVienDao) Naming.lookup("rmi://192.168.1.8:9999/nhanVienDao");
-//		 nuocSXDao =  (NuocSXDao) Naming.lookup("rmi://192.168.1.8:9999/nuocSXDao");
-//		 tkDao =  (TaiKhoanDao) Naming.lookup("rmi://192.168.1.8:9999/taiKhoanDao");
-//		 thuocDao =  (ThuocDao) Naming.lookup("rmi://192.168.1.8:9999/thuocDao");
-		 
-//		cthdDao =  (CTHDDao) Naming.lookup("rmi://192.168.1.9:9999/cthdDao");
-//		hoaDonDao =  (HoaDonDao) Naming.lookup("rmi://192.168.1.9:9999/hoaDonDao");
-//		khachHangDao = (KhachHangDao) Naming.lookup("rmi://192.168.1.9:9999/khachHangDao");
-//		loaiThuocDao =  (LoaiThuocDao) Naming.lookup("rmi://192.168.1.9:9999/loaiThuocDao");
-//		NCCDao =  (NhaCungCapDao) Naming.lookup("rmi://192.168.1.9:9999/nhaCungCapDao");
-//		nhanVienDao =  (NhanVienDao) Naming.lookup("rmi://192.168.1.9:9999/nhanVienDao");
-//		nuocSXDao =  (NuocSXDao) Naming.lookup("rmi://192.168.1.9:9999/nuocSXDao");
-//		tkDao =  (TaiKhoanDao) Naming.lookup("rmi://192.168.1.9:9999/taiKhoanDao");
-//		thuocDao =  (ThuocDao) Naming.lookup("rmi://192.168.1.9:9999/thuocDao");
-		 
-//		 cthdDao = (CTHDDao) Naming.lookup("rmi://192.168.1.6:9999/cthdDao");
-//			hoaDonDao = (HoaDonDao) Naming.lookup("rmi://192.168.1.6:9999/hoaDonDao");
-//			khachHangDao = (KhachHangDao) Naming.lookup("rmi://192.168.1.6:9999/khachHangDao");
-//			loaiThuocDao = (LoaiThuocDao) Naming.lookup("rmi://192.168.1.6:9999/loaiThuocDao");
-//			NCCDao = (NhaCungCapDao) Naming.lookup("rmi://192.168.1.6:9999/nhaCungCapDao");
-//			nhanVienDao = (NhanVienDao) Naming.lookup("rmi://192.168.1.6:9999/nhanVienDao");
-//			nuocSXDao = (NuocSXDao) Naming.lookup("rmi://192.168.1.6:9999/nuocSXDao");
-//			tkDao = (TaiKhoanDao) Naming.lookup("rmi://192.168.1.6:9999/taiKhoanDao");
-//			thuocDao = (ThuocDao) Naming.lookup("rmi://192.168.1.6:9999/thuocDao");
 
 		String ip ="";
 		try {
@@ -160,15 +107,7 @@ public class FrmQuanLyNhanVien extends JPanel implements ActionListener,MouseLis
 			e1.printStackTrace();
 		}
 		
-		cthdDao =  (CTHDDao) Naming.lookup("rmi://"+ip+":9999/cthdDao");
-		hoaDonDao =  (HoaDonDao) Naming.lookup("rmi://"+ip+":9999/hoaDonDao");
-		khachHangDao = (KhachHangDao) Naming.lookup("rmi://"+ip+":9999/khachHangDao");
-		loaiThuocDao =  (LoaiThuocDao) Naming.lookup("rmi://"+ip+":9999/loaiThuocDao");
-		NCCDao =  (NhaCungCapDao) Naming.lookup("rmi://"+ip+":9999/nhaCungCapDao");
 		nhanVienDao =  (NhanVienDao) Naming.lookup("rmi://"+ip+":9999/nhanVienDao");
-		nuocSXDao =  (NuocSXDao) Naming.lookup("rmi://"+ip+":9999/nuocSXDao");
-		tkDao =  (TaiKhoanDao) Naming.lookup("rmi://"+ip+":9999/taiKhoanDao");
-		thuocDao =  (ThuocDao) Naming.lookup("rmi://"+ip+":9999/thuocDao");
 
 		 
 		frame = new JFrame();
@@ -178,8 +117,6 @@ public class FrmQuanLyNhanVien extends JPanel implements ActionListener,MouseLis
 		
 		IconFontSwing.register(FontAwesome.getIconFont());
 		
-		 regex = new Regex();
-	//	 df = new DecimalFormat("###,### VNĐ");
          ngay = new SimpleDateFormat("dd/MM/yyyy");		
 		JPanel pMain = new JPanel();
 		pMain.setBackground(Color.WHITE);
@@ -191,10 +128,8 @@ public class FrmQuanLyNhanVien extends JPanel implements ActionListener,MouseLis
 		Icon icNgay = IconFontSwing.buildIcon(FontAwesome.CALENDAR, 20, new Color(91, 155, 213));
 		Icon icTim = IconFontSwing.buildIcon(FontAwesome.SEARCH, 20, Color.black);
 		Icon icLamMoi = IconFontSwing.buildIcon(FontAwesome.REFRESH, 20, Color.blue);
-		Icon icDS = IconFontSwing.buildIcon(FontAwesome.LIST_OL, 20, Color.orange);
 		Icon icXoa = IconFontSwing.buildIcon(FontAwesome.TIMES, 20, Color.red);
 		Icon icSua = IconFontSwing.buildIcon(FontAwesome.WRENCH, 20, Color.darkGray);
-		Icon icThanhToan = IconFontSwing.buildIcon(FontAwesome.CART_PLUS, 25, new Color(0, 176, 80));
 		
 		JLabel lblQLNV = new JLabel("Quản lý nhân viên ");
 		lblQLNV.setFont(new Font("SansSerif", Font.BOLD, 25));
@@ -205,7 +140,6 @@ public class FrmQuanLyNhanVien extends JPanel implements ActionListener,MouseLis
 		lblTim.setFont(new Font("SansSerif", Font.BOLD, 15));
 		lblTim.setBounds(608, 176, 75, 28);
 		pMain.add(lblTim);
-		DecimalFormat df = new DecimalFormat("###,###,###.####");
 		txttim = new JTextField();
 		txttim.setColumns(10);
 		txttim.setFont(new Font("SansSerif", Font.PLAIN, 15));
@@ -367,7 +301,7 @@ public class FrmQuanLyNhanVien extends JPanel implements ActionListener,MouseLis
 		tbl.getColumnModel().getColumn(7).setCellRenderer(rightRenderer);
 	//	tbl.getColumnModel().getColumn(4).setCellRenderer(rightRenderer);
 		
-		tbl.setAutoResizeMode(tbl.AUTO_RESIZE_OFF);
+		tbl.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		tbl.getColumnModel().getColumn(0).setPreferredWidth(90);
 		tbl.getColumnModel().getColumn(1).setPreferredWidth(150);
 		tbl.getColumnModel().getColumn(2).setPreferredWidth(90);
@@ -461,18 +395,6 @@ public class FrmQuanLyNhanVien extends JPanel implements ActionListener,MouseLis
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-//		int row = tbl.getSelectedRow();
-////		String temp= modelNhanVien.getValueAt(row, 3).toString();
-////		Date date = (Date) new SimpleDateFormat("dd/MM/yyyy").parse(temp);
-//
-//       
-//		txthoten.setText(modelNhanVien.getValueAt(row, 1).toString());
-//		txtsdt.setText(modelNhanVien.getValueAt(row, 6).toString());
-//		datengaysinh.setDate(new Date(modelNhanVien.getValueAt(row, 3).toString()));
-//		txtdiachi.setText(modelNhanVien.getValueAt(row, 4).toString());
-//		cboGT.setSelectedItem(modelNhanVien.getValueAt(row, 2));
-//		cboCV.setSelectedItem(modelNhanVien.getValueAt(row, 5));
-//		txtLuong.setText(modelNhanVien.getValueAt(row, 7).toString());
 		
 	}
 
@@ -502,10 +424,9 @@ public class FrmQuanLyNhanVien extends JPanel implements ActionListener,MouseLis
      public boolean validata() {
     	String hoten = txthoten.getText();
  		String sdt = txtsdt.getText();
- 		Date ngaySinh = datengaysinh.getDate();
+// 		Date ngaySinh = datengaysinh.getDate();
  		String diachi = txtdiachi.getText();
     	String Luong = txtLuong.getText();
-// 		double luong = Double.parseDouble(Luong);
  		if(hoten.isEmpty()) {
  			JOptionPane.showMessageDialog(this, "Họ tên không được trống");
  			txthoten.requestFocus();

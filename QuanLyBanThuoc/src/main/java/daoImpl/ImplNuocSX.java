@@ -8,9 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
 import dao.NuocSXDao;
-import entity.NhaCungCap;
 import entity.NuocSX;
-import entity.Thuoc;
 import util.HibernateUtil;
 
 public class ImplNuocSX extends UnicastRemoteObject implements NuocSXDao {
@@ -48,6 +46,7 @@ public class ImplNuocSX extends UnicastRemoteObject implements NuocSXDao {
 		try {
 			tr.begin();
 			String query="db.dsNuocSX.find({})";
+			@SuppressWarnings("unchecked")
 			List<NuocSX>ls=em.createNativeQuery(query,NuocSX.class).getResultList();
 			tr.commit();
 			return ls;

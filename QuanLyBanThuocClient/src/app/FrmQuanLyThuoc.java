@@ -1,71 +1,51 @@
 package app;
 
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
 import java.awt.BorderLayout;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-
 import java.awt.Color;
-import java.awt.Component;
-
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.BorderFactory;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import java.awt.Font;
-import java.awt.Graphics;
 import java.awt.HeadlessException;
-import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.awt.geom.RoundRectangle2D;
 import java.net.InetAddress;
 import java.net.MalformedURLException;
 import java.net.UnknownHostException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
-
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.UIManager;
-import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
-import javax.swing.text.DateFormatter;
 
 import org.bson.types.ObjectId;
 
-import javax.swing.JTable;
-import javax.swing.JScrollPane;
 import com.toedter.calendar.JDateChooser;
 
-import dao.CTHDDao;
-import dao.HoaDonDao;
-import dao.KhachHangDao;
 import dao.LoaiThuocDao;
 import dao.NhaCungCapDao;
-import dao.NhanVienDao;
 import dao.NuocSXDao;
-import dao.TaiKhoanDao;
 import dao.ThuocDao;
 import entity.LoaiThuoc;
 import entity.NhaCungCap;
@@ -74,24 +54,16 @@ import entity.Thuoc;
 import jiconfont.icons.font_awesome.FontAwesome;
 import jiconfont.swing.IconFontSwing;
 
-import com.mongodb.Block;
-import com.mongodb.MongoClient;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
-
-import com.mongodb.client.model.Indexes;
-import com.mongodb.client.model.Filters;
-import com.mongodb.client.model.Sorts;
-import com.mongodb.client.model.TextSearchOptions;
-import com.mongodb.client.model.Projections;
-
 public class FrmQuanLyThuoc extends JPanel implements ActionListener, MouseListener {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1486775462401966507L;
 	private JFrame frame;
 	private JTextField txttimkiemthuoc;
 	private JTable tbl;
 	private JTextField txttenthuoc;
-	private JComboBox<String> txtloaithuoc;
 	private JTextField txtsoluong;
 	private JTextField txtdongia;
 	private JComboBox<String> cbotenncc;
@@ -106,17 +78,16 @@ public class FrmQuanLyThuoc extends JPanel implements ActionListener, MouseListe
 	private JDateChooser datehansd;
 	private JDateChooser datengaysx;
 	private JButton btntim;
-	private HoaDonDao hoaDonDao;
-	private KhachHangDao khachHangDao;
+
 	private LoaiThuocDao loaiThuocDao;
 	private NhaCungCapDao NCCDao;
-	private NhanVienDao nhanVienDao;
+
 	private NuocSXDao nuocSXDao;
-	private TaiKhoanDao tkDao;
+
 	private ThuocDao thuocDao;
-	private CTHDDao cthdDao;
+
 	private JComboBox<String> cboloaithuoc;
-	private Regex regex;
+
 	private LoaiThuoc loaiThuoc3=null;
 	private NuocSX nuocSX3=null;
 	private NhaCungCap nhaCungCap2=null;
@@ -153,8 +124,6 @@ public class FrmQuanLyThuoc extends JPanel implements ActionListener, MouseListe
 	
 		setLayout(null);
 		
-		regex  = new Regex();
-		
 		String ip ="";
 		try {
 			ip = InetAddress.getLocalHost().getHostAddress();
@@ -162,46 +131,10 @@ public class FrmQuanLyThuoc extends JPanel implements ActionListener, MouseListe
 			e1.printStackTrace();
 		}
 		
-		cthdDao =  (CTHDDao) Naming.lookup("rmi://"+ip+":9999/cthdDao");
-		hoaDonDao =  (HoaDonDao) Naming.lookup("rmi://"+ip+":9999/hoaDonDao");
-		khachHangDao = (KhachHangDao) Naming.lookup("rmi://"+ip+":9999/khachHangDao");
 		loaiThuocDao =  (LoaiThuocDao) Naming.lookup("rmi://"+ip+":9999/loaiThuocDao");
 		NCCDao =  (NhaCungCapDao) Naming.lookup("rmi://"+ip+":9999/nhaCungCapDao");
-		nhanVienDao =  (NhanVienDao) Naming.lookup("rmi://"+ip+":9999/nhanVienDao");
 		nuocSXDao =  (NuocSXDao) Naming.lookup("rmi://"+ip+":9999/nuocSXDao");
-		tkDao =  (TaiKhoanDao) Naming.lookup("rmi://"+ip+":9999/taiKhoanDao");
 		thuocDao =  (ThuocDao) Naming.lookup("rmi://"+ip+":9999/thuocDao");
-		
-//		cthdDao = (CTHDDao) Naming.lookup("rmi://192.168.1.8:9999/cthdDao");
-//		hoaDonDao = (HoaDonDao) Naming.lookup("rmi://192.168.1.8:9999/hoaDonDao");
-//		khachHangDao = (KhachHangDao) Naming.lookup("rmi://192.168.1.8:9999/khachHangDao");
-//		loaiThuocDao = (LoaiThuocDao) Naming.lookup("rmi://192.168.1.8:9999/loaiThuocDao");
-//		NCCDao = (NhaCungCapDao) Naming.lookup("rmi://192.168.1.8:9999/nhaCungCapDao");
-//		nhanVienDao = (NhanVienDao) Naming.lookup("rmi://192.168.1.8:9999/nhanVienDao");
-//		nuocSXDao = (NuocSXDao) Naming.lookup("rmi://192.168.1.8:9999/nuocSXDao");
-//		tkDao = (TaiKhoanDao) Naming.lookup("rmi://192.168.1.8:9999/taiKhoanDao");
-//		thuocDao = (ThuocDao) Naming.lookup("rmi://192.168.1.8:9999/thuocDao");
-
-//		cthdDao =  (CTHDDao) Naming.lookup("rmi://192.168.1.9:9999/cthdDao");
-//		hoaDonDao =  (HoaDonDao) Naming.lookup("rmi://192.168.1.9:9999/hoaDonDao");
-//		khachHangDao = (KhachHangDao) Naming.lookup("rmi://192.168.1.9:9999/khachHangDao");
-//		loaiThuocDao =  (LoaiThuocDao) Naming.lookup("rmi://192.168.1.9:9999/loaiThuocDao");
-//		NCCDao =  (NhaCungCapDao) Naming.lookup("rmi://192.168.1.9:9999/nhaCungCapDao");
-//		nhanVienDao =  (NhanVienDao) Naming.lookup("rmi://192.168.1.9:9999/nhanVienDao");
-//		nuocSXDao =  (NuocSXDao) Naming.lookup("rmi://192.168.1.9:9999/nuocSXDao");
-//		tkDao =  (TaiKhoanDao) Naming.lookup("rmi://192.168.1.9:9999/taiKhoanDao");
-//		thuocDao =  (ThuocDao) Naming.lookup("rmi://192.168.1.9:9999/thuocDao");
-//		regex  = new Regex();
-
-//		cthdDao = (CTHDDao) Naming.lookup("rmi://192.168.1.6:9999/cthdDao");
-//		hoaDonDao = (HoaDonDao) Naming.lookup("rmi://192.168.1.6:9999/hoaDonDao");
-//		khachHangDao = (KhachHangDao) Naming.lookup("rmi://192.168.1.6:9999/khachHangDao");
-//		loaiThuocDao = (LoaiThuocDao) Naming.lookup("rmi://192.168.1.6:9999/loaiThuocDao");
-//		NCCDao = (NhaCungCapDao) Naming.lookup("rmi://192.168.1.6:9999/nhaCungCapDao");
-//		nhanVienDao = (NhanVienDao) Naming.lookup("rmi://192.168.1.6:9999/nhanVienDao");
-//		nuocSXDao = (NuocSXDao) Naming.lookup("rmi://192.168.1.6:9999/nuocSXDao");
-//		tkDao = (TaiKhoanDao) Naming.lookup("rmi://192.168.1.6:9999/taiKhoanDao");
-//		thuocDao = (ThuocDao) Naming.lookup("rmi://192.168.1.6:9999/thuocDao");
 
 		p = new JPanel();
 		p.setBackground(Color.WHITE);
@@ -212,7 +145,6 @@ public class FrmQuanLyThuoc extends JPanel implements ActionListener, MouseListe
 		btntim = new JButton("Tìm");
 		btntim.setFont(new Font("SansSerif", Font.BOLD, 15));
 		btntim.setBackground(new Color(41, 242, 255));
-//		jbtim.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		btntim.setBounds(893, 42, 107, 33);
 		p.add(btntim);
 
@@ -387,7 +319,7 @@ public class FrmQuanLyThuoc extends JPanel implements ActionListener, MouseListe
 		tbl.getColumnModel().getColumn(4).setCellRenderer(rightRenderer);
 		tbl.getColumnModel().getColumn(5).setCellRenderer(rightRenderer);
 		
-		tbl.setAutoResizeMode(tbl.AUTO_RESIZE_OFF);
+		tbl.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		tbl.getColumnModel().getColumn(0).setPreferredWidth(150);
 		tbl.getColumnModel().getColumn(1).setPreferredWidth(120);
 		tbl.getColumnModel().getColumn(2).setPreferredWidth(100);
@@ -430,13 +362,10 @@ public class FrmQuanLyThuoc extends JPanel implements ActionListener, MouseListe
 		//
 		IconFontSwing.register(FontAwesome.getIconFont());
 		Icon icThem = IconFontSwing.buildIcon(FontAwesome.PLUS, 20, new Color(0, 176, 80));
-		Icon icNgay = IconFontSwing.buildIcon(FontAwesome.CALENDAR, 20, new Color(91, 155, 213));
 		Icon icTim = IconFontSwing.buildIcon(FontAwesome.SEARCH, 20, Color.black);
 		Icon icLamMoi = IconFontSwing.buildIcon(FontAwesome.REFRESH, 20, Color.blue);
-		Icon icDS = IconFontSwing.buildIcon(FontAwesome.LIST_OL, 20, Color.orange);
 		Icon icXoa = IconFontSwing.buildIcon(FontAwesome.TIMES, 20, Color.red);
 		Icon icSua = IconFontSwing.buildIcon(FontAwesome.WRENCH, 20, Color.darkGray);
-		Icon icThanhToan = IconFontSwing.buildIcon(FontAwesome.CART_PLUS, 25, new Color(0, 176, 80));
 		btnthem.setIcon(icThem);
 		btnsua.setIcon(icSua);
 		btnxoa.setIcon(icXoa);
@@ -519,6 +448,7 @@ public class FrmQuanLyThuoc extends JPanel implements ActionListener, MouseListe
 		return thuoc;
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
@@ -642,9 +572,6 @@ public class FrmQuanLyThuoc extends JPanel implements ActionListener, MouseListe
 						thuoc.setNgaySX(datengaysx.getDate());
 						thuoc.setTenThuoc(txttenthuoc.getText());
 						thuoc.setSoLuongTon(Integer.parseInt(txtsoluong.getText()));
-						ObjectId id2 = loaiThuocDao.getLoaiThuocTheoTen(cboloaithuoc.getSelectedItem().toString())
-								.getId();
-
 						Thuoc thuoc2 = thuoc;
 						thuocDao.updateThuoc(thuoc2);
 						JOptionPane.showMessageDialog(null, "Sửa thành công");
