@@ -188,6 +188,7 @@ public class FrmQLBH extends JPanel implements ActionListener,MouseListener,Item
 		
 
 		JPanel pKH = new JPanel();
+		pKH.setToolTipText("Nhập thông tin của khách hàng");
 		pKH.setBorder(new TitledBorder(new LineBorder(new Color(91, 155, 213)), "Th\u00F4ng tin kh\u00E1ch h\u00E0ng", TitledBorder.CENTER, TitledBorder.TOP, null, Color.BLACK));
 		pKH.setBackground(new Color(255,255,255,10));
 		pKH.setBounds(10, 72, 637, 210);
@@ -242,6 +243,7 @@ public class FrmQLBH extends JPanel implements ActionListener,MouseListener,Item
 		pKH.add(lblNgaySinh);
 
 		btnThemKH = new JButton("Thêm");
+		btnThemKH.setToolTipText("Thêm khách hàng");
 		btnThemKH.setFont(new Font("SansSerif", Font.BOLD, 15));
 		btnThemKH.setBounds(10, 165, 200, 34);
 		btnThemKH.setBackground(new Color(41, 242, 255));
@@ -249,6 +251,7 @@ public class FrmQLBH extends JPanel implements ActionListener,MouseListener,Item
 		
 
 		btnLamMoiKH = new JButton("Làm mới");
+		btnLamMoiKH.setToolTipText("Làm mới lại thông tin khách hàng");
 		btnLamMoiKH.setFont(new Font("SansSerif", Font.BOLD, 15));
 		btnLamMoiKH.setBackground(new Color(41, 242, 255));
 		btnLamMoiKH.setBounds(434, 165, 193, 34);
@@ -268,6 +271,7 @@ public class FrmQLBH extends JPanel implements ActionListener,MouseListener,Item
 
 		//setBorder(new LineBorder(new Color(91, 155, 213)));
 		JPanel pThuoc = new JPanel();
+		pThuoc.setToolTipText("Chọn thông tin thuốc cần mua");
 		pThuoc.setBackground(new Color(255,255,255,10));
 		pThuoc.setBorder(new TitledBorder(new LineBorder(new Color(91, 155, 213)), "Th\u00F4ng tin thu\u1ED1c", TitledBorder.CENTER, TitledBorder.TOP, null, null));
 		pThuoc.setBounds(657, 72, 350, 210);
@@ -317,12 +321,14 @@ public class FrmQLBH extends JPanel implements ActionListener,MouseListener,Item
 		pThuoc.add(rdoGiamSL);
 
 		btnThemThuoc = new JButton("Thêm thuốc");
+		btnThemThuoc.setToolTipText("");
 		btnThemThuoc.setFont(new Font("SansSerif", Font.BOLD, 15));
 		btnThemThuoc.setBounds(30, 164, 133, 34);
 		btnThemThuoc.setBackground(new Color(41, 242, 255));
 		pThuoc.add(btnThemThuoc);
 
 		btnXoaThuoc = new JButton("Xóa thuốc");
+		btnXoaThuoc.setToolTipText("Xóa thuốc cần mua");
 		btnXoaThuoc.setFont(new Font("SansSerif", Font.BOLD, 15));
 		btnXoaThuoc.setBackground(new Color(41, 242, 255));
 		btnXoaThuoc.setBounds(187, 164, 133, 34);
@@ -357,6 +363,7 @@ public class FrmQLBH extends JPanel implements ActionListener,MouseListener,Item
 		tblThuoc.getColumnModel().getColumn(5).setCellRenderer(rightRenderer);
 
 		JScrollPane spMatHang = new JScrollPane(tblThuoc);
+		spMatHang.setToolTipText("Thông tin thuốc đã chọn");
 		spMatHang.setViewportBorder(null);
 		spMatHang.setBounds(10, 292, 997, 328);
 		spMatHang.setBorder(new LineBorder(new Color(91, 155, 213), 1, true));
@@ -364,6 +371,7 @@ public class FrmQLBH extends JPanel implements ActionListener,MouseListener,Item
 		pMain.add(spMatHang);
 
 		btnLamMoiGD = new JButton("Làm mới");
+		btnLamMoiGD.setToolTipText("Làm mới giao diện");
 		btnLamMoiGD.setFont(new Font("SansSerif", Font.BOLD, 15));
 		btnLamMoiGD.setBackground(new Color(41, 242, 255));
 		btnLamMoiGD.setBounds(238, 655, 209, 34);
@@ -374,19 +382,20 @@ public class FrmQLBH extends JPanel implements ActionListener,MouseListener,Item
 		lblSubThanhTien.setBounds(733, 624, 101, 20);
 		pMain.add(lblSubThanhTien);
 
-		lblThanhTien = new JLabel("123 VNĐ");
+		lblThanhTien = new JLabel("");
 		lblThanhTien.setForeground(new Color(255, 0, 0));
 		lblThanhTien.setFont(new Font("SansSerif", Font.BOLD, 20));
 		lblThanhTien.setBounds(840, 624, 167, 20);
 		pMain.add(lblThanhTien);
 
-		btnThanhToan = new JButton("Thanh toán");
+		btnThanhToan = new JButton("Thanh toán ");
 		btnThanhToan.setFont(new Font("SansSerif", Font.BOLD, 15));
 		btnThanhToan.setBackground(new Color(41, 242, 255));
 		btnThanhToan.setBounds(733, 655, 274, 34);
 		pMain.add(btnThanhToan);
 
 		btnDSKH = new JButton("Danh sách khách hàng");
+		btnDSKH.setToolTipText("Mở danh sách khách hàng");
 		btnDSKH.setBounds(10, 655, 218, 34);
 		pMain.add(btnDSKH);
 		btnDSKH.setFont(new Font("SansSerif", Font.BOLD, 15));
@@ -427,6 +436,7 @@ public class FrmQLBH extends JPanel implements ActionListener,MouseListener,Item
 		pKH.add(spKH);
 		
 		btnSua = new JButton("Sửa");
+		btnSua.setToolTipText("Sửa thông tin khách hàng");
 		btnSua.setFont(new Font("SansSerif", Font.BOLD, 15));
 		btnSua.setBackground(new Color(41, 242, 255));
 		btnSua.setBounds(220, 165, 204, 34);
@@ -495,7 +505,7 @@ public class FrmQLBH extends JPanel implements ActionListener,MouseListener,Item
 		btnXoaThuoc.setIcon(icXoa);
 		btnSua.setIcon(icSua);
 		btnThanhToan.setIcon(icThanhToan);
-
+		btnThemThuoc.setToolTipText("Thêm số lượng thuốc đã mua");
 
 		//action
 		btnDSKH.addActionListener(this);
@@ -524,7 +534,6 @@ public class FrmQLBH extends JPanel implements ActionListener,MouseListener,Item
 
 
 	public void loadFrmDSKH() throws MalformedURLException, RemoteException, NotBoundException {
-		//FrmDSKH frmKH = new FrmDSKH(fMain);
 		
 		DSHD frmKH = new DSHD(fMain);
 		frmKH.setVisible(true);
@@ -855,7 +864,6 @@ public class FrmQLBH extends JPanel implements ActionListener,MouseListener,Item
 			try {
 				loadFrmDSKH();
 			} catch (MalformedURLException | RemoteException | NotBoundException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 		}
@@ -871,8 +879,16 @@ public class FrmQLBH extends JPanel implements ActionListener,MouseListener,Item
 		}
 		if(rdoGiamSL.isSelected()) {
 			btnThemThuoc.setText("Giảm thuốc");
+			Icon icGiam = IconFontSwing.buildIcon(FontAwesome.MINUS, 20, Color.red);
+			btnThemThuoc.setIcon(icGiam);
+			btnThemThuoc.setToolTipText("Giảm số lượng thuốc đã mua");
 		}
-		else btnThemThuoc.setText("Thêm thuốc");
+		else {
+			btnThemThuoc.setText("Thêm thuốc");
+			Icon icGiam = IconFontSwing.buildIcon(FontAwesome.PLUS, 20, new Color(0, 176, 80));
+			btnThemThuoc.setIcon(icGiam);
+			btnThemThuoc.setToolTipText("Thêm số lượng thuốc đã mua");
+		}
 		if(o.equals(btnThemThuoc)) {
 			try {
 				themThuoc();
@@ -940,25 +956,21 @@ public class FrmQLBH extends JPanel implements ActionListener,MouseListener,Item
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
 
 	}
 
@@ -974,7 +986,6 @@ public class FrmQLBH extends JPanel implements ActionListener,MouseListener,Item
 				lt = loaiThuocDao.getLoaiThuocTheoTen(s);
 				dsThuoc = thuocDao.getThuocTheoMaLoai(lt.getId());
 			} catch (RemoteException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 			cboTenThuoc.removeAllItems();

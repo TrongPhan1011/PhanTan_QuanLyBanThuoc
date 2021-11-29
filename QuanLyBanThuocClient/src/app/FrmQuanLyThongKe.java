@@ -144,6 +144,7 @@ public class FrmQuanLyThongKe extends JPanel implements ActionListener,MouseList
 		pThongTinTK.add(lblSubNgay);
 		
 		 btnThongKe = new JButton("Thống kê");
+		 btnThongKe.setToolTipText("Thống kê");
 		btnThongKe.setFont(new Font("SansSerif", Font.BOLD, 15));
 		btnThongKe.setBackground(new Color(41, 242, 255));
 		btnThongKe.setBounds(261, 18, 209, 34);
@@ -163,6 +164,7 @@ public class FrmQuanLyThongKe extends JPanel implements ActionListener,MouseList
 		chooserNgayDen.setFont(new Font("SansSerif",Font.PLAIN, 15));
 		
 		btnLamMoi = new JButton("Làm mới");
+		btnLamMoi.setToolTipText("Làm mới giao diện");
 		btnLamMoi.setFont(new Font("SansSerif", Font.BOLD, 15));
 		btnLamMoi.setBackground(new Color(41, 242, 255));
 		btnLamMoi.setBounds(261, 61, 209, 34);
@@ -175,7 +177,8 @@ public class FrmQuanLyThongKe extends JPanel implements ActionListener,MouseList
 		pDoanhThu.setBorder(new LineBorder(new Color(91, 155, 213), 2));
 		pDoanhThu.setLayout(null);
 		
-		btnDoanhThu = new JButton("100,000 VNĐ");
+		btnDoanhThu = new JButton("");
+		btnDoanhThu.setToolTipText("Thống kê doanh thu");
 		btnDoanhThu.setBackground(Color.WHITE);
 		btnDoanhThu.setFont(new Font("SansSerif", Font.BOLD, 16));
 		btnDoanhThu.setBounds(88, 11, 151, 53);
@@ -199,7 +202,8 @@ public class FrmQuanLyThongKe extends JPanel implements ActionListener,MouseList
 		pThuoc.setBounds(759, 53, 249, 97);
 		pMain.add(pThuoc);
 		
-		btnThuoc = new JButton("100");
+		btnThuoc = new JButton("");
+		btnThuoc.setToolTipText("Thống kê thuốc đã bán ");
 		btnThuoc.setFont(new Font("SansSerif", Font.BOLD, 16));
 		btnThuoc.setBackground(Color.WHITE);
 		btnThuoc.setBounds(88, 11, 151, 53);
@@ -217,13 +221,14 @@ public class FrmQuanLyThongKe extends JPanel implements ActionListener,MouseList
 		pThuoc.add(lblICDSL);
 		
 		pBieuDo = new JPanel();
+		pBieuDo.setToolTipText("Biểu đồ thống kê");
 		pBieuDo.setLayout(null);
 		pBieuDo.setBorder(new TitledBorder(new LineBorder(new Color(91, 155, 213), 2), "Bi\u1EC3u \u0111\u1ED3 th\u1ED1ng k\u00EA", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		pBieuDo.setBackground(Color.WHITE);
 		pBieuDo.setBounds(10, 163, 998, 466);
 		pMain.add(pBieuDo);
 		
-		JLabel lblTenBieuDo = new JLabel("Thống kê doanh thu");
+		JLabel lblTenBieuDo = new JLabel("Biểu đồ thống kê");
 		lblTenBieuDo.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTenBieuDo.setFont(new Font("SansSerif", Font.ITALIC, 15));
 		lblTenBieuDo.setBounds(10, 634, 998, 20);

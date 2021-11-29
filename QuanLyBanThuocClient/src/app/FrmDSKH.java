@@ -34,15 +34,7 @@ import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
-import dao.CTHDDao;
 import dao.HoaDonDao;
-import dao.KhachHangDao;
-import dao.LoaiThuocDao;
-import dao.NhaCungCapDao;
-import dao.NhanVienDao;
-import dao.NuocSXDao;
-import dao.TaiKhoanDao;
-import dao.ThuocDao;
 import entity.CTHD;
 import entity.HoaDon;
 import entity.KhachHang;
