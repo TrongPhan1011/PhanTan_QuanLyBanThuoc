@@ -173,6 +173,7 @@ public class FrmDangNhap extends JFrame implements ActionListener {
 		txtmatkhau.setBorder(new LineBorder(new Color(91, 155, 213)));
 		
 		 btndangnhap = new JButton("Đăng nhập");
+		 btndangnhap.setToolTipText("Đăng nhập vào hệ thống");
 		btndangnhap.setForeground(new Color(255, 255, 255));
 		btndangnhap.setFont(new Font("SansSerif", Font.BOLD, 15));
 		btndangnhap.setBackground(new Color(0, 153, 255));
@@ -182,6 +183,7 @@ public class FrmDangNhap extends JFrame implements ActionListener {
 		panel_1.add(btndangnhap);
 		
 		 btnthoat = new JButton("Thoát");
+		 btnthoat.setToolTipText("Đóng ứng dụng");
 		btnthoat.setForeground(new Color(255, 255, 255));
 		btnthoat.setFont(new Font("SansSerif", Font.BOLD, 15));
 		btnthoat.setBackground(new Color(0, 153, 255));
