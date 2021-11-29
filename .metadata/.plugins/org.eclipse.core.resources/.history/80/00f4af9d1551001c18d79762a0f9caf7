@@ -187,7 +187,6 @@ public class FrmDSKH extends JFrame implements  ActionListener,MouseListener,Ite
 		tbldsKH.setRowHeight(30);
 		
 		btnLammoi = new JButton("Làm mới");
-		btnLammoi.setToolTipText("Làm mới danh sách thuốc");
 		btnLammoi.setBackground(Color.CYAN);
 		btnLammoi.setFont(new Font("SansSerif", Font.BOLD, 15));
 		btnLammoi.setBounds(885, 31, 108, 34);

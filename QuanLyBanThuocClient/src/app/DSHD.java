@@ -127,6 +127,7 @@ public class DSHD extends JFrame implements  ActionListener,MouseListener,ItemLi
 		panel_1.add(txtTim);
 		
 	    btntim = new JButton("Tìm");
+	    btntim.setToolTipText("Tìm khách hàng");
 		btntim.setFont(new Font("Tahoma", Font.BOLD, 15));
 		btntim.setBackground(new Color(41, 242, 255));
 		btntim.setBounds(746, 35, 108, 33);
@@ -169,6 +170,7 @@ public class DSHD extends JFrame implements  ActionListener,MouseListener,ItemLi
 		tbldsKH.setRowHeight(30);
 		
 	    btnLammoi = new JButton("Làm mới");
+	    btnLammoi.setToolTipText("Làm mới giao diện");
 		btnLammoi.setBackground(Color.CYAN);
 		btnLammoi.setFont(new Font("SansSerif", Font.BOLD, 15));
 		btnLammoi.setBounds(885, 34, 108, 34);

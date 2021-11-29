@@ -149,6 +149,7 @@ public class FrmQuanLyNhanVien extends JPanel implements ActionListener,MouseLis
 		pMain.add(txttim);
 		
 		btntim = new JButton("Tìm");
+		btntim.setToolTipText("Tìm nhân viên");
 		btntim.setFont(new Font("Tahoma", Font.BOLD, 15));
 		btntim.setBackground(new Color(41, 242, 255));
 		btntim.setBounds(949, 176, 108, 32);
@@ -229,6 +230,7 @@ public class FrmQuanLyNhanVien extends JPanel implements ActionListener,MouseLis
 		pMain.add(cboCV);
 		
 	    btnthem = new JButton("Thêm");
+	    btnthem.setToolTipText("Thêm nhân viên");
 		btnthem.setForeground(Color.BLACK);
 		btnthem.setFont(new Font("SansSerif", Font.BOLD, 15));
 		btnthem.setBackground(Color.CYAN);
@@ -257,22 +259,25 @@ public class FrmQuanLyNhanVien extends JPanel implements ActionListener,MouseLis
 		pMain.add(txtLuong);
 		
 		btnsua = new JButton("Sửa");
+		btnsua.setToolTipText("Cập nhật nhân viên");
 		btnsua.setFont(new Font("SansSerif", Font.BOLD, 15));
 		btnsua.setBackground(Color.CYAN);
-		btnsua.setBounds(380, 359, 186, 33);
+		btnsua.setBounds(388, 359, 186, 33);
 		pMain.add(btnsua);
 		
 		btnLammoi = new JButton("Làm mới");
+		btnLammoi.setToolTipText("Làm mới giao diện");
 		btnLammoi.setFont(new Font("SansSerif", Font.BOLD, 15));
 		btnLammoi.setBackground(Color.CYAN);
-		btnLammoi.setBounds(585, 359, 180, 33);
+		btnLammoi.setBounds(810, 359, 180, 33);
 		pMain.add(btnLammoi);
 		
 		btnhuy = new JButton("Xóa nhân viên");
+		btnhuy.setToolTipText("Xóa nhân viên");
 		btnhuy.setForeground(Color.BLACK);
 		btnhuy.setFont(new Font("SansSerif", Font.BOLD, 15));
 		btnhuy.setBackground(Color.CYAN);
-		btnhuy.setBounds(787, 359, 180, 33);
+		btnhuy.setBounds(595, 359, 180, 33);
 		pMain.add(btnhuy);
 		
 		JScrollPane scrollPane = new JScrollPane();
