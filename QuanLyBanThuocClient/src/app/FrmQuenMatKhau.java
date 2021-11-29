@@ -1,24 +1,9 @@
 package app;
 
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-
 import java.awt.BorderLayout;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.BorderFactory;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
+import java.awt.Color;
 import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Insets;
-
-import javax.swing.JTextField;
-import javax.swing.UIManager;
-import javax.swing.JButton;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.InetAddress;
 import java.net.MalformedURLException;
@@ -26,64 +11,42 @@ import java.net.UnknownHostException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
-import java.text.ParseException;
-import java.awt.event.ActionEvent;
-import java.awt.Color;
-import java.awt.Component;
 
-import javax.swing.border.Border;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
-import javax.swing.text.MaskFormatter;
 
-import dao.CTHDDao;
-import dao.HoaDonDao;
-import dao.KhachHangDao;
-import dao.LoaiThuocDao;
-import dao.NhaCungCapDao;
 import dao.NhanVienDao;
-import dao.NuocSXDao;
 import dao.TaiKhoanDao;
-import dao.ThuocDao;
-import daoImpl.ImplTaiKhoan;
 import entity.NhanVien;
 import entity.TaiKhoan;
 import jiconfont.icons.font_awesome.FontAwesome;
 import jiconfont.swing.IconFontSwing;
 
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-
 public class FrmQuenMatKhau extends JFrame implements ActionListener {
 
-	private JFrame frmHThngQun;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3868573620408201004L;
 	private JTextField txttendangnhap;
 	private JPasswordField txtsdt;
 	private JButton btndoimatkhau;
 	private JButton btnquaylai;
-	private HoaDonDao hoaDonDao;
-	private KhachHangDao khachHangDao;
-	private LoaiThuocDao loaiThuocDao;
-	private NhaCungCapDao NCCDao;
 	private NhanVienDao nhanVienDao;
-	private NuocSXDao nuocSXDao;
 	private TaiKhoanDao tkDao;
-	private ThuocDao thuocDao;
-	private CTHDDao cthdDao;
 	private TaiKhoan taiKhoan = null;
 	private NhanVien nhanVien = null;
 	private JPasswordField txtmatkhaumoi;
 
-	/**
-	 * Launch the application.
-	 */
 
-	/**
-	 * Create the application.
-	 * 
-	 * @throws NotBoundException
-	 * @throws RemoteException
-	 * @throws MalformedURLException
-	 */
 
 	/**
 	 * Initialize the contents of the frame.
@@ -96,7 +59,7 @@ public class FrmQuenMatKhau extends JFrame implements ActionListener {
 
 		setResizable(false);
 		setTitle("Hệ thống quản lý nhà thuốc");
-		setBounds(100, 100, 650, 391);
+		setBounds(100, 100, 656, 419);
 //		frmHThngQun.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
 
@@ -107,15 +70,8 @@ public class FrmQuenMatKhau extends JFrame implements ActionListener {
 			e1.printStackTrace();
 		}
 		
-		cthdDao =  (CTHDDao) Naming.lookup("rmi://"+ip+":9999/cthdDao");
-		hoaDonDao =  (HoaDonDao) Naming.lookup("rmi://"+ip+":9999/hoaDonDao");
-		khachHangDao = (KhachHangDao) Naming.lookup("rmi://"+ip+":9999/khachHangDao");
-		loaiThuocDao =  (LoaiThuocDao) Naming.lookup("rmi://"+ip+":9999/loaiThuocDao");
-		NCCDao =  (NhaCungCapDao) Naming.lookup("rmi://"+ip+":9999/nhaCungCapDao");
 		nhanVienDao =  (NhanVienDao) Naming.lookup("rmi://"+ip+":9999/nhanVienDao");
-		nuocSXDao =  (NuocSXDao) Naming.lookup("rmi://"+ip+":9999/nuocSXDao");
 		tkDao =  (TaiKhoanDao) Naming.lookup("rmi://"+ip+":9999/taiKhoanDao");
-		thuocDao =  (ThuocDao) Naming.lookup("rmi://"+ip+":9999/thuocDao");
 
 
 		JPanel panel = new JPanel();
@@ -175,7 +131,7 @@ public class FrmQuenMatKhau extends JFrame implements ActionListener {
 		btndoimatkhau.setForeground(new Color(255, 255, 255));
 		btndoimatkhau.setFont(new Font("SansSerif", Font.BOLD, 15));
 		btndoimatkhau.setBackground(new Color(0, 153, 255));
-		btndoimatkhau.setBounds(456, 275, 135, 31);
+		btndoimatkhau.setBounds(405, 266, 229, 40);
 		btndoimatkhau.addActionListener(this);
 
 		panel_1.add(btndoimatkhau);
@@ -185,19 +141,11 @@ public class FrmQuenMatKhau extends JFrame implements ActionListener {
 		btnquaylai.setFont(new Font("SansSerif", Font.BOLD, 15));
 		btnquaylai.setBackground(new Color(0, 153, 255));
 		btnquaylai.addActionListener(this);
-		btnquaylai.setBounds(456, 317, 134, 30);
+		btnquaylai.setBounds(405, 317, 229, 40);
 		panel_1.add(btnquaylai);
 		
 		IconFontSwing.register(FontAwesome.getIconFont());
-		Icon icThem = IconFontSwing.buildIcon(FontAwesome.PLUS, 20, new Color(0, 176, 80));
-		Icon icNgay = IconFontSwing.buildIcon(FontAwesome.CALENDAR, 20, new Color(91, 155, 213));
-		Icon icTim = IconFontSwing.buildIcon(FontAwesome.SEARCH, 20, Color.black);
-		Icon icLamMoi = IconFontSwing.buildIcon(FontAwesome.REFRESH, 20, Color.blue);
-		Icon icDS = IconFontSwing.buildIcon(FontAwesome.LIST_OL, 20, Color.orange);
-		Icon icXoa = IconFontSwing.buildIcon(FontAwesome.TIMES, 20, Color.red);
-		Icon icSua = IconFontSwing.buildIcon(FontAwesome.WRENCH, 20, Color.darkGray);
-		Icon icThanhToan = IconFontSwing.buildIcon(FontAwesome.CART_PLUS, 25, new Color(0, 176, 80));
-		Icon icThoat = IconFontSwing.buildIcon(FontAwesome.SIGN_OUT, 20, Color.darkGray);
+		Icon icThoat = IconFontSwing.buildIcon(FontAwesome.ARROW_LEFT, 20, Color.darkGray);
 		Icon icdoimk = IconFontSwing.buildIcon(FontAwesome.EXCHANGE, 20, Color.darkGray);
 		btnquaylai.setIcon(icThoat);
 		btndoimatkhau.setIcon(icdoimk);
@@ -209,27 +157,28 @@ public class FrmQuenMatKhau extends JFrame implements ActionListener {
 
 	}
 
-	private static class RoundedBorder implements Border {
+//	private static class RoundedBorder implements Border {
+//
+//		private int radius;
+//
+//		RoundedBorder(int radius) {
+//			this.radius = radius;
+//		}
+//
+//		public Insets getBorderInsets(Component c) {
+//			return new Insets(this.radius + 1, this.radius + 1, this.radius + 2, this.radius);
+//		}
+//
+//		public boolean isBorderOpaque() {
+//			return true;
+//		}
+//
+//		public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
+//			g.drawRoundRect(x, y, width - 1, height - 1, radius, radius);
+//		}
+//	}
 
-		private int radius;
-
-		RoundedBorder(int radius) {
-			this.radius = radius;
-		}
-
-		public Insets getBorderInsets(Component c) {
-			return new Insets(this.radius + 1, this.radius + 1, this.radius + 2, this.radius);
-		}
-
-		public boolean isBorderOpaque() {
-			return true;
-		}
-
-		public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
-			g.drawRoundRect(x, y, width - 1, height - 1, radius, radius);
-		}
-	}
-
+	@SuppressWarnings("deprecation")
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
@@ -240,13 +189,10 @@ public class FrmQuenMatKhau extends JFrame implements ActionListener {
 				frmDangNhap.setVisible(true);
 				setVisible(false);
 			} catch (MalformedURLException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			} catch (RemoteException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			} catch (NotBoundException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 		}
@@ -257,7 +203,6 @@ public class FrmQuenMatKhau extends JFrame implements ActionListener {
 			try {
 				nhanVien = nhanVienDao.getNhanVienTheoSoNV(tendangnhap);
 			} catch (RemoteException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 			if (tendangnhap.equals("") || sdt.equals("") || matkhaumoi.equals("")) {
@@ -270,7 +215,6 @@ public class FrmQuenMatKhau extends JFrame implements ActionListener {
 						tkDao.updateTaiKhoan(taiKhoan);
 						JOptionPane.showMessageDialog(null, "Đã cập nhật mật khẩu mới");
 					} catch (RemoteException e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 
