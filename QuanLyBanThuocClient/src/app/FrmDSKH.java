@@ -10,7 +10,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.io.UnsupportedEncodingException;
 import java.net.InetAddress;
 import java.net.MalformedURLException;
 import java.net.UnknownHostException;
@@ -19,25 +18,21 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.BorderFactory;
 import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
-
-import org.bson.types.ObjectId;
 
 import dao.CTHDDao;
 import dao.HoaDonDao;
@@ -51,29 +46,19 @@ import dao.ThuocDao;
 import entity.CTHD;
 import entity.HoaDon;
 import entity.KhachHang;
-import entity.NhanVien;
-import entity.Thuoc;
 import jiconfont.icons.font_awesome.FontAwesome;
 import jiconfont.swing.IconFontSwing;
 
-import javax.swing.ImageIcon;
-
 public class FrmDSKH extends JFrame implements  ActionListener,MouseListener,ItemListener{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3119054749493430978L;
 	private JPanel contentPane;
 	private JTable tbldsThuoc;
-	private JTable table;
 	private JTable tbldsKH;
-	private JTable table_1;
-	private CTHDDao cthdDao;
 	private HoaDonDao hoaDonDao;
-	private KhachHangDao khachHangDao;
-	private LoaiThuocDao loaiThuocDao;
-	private NhaCungCapDao NCCDao;
-	private NhanVienDao nhanVienDao;
-	private TaiKhoanDao tkDao;
-	private NuocSXDao nuocSXDao;
-	private ThuocDao thuocDao;
 	private DefaultTableModel modelthuoc1;
 	private DefaultTableModel modelKhachhang1;
 	private KhachHang khSelect;
@@ -111,15 +96,8 @@ public class FrmDSKH extends JFrame implements  ActionListener,MouseListener,Ite
 			e1.printStackTrace();
 		}
 		
-		cthdDao =  (CTHDDao) Naming.lookup("rmi://"+ip+":9999/cthdDao");
 		hoaDonDao =  (HoaDonDao) Naming.lookup("rmi://"+ip+":9999/hoaDonDao");
-		khachHangDao = (KhachHangDao) Naming.lookup("rmi://"+ip+":9999/khachHangDao");
-		loaiThuocDao =  (LoaiThuocDao) Naming.lookup("rmi://"+ip+":9999/loaiThuocDao");
-		NCCDao =  (NhaCungCapDao) Naming.lookup("rmi://"+ip+":9999/nhaCungCapDao");
-		nhanVienDao =  (NhanVienDao) Naming.lookup("rmi://"+ip+":9999/nhanVienDao");
-		nuocSXDao =  (NuocSXDao) Naming.lookup("rmi://"+ip+":9999/nuocSXDao");
-		tkDao =  (TaiKhoanDao) Naming.lookup("rmi://"+ip+":9999/taiKhoanDao");
-		thuocDao =  (ThuocDao) Naming.lookup("rmi://"+ip+":9999/thuocDao");
+		
 		
 		JPanel panel = new JPanel();
 		panel.setBounds(0, 0, 998, 651);
@@ -241,7 +219,6 @@ public class FrmDSKH extends JFrame implements  ActionListener,MouseListener,Ite
 
 	@Override
 	public void itemStateChanged(ItemEvent e) {
-		// TODO Auto-generated method stub
 		
 	}
 
@@ -251,19 +228,15 @@ public class FrmDSKH extends JFrame implements  ActionListener,MouseListener,Ite
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		Object o = e.getSource();
-		 String sdt = null;
 		if(o.equals(tbldsKH)) {
-			int row = tbldsKH.getSelectedRow();
 			try {
 				modelthuoc1.setRowCount(0);
 				loadDataThuoc();
 			    
 			} catch (RemoteException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
 			
-			// click row --> lấy mã -->  tìm theo mã --> load vô table thuoc --> tính thanh tiền
 			
 
 		}
@@ -321,9 +294,7 @@ public class FrmDSKH extends JFrame implements  ActionListener,MouseListener,Ite
 	private void loadData() throws RemoteException{
 		
 		 List<HoaDon> dsHD = hoaDonDao.getHoaDonTheoMaKH(khSelect.getId());
-		 int i=0;
 		 for(HoaDon hd : dsHD) {
-			 i++;
 			 
 			 modelKhachhang1.addRow(new Object[] { hd.getId(), hd.getKhachHang().getTenKhachHang(),hd.getKhachHang().getSdt(),sf.format( hd.getNgayLap())});
 		 }
