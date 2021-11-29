@@ -538,6 +538,9 @@ public class FrmQuanLyThuoc extends JPanel implements ActionListener, MouseListe
 			txtsoluong.setText("");
 			txttenthuoc.setText("");
 			txttimkiemthuoc.setText("");
+			cboloaithuoc.setSelectedIndex(0);
+			cbonuocsx.setSelectedIndex(0);
+			cbotenncc.setSelectedIndex(0);
 			try {
 				lammoi();
 			} catch (RemoteException e1) {
