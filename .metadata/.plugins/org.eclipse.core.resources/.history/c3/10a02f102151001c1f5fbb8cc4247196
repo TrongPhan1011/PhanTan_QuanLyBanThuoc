@@ -219,7 +219,7 @@ public class FrmQLBH extends JPanel implements ActionListener,MouseListener,Item
 		txtSDT.setBorder(new LineBorder(new Color(91, 155, 213)));
 		pKH.add(txtSDT);
 
-		cboGioiTinh = new JComboBox<String>(); 
+		cboGioiTinh = new JComboBox<String>();
 		cboGioiTinh.setEditable(true);
 		cboGioiTinh.setBackground(Color.WHITE);
 		cboGioiTinh.setFont(new Font("SansSerif", Font.PLAIN, 15));

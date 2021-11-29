@@ -354,12 +354,6 @@ public class FrmQuanLyNhanVien extends JPanel implements ActionListener,MouseLis
 		btnsua.addActionListener(this);
 		btnhuy.addActionListener(this);
 		btntim.addActionListener(this);
-		
-		txthoten.setText("Nguyễn Thị Mai");
-		txtdiachi.setText("TP Hồ Chí Minh");
-		txtLuong.setText("5000000");
-		txtsdt.setText("0918050354");
-		
 	    tbl.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
 			
 			@Override

@@ -296,9 +296,6 @@ public class DSHD extends JFrame implements  ActionListener,MouseListener,ItemLi
 				e1.printStackTrace();
 			}
 	    	}
-	    	if(modelKhachhang.getRowCount()==0) {
-	    		JOptionPane.showMessageDialog(this, "Không có kết quả tìm kiếm");
-	    	}
 			
 	    }
 	    if(o.equals(btnLammoi)) {
