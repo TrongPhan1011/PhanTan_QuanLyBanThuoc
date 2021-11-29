@@ -148,15 +148,15 @@ public class FrmQuanLyNhanVien extends JPanel implements ActionListener,MouseLis
 //		tkDao =  (TaiKhoanDao) Naming.lookup("rmi://192.168.1.9:9999/taiKhoanDao");
 //		thuocDao =  (ThuocDao) Naming.lookup("rmi://192.168.1.9:9999/thuocDao");
 		 
-		 cthdDao = (CTHDDao) Naming.lookup("rmi://192.168.1.6:9999/cthdDao");
-			hoaDonDao = (HoaDonDao) Naming.lookup("rmi://192.168.1.6:9999/hoaDonDao");
-			khachHangDao = (KhachHangDao) Naming.lookup("rmi://192.168.1.6:9999/khachHangDao");
-			loaiThuocDao = (LoaiThuocDao) Naming.lookup("rmi://192.168.1.6:9999/loaiThuocDao");
-			NCCDao = (NhaCungCapDao) Naming.lookup("rmi://192.168.1.6:9999/nhaCungCapDao");
-			nhanVienDao = (NhanVienDao) Naming.lookup("rmi://192.168.1.6:9999/nhanVienDao");
-			nuocSXDao = (NuocSXDao) Naming.lookup("rmi://192.168.1.6:9999/nuocSXDao");
-			tkDao = (TaiKhoanDao) Naming.lookup("rmi://192.168.1.6:9999/taiKhoanDao");
-			thuocDao = (ThuocDao) Naming.lookup("rmi://192.168.1.6:9999/thuocDao");
+//		 cthdDao = (CTHDDao) Naming.lookup("rmi://192.168.1.6:9999/cthdDao");
+//			hoaDonDao = (HoaDonDao) Naming.lookup("rmi://192.168.1.6:9999/hoaDonDao");
+//			khachHangDao = (KhachHangDao) Naming.lookup("rmi://192.168.1.6:9999/khachHangDao");
+//			loaiThuocDao = (LoaiThuocDao) Naming.lookup("rmi://192.168.1.6:9999/loaiThuocDao");
+//			NCCDao = (NhaCungCapDao) Naming.lookup("rmi://192.168.1.6:9999/nhaCungCapDao");
+//			nhanVienDao = (NhanVienDao) Naming.lookup("rmi://192.168.1.6:9999/nhanVienDao");
+//			nuocSXDao = (NuocSXDao) Naming.lookup("rmi://192.168.1.6:9999/nuocSXDao");
+//			tkDao = (TaiKhoanDao) Naming.lookup("rmi://192.168.1.6:9999/taiKhoanDao");
+//			thuocDao = (ThuocDao) Naming.lookup("rmi://192.168.1.6:9999/thuocDao");
 		 
 		frame = new JFrame();
 		frame.setBounds(0, 0, 1043, 736);
@@ -233,6 +233,8 @@ public class FrmQuanLyNhanVien extends JPanel implements ActionListener,MouseLis
 	    datengaysinh = new JDateChooser();
 		datengaysinh.setBounds(867, 227, 190, 28);
 		datengaysinh.setDateFormatString("dd/MM/yyyy");
+		datengaysinh.setBorder(BorderFactory.createLineBorder(Color.CYAN));
+		datengaysinh.setBorder(new LineBorder(new Color(91, 155, 213)));
 		pMain.add(datengaysinh);
 		
 		JLabel lbldiachi = new JLabel("Địa chỉ:");
@@ -254,12 +256,13 @@ public class FrmQuanLyNhanVien extends JPanel implements ActionListener,MouseLis
 		pMain.add(lblgioitinh);
 		
 		cboGT = new JComboBox<String>();
-		cboGT.setBounds(511, 265, 190, 32);
 		cboGT.setFont(new Font("SansSerif", Font.PLAIN, 15));
+		cboGT.setBorder(BorderFactory.createLineBorder(Color.CYAN));
+		cboGT.setBounds(511, 265, 190, 32);
 		cboGT.setBorder(new LineBorder(new Color(91, 155, 213)));
 		cboGT.addItem("Nam");
 		cboGT.addItem("Nữ");
-		cboGT.setBorder(BorderFactory.createLineBorder(Color.CYAN));
+	
 		pMain.add(cboGT);
 		
 		JLabel lblchucvu = new JLabel("Chức vụ");
@@ -317,7 +320,7 @@ public class FrmQuanLyNhanVien extends JPanel implements ActionListener,MouseLis
 		btnLammoi.setBounds(576, 359, 107, 33);
 		pMain.add(btnLammoi);
 		
-		btnhuy = new JButton("Hủy tài khoản");
+		btnhuy = new JButton("Xóa nhân viên");
 		btnhuy.setForeground(Color.BLACK);
 		btnhuy.setFont(new Font("SansSerif", Font.BOLD, 15));
 		btnhuy.setBackground(Color.CYAN);
@@ -367,7 +370,7 @@ public class FrmQuanLyNhanVien extends JPanel implements ActionListener,MouseLis
 		btnsua.setIcon(icSua);
 		btnLammoi.setIcon(icLamMoi);
 		btnhuy.setIcon(icXoa);
-		//datengaysinh.setIcon()
+		datengaysinh.setIcon((ImageIcon) icNgay);
 		
 	
 		loadData();

@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.BorderFactory;
+import javax.swing.Icon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -50,6 +51,9 @@ import entity.HoaDon;
 import entity.KhachHang;
 import entity.NhanVien;
 import entity.Thuoc;
+import jiconfont.icons.font_awesome.FontAwesome;
+import jiconfont.swing.IconFontSwing;
+
 import javax.swing.ImageIcon;
 
 public class FrmDSKH extends JFrame implements  ActionListener,MouseListener,ItemListener{
@@ -104,6 +108,8 @@ public class FrmDSKH extends JFrame implements  ActionListener,MouseListener,Ite
 		tkDao = (TaiKhoanDao) Naming.lookup("rmi://192.168.1.8:9999/taiKhoanDao");
 		thuocDao = (ThuocDao) Naming.lookup("rmi://192.168.1.8:9999/thuocDao");
 		
+		IconFontSwing.register(FontAwesome.getIconFont());
+		Icon icLamMoi = IconFontSwing.buildIcon(FontAwesome.REFRESH, 20, Color.blue);
 		
 		JPanel panel = new JPanel();
 		panel.setBounds(0, 0, 998, 651);
@@ -115,7 +121,7 @@ public class FrmDSKH extends JFrame implements  ActionListener,MouseListener,Ite
 		panel.add(panel_1);
 		panel_1.setLayout(null);
 		
-		JLabel lblTieude = new JLabel("Chi tiết thông tin khách hàng");
+		JLabel lblTieude = new JLabel("Chi tiết hóa đơn");
 		lblTieude.setFont(new Font("SansSerif", Font.BOLD, 25));
 		lblTieude.setBounds(10, 20, 353, 48);
 		panel_1.add(lblTieude);
@@ -187,11 +193,11 @@ public class FrmDSKH extends JFrame implements  ActionListener,MouseListener,Ite
 		btnLammoi = new JButton("Làm mới");
 		btnLammoi.setBackground(Color.CYAN);
 		btnLammoi.setFont(new Font("SansSerif", Font.BOLD, 15));
-		btnLammoi.setBounds(875, 34, 108, 34);
+		btnLammoi.setBounds(885, 31, 108, 34);
 		panel_1.add(btnLammoi);
 		
 		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\USER\\Desktop\\QuanLyBanThuoc\\QuanLyBanThuoc\\data\\img\\bg.png"));
+		lblNewLabel.setIcon(new ImageIcon("data\\img\\bg.png"));
 		lblNewLabel.setBounds(0, 10, 1039, 661);
 		panel_1.add(lblNewLabel);
 		
@@ -206,6 +212,8 @@ public class FrmDSKH extends JFrame implements  ActionListener,MouseListener,Ite
 				frm.setVisible(true);
 			}
 		});
+		
+		btnLammoi.setIcon(icLamMoi);
 		loadData();
 //		lblthanhtien +=modelKhachhang1.
 		

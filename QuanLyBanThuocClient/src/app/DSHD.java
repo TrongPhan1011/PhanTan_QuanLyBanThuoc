@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.BorderFactory;
+import javax.swing.Icon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -50,6 +51,9 @@ import dao.ThuocDao;
 import entity.KhachHang;
 import entity.NhanVien;
 import entity.Thuoc;
+import jiconfont.icons.font_awesome.FontAwesome;
+import jiconfont.swing.IconFontSwing;
+
 import javax.swing.ImageIcon;
 
 public class DSHD extends JFrame implements  ActionListener,MouseListener,ItemListener{
@@ -85,7 +89,7 @@ public class DSHD extends JFrame implements  ActionListener,MouseListener,ItemLi
 	 */
 	public DSHD(JFrame frm) throws MalformedURLException, RemoteException, NotBoundException {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(0, 0, 1012, 683);
+		setBounds(0, 0, 1004, 683);
 		setLocationRelativeTo(null);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -102,6 +106,15 @@ public class DSHD extends JFrame implements  ActionListener,MouseListener,ItemLi
 		tkDao = (TaiKhoanDao) Naming.lookup("rmi://192.168.1.8:9999/taiKhoanDao");
 		thuocDao = (ThuocDao) Naming.lookup("rmi://192.168.1.8:9999/thuocDao");
 		
+		IconFontSwing.register(FontAwesome.getIconFont());
+		Icon icThem = IconFontSwing.buildIcon(FontAwesome.PLUS, 20, new Color(0, 176, 80));
+		Icon icNgay = IconFontSwing.buildIcon(FontAwesome.CALENDAR, 20, new Color(91, 155, 213));
+		Icon icTim = IconFontSwing.buildIcon(FontAwesome.SEARCH, 20, Color.black);
+		Icon icLamMoi = IconFontSwing.buildIcon(FontAwesome.REFRESH, 20, Color.blue);
+		Icon icDS = IconFontSwing.buildIcon(FontAwesome.LIST_OL, 20, Color.orange);
+		Icon icXoa = IconFontSwing.buildIcon(FontAwesome.TIMES, 20, Color.red);
+		Icon icSua = IconFontSwing.buildIcon(FontAwesome.WRENCH, 20, Color.darkGray);
+		Icon icThanhToan = IconFontSwing.buildIcon(FontAwesome.CART_PLUS, 25, new Color(0, 176, 80));
 		
 		JPanel panel = new JPanel();
 		panel.setBounds(0, 0, 998, 651);
@@ -180,13 +193,16 @@ public class DSHD extends JFrame implements  ActionListener,MouseListener,ItemLi
 	    btnLammoi = new JButton("Làm mới");
 		btnLammoi.setBackground(Color.CYAN);
 		btnLammoi.setFont(new Font("SansSerif", Font.BOLD, 15));
-		btnLammoi.setBounds(875, 34, 108, 34);
+		btnLammoi.setBounds(885, 34, 108, 34);
 		panel_1.add(btnLammoi);
 		
 		JLabel label = new JLabel("New label");
-		label.setIcon(new ImageIcon("C:\\Users\\USER\\Desktop\\QuanLyBanThuoc\\QuanLyBanThuoc\\data\\img\\bg.png"));
-		label.setBounds(0, 20, 1028, 651);
+		label.setIcon(new ImageIcon("data\\img\\bg.png"));
+		label.setBounds(0, 10, 1028, 661);
 		panel_1.add(label);
+		
+		btntim.setIcon(icThem);
+		btnLammoi.setIcon(icLamMoi);
 		
 		
 		
