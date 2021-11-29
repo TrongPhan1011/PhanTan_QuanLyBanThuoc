@@ -206,15 +206,15 @@ public class DSHD extends JFrame implements  ActionListener,MouseListener,ItemLi
 		btnLammoi.setBounds(885, 34, 108, 34);
 		panel_1.add(btnLammoi);
 		
+<<<<<<< HEAD
 		JLabel label = new JLabel("New label");
 		label.setIcon(new ImageIcon("data\\img\\bg.png"));
 		label.setBounds(0, 10, 1028, 661);
-		
-//		JLabel label1 = new JLabel("");
-//		label1.setIcon(new ImageIcon("data\\img\\bg.png"));
-//		label1.setBounds(0, 20, 1028, 651);
-
-		
+=======
+		JLabel label = new JLabel("");
+		label.setIcon(new ImageIcon("data\\img\\bg.png"));
+		label.setBounds(0, 20, 1028, 651);
+>>>>>>> 27a6f821e2b4fa5e7d09edc39775029197d6b223
 		panel_1.add(label);
 		
 		btntim.setIcon(icThem);

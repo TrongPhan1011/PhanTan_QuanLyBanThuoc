@@ -44,7 +44,6 @@ public class AddObject {
 //		NuocSXDao nuocSXDao =  (NuocSXDao) Naming.lookup("rmi://192.168.1.9:9999/nuocSXDao");
 //		TaiKhoanDao tkDao =  (TaiKhoanDao) Naming.lookup("rmi://192.168.1.9:9999/taiKhoanDao");
 //		ThuocDao thuocDao =  (ThuocDao) Naming.lookup("rmi://192.168.1.9:9999/thuocDao");
-<<<<<<< HEAD
 		
 //		//Id của Thanh
 		CTHDDao cthdDao =  (CTHDDao) Naming.lookup("rmi://192.168.1.8:9999/cthdDao");
@@ -56,7 +55,6 @@ public class AddObject {
 		NuocSXDao nuocSXDao =  (NuocSXDao) Naming.lookup("rmi://192.168.1.8:9999/nuocSXDao");
 		TaiKhoanDao tkDao =  (TaiKhoanDao) Naming.lookup("rmi://192.168.1.8:9999/taiKhoanDao");
 		ThuocDao thuocDao =  (ThuocDao) Naming.lookup("rmi://192.168.1.8:9999/thuocDao");
-=======
 //		
 //		//Id của Thanh
 //		CTHDDao cthdDao =  (CTHDDao) Naming.lookup("rmi://192.168.1.8:9999/cthdDao");
@@ -69,16 +67,15 @@ public class AddObject {
 //		TaiKhoanDao tkDao =  (TaiKhoanDao) Naming.lookup("rmi://192.168.1.8:9999/taiKhoanDao");
 //		ThuocDao thuocDao =  (ThuocDao) Naming.lookup("rmi://192.168.1.8:9999/thuocDao");
 		
-		CTHDDao cthdDao = (CTHDDao) Naming.lookup("rmi://192.168.1.6:9999/cthdDao");
-		HoaDonDao hoaDonDao = (HoaDonDao) Naming.lookup("rmi://192.168.1.6:9999/hoaDonDao");
-		KhachHangDao khachHangDao = (KhachHangDao) Naming.lookup("rmi://192.168.1.6:9999/khachHangDao");
-		LoaiThuocDao loaiThuocDao = (LoaiThuocDao) Naming.lookup("rmi://192.168.1.6:9999/loaiThuocDao");
-		NhaCungCapDao NCCDao = (NhaCungCapDao) Naming.lookup("rmi://192.168.1.6:9999/nhaCungCapDao");
-		NhanVienDao nhanVienDao = (NhanVienDao) Naming.lookup("rmi://192.168.1.6:9999/nhanVienDao");
-		NuocSXDao nuocSXDao = (NuocSXDao) Naming.lookup("rmi://192.168.1.6:9999/nuocSXDao");
-		TaiKhoanDao tkDao = (TaiKhoanDao) Naming.lookup("rmi://192.168.1.6:9999/taiKhoanDao");
-		ThuocDao thuocDao = (ThuocDao) Naming.lookup("rmi://192.168.1.6:9999/thuocDao");
->>>>>>> c02bc1f8b54e5f4f3853e399d33ceb45b37dd3b2
+//		CTHDDao cthdDao = (CTHDDao) Naming.lookup("rmi://192.168.1.6:9999/cthdDao");
+//		HoaDonDao hoaDonDao = (HoaDonDao) Naming.lookup("rmi://192.168.1.6:9999/hoaDonDao");
+//		KhachHangDao khachHangDao = (KhachHangDao) Naming.lookup("rmi://192.168.1.6:9999/khachHangDao");
+//		LoaiThuocDao loaiThuocDao = (LoaiThuocDao) Naming.lookup("rmi://192.168.1.6:9999/loaiThuocDao");
+//		NhaCungCapDao NCCDao = (NhaCungCapDao) Naming.lookup("rmi://192.168.1.6:9999/nhaCungCapDao");
+//		NhanVienDao nhanVienDao = (NhanVienDao) Naming.lookup("rmi://192.168.1.6:9999/nhanVienDao");
+//		NuocSXDao nuocSXDao = (NuocSXDao) Naming.lookup("rmi://192.168.1.6:9999/nuocSXDao");
+//		TaiKhoanDao tkDao = (TaiKhoanDao) Naming.lookup("rmi://192.168.1.6:9999/taiKhoanDao");
+//		ThuocDao thuocDao = (ThuocDao) Naming.lookup("rmi://192.168.1.6:9999/thuocDao");
 //	
 //
 //	
@@ -198,12 +195,11 @@ public class AddObject {
 		Thuoc t1 = new Thuoc("Telfast HD 180mg", 75000.00, 500, new Date(2020-9-9), new Date(2022-05-15), "Còn bán", lt1, nsx1 , ncc1 );
 		Thuoc t2 = new Thuoc("Medoral (Chai 250ml) ", 85000.00, 30, new Date(2020-06-02), new Date(2022-06-16), "Còn bán", lt2, nsx2 , ncc2 );
 		Thuoc t3 = new Thuoc("Postinor 1 1.5mg", 33000.00, 130, new Date(2021-01-9), new Date(2022-02-12), "Còn bán", lt3, nsx3 , ncc3 );
-		thuocDao.addThuoc(t1);
-		thuocDao.addThuoc(t2);
-		thuocDao.addThuoc(t3);
+//		thuocDao.addThuoc(t1);
+//		thuocDao.addThuoc(t2);
+//		thuocDao.addThuoc(t3);
 		
 		
-<<<<<<< HEAD
 		//LoaiThuoc lt = loaiThuocDao.getLoaiThuocTheoTen(lt2.getTenLoai());
 		
 //		Thuoc t4 = new Thuoc("Telfast HD 180mg", 75000.00, 500, new Date(2020-9-9), new Date(2022-05-15), "Còn bán", lt, nsx1 , ncc1 );
@@ -228,10 +224,8 @@ public class AddObject {
 		//Thuoc t2 = new Thuoc("Teladf", 75000.00, 500, new Date(2020-9-9), new Date(2022-05-15), "Còn bán", lt1, nsx1 , ncc1 );
 		
 //		HoaDon hd = new HoaDon(ngaylap, nhanvienlap, khachhang, listCTHD)
-=======
 		
 		
->>>>>>> c02bc1f8b54e5f4f3853e399d33ceb45b37dd3b2
 		
 
 		
