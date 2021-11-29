@@ -45,15 +45,7 @@ import javax.swing.table.JTableHeader;
 
 import com.toedter.calendar.JDateChooser;
 
-import dao.CTHDDao;
-import dao.HoaDonDao;
-import dao.KhachHangDao;
-import dao.LoaiThuocDao;
-import dao.NhaCungCapDao;
 import dao.NhanVienDao;
-import dao.NuocSXDao;
-import dao.TaiKhoanDao;
-import dao.ThuocDao;
 import entity.NhanVien;
 import entity.TaiKhoan;
 import jiconfont.icons.font_awesome.FontAwesome;
@@ -83,24 +75,15 @@ public class FrmQuanLyNhanVien extends JPanel implements ActionListener,MouseLis
 	
 	private DefaultTableModel modelNhanVien;
 	private JDateChooser datengaysinh;
-	private HoaDonDao hoaDonDao;
-	private KhachHangDao khachHangDao;
-	private LoaiThuocDao loaiThuocDao;
-	private NhaCungCapDao NCCDao;
 	private NhanVienDao nhanVienDao;
-	private NuocSXDao nuocSXDao;
-	private TaiKhoanDao tkDao;
-	private ThuocDao thuocDao;
 	private JLabel lblLuong;
 	private JTextField txtLuong;
 	private List<NhanVien> dsNV;
 	private int currentIndex = 0;
 
-	private Regex regex;
 	private Date now;
 	private SimpleDateFormat ngay;
 
-	private CTHDDao cthdDao;
 
 
 
@@ -124,15 +107,7 @@ public class FrmQuanLyNhanVien extends JPanel implements ActionListener,MouseLis
 			e1.printStackTrace();
 		}
 		
-		cthdDao =  (CTHDDao) Naming.lookup("rmi://"+ip+":9999/cthdDao");
-		hoaDonDao =  (HoaDonDao) Naming.lookup("rmi://"+ip+":9999/hoaDonDao");
-		khachHangDao = (KhachHangDao) Naming.lookup("rmi://"+ip+":9999/khachHangDao");
-		loaiThuocDao =  (LoaiThuocDao) Naming.lookup("rmi://"+ip+":9999/loaiThuocDao");
-		NCCDao =  (NhaCungCapDao) Naming.lookup("rmi://"+ip+":9999/nhaCungCapDao");
 		nhanVienDao =  (NhanVienDao) Naming.lookup("rmi://"+ip+":9999/nhanVienDao");
-		nuocSXDao =  (NuocSXDao) Naming.lookup("rmi://"+ip+":9999/nuocSXDao");
-		tkDao =  (TaiKhoanDao) Naming.lookup("rmi://"+ip+":9999/taiKhoanDao");
-		thuocDao =  (ThuocDao) Naming.lookup("rmi://"+ip+":9999/thuocDao");
 
 		 
 		frame = new JFrame();
@@ -142,7 +117,6 @@ public class FrmQuanLyNhanVien extends JPanel implements ActionListener,MouseLis
 		
 		IconFontSwing.register(FontAwesome.getIconFont());
 		
-		 regex = new Regex();
          ngay = new SimpleDateFormat("dd/MM/yyyy");		
 		JPanel pMain = new JPanel();
 		pMain.setBackground(Color.WHITE);
