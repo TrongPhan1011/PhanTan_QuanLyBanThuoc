@@ -10,7 +10,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.io.UnsupportedEncodingException;
 import java.net.InetAddress;
 import java.net.MalformedURLException;
 import java.net.UnknownHostException;
@@ -18,13 +17,12 @@ import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.text.DateFormat;
-import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -41,40 +39,24 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
-import dao.CTHDDao;
-import dao.HoaDonDao;
 import dao.KhachHangDao;
-import dao.LoaiThuocDao;
-import dao.NhaCungCapDao;
-import dao.NhanVienDao;
-import dao.NuocSXDao;
-import dao.TaiKhoanDao;
-import dao.ThuocDao;
 import entity.KhachHang;
-import entity.NhanVien;
-import entity.Thuoc;
 import jiconfont.icons.font_awesome.FontAwesome;
 import jiconfont.swing.IconFontSwing;
 
-import javax.swing.ImageIcon;
-
 public class DSHD extends JFrame implements  ActionListener,MouseListener,ItemListener{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4766166017970292133L;
 	private JPanel contentPane;
 	private JTextField txtTim;
-	private JTable table;
+
 	private JTable tbldsKH;
-	private JTable table_1;
-	private CTHDDao cthdDao;
-	private HoaDonDao hoaDonDao;
+
 	private KhachHangDao khachHangDao;
-	private LoaiThuocDao loaiThuocDao;
-	private NhaCungCapDao NCCDao;
-	private NhanVienDao nhanVienDao;
-	private TaiKhoanDao tkDao;
-	private NuocSXDao nuocSXDao;
-	private ThuocDao thuocDao;
-	private DefaultTableModel modelthuoc;
+
 	private DefaultTableModel modelKhachhang;
 	private JButton btntim;
 	private JButton btnLammoi;
@@ -106,25 +88,15 @@ public class DSHD extends JFrame implements  ActionListener,MouseListener,ItemLi
 			e1.printStackTrace();
 		}
 		
-		cthdDao =  (CTHDDao) Naming.lookup("rmi://"+ip+":9999/cthdDao");
-		hoaDonDao =  (HoaDonDao) Naming.lookup("rmi://"+ip+":9999/hoaDonDao");
+		
 		khachHangDao = (KhachHangDao) Naming.lookup("rmi://"+ip+":9999/khachHangDao");
-		loaiThuocDao =  (LoaiThuocDao) Naming.lookup("rmi://"+ip+":9999/loaiThuocDao");
-		NCCDao =  (NhaCungCapDao) Naming.lookup("rmi://"+ip+":9999/nhaCungCapDao");
-		nhanVienDao =  (NhanVienDao) Naming.lookup("rmi://"+ip+":9999/nhanVienDao");
-		nuocSXDao =  (NuocSXDao) Naming.lookup("rmi://"+ip+":9999/nuocSXDao");
-		tkDao =  (TaiKhoanDao) Naming.lookup("rmi://"+ip+":9999/taiKhoanDao");
-		thuocDao =  (ThuocDao) Naming.lookup("rmi://"+ip+":9999/thuocDao");
+		
 		
 		IconFontSwing.register(FontAwesome.getIconFont());
-		Icon icThem = IconFontSwing.buildIcon(FontAwesome.PLUS, 20, new Color(0, 176, 80));
-		Icon icNgay = IconFontSwing.buildIcon(FontAwesome.CALENDAR, 20, new Color(91, 155, 213));
+	
 		Icon icTim = IconFontSwing.buildIcon(FontAwesome.SEARCH, 20, Color.black);
 		Icon icLamMoi = IconFontSwing.buildIcon(FontAwesome.REFRESH, 20, Color.blue);
-		Icon icDS = IconFontSwing.buildIcon(FontAwesome.LIST_OL, 20, Color.orange);
-		Icon icXoa = IconFontSwing.buildIcon(FontAwesome.TIMES, 20, Color.red);
-		Icon icSua = IconFontSwing.buildIcon(FontAwesome.WRENCH, 20, Color.darkGray);
-		Icon icThanhToan = IconFontSwing.buildIcon(FontAwesome.CART_PLUS, 25, new Color(0, 176, 80));
+		
 		
 		JPanel panel = new JPanel();
 		panel.setBounds(0, 0, 998, 651);
@@ -161,12 +133,7 @@ public class DSHD extends JFrame implements  ActionListener,MouseListener,ItemLi
 		panel_1.add(btntim);
 		
 		
-		String column[] = { "Tên thuốc","Loại thuốc", "Nước sản xuất","Số lượng","Đơn giá","Tổng tiền"};
-	    modelthuoc = new DefaultTableModel(column, 0);
-//		tbHeader1.setBackground(new Color(91, 155, 213,80));
-//		tbHeader1.setForeground(Color.CYAN);
-//		tbHeader1.setFont(new Font("SansSerif", Font.BOLD, 20));
-//		
+		
 		JPanel pKH = new JPanel();
 		pKH.setBounds(10, 79, 983, 552);
 		panel_1.add(pKH);
@@ -253,7 +220,7 @@ public class DSHD extends JFrame implements  ActionListener,MouseListener,ItemLi
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		Object o = e.getSource();
-		 String tenKH = null;
+		
 		if(o.equals(tbldsKH)) {
 			int row = tbldsKH.getSelectedRow();
 			String sdt = modelKhachhang.getValueAt(row, 4).toString();
@@ -341,6 +308,7 @@ public class DSHD extends JFrame implements  ActionListener,MouseListener,ItemLi
 	    }
 		
 	}
+	@SuppressWarnings("unused")
 	private void taiDuLieuLenBang(List<KhachHang> dsKH) {
 		modelKhachhang.getDataVector().removeAllElements();
 		modelKhachhang.fireTableDataChanged();
@@ -379,16 +347,11 @@ public class DSHD extends JFrame implements  ActionListener,MouseListener,ItemLi
 		
 		
 		KhachHang kh = khachHangDao.getKHTheoSDT(text);
-		DecimalFormat df = new DecimalFormat("###,###,###.####");
 		DateFormat dfd = new SimpleDateFormat("dd/MM/yyyy");
 		int i=1;
 		modelKhachhang.setRowCount(0);
 		modelKhachhang.addRow(new Object[] {i, kh.getTenKhachHang(),dfd.format(kh.getNgaySinh()),kh.getGioiTinh(),kh.getSdt()});	
 		
-//		for(KhachHang khachHang : dsKH) {
-//			i++;
-//			modelKhachhang.addRow(new Object[] {i, khachHang.getTenKhachHang(),dfd.format(khachHang.getNgaySinh()),khachHang.getGioiTinh(),khachHang.getSdt()});	
-//		}
     
 	
 	}
