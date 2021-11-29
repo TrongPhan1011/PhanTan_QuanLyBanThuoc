@@ -210,14 +210,14 @@ public class FrmQuanLyNhanVien extends JPanel implements ActionListener,MouseLis
 		txttim.setColumns(10);
 		txttim.setFont(new Font("SansSerif", Font.PLAIN, 15));
 		txttim.setBorder(BorderFactory.createLineBorder(Color.CYAN));
-		txttim.setBounds(709, 174, 228, 32);
+		txttim.setBounds(711, 174, 228, 32);
 		txttim.setBorder(new LineBorder(new Color(91, 155, 213)));
 		pMain.add(txttim);
 		
 		btntim = new JButton("Tìm");
 		btntim.setFont(new Font("Tahoma", Font.BOLD, 15));
 		btntim.setBackground(new Color(41, 242, 255));
-		btntim.setBounds(949, 176, 108, 32);
+		btntim.setBounds(949, 174, 108, 32);
 		pMain.add(btntim);
 		
 		JLabel lblhoten = new JLabel("Họ và tên:");
