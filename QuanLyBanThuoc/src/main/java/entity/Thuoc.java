@@ -14,12 +14,18 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.bson.types.ObjectId;
+import org.hibernate.ogm.options.shared.IndexOption;
+import org.hibernate.ogm.options.shared.IndexOptions;
 
 
 @Entity
 @Table(name = "dsThuoc",indexes = {
 		@Index(columnList = "tenThuoc",name="tenThuoc_Indexes")
+		
 })
+@IndexOptions(
+	    @IndexOption(forIndex = "tenThuoc_Indexes", options = "{ text: true}"))
+
 public class Thuoc implements Serializable{
 	/**
 	 * 

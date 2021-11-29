@@ -33,81 +33,34 @@ public class AddObject {
 			System.setProperty("java.security.policy","rmi/quanLyBanThuoc.policy");
 			System.setSecurityManager(new SecurityManager());
 		}
-//		
-//		//Id của Trọng
-//		CTHDDao cthdDao =  (CTHDDao) Naming.lookup("rmi://192.168.1.9:9999/cthdDao");
-//		HoaDonDao hoaDonDao =  (HoaDonDao) Naming.lookup("rmi://192.168.1.9:9999/hoaDonDao");
-//	    KhachHangDao khachHangDao = (KhachHangDao) Naming.lookup("rmi://192.168.1.9:9999/khachHangDao");
-//		LoaiThuocDao loaiThuocDao =  (LoaiThuocDao) Naming.lookup("rmi://192.168.1.9:9999/loaiThuocDao");
-//		NhaCungCapDao NCCDao =  (NhaCungCapDao) Naming.lookup("rmi://192.168.1.9:9999/nhaCungCapDao");
-//		NhanVienDao nhanVienDao =  (NhanVienDao) Naming.lookup("rmi://192.168.1.9:9999/nhanVienDao");
-//		NuocSXDao nuocSXDao =  (NuocSXDao) Naming.lookup("rmi://192.168.1.9:9999/nuocSXDao");
-//		TaiKhoanDao tkDao =  (TaiKhoanDao) Naming.lookup("rmi://192.168.1.9:9999/taiKhoanDao");
-//		ThuocDao thuocDao =  (ThuocDao) Naming.lookup("rmi://192.168.1.9:9999/thuocDao");
-		
-//		//Id của Thanh
-		CTHDDao cthdDao =  (CTHDDao) Naming.lookup("rmi://192.168.1.8:9999/cthdDao");
-		HoaDonDao hoaDonDao =  (HoaDonDao) Naming.lookup("rmi://192.168.1.8:9999/hoaDonDao");
-	    KhachHangDao khachHangDao = (KhachHangDao) Naming.lookup("rmi://192.168.1.8:9999/khachHangDao");
-		LoaiThuocDao loaiThuocDao =  (LoaiThuocDao) Naming.lookup("rmi://192.168.1.8:9999/loaiThuocDao");
-		NhaCungCapDao NCCDao =  (NhaCungCapDao) Naming.lookup("rmi://192.168.1.8:9999/nhaCungCapDao");
-		NhanVienDao nhanVienDao =  (NhanVienDao) Naming.lookup("rmi://192.168.1.8:9999/nhanVienDao");
-		NuocSXDao nuocSXDao =  (NuocSXDao) Naming.lookup("rmi://192.168.1.8:9999/nuocSXDao");
-		TaiKhoanDao tkDao =  (TaiKhoanDao) Naming.lookup("rmi://192.168.1.8:9999/taiKhoanDao");
-		ThuocDao thuocDao =  (ThuocDao) Naming.lookup("rmi://192.168.1.8:9999/thuocDao");
-//		
-//		//Id của Thanh
-//		CTHDDao cthdDao =  (CTHDDao) Naming.lookup("rmi://192.168.1.8:9999/cthdDao");
-//		HoaDonDao hoaDonDao =  (HoaDonDao) Naming.lookup("rmi://192.168.1.8:9999/hoaDonDao");
-//	    KhachHangDao khachHangDao = (KhachHangDao) Naming.lookup("rmi://192.168.1.8:9999/khachHangDao");
-//		LoaiThuocDao loaiThuocDao =  (LoaiThuocDao) Naming.lookup("rmi://192.168.1.8:9999/loaiThuocDao");
-//		NhaCungCapDao NCCDao =  (NhaCungCapDao) Naming.lookup("rmi://192.168.1.8:9999/nhaCungCapDao");
-//		NhanVienDao nhanVienDao =  (NhanVienDao) Naming.lookup("rmi://192.168.1.8:9999/nhanVienDao");
-//		NuocSXDao nuocSXDao =  (NuocSXDao) Naming.lookup("rmi://192.168.1.8:9999/nuocSXDao");
-//		TaiKhoanDao tkDao =  (TaiKhoanDao) Naming.lookup("rmi://192.168.1.8:9999/taiKhoanDao");
-//		ThuocDao thuocDao =  (ThuocDao) Naming.lookup("rmi://192.168.1.8:9999/thuocDao");
-		
-//		CTHDDao cthdDao = (CTHDDao) Naming.lookup("rmi://192.168.1.6:9999/cthdDao");
-//		HoaDonDao hoaDonDao = (HoaDonDao) Naming.lookup("rmi://192.168.1.6:9999/hoaDonDao");
-//		KhachHangDao khachHangDao = (KhachHangDao) Naming.lookup("rmi://192.168.1.6:9999/khachHangDao");
-//		LoaiThuocDao loaiThuocDao = (LoaiThuocDao) Naming.lookup("rmi://192.168.1.6:9999/loaiThuocDao");
-//		NhaCungCapDao NCCDao = (NhaCungCapDao) Naming.lookup("rmi://192.168.1.6:9999/nhaCungCapDao");
-//		NhanVienDao nhanVienDao = (NhanVienDao) Naming.lookup("rmi://192.168.1.6:9999/nhanVienDao");
-//		NuocSXDao nuocSXDao = (NuocSXDao) Naming.lookup("rmi://192.168.1.6:9999/nuocSXDao");
-//		TaiKhoanDao tkDao = (TaiKhoanDao) Naming.lookup("rmi://192.168.1.6:9999/taiKhoanDao");
-//		ThuocDao thuocDao = (ThuocDao) Naming.lookup("rmi://192.168.1.6:9999/thuocDao");
-//	
-//
-//	
-////		//Test SK
-////		List<LoaiThuoc> lsLT = loaiThuocDao.getAllLoaiThuoc();
-////		for(LoaiThuoc lt : lsLT) {
-////			
-////			List<Thuoc> ls = thuocDao.getThuocTheoMaLoai(lt.getId());
-////			System.out.println(ls);
-////			LoaiThuoc lt1 = loaiThuocDao.getLoaiThuocTheoTen(lt.getTenLoai());
-////			System.out.println(lt1);
-////		}
-////		
-////		
+
+		CTHDDao cthdDao =  (CTHDDao) Naming.lookup("rmi://192.168.1.9:9999/cthdDao");
+		HoaDonDao hoaDonDao =  (HoaDonDao) Naming.lookup("rmi://192.168.1.9:9999/hoaDonDao");
+	    KhachHangDao khachHangDao = (KhachHangDao) Naming.lookup("rmi://192.168.1.9:9999/khachHangDao");
+		LoaiThuocDao loaiThuocDao =  (LoaiThuocDao) Naming.lookup("rmi://192.168.1.9:9999/loaiThuocDao");
+		NhaCungCapDao NCCDao =  (NhaCungCapDao) Naming.lookup("rmi://192.168.1.9:9999/nhaCungCapDao");
+		NhanVienDao nhanVienDao =  (NhanVienDao) Naming.lookup("rmi://192.168.1.9:9999/nhanVienDao");
+		NuocSXDao nuocSXDao =  (NuocSXDao) Naming.lookup("rmi://192.168.1.9:9999/nuocSXDao");
+		TaiKhoanDao tkDao =  (TaiKhoanDao) Naming.lookup("rmi://192.168.1.9:9999/taiKhoanDao");
+		ThuocDao thuocDao =  (ThuocDao) Naming.lookup("rmi://192.168.1.9:9999/thuocDao");
+	
 ////		//Thanh: Thêm nv-->TK --> mã tk == maNV -->Thanh
 ////		//		KH --> Thanh
-//		NhanVien nv1 = new NhanVien("NV1", "Phạm Vũ Hoài An", "Nữ", new Date(2000-1900,4-1,20), "0966105479", "60 Thống Nhất, p10, Q.Gò Vấp","Quản lý", 5000000, "Đang làm việc", new TaiKhoan("NV1", "123"));
-//		nhanVienDao.addNhanVien(nv1);
-//		NhanVien nv2 = new NhanVien("NV2", "Nguyễn Tuấn Thanh", "Nam", new Date(2001-1900,5-1,20), "0374779028", "56 Đường số 4, p Hiệp Bình Phước, Q.Thủ Đức","Nhân viên bán hàng", 5000000, "Đang làm việc", new TaiKhoan("NV2", "123"));
-//		nhanVienDao.addNhanVien(nv2);
-//		
-//		NhanVien nv3 = new NhanVien("NV3", "Phạm Thị Hoa", "Nữ", new Date(2000-1900,6-1,20), "0966712345", "170 Thống Nhất, p10, Q.Gò Vấp","Nhân viên bán hàng", 5000000, "Đã nghỉ việc", new TaiKhoan("NV3", "123"));
-//		nhanVienDao.addNhanVien(nv3);
-//		NhanVien nv4 = new NhanVien("NV4", "Phạm Vũ Hoài An", "Nữ", new Date(2000-1900,4-1,20), "0966105479", "60 Thống Nhất, p10, Q.Gò Vấp","Nhân viên bán hàng", 5000000, "Đang làm việc", new TaiKhoan("NV4", "123"));
-//		nhanVienDao.addNhanVien(nv4);
-//		
-//		KhachHang kh1 = new KhachHang("Đoàn Phạm Bích Hợp", "Nữ", new Date(2001-1900,3-1,01), "0708985897");
-//		khachHangDao.addKhachHang(kh1);
-//		KhachHang kh2 = new KhachHang("Đoàn Thị Thủy", "Nữ", new Date(2001-1900,4-1,01), "0708985977");
-//		khachHangDao.addKhachHang(kh2);
-//		KhachHang kh3 = new KhachHang("Nguyễn Công Danh", "Nam", new Date(1999-1900,3-1,01), "0374479123");
-//		khachHangDao.addKhachHang(kh3);
+		NhanVien nv1 = new NhanVien("NV1", "Phạm Vũ Hoài An", "Nữ", new Date(2000-1900,4-1,20), "0966105479", "60 Thống Nhất, p10, Q.Gò Vấp","Quản lý", 5000000, "Đang làm việc", new TaiKhoan("NV1", "123"));
+		nhanVienDao.addNhanVien(nv1);
+		NhanVien nv2 = new NhanVien("NV2", "Nguyễn Tuấn Thanh", "Nam", new Date(2001-1900,5-1,20), "0374779028", "56 Đường số 4, p Hiệp Bình Phước, Q.Thủ Đức","Nhân viên bán hàng", 5000000, "Đang làm việc", new TaiKhoan("NV2", "123"));
+		nhanVienDao.addNhanVien(nv2);
+		
+		NhanVien nv3 = new NhanVien("NV3", "Phạm Thị Hoa", "Nữ", new Date(2000-1900,6-1,20), "0966712345", "170 Thống Nhất, p10, Q.Gò Vấp","Nhân viên bán hàng", 5000000, "Đã nghỉ việc", new TaiKhoan("NV3", "123"));
+		nhanVienDao.addNhanVien(nv3);
+
+
+		KhachHang kh1 = new KhachHang("Đoàn Phạm Bích Hợp", "Nữ", new Date(2001-1900,3-1,01), "0708985897");
+		khachHangDao.addKhachHang(kh1);
+		KhachHang kh2 = new KhachHang("Đoàn Thị Thủy", "Nữ", new Date(2001-1900,4-1,01), "0708985977");
+		khachHangDao.addKhachHang(kh2);
+		KhachHang kh3 = new KhachHang("Nguyễn Công Danh", "Nam", new Date(1999-1900,3-1,01), "0374479123");
+		khachHangDao.addKhachHang(kh3);
 //
 //	
 //		
@@ -138,19 +91,9 @@ public class AddObject {
 		LoaiThuoc lt15=new LoaiThuoc("Vitamin & Khoáng chất");
 		LoaiThuoc lt16=new LoaiThuoc("Khác");
 //	//addloaithuoc
-		loaiThuocDao.addLoaiThuoc(lt4);
-		loaiThuocDao.addLoaiThuoc(lt5);
-		loaiThuocDao.addLoaiThuoc(lt6);
-		loaiThuocDao.addLoaiThuoc(lt7);
-		loaiThuocDao.addLoaiThuoc(lt8);
-		loaiThuocDao.addLoaiThuoc(lt9);
-		loaiThuocDao.addLoaiThuoc(lt10);
-		loaiThuocDao.addLoaiThuoc(lt11);
-		loaiThuocDao.addLoaiThuoc(lt12);
-		loaiThuocDao.addLoaiThuoc(lt13);
-		loaiThuocDao.addLoaiThuoc(lt14);
-		loaiThuocDao.addLoaiThuoc(lt15);
-		loaiThuocDao.addLoaiThuoc(lt16);
+		
+		
+		
 ////		//nuoc san xuat
 		NuocSX nsx1=new NuocSX("Pháp");
 		NuocSX nsx2=new NuocSX("Việt Nam");
@@ -193,40 +136,26 @@ public class AddObject {
 		NCCDao.addNCC(ncc15);
 //		//thuoc
 		Thuoc t1 = new Thuoc("Telfast HD 180mg", 75000.00, 500, new Date(2020-9-9), new Date(2022-05-15), "Còn bán", lt1, nsx1 , ncc1 );
-		Thuoc t2 = new Thuoc("Medoral (Chai 250ml) ", 85000.00, 30, new Date(2020-06-02), new Date(2022-06-16), "Còn bán", lt2, nsx2 , ncc2 );
+		Thuoc t2 = new Thuoc("Medoral (Chai 250ml)", 85000.00, 30, new Date(2020-06-02), new Date(2022-06-16), "Còn bán", lt2, nsx2 , ncc2 );
 		Thuoc t3 = new Thuoc("Postinor 1 1.5mg", 33000.00, 130, new Date(2021-01-9), new Date(2022-02-12), "Còn bán", lt3, nsx3 , ncc3 );
-//		thuocDao.addThuoc(t1);
-//		thuocDao.addThuoc(t2);
-//		thuocDao.addThuoc(t3);
+		thuocDao.addThuoc(t1);
+		thuocDao.addThuoc(t2);
+		thuocDao.addThuoc(t3);
 		
-		
-		//LoaiThuoc lt = loaiThuocDao.getLoaiThuocTheoTen(lt2.getTenLoai());
-		
-//		Thuoc t4 = new Thuoc("Telfast HD 180mg", 75000.00, 500, new Date(2020-9-9), new Date(2022-05-15), "Còn bán", lt, nsx1 , ncc1 );
-//		Thuoc t5 = new Thuoc("Telfast HD 140mg", 75000.00, 500, new Date(2020-9-9), new Date(2022-05-15), "Còn bán", lt, nsx1 , ncc1 );
-//		
-//		
-//		System.out.println("before: \n"+t1.toString());
-//		
-//		t1.setLoaiThuoc(lt);
-//		
-//		thuocDao.updateThuoc(t1);
-//		System.out.println("Update: \n"+t1.toString());
-		
-		
-//		thuocDao.addThuoc(t4);
-//		thuocDao.addThuoc(t5);
-		
-		
-		
-//		t1.setLoaiThuoc(lt12);
-//		thuocDao.updateThuoc(t1);
-		//Thuoc t2 = new Thuoc("Teladf", 75000.00, 500, new Date(2020-9-9), new Date(2022-05-15), "Còn bán", lt1, nsx1 , ncc1 );
-		
-//		HoaDon hd = new HoaDon(ngaylap, nhanvienlap, khachhang, listCTHD)
-		
-		
-		
+		loaiThuocDao.addLoaiThuoc(lt4);
+		loaiThuocDao.addLoaiThuoc(lt5);
+		loaiThuocDao.addLoaiThuoc(lt6);
+		loaiThuocDao.addLoaiThuoc(lt7);
+		loaiThuocDao.addLoaiThuoc(lt8);
+		loaiThuocDao.addLoaiThuoc(lt9);
+		loaiThuocDao.addLoaiThuoc(lt10);
+		loaiThuocDao.addLoaiThuoc(lt11);
+		loaiThuocDao.addLoaiThuoc(lt12);
+		loaiThuocDao.addLoaiThuoc(lt13);
+		loaiThuocDao.addLoaiThuoc(lt14);
+		loaiThuocDao.addLoaiThuoc(lt15);
+		loaiThuocDao.addLoaiThuoc(lt16);
+
 
 		
 		

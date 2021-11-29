@@ -467,8 +467,9 @@ public class FrmQLBH extends JPanel implements ActionListener,MouseListener,Item
 		List<Thuoc> dsThuoc = null;
 		try {
 			itemLT = loaiThuocDao.getLoaiThuocTheoTen(s);
-			
 			dsThuoc = thuocDao.getThuocTheoMaLoai(itemLT.getId());
+			
+			
 		} catch (RemoteException e1) {
 			e1.printStackTrace();
 		}
@@ -477,7 +478,6 @@ public class FrmQLBH extends JPanel implements ActionListener,MouseListener,Item
 		//Load ds Thuốc
 		for (Thuoc t : dsThuoc)
 		{
-
 			cboTenThuoc.addItem(t.getTenThuoc());
 		}
 		

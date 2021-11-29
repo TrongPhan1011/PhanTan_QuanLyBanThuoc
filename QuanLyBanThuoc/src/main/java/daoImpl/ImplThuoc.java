@@ -143,5 +143,6 @@ public class ImplThuoc  extends UnicastRemoteObject implements ThuocDao {
 		
 		return null;
 	}
+	
 
 }

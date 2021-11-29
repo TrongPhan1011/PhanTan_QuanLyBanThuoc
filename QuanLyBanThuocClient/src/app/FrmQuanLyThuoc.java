@@ -2,6 +2,7 @@ package app;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Font;
 import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
@@ -18,7 +19,10 @@ import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -38,6 +42,9 @@ import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
+import javax.swing.table.TableCellEditor;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.text.TableView.TableCell;
 
 import org.bson.types.ObjectId;
 
@@ -243,14 +250,14 @@ public class FrmQuanLyThuoc extends JPanel implements ActionListener, MouseListe
 		datehansd.setBounds(822, 129, 178, 32);
 		datehansd.setFont(new Font("SansSerif", Font.PLAIN, 15));
 		datehansd.setBorder(new LineBorder(new Color(91, 155, 213)));
-		datehansd.setDateFormatString("yyyy/MM/dd");
+		datehansd.setDateFormatString("dd/MM/yyyy");
 		p.add(datehansd);
 
 		datengaysx = new JDateChooser();
 		datengaysx.setBounds(473, 131, 190, 32);
 		datengaysx.setFont(new Font("SansSerif", Font.PLAIN, 15));
 		datengaysx.setBorder(new LineBorder(new Color(91, 155, 213)));
-		datengaysx.setDateFormatString("yyyy/MM/dd");
+		datengaysx.setDateFormatString("dd/MM/yyyy");
 		p.add(datengaysx);
 
 		txttenthuoc = new JTextField();
@@ -382,14 +389,16 @@ public class FrmQuanLyThuoc extends JPanel implements ActionListener, MouseListe
 
 	private void loaddata() throws RemoteException {
 		DecimalFormat df = new DecimalFormat("###,###,###.####");
-		DateFormat dfd = new SimpleDateFormat("yyyy/MM/dd");
+		DateFormat dfd = new SimpleDateFormat("dd/MM/yyyy");
 		List<Thuoc> dsthuoc = thuocDao.getAllThuoc();
+		
 		for (Thuoc t : dsthuoc) {
 			modelthuoc.addRow(new Object[] { t.getTenThuoc(), t.getLoaiThuoc().getTenLoai(), dfd.format(t.getNgaySX()),
 					dfd.format(t.getHanSD()), df.format(t.getDonGia()), t.getSoLuongTon(), t.getNcc().getTenNCC(),
 					t.getNcc().getDiaChiNCC(), t.getNuocSX().getTenNuocSX() });
 		}
 	}
+	
 
 	private void loadloaithuoccbo() throws RemoteException {
 		List<LoaiThuoc> loaiThuocs = loaiThuocDao.getAllLoaiThuoc();
@@ -418,7 +427,7 @@ public class FrmQuanLyThuoc extends JPanel implements ActionListener, MouseListe
 	}
 
 	private Thuoc reverThuoc() throws RemoteException {
-		String tenthuoc = txttenthuoc.getText();
+		String tenthuoc = txttenthuoc.getText().trim();
 		String loaithuoc = cboloaithuoc.getSelectedItem().toString();
 		Date ngaysx = (Date) datengaysx.getDate();
 		Date hansd = (Date) datehansd.getDate();
@@ -426,7 +435,7 @@ public class FrmQuanLyThuoc extends JPanel implements ActionListener, MouseListe
 		int soluong = Integer.parseInt(txtsoluong.getText());
 		String trangthai = "Còn bán";
 		String tenncc = cbotenncc.getSelectedItem().toString();
-		String diachi = txtdiachi.getText();
+		String diachi = txtdiachi.getText().trim();
 		String nuocsx = cbonuocsx.getSelectedItem().toString();
 		LoaiThuoc loaithuoc2=loaiThuocDao.getLoaiThuocTheoTen(loaithuoc);
 		if(loaithuoc.equals(loaithuoc2.getTenLoai())) {
@@ -655,16 +664,16 @@ public class FrmQuanLyThuoc extends JPanel implements ActionListener, MouseListe
 		String soluong = txtsoluong.getText();
 		String dongia = txtdongia.getText();
 		String diachi = txtdiachi.getText();
-		DateFormat df = new SimpleDateFormat("yyyy/MM/dd");
-		Date ngaysx = new SimpleDateFormat("yyyy/MM/dd").parse(df.format(datengaysx.getDate()));
-		Date hdsd = new SimpleDateFormat("yyyy/MM/dd").parse(df.format(datehansd.getDate()));
+		DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+		Date ngaysx = new SimpleDateFormat("dd/MM/yyyy").parse(df.format(datengaysx.getDate()));
+		Date hdsd = new SimpleDateFormat("dd/MM/yyyy").parse(df.format(datehansd.getDate()));
 
 		if (tenthuoc.length() > 0) {
-			String regex = "^([ A-Za-za-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂẾưăạảấầẩẫậắằẳẵặẹẻẽềềểếỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ]*(\\s?))+$";
+			String regex = "^([\\.\\(\\)0-9 A-Za-za-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂẾưăạảấầẩẫậắằẳẵặẹẻẽềềểếỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷýỹ]*(\\s?))+$";
 			Pattern pattern = Pattern.compile(regex);
 			Matcher matcher = pattern.matcher(tenthuoc);
 			if (!matcher.find()) {
-				JOptionPane.showMessageDialog(null, "Nhập sai tên (Ví dụ nhập:Nguyễn Văn A)");
+				JOptionPane.showMessageDialog(null, "Tên thuốc không hợp lệ");
 				txttenthuoc.requestFocus();
 				txttenthuoc.selectAll();
 				return false;
@@ -680,7 +689,7 @@ public class FrmQuanLyThuoc extends JPanel implements ActionListener, MouseListe
 			}
 		}
 		if (dongia.length() > 0) {
-			String regexs = "^[0-9]+$";
+			String regexs = "^[\\.0-9]+$";
 			if (!dongia.matches(regexs)) {
 				JOptionPane.showMessageDialog(this, "Giá bán phải là số ");
 				txtdongia.requestFocus();
