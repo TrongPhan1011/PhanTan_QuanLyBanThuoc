@@ -4,7 +4,6 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.List;
 
-import entity.KhachHang;
 import entity.NhanVien;
 
 public interface NhanVienDao extends Remote {

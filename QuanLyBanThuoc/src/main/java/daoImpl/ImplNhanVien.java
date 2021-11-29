@@ -8,10 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
 import dao.NhanVienDao;
-import entity.KhachHang;
-import entity.LoaiThuoc;
 import entity.NhanVien;
-import entity.Thuoc;
 import util.HibernateUtil;
 
 public class ImplNhanVien extends UnicastRemoteObject implements NhanVienDao {
@@ -50,6 +47,7 @@ public class ImplNhanVien extends UnicastRemoteObject implements NhanVienDao {
 		try {
 			
 			tr.begin();
+			@SuppressWarnings("unchecked")
 			List<NhanVien> nv =  em.createNativeQuery("db.dsNhanVien.find({'trang_Thai_Lam_Viec' : 'Đang làm việc'})",NhanVien.class).getResultList();
 			
 			tr.commit();
@@ -68,6 +66,7 @@ public class ImplNhanVien extends UnicastRemoteObject implements NhanVienDao {
 		try {
 			
 			tr.begin();
+			@SuppressWarnings("unchecked")
 			List<NhanVien> nv =  em.createNativeQuery("db.dsNhanVien.find({})",NhanVien.class).getResultList();
 		    i= nv.size();
 			tr.commit();
@@ -120,6 +119,7 @@ public class ImplNhanVien extends UnicastRemoteObject implements NhanVienDao {
 			
 			tr.begin();
 			String query = "db.dsNhanVien.find({$text:{$search:'"+text+"' }})";
+			@SuppressWarnings("unchecked")
 			List<NhanVien> nv =  em.createNativeQuery(query,NhanVien.class).getResultList();
 			tr.commit();
 			return nv;

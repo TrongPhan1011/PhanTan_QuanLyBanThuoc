@@ -1,44 +1,33 @@
 package app;
 
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.UIManager;
-
-import jiconfont.icons.font_awesome.FontAwesome;
-import jiconfont.swing.IconFontSwing;
-
-import javax.swing.JPanel;
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
 import java.awt.Color;
-import java.awt.Component;
-
-import javax.swing.JLabel;
 import java.awt.Font;
-import java.awt.Image;
-import java.awt.Panel;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.net.MalformedURLException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
+
+import jiconfont.icons.font_awesome.FontAwesome;
+import jiconfont.swing.IconFontSwing;
 
 public class FrmMain extends JFrame implements ActionListener  {
 
-	private JFrame frame;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7754060787865635332L;
 	private JLabel jlbgetngay;
-	private Panel pMain;
 	FrmQuanLyThuoc QuanLyThuoc=new FrmQuanLyThuoc();
 	FrmQuanLyThuoc frmQuanLyKhachHang=new FrmQuanLyThuoc();
 	FrmQuanLyNhanVien frmQuanLyNhanVien=new FrmQuanLyNhanVien();
@@ -47,8 +36,6 @@ public class FrmMain extends JFrame implements ActionListener  {
 	private JButton btnquanlynhanvien;
 	private JTabbedPane tabbedPane1;
 	private FrmQuanLyThuoc quanLyThuoc;
-	private static String manv;
-	private static String chucvu;
 	
 
 	
@@ -225,7 +212,6 @@ public class FrmMain extends JFrame implements ActionListener  {
 	
 
 	public void getTime() {
-		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
 		LocalDate now=LocalDate.now();
 		String s= now.toString();
 		jlbgetngay.setText(s);

@@ -1,75 +1,52 @@
 package app;
 
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-
 import java.awt.BorderLayout;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.BorderFactory;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
+import java.awt.Color;
+import java.awt.EventQueue;
 import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.Insets;
-
-import javax.swing.JTextField;
-import javax.swing.UIManager;
-import javax.swing.JButton;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.net.InetAddress;
 import java.net.MalformedURLException;
 import java.net.UnknownHostException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
-import java.text.ParseException;
-import java.awt.event.ActionEvent;
-import java.awt.Color;
-import java.awt.Component;
 
-import javax.swing.border.Border;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+import javax.swing.UIManager;
 import javax.swing.border.LineBorder;
-import javax.swing.text.MaskFormatter;
 
-import dao.CTHDDao;
-import dao.HoaDonDao;
-import dao.KhachHangDao;
-import dao.LoaiThuocDao;
-import dao.NhaCungCapDao;
 import dao.NhanVienDao;
-import dao.NuocSXDao;
 import dao.TaiKhoanDao;
-import dao.ThuocDao;
-import daoImpl.ImplTaiKhoan;
 import entity.NhanVien;
 import entity.TaiKhoan;
 import jiconfont.icons.font_awesome.FontAwesome;
 import jiconfont.swing.IconFontSwing;
 
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-
 public class FrmDangNhap extends JFrame implements ActionListener {
 
-	private JFrame frmHThngQun;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4420857605153751161L;
 	private JTextField txttendangnhap;
 	private JPasswordField txtmatkhau;
 	private JButton btndangnhap;
 	private JButton btnthoat;
-	private HoaDonDao hoaDonDao;
-	private KhachHangDao khachHangDao;
-	private LoaiThuocDao loaiThuocDao;
-	private NhaCungCapDao NCCDao;
 	private NhanVienDao nhanVienDao;
-	private NuocSXDao nuocSXDao;
 	private TaiKhoanDao tkDao;
-	private ThuocDao thuocDao;
-	private CTHDDao cthdDao;
+	
 	private TaiKhoan taiKhoan=null;
 	private NhanVien nhanVien=null;
 
@@ -90,16 +67,6 @@ public class FrmDangNhap extends JFrame implements ActionListener {
 			}
 		});
 	}
-
-	/**
-	 * Create the application.
-	 * @throws NotBoundException 
-	 * @throws RemoteException 
-	 * @throws MalformedURLException 
-	 */
-//	public FrmDangNhap() throws MalformedURLException, RemoteException, NotBoundException {
-//		initialize();
-//	}
 
 	/**
 	 * Initialize the contents of the frame.
@@ -127,37 +94,8 @@ public class FrmDangNhap extends JFrame implements ActionListener {
 		}
 		
 		
-//		cthdDao = (CTHDDao) Naming.lookup("rmi://192.168.1.6:9999/cthdDao");
-//		hoaDonDao = (HoaDonDao) Naming.lookup("rmi://192.168.1.6:9999/hoaDonDao");
-//		khachHangDao = (KhachHangDao) Naming.lookup("rmi://192.168.1.6:9999/khachHangDao");
-//		loaiThuocDao = (LoaiThuocDao) Naming.lookup("rmi://192.168.1.6:9999/loaiThuocDao");
-//		NCCDao = (NhaCungCapDao) Naming.lookup("rmi://192.168.1.6:9999/nhaCungCapDao");
-//		nhanVienDao = (NhanVienDao) Naming.lookup("rmi://192.168.1.6:9999/nhanVienDao");
-//		nuocSXDao = (NuocSXDao) Naming.lookup("rmi://192.168.1.6:9999/nuocSXDao");
-//		tkDao = (TaiKhoanDao) Naming.lookup("rmi://192.168.1.6:9999/taiKhoanDao");
-//		thuocDao = (ThuocDao) Naming.lookup("rmi://192.168.1.6:9999/thuocDao");
-		
-		
-		//
-//		cthdDao = (CTHDDao) Naming.lookup("rmi://192.168.1.8:9999/cthdDao");
-//		hoaDonDao = (HoaDonDao) Naming.lookup("rmi://192.168.1.8:9999/hoaDonDao");
-//		khachHangDao = (KhachHangDao) Naming.lookup("rmi://192.168.1.8:9999/khachHangDao");
-//		loaiThuocDao = (LoaiThuocDao) Naming.lookup("rmi://192.168.1.8:9999/loaiThuocDao");
-//		NCCDao = (NhaCungCapDao) Naming.lookup("rmi://192.168.1.8:9999/nhaCungCapDao");
-//		nhanVienDao = (NhanVienDao) Naming.lookup("rmi://192.168.1.8:9999/nhanVienDao");
-//		nuocSXDao = (NuocSXDao) Naming.lookup("rmi://192.168.1.8:9999/nuocSXDao");
-//		tkDao = (TaiKhoanDao) Naming.lookup("rmi://192.168.1.8:9999/taiKhoanDao");
-//		thuocDao = (ThuocDao) Naming.lookup("rmi://192.168.1.8:9999/thuocDao");
-		
-		cthdDao =  (CTHDDao) Naming.lookup("rmi://"+ip+":9999/cthdDao");
-		hoaDonDao =  (HoaDonDao) Naming.lookup("rmi://"+ip+":9999/hoaDonDao");
-		khachHangDao = (KhachHangDao) Naming.lookup("rmi://"+ip+":9999/khachHangDao");
-		loaiThuocDao =  (LoaiThuocDao) Naming.lookup("rmi://"+ip+":9999/loaiThuocDao");
-		NCCDao =  (NhaCungCapDao) Naming.lookup("rmi://"+ip+":9999/nhaCungCapDao");
 		nhanVienDao =  (NhanVienDao) Naming.lookup("rmi://"+ip+":9999/nhanVienDao");
-		nuocSXDao =  (NuocSXDao) Naming.lookup("rmi://"+ip+":9999/nuocSXDao");
 		tkDao =  (TaiKhoanDao) Naming.lookup("rmi://"+ip+":9999/taiKhoanDao");
-		thuocDao =  (ThuocDao) Naming.lookup("rmi://"+ip+":9999/thuocDao");
 		
 		JPanel panel = new JPanel();
 		getContentPane().add(panel, BorderLayout.CENTER);
@@ -271,30 +209,30 @@ public class FrmDangNhap extends JFrame implements ActionListener {
 		
 	
 	}
-	private static class RoundedBorder implements Border {
-
-	    private int radius;
-
-
-	    RoundedBorder(int radius) {
-	        this.radius = radius;
-	    }
-
-
-	    public Insets getBorderInsets(Component c) {
-	        return new Insets(this.radius+1, this.radius+1, this.radius+2, this.radius);
-	    }
-
-
-	    public boolean isBorderOpaque() {
-	        return true;
-	    }
-
-
-	    public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
-	        g.drawRoundRect(x, y, width-1, height-1, radius, radius);
-	    }
-	}
+//	private static class RoundedBorder implements Border {
+//
+//	    private int radius;
+//
+//
+//	    RoundedBorder(int radius) {
+//	        this.radius = radius;
+//	    }
+//
+//
+//	    public Insets getBorderInsets(Component c) {
+//	        return new Insets(this.radius+1, this.radius+1, this.radius+2, this.radius);
+//	    }
+//
+//
+//	    public boolean isBorderOpaque() {
+//	        return true;
+//	    }
+//
+//
+//	    public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
+//	        g.drawRoundRect(x, y, width-1, height-1, radius, radius);
+//	    }
+//	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
@@ -304,6 +242,7 @@ public class FrmDangNhap extends JFrame implements ActionListener {
 		}
 		if(o.equals(btndangnhap)) {
 			String tendangnhap=txttendangnhap.getText().trim();
+			@SuppressWarnings("deprecation")
 			String mk=txtmatkhau.getText().trim();
 			
 			try {
