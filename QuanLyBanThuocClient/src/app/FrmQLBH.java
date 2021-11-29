@@ -18,9 +18,7 @@ import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -43,24 +41,17 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
-import org.bson.types.ObjectId;
-
 import com.toedter.calendar.JDateChooser;
 
-import dao.CTHDDao;
 import dao.HoaDonDao;
 import dao.KhachHangDao;
 import dao.LoaiThuocDao;
-import dao.NhaCungCapDao;
 import dao.NhanVienDao;
-import dao.NuocSXDao;
-import dao.TaiKhoanDao;
 import dao.ThuocDao;
 import entity.CTHD;
 import entity.HoaDon;
 import entity.KhachHang;
 import entity.LoaiThuoc;
-import entity.NhaCungCap;
 import entity.NhanVien;
 import entity.Thuoc;
 import jiconfont.icons.font_awesome.FontAwesome;
@@ -83,16 +74,14 @@ public class FrmQLBH extends JPanel implements ActionListener,MouseListener,Item
 	private JTable tblThuoc;
 	private JButton btnDSKH;
 	private JDateChooser chooserNgaySinh;
-	private CTHDDao cthdDao;
+	
 	private JComboBox<String> cboLoaiThuoc;
 	private JComboBox<String> cboTenThuoc;
 	private HoaDonDao hoaDonDao;
 	private KhachHangDao khachHangDao;
 	private LoaiThuocDao loaiThuocDao;
-	private NhaCungCapDao NCCDao;
+	
 	private NhanVienDao nhanVienDao;
-	private NuocSXDao nuocSXDao;
-	private TaiKhoanDao tkDao;
 	private ThuocDao thuocDao;
 	private JButton btnTim;
 	private JComboBox<String> cboGioiTinh;
@@ -147,49 +136,13 @@ public class FrmQLBH extends JPanel implements ActionListener,MouseListener,Item
 		} catch (UnknownHostException e1) {
 			e1.printStackTrace();
 		}
-		
-<<<<<<< HEAD
 
-		cthdDao =  (CTHDDao) Naming.lookup("rmi://192.168.1.8:9999/cthdDao");
-		hoaDonDao =  (HoaDonDao) Naming.lookup("rmi://192.168.1.8:9999/hoaDonDao");
-	    khachHangDao = (KhachHangDao) Naming.lookup("rmi://192.168.1.8:9999/khachHangDao");
-		loaiThuocDao =  (LoaiThuocDao) Naming.lookup("rmi://192.168.1.8:9999/loaiThuocDao");
-		 NCCDao =  (NhaCungCapDao) Naming.lookup("rmi://192.168.1.8:9999/nhaCungCapDao");
-		 nhanVienDao =  (NhanVienDao) Naming.lookup("rmi://192.168.1.8:9999/nhanVienDao");
-		 nuocSXDao =  (NuocSXDao) Naming.lookup("rmi://192.168.1.8:9999/nuocSXDao");
-		 tkDao =  (TaiKhoanDao) Naming.lookup("rmi://192.168.1.8:9999/taiKhoanDao");
-		 thuocDao =  (ThuocDao) Naming.lookup("rmi://192.168.1.8:9999/thuocDao");
 
-//		cthdDao =  (CTHDDao) Naming.lookup("rmi://192.168.1.8:9999/cthdDao");
-//		hoaDonDao =  (HoaDonDao) Naming.lookup("rmi://192.168.1.8:9999/hoaDonDao");
-//	    khachHangDao = (KhachHangDao) Naming.lookup("rmi://192.168.1.8:9999/khachHangDao");
-//		loaiThuocDao =  (LoaiThuocDao) Naming.lookup("rmi://192.168.1.8:9999/loaiThuocDao");
-//		 NCCDao =  (NhaCungCapDao) Naming.lookup("rmi://192.168.1.8:9999/nhaCungCapDao");
-//		 nhanVienDao =  (NhanVienDao) Naming.lookup("rmi://192.168.1.8:9999/nhanVienDao");
-//		 nuocSXDao =  (NuocSXDao) Naming.lookup("rmi://192.168.1.8:9999/nuocSXDao");
-//		 tkDao =  (TaiKhoanDao) Naming.lookup("rmi://192.168.1.8:9999/taiKhoanDao");
-//		 thuocDao =  (ThuocDao) Naming.lookup("rmi://192.168.1.8:9999/thuocDao");
-		 
-//		cthdDao = (CTHDDao) Naming.lookup("rmi://192.168.1.6:9999/cthdDao");
-//		hoaDonDao = (HoaDonDao) Naming.lookup("rmi://192.168.1.6:9999/hoaDonDao");
-//		khachHangDao = (KhachHangDao) Naming.lookup("rmi://192.168.1.6:9999/khachHangDao");
-//		loaiThuocDao = (LoaiThuocDao) Naming.lookup("rmi://192.168.1.6:9999/loaiThuocDao");
-//		NCCDao = (NhaCungCapDao) Naming.lookup("rmi://192.168.1.6:9999/nhaCungCapDao");
-//		nhanVienDao = (NhanVienDao) Naming.lookup("rmi://192.168.1.6:9999/nhanVienDao");
-//		nuocSXDao = (NuocSXDao) Naming.lookup("rmi://192.168.1.6:9999/nuocSXDao");
-//		tkDao = (TaiKhoanDao) Naming.lookup("rmi://192.168.1.6:9999/taiKhoanDao");
-//		thuocDao = (ThuocDao) Naming.lookup("rmi://192.168.1.6:9999/thuocDao");
-=======
-		cthdDao =  (CTHDDao) Naming.lookup("rmi://"+ip+":9999/cthdDao");
 		hoaDonDao =  (HoaDonDao) Naming.lookup("rmi://"+ip+":9999/hoaDonDao");
 		khachHangDao = (KhachHangDao) Naming.lookup("rmi://"+ip+":9999/khachHangDao");
 		loaiThuocDao =  (LoaiThuocDao) Naming.lookup("rmi://"+ip+":9999/loaiThuocDao");
-		NCCDao =  (NhaCungCapDao) Naming.lookup("rmi://"+ip+":9999/nhaCungCapDao");
 		nhanVienDao =  (NhanVienDao) Naming.lookup("rmi://"+ip+":9999/nhanVienDao");
-		nuocSXDao =  (NuocSXDao) Naming.lookup("rmi://"+ip+":9999/nuocSXDao");
-		tkDao =  (TaiKhoanDao) Naming.lookup("rmi://"+ip+":9999/taiKhoanDao");
 		thuocDao =  (ThuocDao) Naming.lookup("rmi://"+ip+":9999/thuocDao");
->>>>>>> 27a6f821e2b4fa5e7d09edc39775029197d6b223
 
 		 regex  = new Regex();
 	
@@ -874,10 +827,8 @@ public class FrmQLBH extends JPanel implements ActionListener,MouseListener,Item
 			if(rowKH != -1) {
 				int rowThuoc = tblThuoc.getRowCount();
 				if(rowThuoc != 0 ) {
-	//				HoaDon hd = new HoaDon(ngaylap, nhanvienlap, khachhang, listCTHD)
 					Date ngayLap = now;
-//					NhanVien nv = nhanVienDao.getNhanVienTheoSoNV(maNV);
-					NhanVien nv = nhanVienDao.getNhanVienTheoSoNV("NV1");
+					NhanVien nv = nhanVienDao.getNhanVienTheoSoNV(maNV);
 					KhachHang kh = khachHangDao.getKHTheoSDT(modelKH.getValueAt(rowKH, 1).toString());
 					List<CTHD> lsCTHD = getdsCTHD();
 					HoaDon hd = new HoaDon(ngayLap, nv, kh, lsCTHD);
