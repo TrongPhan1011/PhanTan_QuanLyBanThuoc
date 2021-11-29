@@ -16,12 +16,17 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.bson.types.ObjectId;
+import org.hibernate.ogm.options.shared.IndexOption;
+import org.hibernate.ogm.options.shared.IndexOptions;
 
 @Entity
 @Table(name = "dsNhanVien",indexes = {
-		@Index(columnList = "sdt",name="sdt_Indexes"),
-		@Index(columnList = "ten_Nhan_Vien",name="ten_Nhan_Vien_Indexes")
+		@Index(columnList = "sdt,ten_Nhan_Vien",name="sdt_Ten_Indexes"),
+		
 })
+@IndexOptions(
+	    @IndexOption(forIndex = "sdt_Ten_Indexes", options = "{text: true}"))
+
 public class NhanVien implements Serializable {
 	/**
 	 * 
