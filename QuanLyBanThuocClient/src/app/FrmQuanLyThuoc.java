@@ -250,14 +250,14 @@ public class FrmQuanLyThuoc extends JPanel implements ActionListener, MouseListe
 		datehansd.setBounds(822, 129, 178, 32);
 		datehansd.setFont(new Font("SansSerif", Font.PLAIN, 15));
 		datehansd.setBorder(new LineBorder(new Color(91, 155, 213)));
-		datehansd.setDateFormatString("yyyy/MM/dd");
+		datehansd.setDateFormatString("dd/MM/yyyy");
 		p.add(datehansd);
 
 		datengaysx = new JDateChooser();
 		datengaysx.setBounds(473, 131, 190, 32);
 		datengaysx.setFont(new Font("SansSerif", Font.PLAIN, 15));
 		datengaysx.setBorder(new LineBorder(new Color(91, 155, 213)));
-		datengaysx.setDateFormatString("yyyy/MM/dd");
+		datengaysx.setDateFormatString("dd/MM/yyyy");
 		p.add(datengaysx);
 
 		txttenthuoc = new JTextField();
@@ -389,7 +389,7 @@ public class FrmQuanLyThuoc extends JPanel implements ActionListener, MouseListe
 
 	private void loaddata() throws RemoteException {
 		DecimalFormat df = new DecimalFormat("###,###,###.####");
-		DateFormat dfd = new SimpleDateFormat("yyyy/MM/dd");
+		DateFormat dfd = new SimpleDateFormat("dd/MM/yyyy");
 		List<Thuoc> dsthuoc = thuocDao.getAllThuoc();
 		
 		for (Thuoc t : dsthuoc) {
