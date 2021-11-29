@@ -150,12 +150,14 @@ public class FrmQuanLyThuoc extends JPanel implements ActionListener, MouseListe
 		p.setLayout(null);
 
 		btntim = new JButton("Tìm");
+		btntim.setToolTipText("Tìm thuốc theo tên");
 		btntim.setFont(new Font("SansSerif", Font.BOLD, 15));
 		btntim.setBackground(new Color(41, 242, 255));
 		btntim.setBounds(893, 42, 107, 33);
 		p.add(btntim);
 
 		btnthem = new JButton("Thêm");
+		btnthem.setToolTipText("Thêm thuốc mới");
 		btnthem.setBackground(Color.CYAN);
 		btnthem.setFont(new Font("SansSerif", Font.BOLD, 15));
 		btnthem.setForeground(Color.BLACK);
@@ -163,18 +165,21 @@ public class FrmQuanLyThuoc extends JPanel implements ActionListener, MouseListe
 		p.add(btnthem);
 
 		btnxoa = new JButton("Xóa");
+		btnxoa.setToolTipText("Xóa thuốc");
 		btnxoa.setFont(new Font("SansSerif", Font.BOLD, 15));
 		btnxoa.setBackground(Color.CYAN);
 		btnxoa.setBounds(325, 229, 172, 33);
 		p.add(btnxoa);
 
 		btnsua = new JButton("Sửa");
+		btnsua.setToolTipText("Sửa thông tin thuốc");
 		btnsua.setBackground(Color.CYAN);
 		btnsua.setFont(new Font("SansSerif", Font.BOLD, 15));
 		btnsua.setBounds(507, 229, 172, 33);
 		p.add(btnsua);
 
 		btnlammoi = new JButton("Làm mới");
+		btnlammoi.setToolTipText("Làm mới thông tin như ban đầu");
 		btnlammoi.setBackground(Color.CYAN);
 		btnlammoi.setFont(new Font("SansSerif", Font.BOLD, 15));
 		btnlammoi.setBounds(690, 229, 172, 33);
@@ -542,6 +547,9 @@ public class FrmQuanLyThuoc extends JPanel implements ActionListener, MouseListe
 			txtsoluong.setText("");
 			txttenthuoc.setText("");
 			txttimkiemthuoc.setText("");
+			cboloaithuoc.setSelectedIndex(0);
+			cbonuocsx.setSelectedIndex(0);
+			cbotenncc.setSelectedIndex(0);
 			try {
 				lammoi();
 			} catch (RemoteException e1) {

@@ -128,6 +128,7 @@ public class FrmQuenMatKhau extends JFrame implements ActionListener {
 		txtsdt.setBorder(new LineBorder(new Color(91, 155, 213)));
 
 		btndoimatkhau = new JButton("Đổi mật khẩu");
+		btndoimatkhau.setToolTipText("Thay đổi mật khẩu");
 		btndoimatkhau.setForeground(new Color(255, 255, 255));
 		btndoimatkhau.setFont(new Font("SansSerif", Font.BOLD, 15));
 		btndoimatkhau.setBackground(new Color(0, 153, 255));
@@ -137,6 +138,7 @@ public class FrmQuenMatKhau extends JFrame implements ActionListener {
 		panel_1.add(btndoimatkhau);
 
 		btnquaylai = new JButton("Quay lại");
+		btnquaylai.setToolTipText("Quay lại giao diện đăng nhập");
 		btnquaylai.setForeground(new Color(255, 255, 255));
 		btnquaylai.setFont(new Font("SansSerif", Font.BOLD, 15));
 		btnquaylai.setBackground(new Color(0, 153, 255));

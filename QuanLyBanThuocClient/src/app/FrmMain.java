@@ -73,6 +73,7 @@ public class FrmMain extends JFrame implements ActionListener  {
 		panel_1.add(jlbmenu);
 		
 		JButton btnQLThuoc = new JButton("Quản lý thuốc");
+		btnQLThuoc.setToolTipText("Giao diện quản lý thuốc");
 		btnQLThuoc.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				tabbedPane1.setSelectedIndex(0);
@@ -85,6 +86,7 @@ public class FrmMain extends JFrame implements ActionListener  {
 		panel_1.add(btnQLThuoc);
 		
 		JButton btnHoaDon = new JButton("Quản lý bán hàng");
+		btnHoaDon.setToolTipText("Giao diện quản lý bán hàng");
 		btnHoaDon.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				tabbedPane1.setSelectedIndex(1);
@@ -98,6 +100,7 @@ public class FrmMain extends JFrame implements ActionListener  {
 		panel_1.add(btnHoaDon);
 		
 		btnquanlynhanvien = new JButton("Quản lý nhân viên");
+		btnquanlynhanvien.setToolTipText("Giao diện quản lý nhân viên");
 		btnquanlynhanvien.setFont(new Font("Tahoma", Font.BOLD, 19));
 		btnquanlynhanvien.setForeground(new Color(255, 255, 255));
 		btnquanlynhanvien.setBackground(new Color(51, 204, 204));
@@ -105,6 +108,7 @@ public class FrmMain extends JFrame implements ActionListener  {
 		panel_1.add(btnquanlynhanvien);
 		
 		JButton btnquanlythongke = new JButton("Quản lý thống kê");
+		btnquanlythongke.setToolTipText("Giao diện thống kê doanh thu");
 		btnquanlythongke.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				tabbedPane1.setSelectedIndex(3);
@@ -117,6 +121,7 @@ public class FrmMain extends JFrame implements ActionListener  {
 		panel_1.add(btnquanlythongke);
 		
 		JButton btnDangXuat = new JButton("Đăng xuất");
+		btnDangXuat.setToolTipText("Trở lại giao diện đăng nhập");
 		btnDangXuat.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				setVisible(false);
